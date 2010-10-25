@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE project SYSTEM "gtdmanager.dtd">
+<project vendor-id="Gruppe 5" version="1.3.2">
+<name>OsmUi</name>
+<property name="view" value="0"/>
+<property name="fontsize" value="10"/>
+<property name="zoomfactor" value="100"/>
+<property name="export-width" value="21.0"/>
+<property name="export-height" value="14.8"/>
+<property name="export-dpi" value="72.0"/>
+<property name="export-standartsize" value="DIN A5 quer"/>
+<instance>
+<name>OsmUi</name>
+<creation-date date="25" month="10" year="2010"/>
+<start-date date="19" month="10" year="2010"/>
+<end-date date="11" month="2" year="2011"/>
+<activity id="2014955747">
+<name>Spezifikation</name>
+<short-name>Spez</short-name>
+<start-date date="19" month="10" year="2010"/>
+<end-date date="30" month="11" year="2010"/>
+<property name="keep-length" value="false"/>
+<property name="move-dependencies" value="true"/>
+<dependency activity-id="-399008102" type="begin-begin"/>
+<dependency activity-id="1723226603" type="begin-end"/>
+<dependency activity-id="-1294875296" type="begin-end"/>
+<dependency activity-id="-315828855" type="begin-end"/>
+<activity id="-1177760164">
+<name>Kick-Off</name>
+<short-name>KickO</short-name>
+<start-date date="19" month="10" year="2010"/>
+<end-date date="19" month="10" year="2010"/>
+<property name="keep-length" value="false"/>
+<property name="move-dependencies" value="true"/>
+</activity>
+<activity id="-399008102">
+<name>Analyse</name>
+<short-name>Analy</short-name>
+<start-date date="19" month="10" year="2010"/>
+<end-date date="29" month="10" year="2010"/>
+<property name="keep-length" value="false"/>
+<property name="move-dependencies" value="true"/>
+<dependency activity-id="-1894930395" type="begin-begin"/>
+<dependency activity-id="-2135189629" type="begin-end"/>
+<dependency activity-id="2014955747" type="begin-begin"/>
+</activity>
+<activity id="-1894930395">
+<name>Erstellung des Projektplans</name>
+<short-name>Plan</short-name>
+<start-date date="19" month="10" year="2010"/>
+<end-date date="29" month="10" year="2010"/>
+<property name="keep-length" value="false"/>
+<property name="move-dependencies" value="true"/>
+<dependency activity-id="-399008102" type="begin-begin"/>
+</activity>
+<activity id="-2135189629">
+<name>Spezifikation</name>
+<short-name>Spez</short-name>
+<start-date date="29" month="10" year="2010"/>
+<end-date date="16" month="11" year="2010"/>
+<property name="keep-length" value="false"/>
+<property name="move-dependencies" value="true"/>
+<dependency activity-id="561016280" type="begin-end"/>
+<dependency activity-id="-399008102" type="end-begin"/>
+</activity>
+<activity id="561016280">
+<name>Review der Spezifikation</name>
+<short-name>SRev</short-name>
+<start-date date="16" month="11" year="2010"/>
+<end-date date="24" month="11" year="2010"/>
+<property name="keep-length" value="false"/>
+<property name="move-dependencies" value="true"/>
+<dependency activity-id="1132296832" type="begin-end"/>
+<dependency activity-id="-2135189629" type="end-begin"/>
+</activity>
+<activity id="1132296832">
+<name>Korrektur der Spezifikation</name>
+<short-name>SKorr</short-name>
+<start-date date="24" month="11" year="2010"/>
+<end-date date="30" month="11" year="2010"/>
+<property name="keep-length" value="false"/>
+<property name="move-dependencies" value="true"/>
+<dependency activity-id="561016280" type="end-begin"/>
+</activity>
+</activity>
+<activity id="1723226603">
+<name>Entwurf</name>
+<short-name>Entw</short-name>
+<start-date date="30" month="11" year="2010"/>
+<end-date date="14" month="12" year="2010"/>
+<property name="keep-length" value="false"/>
+<property name="move-dependencies" value="true"/>
+<dependency activity-id="-230611723" type="begin-end"/>
+<dependency activity-id="2014955747" type="end-begin"/>
+</activity>
+<activity id="-1294875296">
+<name>Handbuch</name>
+<short-name>Handb</short-name>
+<start-date date="30" month="11" year="2010"/>
+<end-date date="1" month="2" year="2011"/>
+<property name="keep-length" value="false"/>
+<property name="move-dependencies" value="true"/>
+<dependency activity-id="2014955747" type="end-begin"/>
+</activity>
+<activity id="-315828855">
+<name>Test</name>
+<short-name>Test</short-name>
+<start-date date="30" month="11" year="2010"/>
+<end-date date="1" month="2" year="2011"/>
+<property name="keep-length" value="false"/>
+<property name="move-dependencies" value="true"/>
+<dependency activity-id="-238465440" type="begin-begin"/>
+<dependency activity-id="2014955747" type="end-begin"/>
+<activity id="-238465440">
+<name>Black-Box Test-Cases</name>
+<short-name>Black</short-name>
+<start-date date="30" month="11" year="2010"/>
+<end-date date="14" month="12" year="2010"/>
+<property name="keep-length" value="false"/>
+<property name="move-dependencies" value="true"/>
+<dependency activity-id="-315828855" type="begin-begin"/>
+<dependency activity-id="463868391" type="begin-end"/>
+</activity>
+<activity id="463868391">
+<name>Testfälle + Unit-Tests</name>
+<short-name>Testf</short-name>
+<start-date date="14" month="12" year="2010"/>
+<end-date date="25" month="1" year="2011"/>
+<property name="keep-length" value="false"/>
+<property name="move-dependencies" value="true"/>
+<dependency activity-id="-238465440" type="end-begin"/>
+<dependency activity-id="-307989164" type="begin-end"/>
+</activity>
+<activity id="-307989164">
+<name>Test</name>
+<short-name>Test</short-name>
+<start-date date="25" month="1" year="2011"/>
+<end-date date="27" month="1" year="2011"/>
+<property name="keep-length" value="false"/>
+<property name="move-dependencies" value="true"/>
+<dependency activity-id="1000745603" type="begin-end"/>
+<dependency activity-id="463868391" type="end-begin"/>
+</activity>
+<activity id="1000745603">
+<name>Nachbearbeitung</name>
+<short-name>Testk</short-name>
+<start-date date="27" month="1" year="2011"/>
+<end-date date="1" month="2" year="2011"/>
+<property name="keep-length" value="false"/>
+<property name="move-dependencies" value="true"/>
+<dependency activity-id="-307989164" type="end-begin"/>
+</activity>
+</activity>
+<activity id="-230611723">
+<name>Implementierung</name>
+<short-name>Code</short-name>
+<start-date date="14" month="12" year="2010"/>
+<end-date date="25" month="1" year="2011"/>
+<property name="keep-length" value="false"/>
+<property name="move-dependencies" value="true"/>
+<dependency activity-id="1723226603" type="end-begin"/>
+<dependency activity-id="603324165" type="begin-begin"/>
+<activity id="603324165">
+<name>Alpha Release</name>
+<short-name>Alpha</short-name>
+<start-date date="14" month="12" year="2010"/>
+<end-date date="31" month="12" year="2010"/>
+<property name="keep-length" value="false"/>
+<property name="move-dependencies" value="true"/>
+<dependency activity-id="-986443100" type="begin-end"/>
+<dependency activity-id="-230611723" type="begin-begin"/>
+</activity>
+<activity id="-986443100">
+<name>Beta Release</name>
+<short-name>Beta</short-name>
+<start-date date="31" month="12" year="2010"/>
+<end-date date="11" month="1" year="2011"/>
+<property name="keep-length" value="false"/>
+<property name="move-dependencies" value="true"/>
+<dependency activity-id="603324165" type="end-begin"/>
+<dependency activity-id="-1596052332" type="begin-end"/>
+</activity>
+<activity id="-1596052332">
+<name>Release Candidate</name>
+<short-name>RC</short-name>
+<start-date date="11" month="1" year="2011"/>
+<end-date date="25" month="1" year="2011"/>
+<property name="keep-length" value="false"/>
+<property name="move-dependencies" value="true"/>
+<dependency activity-id="-986443100" type="end-begin"/>
+</activity>
+</activity>
+</instance>
+</project>
