@@ -80,7 +80,7 @@ Leistungen des Auftraggebers:
 \hline 
 \end{tabular} 
 \subsection{Abnahmeprozedur}
-Die Abnahme erfolgt durch den Kunden, vertreten durch Igor Podolskiy und/oder Holger Röder
+Die Abnahme erfolgt durch den Kunden, vertreten durch Igor Podolskiy und/oder Holger Röder.
 \subsection{Änderungsverfahren}
 Anforderungsänderungen werden vom Kunde über das Kundenforum bekannt gegeben. Vom Hersteller ausgehende Änderungswünsche werden mit dem
 Kunden und den Betreuern abgesprochen.
@@ -90,10 +90,25 @@ Kunden und den Betreuern abgesprochen.
 \subsection{Projektspezifische Abweichungen vom Standardprozess}
 \subsection{Phasen der Entwicklung}
 \subsection{Dokumentationsplan}
+Folgende Dokumente werden erstellt und dem aktuellen Stand angepasst:
+\begin{itemize}
+\item Spezifikation
+\item Projektplan + Gantt- und Termin-Drift-Diagramm
+\item Handbuch/Online-Hilfe
+\item Source/API Dokumentation mit Javadoc
+\end{itemize}
 
 \section{Risiken}
 \subsection{Risiken und ihre Bewertung}
+\begin{itemize}
+\item Serverabstürtze/Datenverlust
+\end{itemize}
+Dieses Risiko ist hoch wobei es meist durch Fehlbedienung und nicht durch Hardwareausfall auftritt.
 \subsection{Maßnahmen zur Reduktion der Risiken}
+\subsubsection{Datenverlust}
+Um dem Verlust von wichtigen Projektdaten vorzubeugen wird git als dezentralisiertes Versionsverwaltungssystem eingesetzt,
+so hat jeder Entwickler immer eine gesammte Kopie der Versionshistorie so, dass diese von jedem wieder hergestellt werden kann
+sollte sie auf dem Projektserver oder bei einem der Entwickler verloren gehen.
 \subsection{Notfallpläne}
 
 \section{Richtlinien für die Entwicklung}
@@ -101,7 +116,7 @@ Kunden und den Betreuern abgesprochen.
 Als Konfirgurationsverwaltung wird git verwendet, sowie als webbasiertes Projektmanagementtool Trac, desweiteren existiert eine Projektinterne
 Mailingliste.
 \subsection{Design- und Programmierrichtlinien}
-Als Programmierrichtlinie wird die Java Code Convention von Oracle/Sun verwendet, siehe http://www.oracle.com/technetwork/java/codeconvtoc-136057.html
+Als Programmierrichtlinie wird die Java Code Convention von Oracle/Sun verwendet, siehe \url{http://www.oracle.com/technetwork/java/codeconvtoc-136057.htm}l
 Als Dokumentationssystem wird Javadoc verwendet.
 \subsection{Einsatz von Werkzeugen}
 Als IDE wird Eclipse Helios genutzt, für Code Coverage Messungen das Plugin CodeCover. Hinzu kommen die unter Konfigurationsverwaltung genannten
@@ -124,7 +139,5 @@ Die Software wird auf allen durch Java SE unterstützen Systeme lauffähig sein,
 \subsection{Projektstrukturplan (Arbeitsgliederung)}
 \subsection{Terminplan}
 \subsection{Kostenplan}
-
-
 
 \end{document}
