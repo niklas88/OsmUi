@@ -25,38 +25,45 @@
 
 \section{Einleitung}
 \subsection{Zweck, Abgrenzung}
-OsmUi stellt eine benutzerfreundlichere Schnittstelle zur Benutzung von Osmosis dar. Hierbei soll das Pipeline Modell, welches von Osmosis verwendet wird, auf ein leicht benutzbares GUI Modell übertragen werden. 
+OsmUi stellt eine benutzerfreundlichere Schnittstelle zur Benutzung von Osmosis dar. Hierbei soll das Pipeline Modell, welches von Osmosis verwendet wird, auf ein leicht benutzbares GUI Modell übertragen werden.
+OsmUi verarbeitet hierbei selbst keine Daten von OpenStreetMap, sondern generiert Aufrufe für Osmosis oder ruft dieses
+selbst auf. 
 \subsection{Projektüberblick, Motivation}
-Aus der schwierigen Aufgabe die Kommandozeilen für Osmosis zu generieren entstand die Idee für OsmUi. Dabei stellt OsmUi folgende Grundfunktionalitäten bereit:
-
-- Generierung einer Kommandozeile
-- Graphische Aufbereitung der Task-Auswahl
-
-
+Da es sehr mühselig ist, die komplexen Pipline-Konstruktionen für Osmosis immer wieder per Hand auf der Kommandozeile oder in einer bat/sh Datei einzugeben, 
+enstand die Idee einer grafischen Benutzeroberfläche für Osmosis.
+Diese Idee wird nun in Form des Softwarepraktikums im Wintersemester 2010/11 an der Universität Stuttgart umgesetzt.
+Eine der so entstehenden Lösungen ist OsmUi, folgende Grundfunktionalitäten sollen durch OsmUi zur Verfügung gestellt werden:
+\begin{itemize}
+\item Generierung einer Kommandozeile
+\item Graphische Aufbereitung der Task-Auswahl und Konstruktion von Piplines
+\end{itemize}
 
 \section{Formale Grundlagen}
 \subsection{Vertragliche Anforderungen an die Projektdurchführung}
 Das Projekt muss bis zum 01.02.2010 fertiggestellt werden. Dabei werden pro Person 180 Arbeitsstunden veranschlagt.
 \subsection{Vertragliche Anforderungen an das Produkt}
-OsmUi muss mit 100 Tasks gleichzeitig klarkommen und auf allen Plattformen laufen, die Java se unterstützen. 
-
+OsmUi muss mit 100 Tasks gleichzeitig klarkommen und auf allen Plattformen laufen, die Java SE unterstützen. 
 
 \section{Leistungen der Vertragspartner}
 \subsection{Lieferumfang (Software, Dienstleistungen)}
 Im Lieferumfang enthalten sind:
-- OsmUi
-- Handbuch (online / PDF) in englischer Sprache
-- Code
-- Installationsanleitung
+\begin{itemize}
+\item OsmUi
+\item Handbuch (online / PDF) in englischer Sprache
+\item Code
+\item Installationsanleitung
+\end{itemize}
 \subsection{Resultate, die nicht zum Lieferumfang gehören}
 Testplan, Projektplan, Spezifikation
 \subsection{Leistungen des Auftraggebers}
 Leistungen des Auftraggebers:
+\begin{itemize}
+\item Bibliothek zum auswählen des Kartenausschnitts.
+\item Bibliothek zum Preview der durch Osmosis generierten Ausgabe
+\item kleines komplettes Beispiel für eine typische Osmosis Benutzung
+\item einige Beispiel-Kommandozeilenaufrufe
+\end{itemize}
 
--Application Interface zum auswählen des Kartenausschnitts.
--Application Interface zum Preview der gewählten Optionen.
--kleines komplettes Beispiel
--einige Beispiel-Kommandozeileneingaben
 \subsection{Externe Meilensteine}
 \begin{tabular}{|c|c|p{14em}|p{14em}|}
 \hline Datum & Uhrzeit & Beschreibung & Meilensteinbeauftragter\\ 
@@ -73,9 +80,10 @@ Leistungen des Auftraggebers:
 \hline 
 \end{tabular} 
 \subsection{Abnahmeprozedur}
-Kunde versucht mit unserem Produkt zu recht zu kommen.
+Die Abnahme erfolgt durch den Kunden, vertreten durch Igor Podolskiy und/oder Holger Röder.
 \subsection{Änderungsverfahren}
-Änderungen werden vom Kunde über das Kundenforum bekanntgegeben. Unsere Änderungen werden mit den Betreuern abgesprochen.
+Anforderungsänderungen werden vom Kunde über das Kundenforum bekannt gegeben. Vom Hersteller ausgehende Änderungswünsche werden mit dem
+Kunden und den Betreuern abgesprochen.
 
 
 \section{Entwicklungsprozess}
@@ -83,33 +91,46 @@ Kunde versucht mit unserem Produkt zu recht zu kommen.
 \subsection{Projektspezifische Abweichungen vom Standardprozess}
 \subsection{Phasen der Entwicklung}
 \subsection{Dokumentationsplan}
-
+Folgende Dokumente werden erstellt und dem aktuellen Stand angepasst:
+\begin{itemize}
+\item Spezifikation
+\item Projektplan + Gantt- und Termin-Drift-Diagramm
+\item Handbuch/Online-Hilfe
+\item Source/API Dokumentation mit Javadoc
+\end{itemize}
 
 \section{Risiken}
 \subsection{Risiken und ihre Bewertung}
+\begin{itemize}
+\item Serverabstürtze/Datenverlust
+\end{itemize}
+Dieses Risiko ist hoch wobei es meist durch Fehlbedienung und nicht durch Hardwareausfall auftritt.
 \subsection{Maßnahmen zur Reduktion der Risiken}
+\subsubsection{Datenverlust}
+Um dem Verlust von wichtigen Projektdaten vorzubeugen wird git als dezentralisiertes Versionsverwaltungssystem eingesetzt,
+so hat jeder Entwickler immer eine gesammte Kopie der Versionshistorie so, dass diese von jedem wieder hergestellt werden kann
+sollte sie auf dem Projektserver oder bei einem der Entwickler verloren gehen.
 \subsection{Notfallpläne}
-
 
 \section{Richtlinien für die Entwicklung}
 \subsection{Konfigurationsmanagement}
+Als Konfirgurationsverwaltung wird git verwendet, sowie als webbasiertes Projektmanagementtool Trac, desweiteren existiert eine Projektinterne
+Mailingliste.
 \subsection{Design- und Programmierrichtlinien}
+Als Programmierrichtlinie wird die Java Code Convention von Oracle/Sun verwendet, siehe \url{http://www.oracle.com/technetwork/java/codeconvtoc-136057.htm}l
+Als Dokumentationssystem wird Javadoc verwendet.
 \subsection{Einsatz von Werkzeugen}
-
-
-
-%\section{Anforderungen an die Umgebung}
+Als IDE wird Eclipse Helios genutzt, für Code Coverage Messungen das Plugin CodeCover. Hinzu kommen die unter Konfigurationsverwaltung genannten
+Werkzeuge sowie die Java Entwicklungswerkzeuge des Sun- und OpenJDK.
+\section{Anforderungen an die Umgebung}
+Die Software wird auf allen durch Java SE unterstützen Systeme lauffähig sein, denn es werden nur reine Java Bibliotheken eingesetzt.
 %\subsection{Infrastruktur (Büros, Rechnersysteme, Software)}
 %\subsection{Leistungen Dritter im Unternehmen}
-\subsection{Leistungen externer Lieferanten}
-
-
-
+%\subsection{Leistungen externer Lieferanten}
 
 \section{Projektorganisation}
 \subsection{Schnittstelle zum Auftraggeber}
-\subsection{Schnittstellen zur eigenen Organisation}
-\subsection{Schnittstellen zu anderen Projekten}
+Schnittstelle zum Kunden ist das Kundenforum. 
 \subsection{Schlüsselpersonen}
 \begin{itemize}
 \item[]
@@ -128,12 +149,10 @@ interner Kunde : Holger Röder\\
 \subsection{Organisation (differenziert für die einzelnen Projektphasen)}
 \subsection{Berichtwesen}
 
-
 \section{Entwicklungsplan}
 \subsection{Projektstrukturplan (Arbeitsgliederung)}
 \subsection{Terminplan}
 \subsection{Kostenplan}
-
-
+Es werden pro Person 180 Arbeitsstunden veranschlagt, dem Kunden entstehen aber keine Kosten.
 
 \end{document}
