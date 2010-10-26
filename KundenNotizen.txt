@@ -1,5 +1,5 @@
-Grundsätzliche Funktion
-- Die zu entwickelnde Software, stellt eine nenutzerfreundlichere Schnittstelle zur Benutzung des Kommandozeilentools Osmosis bereit. Dabei handelt es sich  um ein Werkzeug zur Pipline gestützten Verarbeitung von OpenStreetMap Daten, dabei können diese aus einer XML Datei oder einer Datenbank gelesen werden und anschließend durch verschiedenste Tasks gefiltert, verschmolzen, in Layer aufgetrennt und verändert (z.B. durch das Einfließen lassen von Änderungen) werden. Hierzu soll das Pipeline Modell welches von Osmosis verwendet wird auf ein leicht benutzbares GUI Modell übertragen werden. 
+﻿Grundsätzliche Funktion
+- Die zu entwickelnde Software, stellt eine benutzerfreundlichere Schnittstelle zur Benutzung des Kommandozeilentools Osmosis bereit. Dabei handelt es sich  um ein Werkzeug zur Pipline gestützten Verarbeitung von OpenStreetMap Daten, dabei können diese aus einer XML Datei oder einer Datenbank gelesen werden und anschließend durch verschiedenste Tasks gefiltert, verschmolzen, in Layer aufgetrennt und verändert (z.B. durch das Einfließen lassen von Änderungen) werden. Hierzu soll das Pipeline Modell welches von Osmosis verwendet wird auf ein leicht benutzbares GUI Modell übertragen werden. 
 Ist Zustand:
 Wer nutzt Osmosis?
 - Das OpenStreetMap Projekt, aber eigentlich alle die es nutzten wollen
