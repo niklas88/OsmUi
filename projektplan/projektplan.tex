@@ -88,40 +88,67 @@ Kunden und den Betreuern abgesprochen.
 
 \section{Entwicklungsprozess}
 \subsection{Strategie für die Entwicklung und Integration}
+Die Entwicklung erfolgt nach einem erweiterten Wasserfallmodell.
+In der Implementierungsphase wird außerdem verstärkt Pair Programming eingesetzt werden.
+Wobei die Entwicklung von einem Chief Programmer geleitet wird, wichtig ist hierbei, dass dieser die Verantwortung für die eigentliche Entwicklung, angefangen beim Entwurf, tragen wird, aber keine Verwaltungsaufgaben, die über die Implementierung hinaus gehen, hat.
 \subsection{Projektspezifische Abweichungen vom Standardprozess}
+
 \subsection{Phasen der Entwicklung}
+Die weitere Entwicklung erfolgt in  folgenden Phasen:
+\begin{enumerate}
+\item
+Spezifikation und Spezifikationsreview
+\item
+Entwurf unter anderem mit UML Diagrammen
+\item
+Implementierung, sowohl des  eigentlichen Softwaresystems als auch der Unit Tests,
+wobei bereits fertige Einheiten so früh wie möglich mit passenden Unit Tests getestet werden.
+\item 
+Test des Gesamtsystems und Korrektur von Fehlern
+\item
+Interne Abnahme bei erfolgreich bestandenen Tests des Gesamtsystems
+\item
+Abnahme durch den Kunden
+\end{enumerate}
 \subsection{Dokumentationsplan}
-Folgende Dokumente werden erstellt und dem aktuellen Stand angepasst:
+Folgende Dokumente werden erstellt und auf dem aktuellen Stand gehalten:
 \begin{itemize}
-\item Spezifikation
 \item Projektplan + Gantt- und Termin-Drift-Diagramm
+\item Spezifikation
 \item Handbuch/Online-Hilfe
-\item Source/API Dokumentation mit Javadoc
+\item Source/API Dokumentation mit Javadoc. Hierbei wird als Teil des Styleguides jede nach außen sichtbare (public) Methode und jede Klasse dokumentiert.
 \end{itemize}
 
 \section{Risiken}
 \subsection{Risiken und ihre Bewertung}
 \begin{itemize}
-\item Serverabstürtze/Datenverlust
+\item Serverabstürze/Datenverlust\\
+Dieses Risiko ist hoch, wobei es meist durch Fehlbedienung und nicht durch Hardwareausfall auftritt.
+\item Ausscheiden eines Teilnehmers aus dem Projekt\\
+Dieses Risiko ist gering.
+\item Temporärer Ausfall eines Teilnehmers aus dem Projekt.\\
+Dieses Risiko ist hoch, da Krankheiten nicht vorhergesehen werden können.
 \end{itemize}
-Dieses Risiko ist hoch wobei es meist durch Fehlbedienung und nicht durch Hardwareausfall auftritt.
+
+
 \subsection{Maßnahmen zur Reduktion der Risiken}
 \subsubsection{Datenverlust}
-Um dem Verlust von wichtigen Projektdaten vorzubeugen wird git als dezentralisiertes Versionsverwaltungssystem eingesetzt,
-so hat jeder Entwickler immer eine gesammte Kopie der Versionshistorie so, dass diese von jedem wieder hergestellt werden kann
-sollte sie auf dem Projektserver oder bei einem der Entwickler verloren gehen.
+Um dem Verlust wichtiger Projektdaten vorzubeugen, wird git als dezentralisiertes Versionsverwaltungssystem eingesetzt.
+So hat jeder Entwickler immer eine gesamte Kopie der Versionshistorie. Diese von jedem wieder hergestellt werden, sollte sie auf dem Projektserver oder bei einem der Entwickler verloren gehen.
+\subsubsection{Wegfall}
+Durch sorgfälltige Dokumentation und einer detailierten Spezifikation fällt es neuen Mitarbeitern leichter sich einzuarbeiten.
+\subsubsection{Ausfall}
+Durch das vermeiden unnötiger Risiken wird temporärer Ausfall minimiert.
 \subsection{Notfallpläne}
-
+Im Notfall an den Betreuer wenden.
 \section{Richtlinien für die Entwicklung}
 \subsection{Konfigurationsmanagement}
-Als Konfirgurationsverwaltung wird git verwendet, sowie als webbasiertes Projektmanagementtool Trac, desweiteren existiert eine Projektinterne
-Mailingliste.
+Als Konfirgurationsverwaltung wird git verwendet sowie als webbasiertes Projektmanagementtool Trac. Desweiteren existiert eine Projektinterne Mailingliste.
 \subsection{Design- und Programmierrichtlinien}
 Als Programmierrichtlinie wird die Java Code Convention von Oracle/Sun verwendet, siehe \url{http://www.oracle.com/technetwork/java/codeconvtoc-136057.htm}l
 Als Dokumentationssystem wird Javadoc verwendet.
 \subsection{Einsatz von Werkzeugen}
-Als IDE wird Eclipse Helios genutzt, für Code Coverage Messungen das Plugin CodeCover. Hinzu kommen die unter Konfigurationsverwaltung genannten
-Werkzeuge sowie die Java Entwicklungswerkzeuge des Sun- und OpenJDK.
+Als IDE wird Eclipse Helios genutzt, für Code Coverage Messungen das Plugin CodeCover. Hinzu kommen die unter Konfigurationsverwaltung genannten Werkzeuge sowie die Java Entwicklungswerkzeuge des Sun- und OpenJDK.
 \section{Anforderungen an die Umgebung}
 Die Software wird auf allen durch Java SE unterstützen Systeme lauffähig sein, denn es werden nur reine Java Bibliotheken eingesetzt.
 %\subsection{Infrastruktur (Büros, Rechnersysteme, Software)}
@@ -133,18 +160,21 @@ Die Software wird auf allen durch Java SE unterstützen Systeme lauffähig sein,
 Schnittstelle zum Kunden ist das Kundenforum. 
 \subsection{Schlüsselpersonen}
 \begin{itemize}
-\item[]
+\item
 Projektleiter : Peter Vollmer (vollmepr@studi.informatik.uni-stuttgart.de)
-\item[]
+\item
 Chiefprogrammer : Niklas Schnelle (schnelns@studi.informatik.uni-stuttgart.de)
-\item[]
+\item
 Chieftester : Verena Käfer (kaeferva@studi.informatik.uni-stuttgart.de
 \item
 externer Kunden : Igor Podolskiy\\
 (\href{http://www.uni-stuttgart.de/iev/institut/php-Dateien/php_HompageAnzeigen.php?Name=Pd}{http://www.uni-stuttgart.de/iev/institut/php-Dateien/php\_HompageAnzeigen.php?Name=Pd})
-\item[]
+\item
 interner Kunde : Holger Röder\\
 (\href{http://www.iste.uni-stuttgart.de/se/menschen/roeder.html}{http://www.iste.uni-stuttgart.de/se/menschen/roeder.html})
+\item 
+Betreuer : Daniel Kulesz\\
+(\href{http://www.iste.uni-stuttgart.de/se/menschen/kulesz.html}{http://www.iste.uni-stuttgart.de/se/menschen/kulesz.html})
 \end{itemize}
 \subsection{Organisation (differenziert für die einzelnen Projektphasen)}
 \subsection{Berichtwesen}
