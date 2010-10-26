@@ -5,12 +5,12 @@
 <property name="view" value="0"/>
 <property name="fontsize" value="10"/>
 <property name="zoomfactor" value="100"/>
-<property name="export-width" value="21.0"/>
-<property name="export-height" value="14.8"/>
+<property name="export-width" value="14.8"/>
+<property name="export-height" value="10.5"/>
 <property name="export-dpi" value="72.0"/>
-<property name="export-standartsize" value="DIN A5 quer"/>
+<property name="export-standartsize" value="DIN A6 quer"/>
 <instance>
-<name>OsmUi</name>
+<name>Erstellung</name>
 <creation-date date="25" month="10" year="2010"/>
 <start-date date="19" month="10" year="2010"/>
 <end-date date="11" month="2" year="2011"/>
