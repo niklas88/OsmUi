@@ -25,16 +25,16 @@
 
 \section{Einleitung}
 \subsection{Zweck, Abgrenzung}
-OsmUi stellt eine benutzerfroundlichere Schnittstelle zur Benutzung von Osmosis dar. Hierbei soll das Pipeline Modell, welches von Osmosis verwendet wird, auf ein leicht benutzbares GUI Modell übertragen werden.
+OsmUi stellt eine benutzerfreundlichere Schnittstelle zur Benutzung von Osmosis dar. Hierbei soll das Pipeline Modell, welches von Osmosis verwendet wird, auf ein leicht benutzbares GUI Modell übertragen werden.
 OsmUi verarbeitet selbst keine Daten von OpenStreetMap, sondern generiert Aufrufe für Osmosis. 
 \subsection{Projektüberblick, Motivation}
-Da es sehr mühselig ist, die komplexen Pipline-Konstruktionen für Osmosis immer wieder per Hand auf der Kommandozeile oder in einer bat/sh Datei einzugeben, 
-enstand die Idee einer grafischen Benutzeroberfläche für Osmosis.
+Da es sehr mühselig ist, die komplexen Pipeline-Konstruktionen für Osmosis immer wieder per Hand auf der Kommandozeile oder in einer bat/sh Datei einzugeben, 
+entstand die Idee einer grafischen Benutzeroberfläche für Osmosis.
 Diese Idee wird nun in Form des Softwarepraktikums im Wintersemester 2010/11 an der Universität Stuttgart umgesetzt.
 Eine der so entstehenden Lösungen ist OsmUi, folgende Grundfunktionalitäten sollen durch OsmUi zur Verfügung gestellt werden:
 \begin{itemize}
 \item Generierung einer Kommandozeile
-\item Graphische Aufbereitung der Task-Auswahl und Konstruktion von Piplines
+\item Graphische Aufbereitung der Task-Auswahl und Konstruktion von Pipelines
 \end{itemize}
 
 \section{Formale Grundlagen}
@@ -58,7 +58,7 @@ Testplan, Projektplan, Spezifikation
 \subsection{Leistungen des Auftraggebers}
 Leistungen des Auftraggebers:
 \begin{itemize}
-\item Bibliothek zum auswählen des Kartenausschnitts.
+\item Bibliothek zum Auswählen des Kartenausschnitts.
 \item Bibliothek zum Preview der durch Osmosis generierten Ausgabe
 \item kleines komplettes Beispiel für eine typische Osmosis Benutzung
 \item einige Beispiel-Kommandozeilenaufrufe
@@ -90,7 +90,7 @@ Kunden und den Betreuern abgesprochen.
 \subsection{Strategie für die Entwicklung und Integration}
 Die Entwicklung erfolgt nach einem erweiterten Wasserfallmodell.
 In der Implementierungsphase wird außerdem verstärkt Pair Programming eingesetzt werden.
-Wobei die Entwicklung von einem Chief Programmer geleitet wird, wichtig ist hierbei, dass dieser die Verantwortung für die eigentliche Entwicklung trägt.
+Hierbei wird die Entwicklung von einem Chief Programmer geleitet, dabei ist wichtig, dass dieser die Verantwortung für die eigentliche Entwicklung trägt.
 \subsection{Projektspezifische Abweichungen vom Standardprozess}
 
 \subsection{Phasen der Entwicklung}
@@ -99,7 +99,7 @@ Die weitere Entwicklung erfolgt in  folgenden Phasen:
 \item
 Spezifikation und Spezifikationsreview
 \item
-Entwurf unter anderem mit UML Diagrammen
+Entwurf, unter anderem mit UML Diagrammen
 \item
 Implementierung, sowohl des  eigentlichen Softwaresystems als auch der Unit Tests,
 wobei bereits fertige Einheiten so früh wie möglich mit passenden Unit Tests getestet werden.
@@ -133,17 +133,17 @@ Dieses Risiko ist hoch, da Krankheiten nicht vorhergesehen werden können.
 
 \subsection{Maßnahmen zur Reduktion der Risiken}
 \subsubsection{Datenverlust}
-Um dem Verlust wichtiger Projektdaten vorzubeugen, wird git als dezentralisiertes Versionsverwaltungssystem eingesetzt.
+Um dem Verlust wichtiger Projektdaten vorzubeugen, wird Git als dezentralisiertes Versionsverwaltungssystem eingesetzt.
 So hat jeder Entwickler immer eine gesamte Kopie der Versionshistorie. Diese kann so von jedem wieder hergestellt werden, sollte sie auf dem Projektserver oder bei einem der Entwickler verloren gehen.
 \subsubsection{Wegfall}
-Durch sorgfälltige Dokumentation und einer detailierten Spezifikation fällt es neuen Mitarbeitern leichter sich einzuarbeiten.
+Durch sorgfältige Dokumentation und einer detaillierten Spezifikation fällt es neuen Mitarbeitern leichter sich einzuarbeiten.
 \subsubsection{Ausfall}
 Durch das vermeiden unnötiger Risiken wird temporärer Ausfall minimiert.
 \subsection{Notfallpläne}
 Im Notfall an den Betreuer wenden.
 \section{Richtlinien für die Entwicklung}
 \subsection{Konfigurationsmanagement}
-Als Konfirgurationsverwaltung wird Git verwendet sowie als webbasiertes Projektmanagementtool Trac. Desweiteren existiert eine Projektinterne Mailingliste.
+Als Konfigurationsverwaltung wird Git verwendet sowie als webbasiertes Projektmanagementtool Trac. Des weiteren existiert eine projektinterne Mailingliste.
 \subsection{Design- und Programmierrichtlinien}
 Als Programmierrichtlinie wird die Java Code Convention von Oracle/Sun verwendet, siehe \url{http://www.oracle.com/technetwork/java/codeconvtoc-136057.htm}l
 Als Dokumentationssystem wird Javadoc verwendet.
@@ -205,7 +205,7 @@ Das Projekt beinhaltet folgende Arbeitspakete:
 Mit
 dem Schreiben des Handbuchs soll möglichst früh nach Fertigstellung der Spezifikation begonnen
 werden. Zudem soll das Handbuch in den Projektphasen Entwurf und Implementierung stets mit
-den anderen Dokumenten konsistent gehalten und ggfs. erweitert werden. Nach Fertigstellung der
+den anderen Dokumenten konsistent gehalten und ggf. erweitert werden. Nach Fertigstellung der
 Projektphase Implementierung soll das Handbuch noch einmal überarbeitet werden.
 Die Modultests sollen direkt vor der Implementierung des zugehörigen Moduls erstellt werden, um
 Fehler in der Implementierung frühzeitig erkennen und beheben zu können.
@@ -218,7 +218,7 @@ Fehler in der Implementierung frühzeitig erkennen und beheben zu können.
 \subsubsection{Legende}
 Entwicklungsphasen:
 \begin{itemize}
-\item Spez - Analyse und Spezikation
+\item Spez - Analyse und Spezifikation
 \item Entw - Entwurf
 \item Code - Implementierung
 \item Test - Test
