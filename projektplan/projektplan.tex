@@ -26,8 +26,7 @@
 \section{Einleitung}
 \subsection{Zweck, Abgrenzung}
 OsmUi stellt eine benutzerfroundlichere Schnittstelle zur Benutzung von Osmosis dar. Hierbei soll das Pipeline Modell, welches von Osmosis verwendet wird, auf ein leicht benutzbares GUI Modell übertragen werden.
-OsmUi verarbeitet hierbei selbst keine Daten von OpenStreetMap, sondern generiert Aufrufe für Osmosis oder ruft dieses
-selbst auf. 
+OsmUi verarbeitet selbst keine Daten von OpenStreetMap, sondern generiert Aufrufe für Osmosis. 
 \subsection{Projektüberblick, Motivation}
 Da es sehr mühselig ist, die komplexen Pipline-Konstruktionen für Osmosis immer wieder per Hand auf der Kommandozeile oder in einer bat/sh Datei einzugeben, 
 enstand die Idee einer grafischen Benutzeroberfläche für Osmosis.
@@ -68,7 +67,7 @@ Leistungen des Auftraggebers:
 \subsection{Externe Meilensteine}
 \begin{tabular}{|c|c|p{14em}|p{14em}|}
 \hline Datum & Uhrzeit & Beschreibung & Meilensteinbeauftragter\\ 
-\hline 19.10.2010 & 15:45 - 17:15 Uhr & Kick-Off & Verena käfer, Niklas Schnelle, Peter Vollmer\\ 
+\hline 19.10.2010 & 15:45 - 17:15 Uhr & Kick-Off & Verena Käfer, Niklas Schnelle, Peter Vollmer\\ 
 \hline 29.10.2010 & 12:00 Uhr & Abgabe Analysenotizen + Projektplan & Peter Vollmer\\ 
 \hline 16.11.20101 & 12:00 Uhr & Abgabe Spezifikation + UI Prototyp & Niklas Schnelle\\ 
 \hline 30.11.2010 & 12:00 Uhr & Abgabe korrigierte Spezifikation + Zwischenstand Zeitabrechnung & Verena Käfer\\ 
@@ -76,8 +75,8 @@ Leistungen des Auftraggebers:
 \hline 31.12.2010 & 23:59 Uhr & Abgabe Zwischenstand Implementierung (Alpha) + Systemtestplan & Niklas Schnelle\\ 
 \hline 11.01.2011 & 12:00 Uhr & Abgabe Implementierung (Beta) + Modultest & Verena Käfer\\ 
 \hline 25.01.2011 & 12:00 Uhr & Abgabe Implementierung (RC) + Systemtestprotokoll & Peter Vollmer\\ 
-\hline 01.02.2011 & ganzer Tag & Abnahme durch den Kunden & Verena käfer, Niklas Schnelle, Peter Vollmer\\ 
-\hline 11.02.2011 & & Ende des Softwarepraktikums & Verena käfer, Niklas Schnelle, Peter Vollmer\\ 
+\hline 01.02.2011 & ganzer Tag & Abnahme durch den Kunden & Verena Käfer, Niklas Schnelle, Peter Vollmer\\ 
+\hline 11.02.2011 & & Ende des Softwarepraktikums & Verena Käfer, Niklas Schnelle, Peter Vollmer\\ 
 \hline 
 \end{tabular} 
 \subsection{Abnahmeprozedur}
@@ -91,8 +90,7 @@ Kunden und den Betreuern abgesprochen.
 \subsection{Strategie für die Entwicklung und Integration}
 Die Entwicklung erfolgt nach einem erweiterten Wasserfallmodell.
 In der Implementierungsphase wird außerdem verstärkt Pair Programming eingesetzt werden.
-Wobei die Entwicklung von einem Chief Programmer geleitet wird, wichtig ist hierbei, dass dieser die Verantwortung für die eigentliche Entwicklung,
-angefangen beim Entwurf, tragen wird, aber keine Verwaltungsaufgaben, die über die Implementierung hinaus gehen, hat.
+Wobei die Entwicklung von einem Chief Programmer geleitet wird, wichtig ist hierbei, dass dieser die Verantwortung für die eigentliche Entwicklung trägt.
 \subsection{Projektspezifische Abweichungen vom Standardprozess}
 
 \subsection{Phasen der Entwicklung}
@@ -136,7 +134,7 @@ Dieses Risiko ist hoch, da Krankheiten nicht vorhergesehen werden können.
 \subsection{Maßnahmen zur Reduktion der Risiken}
 \subsubsection{Datenverlust}
 Um dem Verlust wichtiger Projektdaten vorzubeugen, wird git als dezentralisiertes Versionsverwaltungssystem eingesetzt.
-So hat jeder Entwickler immer eine gesamte Kopie der Versionshistorie. Diese von jedem wieder hergestellt werden, sollte sie auf dem Projektserver oder bei einem der Entwickler verloren gehen.
+So hat jeder Entwickler immer eine gesamte Kopie der Versionshistorie. Diese kann so von jedem wieder hergestellt werden, sollte sie auf dem Projektserver oder bei einem der Entwickler verloren gehen.
 \subsubsection{Wegfall}
 Durch sorgfälltige Dokumentation und einer detailierten Spezifikation fällt es neuen Mitarbeitern leichter sich einzuarbeiten.
 \subsubsection{Ausfall}
@@ -145,12 +143,20 @@ Durch das vermeiden unnötiger Risiken wird temporärer Ausfall minimiert.
 Im Notfall an den Betreuer wenden.
 \section{Richtlinien für die Entwicklung}
 \subsection{Konfigurationsmanagement}
-Als Konfirgurationsverwaltung wird git verwendet sowie als webbasiertes Projektmanagementtool Trac. Desweiteren existiert eine Projektinterne Mailingliste.
+Als Konfirgurationsverwaltung wird Git verwendet sowie als webbasiertes Projektmanagementtool Trac. Desweiteren existiert eine Projektinterne Mailingliste.
 \subsection{Design- und Programmierrichtlinien}
 Als Programmierrichtlinie wird die Java Code Convention von Oracle/Sun verwendet, siehe \url{http://www.oracle.com/technetwork/java/codeconvtoc-136057.htm}l
 Als Dokumentationssystem wird Javadoc verwendet.
 \subsection{Einsatz von Werkzeugen}
-Als IDE wird Eclipse Helios genutzt, für Code Coverage Messungen das Plugin CodeCover. Hinzu kommen die unter Konfigurationsverwaltung genannten Werkzeuge sowie die Java Entwicklungswerkzeuge des Sun- und OpenJDK.
+Folgende Werkzeuge werden eingesetzt:
+\begin{itemize}
+\item GTD-Manager für die Erstellung von Gantt- und Termindriftdiagrammen
+\item Visual Paradigm für die UML-Modellierung
+\item RevAger zur Review-Organisation
+\item Eclipse Helios als IDE
+\item Eclipse-Plugin CodeCover zur Coverage Messung
+\item Justus zur Testfallverwaltung
+\end{itemize}
 \section{Anforderungen an die Umgebung}
 Die Software wird auf allen durch Java SE unterstützen Systeme lauffähig sein, denn es werden nur reine Java Bibliotheken eingesetzt.
 %\subsection{Infrastruktur (Büros, Rechnersysteme, Software)}
@@ -183,11 +189,58 @@ Betreuer : Daniel Kulesz\\
 
 \section{Entwicklungsplan}
 \subsection{Projektstrukturplan (Arbeitsgliederung)}
+Das Projekt beinhaltet folgende Arbeitspakete:
+\begin{itemize}
+\item Projektplan
+\item Spezifikation
+\item Review der Spezifikation
+\item Überarbeitung der Spezifikation nach Review
+\item Entwurf
+\item Implementierung
+\item Modultest
+\item Systemtest
+\item Handbuch
+\item Auslieferung
+\item Sonstiges
+Mit
+dem Schreiben des Handbuchs soll möglichst früh nach Fertigstellung der Spezifikation begonnen
+werden. Zudem soll das Handbuch in den Projektphasen Entwurf und Implementierung stets mit
+den anderen Dokumenten konsistent gehalten und ggfs. erweitert werden. Nach Fertigstellung der
+Projektphase Implementierung soll das Handbuch noch einmal überarbeitet werden.
+Die Modultests sollen direkt vor der Implementierung des zugehörigen Moduls erstellt werden, um
+Fehler in der Implementierung frühzeitig erkennen und beheben zu können.
+\end{itemize}
 \subsection{Terminplan}
 \subsubsection{Gantt Diagramm}
 \includegraphics[width=15cm]{gantt.png}
 \subsubsection{Termin-Drift Diagramm}
 \includegraphics[width=15cm]{termindrift.png}
+\subsubsection{Legende}
+Entwicklungsphasen:
+\begin{itemize}
+\item Spez - Analyse und Spezikation
+\item Entw - Entwurf
+\item Code - Implementierung
+\item Test - Test
+\end{itemize}
+Untergeordnete Entwicklungsphasen:
+\begin{itemize}
+\item KickO - Projektbeginn
+\item Analy - Erstellung der Analyse, Kundengespräch
+\item Plan - Erstellung des Projektplan
+\item Spez - Erstellung der Spezifikation
+\item SRev - Review der Spezifikation
+\item SKorr - Korrektur der Spezifikation anhand des Reviewprotokolls
+\item Handb - Erstellung des Handbuchs anhand der Spezifikation und deren Korrektur
+\item Black - Erstellung der Blackboxtests anhand der Spezifikation
+\item Testf -Erstellung der Modul und Unit-Tests 
+\item Test - Testphase mit allen Testfällen
+\item Testk - Korrekturphase nach der Testphase
+\item Alpha - 
+\item Beta - 
+\item RC -  
+
+\end{itemize}
 \subsection{Kostenplan}
 Es werden pro Person 180 Arbeitsstunden veranschlagt, dem Kunden entstehen aber keine Kosten.
 
