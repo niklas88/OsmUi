@@ -86,69 +86,131 @@ für einige Linux Distributionen geben, die die Installation erleichtern sowie O
 Bei OsmUi gibt es grundsätzlich nur eine Nutzerklasse. Es wird davon ausgegangen, dass OsmUi benutzt wird um eine Verarbeitungspipeline für OpenStreetMap Daten
 zu erstellen, welche anschließend durch Osmosis ``ausgeführt'' wird. Hierbei wird davon ausgegangen, dass der Nutzer grundlegende Kentnisse 
 von Datenverarbeitung und OpenStreetMap hat.
-
-\section{Testprotokoll-Export als PDF}
-\subsection{Kopf- und Fußzeile}
-\subsection{Testprotokolleigenschaften und Zusammenfassung}
-
+\section{Laden und Speichern von Verarbeitungspiplines als Osmosis Aufrufscript}
+Dem KISS-Prinzip folgend bietet OsmUi eine einheitliche Laden und Speichern Funktion, die sowohl eventuell bereits vorhandene Osmosis Aufrufscripts
+laden kann, als auch durch OsmUi selbst erstellte Verarbeitungspiplines, die immer auch als Aufrufscript gespeichert werden. 
+Dies ermöglicht auch beim Wechsel des Werkzeugs einen leichten Zugriff auf alle mit OsmUi erstellten Dateien.
+\subsection{Laden}
+Eine der Hauptfunktionen von OsmUi stellt das Laden von Aufrufscripten da. Dabei können sowohl Dateien im .bat, als auch im .sh Format (mit \#!/bin/sh Shebang)
+sowie Textdateien in denen nur eine Osmosis Parameterliste steht geladen werden. Sie werden direkt im Pipelinebearbeitungsfeld angezeigt und
+stehen zur Bearbeitung bereit.
+\subsubsection{Speichern}
+Zum Speichern wählt der Benutzer entweder einen neue Datei aus, die wenn vorhanden überschrieben und sonst neu erstellt wird, oder er überschreibt die gerade bearbeitete Datei.
+Der Dateityp kann hierbei zwischen .sh Script und .bat gewählt werden, wobei die zu letzt verwendete Einstellung der voreingestellt ist.
 \section{Benutzeroberfläche}
-\subsection{Prgrammstart}
-\subsection{Titelleiste des Hauptfensters}
-\subsection{Startbildschirm}
-\subsection{Moduswahlbildschirm}
-\subsection{Allgemeine Beschreibung des Hauptfensters}
-\subsubsection{Die Modusleiste}
-\subsubsection{Verhalten bei Änderung der Fenstergröße}
-\subsubsection{Verhalten von Rückgängig und wiederholen}
-\subsubsection{Verhalten beim Erstellen von Kopien}
-\subsubsection{Verhalten beim Entfernen von Elementen}
-\subsubsection{Filterung der Auswahl beim Duplizieren, Kopieren und Verschieben}
-\subsection{Menübefehle}
-\subsubsection{Alle Testsequenzen exportieren}
-\subsubsection{Ausschneiden}
-\subsubsection{Ausgewählte Testsequenz exportieren}
-\subsubsection{Auswertung}
-\subsubsection{Beenden}
-\subsubsection{Benutzerverwaltung}
-\subsubsection{Durchführung}
-\subsubsection{Einfügen}
-\subsubsection{Einstellungen}
-\subsubsection{\textit{Elememt} an das Ende verschieben}
-\subsubsection{\textit{Element} an den Anfang verschieben}
-\subsubsection{\textit{Element} eine Position nach ob}
-\subsubsection{\textit{Element} eine Position nach unten}
-\subsubsection{\textit{Element} duplizieren}
-\subsubsection{\textit{Element} entfernen}
-\subsubsection{Hilfe}
-\subsubsection{Kopieren}
-\subsubsection{Neue Testsequenz}
-\subsubsection{Neuer Testfall}
-\subsubsection{Neues Projekt}
-\subsubsection{Programmfehler melden}
-\subsubsection{Projekt öffnen}
-\subsubsection{Projekt schließen}
-\subsubsection{Projekt speichern}
-\subsubsection{Projekt speichern unter}
-\subsubsection{Rückgängig}
-\subsubsection{Suchen}
-\subsubsection{Test abbrechen}
-\subsubsection{Test durchführen}
-\subsubsection{Testdaten importieren}
-\subsubsection{Testprotokoll als PDF speichern}
-\subsubsection{Über}
-\subsubsection{Update Prüfung}
-\subsubsection{Verwaltung}
-\subsubsection{Wiederholen}
-\subsubsection{Zuletzt geöffnete Projekte}
-\subsection{Gliederung der Menüleiste}
-\subsection{Hauptfenster im Verwaltungsmodus}
-\subsubsection{Der Baum}
-\subsubsection{Inhaltsbereich mit Mehrfachausahl oder ohne Auswahl im Baum}
-\subsubsection{Inhaltsbereich bei Auswahl einer Testsequenz}
-\subsubsection{Inhaltsbereich bei Auswahl eines Testfalls}
-\subsubsection{Verhalten der Eingabefelder im Inhaltsbereich}
-\subsection{Hauptfenster im Durchführungsmodus}
-\subsubsection{•}
+Die Benutzeroberfläche von OsmUi ist in zwei Hauptteile aufgeteilt, zudem gibt es ein Anwendungsmenü. Im linken Teil können neue Tasks ausgewählt werden die zur
+Pipeline hinzugefügt werden können.
+%\subsection{Titelleiste des Hauptfensters}
+%\subsection{Startbildschirm}
+%\subsection{Moduswahlbildschirm}
+%\subsection{Allgemeine Beschreibung des Hauptfensters}
+%\subsubsection{Die Modusleiste}
+% \subsubsection{Verhalten bei Änderung der Fenstergröße}
+% \subsubsection{Verhalten von Rückgängig und wiederholen}\subsection{Titelleiste des Hauptfensters}
+% \subsection{Startbildschirm}
+% \subsection{Moduswahlbildschirm}
+% \subsection{Allgemeine Beschreibung des Hauptfensters}
+% \subsubsection{Die Modusleiste}
+% \subsubsection{Verhalten bei Änderung der Fenstergröße}
+% \subsubsection{Verhalten von Rückgängig und wiederholen}
+% \subsubsection{Verhalten beim Erstellen von Kopien}
+% \subsubsection{Verhalten beim Entfernen von Elementen}
+% \subsubsection{Filterung der Auswahl beim Duplizieren, Kopieren und Verschieben}
+% \subsection{Menübefehle}
+% \subsubsection{Alle Testsequenzen exportieren}
+% \subsubsection{Ausschneiden}
+% \subsubsection{Ausgewählte Testsequenz exportieren}
+% \subsubsection{Auswertung}
+% \subsubsection{Beenden}
+% \subsubsection{Benutzerverwaltung}
+% \subsubsection{Durchführung}
+% \subsubsection{Einfügen}
+% \subsubsection{Einstellungen}
+% \subsubsection{\textit{Elememt} an das Ende verschieben}
+% \subsubsection{\textit{Element} an den Anfang verschieben}
+% \subsubsection{\textit{Element} eine Position nach ob}
+% \subsubsection{\textit{Element} eine Position nach unten}
+% \subsubsection{\textit{Element} duplizieren}
+% \subsubsection{\textit{Element} entfernen}
+% \subsubsection{Hilfe}
+% \subsubsection{Kopieren}
+% \subsubsection{Neue Testsequenz}
+% \subsubsection{Neuer Testfall}
+% \subsubsection{Neues Projekt}
+% \subsubsection{Programmfehler melden}
+% \subsubsection{Projekt öffnen}
+% \subsubsection{Projekt schließen}
+% \subsubsection{Projekt speichern}
+% \subsubsection{Projekt speichern unter}
+% \subsubsection{Rückgängig}
+% \subsubsection{Suchen}
+% \subsubsection{Test abbrechen}
+% \subsubsection{Test durchführen}
+% \subsubsection{Testdaten importieren}
+% \subsubsection{Testprotokoll als PDF speichern}
+% \subsubsection{Über}
+% \subsubsection{Update Prüfung}
+% \subsubsection{Verwaltung}
+% \subsubsection{Wiederholen}
+% \subsubsection{Zuletzt geöffnete Projekte}
+% \subsection{Gliederung der Menüleiste}
+% \subsection{Hauptfenster im Verwaltungsmodus}
+% \subsubsection{Der Baum}
+% \subsubsection{Inhaltsbereich mit Mehrfachausahl oder ohne Auswahl im Baum}
+% \subsubsection{Inhaltsbereich bei Auswahl einer Testsequenz}
+% \subsubsection{Inhaltsbereich bei Auswahl eines Testfalls}
+% \subsubsection{Verhalten der Eingabefelder im Inhaltsbereich}
+% \subsection{Hauptfenster im Durchführungsmodus}
+% 
+% \subsubsection{Verhalten beim Erstellen von Kopien}
+% \subsubsection{Verhalten beim Entfernen von Elementen}
+% \subsubsection{Filterung der Auswahl beim Duplizieren, Kopieren und Verschieben}
+% \subsection{Menübefehle}
+% \subsubsection{Alle Testsequenzen exportieren}
+% \subsubsection{Ausschneiden}
+% \subsubsection{Ausgewählte Testsequenz exportieren}
+% \subsubsection{Auswertung}
+% \subsubsection{Beenden}
+% \subsubsection{Benutzerverwaltung}
+% \subsubsection{Durchführung}
+% \subsubsection{Einfügen}
+% \subsubsection{Einstellungen}
+% \subsubsection{\textit{Elememt} an das Ende verschieben}
+% \subsubsection{\textit{Element} an den Anfang verschieben}
+% \subsubsection{\textit{Element} eine Position nach ob}
+% \subsubsection{\textit{Element} eine Position nach unten}
+% \subsubsection{\textit{Element} duplizieren}
+% \subsubsection{\textit{Element} entfernen}
+% \subsubsection{Hilfe}
+% \subsubsection{Kopieren}
+% \subsubsection{Neue Testsequenz}
+% \subsubsection{Neuer Testfall}
+% \subsubsection{Neues Projekt}
+% \subsubsection{Programmfehler melden}
+% \subsubsection{Projekt öffnen}
+% \subsubsection{Projekt schließen}
+% \subsubsection{Projekt speichern}
+% \subsubsection{Projekt speichern unter}
+% \subsubsection{Rückgängig}
+% \subsubsection{Suchen}
+% \subsubsection{Test abbrechen}
+% \subsubsection{Test durchführen}
+% \subsubsection{Testdaten importieren}
+% \subsubsection{Testprotokoll als PDF speichern}
+% \subsubsection{Über}
+% \subsubsection{Update Prüfung}
+% \subsubsection{Verwaltung}
+% \subsubsection{Wiederholen}
+% \subsubsection{Zuletzt geöffnete Projekte}
+% \subsection{Gliederung der Menüleiste}
+% \subsection{Hauptfenster im Verwaltungsmodus}
+% \subsubsection{Der Baum}
+% \subsubsection{Inhaltsbereich mit Mehrfachausahl oder ohne Auswahl im Baum}
+% \subsubsection{Inhaltsbereich bei Auswahl einer Testsequenz}
+% \subsubsection{Inhaltsbereich bei Auswahl eines Testfalls}
+% \subsubsection{Verhalten der Eingabefelder im Inhaltsbereich}
+% \subsection{Hauptfenster im Durchführungsmodus}
+
 
 
 \end{document}
