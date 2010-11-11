@@ -40,21 +40,22 @@ In dem Entwicklungsprojekt OsmUi soll eine grafische Benutzeroberfläche für da
 entwickelt werden. Zu diesem Zweck überträgt OsmUi das abstrakte Pipelinekonzept von Osmosis auf eine grafische Darstellung, welche die gesamte
 Funktionalität von Osmosis zugänglich macht, dabei aber deutlich benutzerfreundlicher sein soll.\\
 Während bei Osmosis ein langer Kommandozeilenaufruf eine Pipeline zur Verarbeitung von OpenStreetMap Daten beschreibt, wobei sich der Benutzer die Befehle merken
-und korrekt in der gewünschten Reihenfolge aufschreiben muss.\\
-Soll es mit OsmUi möglich sein eine Verarbeitungspipeline ``zusammen zu klicken'' hierbei kann die Funktionsweise der einzelnen Tasks sowie deren Interaktion
-der Benutzeroberfläche von OsmUi entnommen werden.
-\subsection{Konventionen}
+und korrekt in der gewünschten Reihenfolge aufschreiben muss, soll es mit OsmUi möglich sein eine Verarbeitungspipeline ``zusammen zu klicken''.\\
+Hierbei kann die Funktionsweise der einzelnen Tasks sowie deren Interaktion der Benutzeroberfläche von OsmUi entnommen werden.
+%\subsection{Konventionen} %Kommt noch
+
+\section{Akteure}
+\subsection{Benutzer}
+Bei OsmUi gibt es grundsätzlich nur eine Nutzerklasse. Es wird davon ausgegangen, dass OsmUi benutzt wird um eine Verarbeitungspipeline für OpenStreetMap Daten
+zu erstellen, welche anschließend durch Osmosis ``ausgeführt'' wird. Hierbei wird davon ausgegangen, dass der Nutzer grundlegende Kentnisse 
+von Datenverarbeitung und OpenStreetMap hat.
 
 \section{Nichtfunktionale Anforderungen}
-\subsection{Mengengerüst}
-Bei OsmUi handelt es sich um eine Einzelplatzanwendung und es wird keine Netzwerkfunktion genutzt, somit gibt es zu jedem Zeitpunkt einen Nutzer.\\
-Beim erstellen/laden/speichern von Verarbeitungspipelines muss OsmUi in der Lage sein mit Pipelines von bis zu 100 Tasks zuverlässig zu arbeiten,
-eine künstliche Beschränkung nach oben besteht jedoch nicht.
 \subsection{Entwurfseinschränkungen}
 \subsubsection{Entwurfskonzept}
 OsmUi wird nach dem \href{http://de.wikipedia.org/wiki/KISS-Prinzip}{KISS-Prinzip} entwickelt, d.h. entscheidend für die Qualität der Software soll
-sein wie gut die Hauptfunktionen unterstützt werden, bessere Hauptfunktionalität ist einem größeren Funktionsumfang unterzuordnen.\\
-Im Fall von OsmUi heißt dies, dass das Hauptaugenmerk auf dem einfachen und sinnvollen erstellen von Verarbeitungspipelines, deren Import und Export liegt.
+sein, wie gut die Hauptfunktionen unterstützt werden. Bessere Hauptfunktionalität ist einem größeren Funktionsumfang unterzuordnen.\\
+Im Fall von OsmUi heißt dies, dass das Hauptaugenmerk auf dem einfachen und sinnvollen erstellen von Verarbeitungspipelines, sowie deren Import und Export liegt.\\
 Weniger wichtig sind hingegen ``Luxusfunktionen'' wie direktes Anzeigen des Verarbeitungsergebnisses (was auf Grund der Vielfalt der Funktionen von Osmosis
 und der Verarbeitungsdauer onehin nicht immer sinnvoll ist) oder das direkte Aufrufen von Osmosis.
 \subsubsection{Systemumgebung}
@@ -81,17 +82,17 @@ so gestaltet, dass OsmUi leicht und schnell an neue oder veränderte Osmosis Fun
 OsmUi wird als ausführbares JAR Archiv ausgeliefert, welches auf allen Java SE 1.6 fähigen Systemen benutzt werden kann. Gegebenenfalls wird es außerdem Pakete 
 für einige Linux Distributionen geben, die die Installation erleichtern sowie OsmUi in Menüs einbinden.
 
-\section{Akteure}
-\subsection{Benutzer}
-Bei OsmUi gibt es grundsätzlich nur eine Nutzerklasse. Es wird davon ausgegangen, dass OsmUi benutzt wird um eine Verarbeitungspipeline für OpenStreetMap Daten
-zu erstellen, welche anschließend durch Osmosis ``ausgeführt'' wird. Hierbei wird davon ausgegangen, dass der Nutzer grundlegende Kentnisse 
-von Datenverarbeitung und OpenStreetMap hat.
 
-\section{Laden und Speichern von Verarbeitungspiplines als Osmosis Aufrufscript}
+\section{Funktionale Anforderungen}
+\subsection{Mengengerüst}
+Bei OsmUi handelt es sich um eine Einzelplatzanwendung und es wird keine Netzwerkfunktion genutzt, somit gibt es zu jedem Zeitpunkt einen Nutzer.\\
+Beim erstellen/laden/speichern von Verarbeitungspipelines muss OsmUi in der Lage sein mit Pipelines von bis zu 100 Tasks zuverlässig zu arbeiten,
+eine künstliche Beschränkung nach oben besteht jedoch nicht.
+\subsection{Laden und Speichern von Verarbeitungspiplines als Osmosis Aufrufscript}
 Dem KISS-Prinzip folgend bietet OsmUi eine einheitliche Laden und Speichern Funktion, die sowohl eventuell bereits vorhandene Osmosis Aufrufscripts
 laden kann, als auch durch OsmUi selbst erstellte Verarbeitungspiplines, die immer auch als Aufrufscript gespeichert werden. 
 Dies ermöglicht auch beim Wechsel des Werkzeugs einen leichten Zugriff auf alle mit OsmUi erstellten Dateien.
-\subsection{Laden}
+\subsubsection{Laden}
 Eine der Hauptfunktionen von OsmUi stellt das Laden von Aufrufscripten da. Dabei können sowohl Dateien im .bat, als auch im .sh Format (mit \#!/bin/sh Shebang)
 sowie Textdateien in denen nur eine Osmosis Parameterliste steht geladen werden. Sie werden direkt im Pipelinebearbeitungsfeld angezeigt und
 stehen zur Bearbeitung bereit.
@@ -99,24 +100,24 @@ stehen zur Bearbeitung bereit.
 Zum Speichern wählt der Benutzer entweder einen neue Datei aus, die wenn vorhanden überschrieben und sonst neu erstellt wird, oder er überschreibt die gerade bearbeitete Datei.
 Der Dateityp kann hierbei zwischen .sh Script und .bat gewählt werden, wobei die zu letzt verwendete Einstellung der voreingestellt ist.
 
-\section{Benutzeroberfläche}
+\subsection{Benutzeroberfläche}
 Die Benutzeroberfläche von OsmUi ist in zwei Hauptteile aufgeteilt, die Taskauswahlbox und die Pipelinebox, zudem gibt es ein Anwendungsmenü, und beim Bearbeiten einer Task wird es ein weiteres Einstellungsfenster
 geben.
-\subsection{Taskauswahlbox}
+\subsubsection{Taskauswahlbox}
 Der Linke Teil der Benutzeroberfläche stellt sich als Liste der gerade zum einfügen verfügbaren Tasks da, dabei kann die Darstellung als Icon oder als Text oder 
 als Kombination hiervon erfolgen. Es werden nur Tasks angezeigt die gerade auch einfügbar sind. \\
 Am Anfang sind dies zum Beispiel alle Tasks (z.B. read XML) die keinen Streameingang haben. Ist in der Pipelinebox eine Task ausgewählt, so
 sind nur diejenigen Tasks sichtbar, die mit dem/den Ausgang/Ausgängen der ausgewählten Task kompatibel sind.\\
 So wird verhindert, dass der Benutzer Pipelines bauen kann, die nicht durch Osmosis ausführbar sind.
-\subsection{Pipelinebox}
+\subsubsection{Pipelinebox}
 In der Pipelinebox wird die Pipeline grafisch dargestellt und es können Tasks zum Bearbeiten ausgewählt werden. Ist eine Task ausgewählt so können ihre Eigenschaften
 bearbeitet oder eine neue Task über die Taskauswahlbox wie oben beschrieben angefügt werden. Desweiteren kann eine Verbindung zu einer anderen Task, die noch offene
 Inputs
-\subsection{Taskeinstellungsdialog}
+\subsubsection{Taskeinstellungsdialog}
 Wählt der Benutzer eine Task aus so stellt OsmUi einen Dialog zur Verfügung in dem alle fúr den jeweiligen Tasktyp vorhandenen Einstellungen eingegeben werden können.
 Hierbei kann die Eingabe eingeschränkt sein zum Beispiel als Spanne von Zahlen oder einen Kartenausschnitt, oder frei als Text erfolgen. Dabei soll der fúr
 den Datentyp beste Eingabemodus gewählt werden.
-\subsection{Lokalisation}
+\subsubsection{Lokalisation}
 OsmUi wird Lokalisation für mindestens Deutsch und Englisch bieten. Dabei wird die aktuelle Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen um
 sie ohne Interaktion durch den Benutzer in dessen System ein zu gliedern.
 
