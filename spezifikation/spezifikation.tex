@@ -55,70 +55,68 @@ von Datenverarbeitung und OpenStreetMap hat.
 \subsubsection{Entwurfskonzept}
 OsmUi wird nach dem \href{http://de.wikipedia.org/wiki/KISS-Prinzip}{KISS-Prinzip} entwickelt, d.h. entscheidend für die Qualität der Software soll
 sein, wie gut die Hauptfunktionen unterstützt werden. Bessere Hauptfunktionalität ist einem größeren Funktionsumfang unterzuordnen.\\
-Im Fall von OsmUi heißt dies, dass das Hauptaugenmerk auf dem einfachen und sinnvollen erstellen von Verarbeitungspipelines, sowie deren Import und Export liegt.\\
+Im Fall von OsmUi heißt dies, dass das Hauptaugenmerk auf dem einfachen und sinnvollen Erstellen von Verarbeitungspipelines, sowie deren Import und Export liegt.\\
 Weniger wichtig sind hingegen ``Luxusfunktionen'' wie direktes Anzeigen des Verarbeitungsergebnisses (was auf Grund der Vielfalt der Funktionen von Osmosis
-und der Verarbeitungsdauer onehin nicht immer sinnvoll ist) oder das direkte Aufrufen von Osmosis.
+und der Verarbeitungsdauer ohnehin nicht immer sinnvoll ist) oder das direkte Aufrufen von Osmosis.
 \subsubsection{Systemumgebung}
 Systemumgebung ist das \textbf{Java Runtime Environment in Version 1.6 und höher (SE)}. Dabei ist OsmUi als reine Java Anwendung zu entwickeln, so dass
-keine externen Abhängigkeiten bestehen und OsmUi auf allen Java SE Kompatiblen Systemen eingesetzt werden kann.
+keine externen Abhängigkeiten bestehen und OsmUi auf allen Java SE kompatiblen Systemen eingesetzt werden kann.
 Eventuell wird intern die Bibliothek \textbf{JGraph} eingesetzt, diese wird dann aber direkt mit ausgeliefert
-und ist ebenfalls reines Java. 
+und ist ebenso in platformunabhängigem Java geschrieben. 
 \subsubsection{Layout und Gestaltung}
-OsmUi soll ab einer Auflösung von 1024x768 benutzbar sein. Alle Fenster sollen, wenn dies sinnvoll ist skalierbar sein und den eventuell gewonnen Platz sinnvoll
-nutzen. Um Benutzer von Multimonitorsystemen und exotischen Windowmanagern zu entlassen soll die Positionierung von neuen Fenstern nativ erfolgen, d.h. es
-sollen insbesondere keine Fenster in eine errechnete Bildschirmmitte von OsmUi selbst positioniert werden.
+OsmUi soll ab einer Auflösung von 1024x768 benutzbar sein. Alle Fenster sollen, wenn dies sinnvoll ist, skalierbar sein und den eventuell gewonnenen Platz
+nutzen. Um Benutzer von Multimonitorsystemen und exotischen Windowmanagern zu entlasten soll die Positionierung von neuen Fenstern nativ erfolgen. Es
+sollen insbesondere keine Fenster in eine errechnete Bildschirmmitte von OsmUi positioniert werden.
 \subsection{Robustheit}
-OsmUi soll als Software möglichst robust arbeiten, d.h. unter allen Bedinungen korrekt arbeiten. Dies soll durch defensive Programmierung erreicht werden.
-Jedoch sollen Benutzereingaben möglichst früh geprüft werden, so dass tiefere Funktionen den Daten ``vertrauen'' können, dies sichert zudem ab, dass klar ist, welcher
-Programmteil für die Prüfung zuständig ist, nämlich immer der erste der die nötigen Informationen hat.\\
-Weiterhin wird die Robustheit durch das KISS-Prinzip unterstützt indem weniger Funktionen besser entworfen und getestet werden können.
+OsmUi soll als Software möglichst robust arbeiten, d.h. unter allen Bedingungen korrekt arbeiten. Dies soll durch defensive Programmierung erreicht werden.
+Jedoch sollen Benutzereingaben möglichst früh geprüft werden, so dass tiefere Funktionen den Daten ``vertrauen'' können. Dies sichert zudem ab, dass klar ist, welcher
+Programmteil für die Prüfung zuständig ist. Nämlich immer der erste, der die nötigen Informationen hat.\\
+Weiterhin wird die Robustheit durch das KISS-Prinzip unterstützt, da weniger Funktionen besser entworfen und getestet werden können.
 \subsection{Portabilität}
-OsmUi soll durch den Einsatz reinen Java's auf alle Systeme mit Java SE 1.6 Unterstützung lauffähig sein. Als Exportformate für Osmosis Kommandoscripts
-werden .bat und .sh (/bin/sh) Unterstützt womit alle Posix Systeme sowie Windows abgedeckt sind.
+OsmUi soll durch den Einsatz reinen Javas auf allen Systemen mit Java SE 1.6 Unterstützung lauffähig sein. Als Exportformate für Osmosis Aufrufskripte
+werden .bat und .sh (/bin/sh) unterstützt, womit alle Posix Systeme sowie Windows abgedeckt sind.
 \subsection{Erweiterbarkeit}
-Das Programm muss keine besonderen Erweiterungsfunktionalitäten wie etwa ein Pluginsystem zur Verfügung stellen, jedoch wird der Programmcode und die Systemarchitektur
+Das Programm muss keine besonderen Erweiterungsfunktionalitäten wie etwa ein Pluginsystem zur Verfügung stellen, jedoch werden der Programmcode und die Systemarchitektur
 so gestaltet, dass OsmUi leicht und schnell an neue oder veränderte Osmosis Funktionen angepasst werden kann.
 \section{Distributionsform und Installation}
-OsmUi wird als ausführbares JAR Archiv ausgeliefert, welches auf allen Java SE 1.6 fähigen Systemen benutzt werden kann. Gegebenenfalls wird es außerdem Pakete 
-für einige Linux Distributionen geben, die die Installation erleichtern sowie OsmUi in Menüs einbinden.
+OsmUi wird als ausführbares JAR Archiv ausgeliefert, welches direkt ausgeführt werden kann.
 
 
 \section{Funktionale Anforderungen}
 \subsection{Mengengerüst}
-Bei OsmUi handelt es sich um eine Einzelplatzanwendung und es wird keine Netzwerkfunktion genutzt, somit gibt es zu jedem Zeitpunkt einen Nutzer.\\
-Beim erstellen/laden/speichern von Verarbeitungspipelines muss OsmUi in der Lage sein mit Pipelines von bis zu 100 Tasks zuverlässig zu arbeiten,
+Bei OsmUi handelt es sich um eine Einzelplatzanwendung und es wird keine Netzwerkfunktion genutzt, somit gibt es zu jedem Zeitpunkt genau einen Nutzer.\\
+Beim Erstellen/Laden/Speichern von Verarbeitungspipelines muss OsmUi in der Lage sein, mit Pipelines von bis zu 100 Tasks zuverlässig zu arbeiten -
 eine künstliche Beschränkung nach oben besteht jedoch nicht.
 \subsection{Laden und Speichern von Verarbeitungspiplines als Osmosis Aufrufscript}
-Dem KISS-Prinzip folgend bietet OsmUi eine einheitliche Laden und Speichern Funktion, die sowohl eventuell bereits vorhandene Osmosis Aufrufscripts
-laden kann, als auch durch OsmUi selbst erstellte Verarbeitungspiplines, die immer auch als Aufrufscript gespeichert werden. 
+Dem KISS-Prinzip folgend bietet OsmUi eine einheitliche Laden- und Speichern-Funktion, die sowohl bereits vorhandene Osmosis Aufrufscripts als auch durch OsmUi
+selbst erstellte Verarbeitungspiplines, laden kann. Die Speicherung erfolgt als Osmosis Aufrufskripte.\\
 Dies ermöglicht auch beim Wechsel des Werkzeugs einen leichten Zugriff auf alle mit OsmUi erstellten Dateien.
 \subsubsection{Laden}
-Eine der Hauptfunktionen von OsmUi stellt das Laden von Aufrufscripten da. Dabei können sowohl Dateien im .bat, als auch im .sh Format (mit \#!/bin/sh Shebang)
-sowie Textdateien in denen nur eine Osmosis Parameterliste steht geladen werden. Sie werden direkt im Pipelinebearbeitungsfeld angezeigt und
+Eine der Hauptfunktionen von OsmUi stellt das Laden von Aufrufscripten dar. Dabei können sowohl Dateien im .bat - als auch im .sh Format (mit \#!/bin/sh Shebang),
+sowie Textdateien, in denen nur eine Osmosis Parameterliste steht, geladen werden. Sie werden direkt im Pipelinebearbeitungsfeld angezeigt und
 stehen zur Bearbeitung bereit.
 \subsubsection{Speichern}
-Zum Speichern wählt der Benutzer entweder einen neue Datei aus, die wenn vorhanden überschrieben und sonst neu erstellt wird, oder er überschreibt die gerade bearbeitete Datei.
-Der Dateityp kann hierbei zwischen .sh Script und .bat gewählt werden, wobei die zu letzt verwendete Einstellung der voreingestellt ist.
-
+Zum Speichern wählt der Benutzer entweder einen neue Datei aus, die, wenn vorhanden, überschrieben und sonst neu erstellt wird. Oder er überschreibt die gerade bearbeitete Datei.
+Der Dateityp kann hierbei zwischen .sh Script und .bat gewählt werden.
 \subsection{Benutzeroberfläche}
-Die Benutzeroberfläche von OsmUi ist in zwei Hauptteile aufgeteilt, die Taskauswahlbox und die Pipelinebox, zudem gibt es ein Anwendungsmenü, und beim Bearbeiten einer Task wird es ein weiteres Einstellungsfenster
-geben.
+Die Benutzeroberfläche von OsmUi ist in zwei Teile aufgeteilt: die Taskauswahlbox und die Pipelinebox. Desweiteren gibt es ein Anwendungsmenü und beim Bearbeiten eines Tasks
+wird es ein weiteres Einstellungsfenster geben.
 \subsubsection{Taskauswahlbox}
-Der Linke Teil der Benutzeroberfläche stellt sich als Liste der gerade zum einfügen verfügbaren Tasks da, dabei kann die Darstellung als Icon oder als Text oder 
-als Kombination hiervon erfolgen. Es werden nur Tasks angezeigt die gerade auch einfügbar sind. \\
-Am Anfang sind dies zum Beispiel alle Tasks (z.B. read XML) die keinen Streameingang haben. Ist in der Pipelinebox eine Task ausgewählt, so
-sind nur diejenigen Tasks sichtbar, die mit dem/den Ausgang/Ausgängen der ausgewählten Task kompatibel sind.\\
+Im linken Teil der Benutzeroberfläche wird eine Liste der gerade zum Einfügen verfügbaren Tasks dargestellt. Dabei kann die Darstellung als Icon,
+Text oder Kombination erfolgen. Es werden nur Tasks angezeigt die gerade auch einfügbar sind. \\
+Am Anfang sind dies zum Beispiel alle Tasks, (z.B. read XML) die keinen Streameingang haben. Ist in der Pipelinebox ein Task ausgewählt, so
+sind nur diejenigen Tasks sichtbar, die mit dem/den Ausgang/Ausgängen des ausgewählten Task kompatibel sind.\\
 So wird verhindert, dass der Benutzer Pipelines bauen kann, die nicht durch Osmosis ausführbar sind.
 \subsubsection{Pipelinebox}
-In der Pipelinebox wird die Pipeline grafisch dargestellt und es können Tasks zum Bearbeiten ausgewählt werden. Ist eine Task ausgewählt so können ihre Eigenschaften
-bearbeitet oder eine neue Task über die Taskauswahlbox wie oben beschrieben angefügt werden. Desweiteren kann eine Verbindung zu einer anderen Task, die noch offene
-Inputs
+In der Pipelinebox wird die Pipeline grafisch dargestellt und es können Tasks zum Bearbeiten ausgewählt werden. Ist ein Task ausgewählt so können seine Eigenschaften
+bearbeitet oder ein neuer Task über die Taskauswahlbox - wie oben beschrieben - angefügt werden. Desweiteren kann eine Verbindung zu einem anderen Task, der noch offene
+Inputs hat, hergestellt werden.
 \subsubsection{Taskeinstellungsdialog}
-Wählt der Benutzer eine Task aus so stellt OsmUi einen Dialog zur Verfügung in dem alle fúr den jeweiligen Tasktyp vorhandenen Einstellungen eingegeben werden können.
-Hierbei kann die Eingabe eingeschränkt sein zum Beispiel als Spanne von Zahlen oder einen Kartenausschnitt, oder frei als Text erfolgen. Dabei soll der fúr
-den Datentyp beste Eingabemodus gewählt werden.
+Wählt der Benutzer einen Task aus, so stellt OsmUi einen Dialog zur Verfügung, in dem alle - für den jeweiligen Tasktyp vorhandenen - Parameter eingegeben werden können.
+Hierbei kann die Eingabe eingeschränkt sein: als Spanne von Zahlen, als Kartenausschnitt oder als freier Text erfolgen. Dabei wird der für
+den Datentyp beste Eingabemodus gewählt.
 \subsubsection{Lokalisation}
-OsmUi wird Lokalisation für mindestens Deutsch und Englisch bieten. Dabei wird die aktuelle Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen um
-sie ohne Interaktion durch den Benutzer in dessen System ein zu gliedern.
+OsmUi wird eine übersetzte Benutzeroberfláche für mindestens die Sprachen Deutsch und Englisch bieten. Dabei wird die aktuell verwendete
+Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne Interaktion durch den Benutzer in dessen System einzugliedern.
 
 \end{document}
