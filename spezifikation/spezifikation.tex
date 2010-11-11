@@ -116,7 +116,150 @@ Wählt der Benutzer einen Task aus, so stellt OsmUi einen Dialog zur Verfügung,
 Hierbei kann die Eingabe eingeschränkt sein: als Spanne von Zahlen, als Kartenausschnitt oder als freier Text erfolgen. Dabei wird der für
 den Datentyp beste Eingabemodus gewählt.
 \subsubsection{Lokalisation}
-OsmUi wird eine übersetzte Benutzeroberfláche für mindestens die Sprachen Deutsch und Englisch bieten. Dabei wird die aktuell verwendete
+OsmUi wird eine übersetzte Benutzeroberfläche für mindestens die Sprachen Deutsch und Englisch bieten. Dabei wird die aktuell verwendete
 Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne Interaktion durch den Benutzer in dessen System einzugliedern.
+\subsection{Use Cases}
 
+\begin{tabular}{|c|p{10cm}|}
+\hline Name & Datei laden \\ 
+\hline Ziel & gespeicherte Datei soll geladen werden \\ 
+\hline Vorbedingung & Eine gespeicherte Datei ist vorhanden \\ 
+\hline Nachbedingung & Die Datei wurde geladen \\ 
+\hline Nachbedingung im Sonderfall & Es wurde nichts geladen \\ 
+\hline Akteure & Benutzer \\ 
+\hline Normalablauf & - Der Benutzer klickt auf den Lade-Button
+\newline 
+- Das Lade-Menü öffnet sich
+\newline 
+- Der Benutzer wählt die gewünschte Datei aus
+\newline 
+- Die gewählte Datei wird geladen
+\\ 
+\hline Sonderfall &  
+ - Der Benutzer klickt auf den Lade-Button
+ \newline
+ - Das Lade-Menü öffnet sich
+ \newline
+ - Der Benutzer hat noch nichts gespeichert oder will nichts laden
+ \newline
+ - Der Benutzter bricht den Vorgang ab
+\\
+\hline 
+\end{tabular} 
+\\
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Name & Datei speichern \\ 
+\hline Ziel & Aktuelle Datei soll gespeichert werden \\ 
+\hline Vorbedingung & Die aktuelle Datei wurde schon einmal gespeichert \\ 
+\hline Nachbedingung & Die Datei wurde gespeichert \\ 
+\hline Nachbedingung im Sonderfall 1) & Die Datei wurde neu gespeichert \\ 
+\hline Nachbedingung im Sonderfall 2) & Die Datei wurde nicht gespeichert\\
+\hline Akteur & Benutzer \\ 
+\hline Normalablauf & - Der Benutzer klickt den Speicher-Button 
+\newline
+- Die Datei wird gespeichert
+\\
+\hline Sonderfall 1) & - Der Benutzer klickt auf den Speicher-Button
+\newline
+- Das Speichern-unter-Menü öffnet sich
+\newline
+- weiter wie im Use-Case Datei speichern unter
+ \\ 
+ \hline Sonderfall 2) & - Der Benutzer bricht den vorgang ab \\
+\hline 
+\end{tabular} 
+\\
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Name & Datei speichern unter \\ 
+\hline Ziel & Die Datei soll in einem selbst gewählten Verzeichnis gespeichert werden \\ 
+\hline Vorbedingung & keine \\ 
+\hline Nachbedingung & Die Datei wurde im gewählten Verzeichnis gespeichert \\ 
+\hline Nachbedingung im Sonderfall & Die Datei wurde nicht gespeichert \\ 
+\hline Akteur & Benutzer \\ 
+\hline Normalablauf & - Der Benutzer klickt den Speichern-unter-Button
+\newline 
+- Das Speichern-unter-Menü öffnet sich
+\newline
+- Der Benutzer wählt den Speicherort und den Namen
+\newline
+- Die Datei wird gespeichert
+\\ 
+\hline Sonderfall & - Der Benutzer bricht den Vorgang ab \\ 
+\hline 
+\end{tabular} 
+\\
+\\
+\begin{tabular}{|p {5cm}|p{10cm}|}
+\hline Name & Hilfe aufrufen \\ 
+\hline Ziel & Das Hilfe-Menü soll aufgerufen werden \\ 
+\hline Vorbedingung & keine \\ 
+\hline Nachbedingung & Das Hilfe-Menü wurde geöffnet \\ 
+\hline Akteur & Benutzer \\ 
+\hline Normalablauf & - Der Benutzer klickt den Hilfe-Button
+\newline
+- Das Hilfe-Menü wurde geöffnet \\ 
+\hline 
+\end{tabular} 
+\\
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Name & neue Datei erstellen \\ 
+\hline Ziel & Eine neue Datei soll erstellt werden \\ 
+\hline Vorbedingung & keine \\ 
+\hline Nachbedingung & Eine neue Datei wurde erstellt \\ 
+\hline Akteur & Benutzer \\ 
+\hline Normalablauf & - Der Benutzer klickt den Neu-Datei-erstellen-Button
+\newline
+- Eine neue Datei öffnet sich
+\\ 
+\hline 
+\end{tabular} 
+\\
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Name & neuen Task hinzufügen \\ 
+\hline Ziel & Ein neuer Task soll hinzugefügt werden \\ 
+\hline Vorbedingung & keine \\ 
+\hline Nachbedingung & Ein neuer Task wurde hinzugefügt \\ 
+\hline Akteur & Benutzer \\ 
+\hline Normalablauf & - Der Benutzer wählt einen neuen Task aus und setzt die Einstellungen
+\newline
+- Der Task wird hinzugefügt
+\\ 
+\hline 
+\end{tabular}
+\\
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Name & Task entfernen \\ 
+\hline Ziel & Ein Task soll entfernt werden \\ 
+\hline Vorbedingung & Es ist mindestens ein Task vorhanden \\ 
+\hline Nachbedingung & Der Task wurde gelöscht \\ 
+\hline Nachbedingung im Sonderfall & Eine Warnung wurde ausgsgeben \\ 
+\hline Akteur & Benutzer \\ 
+\hline Normalablauf & - Der Benutzer wählt den zu löschenden Task aus und klickt den Löschen-Button
+\newline
+- Der Task wird gelöscht
+\\ 
+\hline Sonderfall & - Der Benutzer wählt den zu löschenden Task und klickt den Löschen-Button
+\newline
+- OsmUi gibt eine Warnung aus und der Task wird gelöscht
+ \\ 
+\hline 
+\end{tabular}  
+\\
+\\\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Name & Task ändern \\ 
+\hline Ziel & Ein bestehender Task soll geändert werden \\ 
+\hline Vorbedingung & Es gibt mindestens einen Task \\ 
+\hline Nachbedingung & Der Task wurde geändert \\  
+\hline Akteur & Benutzer \\ 
+\hline Normalablauf & - Der Benutzer wählt den zu ändernden Task an und klickt den Ändern-Button
+\newline
+- Der Benutzer ändert die gewünschten Eigenschaften und klickt auf den OK-Button
+\\ 
+\hline 
+\end{tabular} 
 \end{document}
