@@ -49,3 +49,40 @@ Lieferumfang:
 - Unsere Software
 - Handbuch(Pdf/online Handbuch)
 
+
+
+Kundenbefragung 2:
+
+- Die Preview muss nur angestoßen werden, sie läuft dann von allein
+- API kommt noch
+- Bounding Boxes: -sowohl mit Maus ziehbar, als auch Koordinateneingabe
+- Gruppierung aus Wiki übernehmen
+- Beispiele kommen noch
+- muss ein in sich stimmiges Projekt sein
+- authFile / Klartext -> Warnung bei Klartext ausgeben
+- verschiedene Ansichten (z-B. Icon-Größe änderbar)
+- Merhrfensterkonzept (keine Priorität)
+- Pipeline ist stehender Begriff (keine Übersetztung)
+- kein MUSS: Zurück-Button
+- MYSql interessiert nicht mehr
+- alles, was auf API < 0.6 referenziert ist irrelevant
+- Barrierefreiheit: Standardsystemschrift muss mit 24 Klarkommen
+
+Preview:
+- eigenständiges Fenster (Minimieren/Maximieren möglich)
+- keine hohe Qualität
+ 
+Projektplan:
+- Hinzufügen, dass eine Zulieferung durch den Kunden besteht
+
+Verifizierung:
+- minimale Mittel(zB Feld leer gelassen)
+- keine komplexe Überprüfung
+
+Ist:
+- alles wird im wiki nachgeschaut
+- Soll in Programm eingebunden werden
+- MUSS
+- Server mit Name und PW im Intranet
+- durchschnittlich 15-20 Tasks, auf jeden Fall zweistellig
+
