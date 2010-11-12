@@ -123,7 +123,7 @@ den Datentyp beste Eingabemodus gewählt.\\
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Parameter_Optionen.png}
 \end{center}
 \subsubsection{Lokalisation}
-OsmUi wird eine übersetzte Benutzeroberfláche für mindestens die Sprachen Deutsch und Englisch bieten. Dabei wird die aktuell verwendete
+OsmUi wird eine übersetzte Benutzeroberfläche für mindestens die Sprachen Deutsch und Englisch bieten. Dabei wird die aktuell verwendete
 Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne Interaktion durch den Benutzer in dessen System einzugliedern.
 
 \subsection{Use Cases}
@@ -291,29 +291,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 
 
 \subsection{Begriffslexikon}
-\begin{tabular}{|c|p{10cm}|}
-\hline Begriff & \textbf{Task} \\ 
-\hline Bedeutung & Ist ein Bearbeitungsschritt einer Pipeline\\ 
-\hline Abgrenzung & Ein Task ist kein Parameter, er besitzt diese. Ein Task ist keine Anwendung/Aufgabe im herkömmlichen Sinne \\ 
-\hline Gültigkeit & Ist nur gültig für das Pipelinesystem von Osmosis. \\ 
-\hline Bezeichnung & Ein Task ist für eine eindeutigen Bearbeitungsschritt von Osmosis zuständig\\ 
-\hline Unklarheiten & Keine \\ 
-\hline Querverweise & Parameter\\ 
-\hline 
-\end{tabular}
-
-\begin{tabular}{|c|p{10cm}|}
-\hline Begriff & \textbf{Pipeline} \\ 
-\hline Bedeutung & Eine Pipeline ist ein Konstrukt, dem Daten zugeführt werden, diese bearbeitet und anschließend zurückgibt.  \\ 
-\hline Abgrenzung & Eine Pipeline kein reales Rohrsysteme gemeint. Es sind reine Gedanken-Konstrukte \\ 
-\hline Gültigkeit & Die Bedeutung des Wortes verfäll ausßerhalb von Osmosis. \\ 
-\hline Bezeichnung & Eine Pipeline ist durch die in ihr enthaltenen Tasks eindeutig bestimmt \\ 
-\hline Unklarheiten & keine \\ 
-\hline Querverweise & Task \\ 
-\hline 
-\end{tabular}
-
-\begin{tabular}{|c|p{10cm}|}
+\begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Aufrufscript} \\ 
 \hline Bedeutung &  \\ 
 \hline Abgrenzung &  \\ 
@@ -323,37 +301,81 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Querverweise &  \\ 
 \hline 
 \end{tabular}
-
-\begin{tabular}{|c|p{10cm}|}
-\hline Begriff & \textbf{Pipelinebox} \\ 
-\hline Bedeutung & Ist der Teil der Oberfläche, in der die Pipeline grafisch dargestellt wird. \\ 
-\hline Abgrenzung & Es handelt sich um keine reale Box, sondern um ein gedankliches Konstrukt \\ 
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Dialog}\\ 
+\hline Bedeutung & Ein sich öffnendes Fenster, in dem sich Einstellungen vornehmen lassen \\ 
+\hline Abgrenzung & Es ist kein Dialog zwischen zwei Personen gemeint\\ 
 \hline Gültigkeit & Der Begriff gilt innerhalb von Osmosis \\ 
-\hline Bezeichnung & es gibt nur eine Pipelinebox \\ 
+\hline Bezeichnung & Es gibt mehrere Dialoge, die sich durch ihren Inhalt unterscheiden \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Fenster \\ 
+\hline
+\end{tabular}
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Fenster}\\ 
+\hline Bedeutung & Ein Fenster ist ein (meist rechteckiger) Bestandteil einer grafischen Benutzerschnittstelle \\ 
+\hline Abgrenzung & Es handelt sich nicht um ein Fenster in einem Gebäude\\ 
+\hline Gültigkeit & Der Begriff gilt innerhalb von Osmosis \\ 
+\hline Bezeichnung & Ein Fenster ist durch seinen Titel und den dargestellten Inhalt definiert \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Dialog \\ 
+\hline
+\end{tabular}
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{OsmUi}, synonym Produkt, Software, Kommandozeilenwerkzeug \\ 
+\hline Bedeutung & OsmUi ist das zu entwickelnde Produkt \\ 
+\hline Abgrenzung & Es ist nur das Produkt gemeint, keine andere Software o. Ä. \\ 
+\hline Gültigkeit & Dies Bezeichnung gilt nur innerhalb des Projekts \\ 
+\hline Bezeichnung & OamUi gibt es nur einmal, es ist daher eindeutig \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & keine \\ 
+\hline 
+\end{tabular}
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Pipeline} \\ 
+\hline Bedeutung & Eine Pipeline ist ein Konstrukt, dem Daten zugeführt werdn. Es bearbeitet diese und gibt sie anschließend zurück.  \\ 
+\hline Abgrenzung & Es ist kein reales Rohrsysteme gemeint, sondern ein reines Gedanken-Konstrukt \\ 
+\hline Gültigkeit & Die Bedeutung des Wortes verfäll ausßerhalb von Osmosis. \\ 
+\hline Bezeichnung & Eine Pipeline ist durch die in ihr enthaltenen Tasks und deren Reihenfolge eindeutig bestimmt \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Task \\ 
+\hline 
+\end{tabular}
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Pipelinebox} \\ 
+\hline Bedeutung & Ist der Teil der Oberfläche, in der die Pipeline grafisch dargestellt wird \\ 
+\hline Abgrenzung & Es handelt sich um keine reale Box, sondern um ein gedankliches Konstrukt \\ 
+\hline Gültigkeit & Der Begriff gilt nur innerhalb von Osmosis \\ 
+\hline Bezeichnung & Es gibt nur eine Pipelinebox. Sie ist daher eindeutig \\ 
 \hline Unklarheiten & keine \\ 
 \hline Querverweise & Pipeline \\ 
 \hline 
 \end{tabular}
 \\
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff &  \\ 
-\hline Bedeutung &  \\ 
-\hline Abgrenzung &  \\ 
-\hline Gültigkeit &  \\ 
-\hline Bezeichnung &  \\ 
-\hline Unklarheiten &  \\ 
-\hline Querverweise &  \\ 
+\hline Begriff & \textbf{Task} \\ 
+\hline Bedeutung & Ein Bearbeitungsschritt einer Pipeline, der verschiedene Parameter enthält. Er kann neu generiert, gelöscht und geändert werden\\ 
+\hline Abgrenzung & Ein Task ist kein Parameter, er besitzt diese. Er ist keine Anwendung/Aufgabe im herkömmlichen Sinne \\ 
+\hline Gültigkeit & Der Begriff ist nur gültig für das Pipelinesystem von Osmosis\\ 
+\hline Bezeichnung & Ein Task ist durch seine gesetzten Parameter eindeutig definiert. Tasks mit den gleichen Parametern haben die gleiche Aufgabe\\ 
+\hline Unklarheiten & Keine \\ 
+\hline Querverweise & Parameter, Pipeline\\ 
 \hline 
 \end{tabular}
 \\
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff &  \\ 
-\hline Bedeutung &  \\ 
-\hline Abgrenzung &  \\ 
-\hline Gültigkeit &  \\ 
-\hline Bezeichnung &  \\ 
-\hline Unklarheiten &  \\ 
-\hline Querverweise &  \\ 
+\hline Begriff & \textbf{Taskauswahlbox} \\ 
+\hline Bedeutung & Der Teil der Oberfläche, in dem man die Tasks auswählen kann  \\ 
+\hline Abgrenzung & Es handelt sich um keine reale Box, sondern um ein gedankliches Konstrukt \\ 
+\hline Gültigkeit & Der Begriff gilt nur innerhalb von Osmosis \\ 
+\hline Bezeichnung & Es gibt nur eine Taskauswahlbox. Sie ist daher eindeutig \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Task \\ 
 \hline 
 \end{tabular}
 \end{document}
