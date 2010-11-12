@@ -230,7 +230,8 @@ Beim Klicken auf den Menüeintrag \textbf{Hilfe} öffnet sich ein Dialog. Der Be
 - Die Datei wird gespeichert
 \\ 
 \hline Sonderfall 1)& - Der Benutzer bricht den Vorgang ab \\ 
-\hline Sonderfall 2)& - Die Datei kann nicht geöffnet werden\\
+\hline Sonderfall 2)& - Die Datei kann nicht gespeichert werden
+\newline - Es wird eine Fehlermeldung ausgegeben\\
 \hline 
 \end{tabular} 
 \\
@@ -314,7 +315,7 @@ Beim Klicken auf den Menüeintrag \textbf{Hilfe} öffnet sich ein Dialog. Der Be
 
 \subsection{Begriffslexikon}
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Aufrufscript} \\ 
+\hline Begriff & \textbf{Aufrufscript} synonym gespeicherte Datei, .sh/.bat Skript\\ 
 \hline Bedeutung &  \\ 
 \hline Abgrenzung &  \\ 
 \hline Gültigkeit &  \\ 
@@ -328,7 +329,7 @@ Beim Klicken auf den Menüeintrag \textbf{Hilfe} öffnet sich ein Dialog. Der Be
 \hline Begriff & \textbf{Dialog}\\ 
 \hline Bedeutung & Ein sich öffnendes Fenster, in dem sich Einstellungen vornehmen lassen \\ 
 \hline Abgrenzung & Es ist kein Dialog zwischen zwei Personen gemeint\\ 
-\hline Gültigkeit & Der Begriff gilt innerhalb von Osmosis \\ 
+\hline Gültigkeit & Der Begriff gilt innerhalb von OsmUi \\ 
 \hline Bezeichnung & Es gibt mehrere Dialoge, die sich durch ihren Inhalt unterscheiden \\ 
 \hline Unklarheiten & keine \\ 
 \hline Querverweise & Fenster \\ 
@@ -339,7 +340,7 @@ Beim Klicken auf den Menüeintrag \textbf{Hilfe} öffnet sich ein Dialog. Der Be
 \hline Begriff & \textbf{Fenster}\\ 
 \hline Bedeutung & Ein Fenster ist ein (meist rechteckiger) Bestandteil einer grafischen Benutzerschnittstelle \\ 
 \hline Abgrenzung & Es handelt sich nicht um ein Fenster in einem Gebäude\\ 
-\hline Gültigkeit & Der Begriff gilt innerhalb von Osmosis \\ 
+\hline Gültigkeit & Der Begriff gilt innerhalb von OsmUi\\ 
 \hline Bezeichnung & Ein Fenster ist durch seinen Titel und den dargestellten Inhalt definiert \\ 
 \hline Unklarheiten & keine \\ 
 \hline Querverweise & Dialog \\ 
@@ -347,22 +348,33 @@ Beim Klicken auf den Menüeintrag \textbf{Hilfe} öffnet sich ein Dialog. Der Be
 \end{tabular}
 \\
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{OsmUi}, synonym Produkt, Software, Kommandozeilenwerkzeug \\ 
-\hline Bedeutung & OsmUi ist das zu entwickelnde Produkt \\ 
+\hline Begriff & \textbf{OsmUi}, synonym Produkt, Software, das Programm \\ 
+\hline Bedeutung & OsmUi ist das zu entwickelnde Produkt es stellt eine Benutzeroberfläche für Osmosis da \\ 
 \hline Abgrenzung & Es ist nur das Produkt gemeint, keine andere Software o. Ä. \\ 
-\hline Gültigkeit & Dies Bezeichnung gilt nur innerhalb des Projekts \\ 
-\hline Bezeichnung & OamUi gibt es nur einmal, es ist daher eindeutig \\ 
+\hline Gültigkeit & Diese Bezeichnung gilt nur innerhalb des Projekts \\ 
+\hline Bezeichnung & OsmUi gibt es nur einmal, es ist daher eindeutig \\ 
 \hline Unklarheiten & keine \\ 
-\hline Querverweise & keine \\ 
+\hline Querverweise & Osmosis \\ 
+\hline 
+\end{tabular}
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Osmosis} synonym Osmosis Kommandozeilenwerkzeug\\ 
+\hline Bedeutung & Osmosis ist ein Kommandozeilenwerkzeug zum Bearbeiten von OpenStreetMap Daten mithilfe von Pipelines \\ 
+\hline Abgrenzung & Es ist nur Osmosis gemeint nicht OsmUi welches eine grafische Oberfläche für Osmosis darstellt\\ 
+\hline Gültigkeit & Diese Bezeichnung gilt nur innerhalb des Projekts \\ 
+\hline Bezeichnung & Osmosis gibt es nur einmal, es ist daher eindeutig \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & OsmUi \\ 
 \hline 
 \end{tabular}
 \\
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Pipeline} \\ 
-\hline Bedeutung & Eine Pipeline ist ein Konstrukt, dem Daten zugeführt werdn. Es bearbeitet diese und gibt sie anschließend zurück.  \\ 
+\hline Bedeutung & Eine Pipeline ist ein Konstrukt, zur Datenverarbeitung. In ihm werden Daten eingelesen, durch Tasks verarbeitet und schließlich ausgegeben\\ 
 \hline Abgrenzung & Es ist kein reales Rohrsysteme gemeint, sondern ein reines Gedanken-Konstrukt \\ 
-\hline Gültigkeit & Die Bedeutung des Wortes verfäll ausßerhalb von Osmosis. \\ 
-\hline Bezeichnung & Eine Pipeline ist durch die in ihr enthaltenen Tasks und deren Reihenfolge eindeutig bestimmt \\ 
+\hline Gültigkeit & Die Bedeutung des Begriffs gilt nur im Zusammmenhang mit Osmosis/OsmUi. \\ 
+\hline Bezeichnung & Eine Pipeline ist durch die in ihr enthaltenen Tasks und deren Verbindungen eindeutig bestimmt \\ 
 \hline Unklarheiten & keine \\ 
 \hline Querverweise & Task \\ 
 \hline 
@@ -370,10 +382,10 @@ Beim Klicken auf den Menüeintrag \textbf{Hilfe} öffnet sich ein Dialog. Der Be
 \\
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Pipelinebox} \\ 
-\hline Bedeutung & Ist der Teil der Oberfläche, in der die Pipeline grafisch dargestellt wird \\ 
-\hline Abgrenzung & Es handelt sich um keine reale Box, sondern um ein gedankliches Konstrukt \\ 
-\hline Gültigkeit & Der Begriff gilt nur innerhalb von Osmosis \\ 
-\hline Bezeichnung & Es gibt nur eine Pipelinebox. Sie ist daher eindeutig \\ 
+\hline Bedeutung & Ist der Teil der Oberfläche, in der die Pipeline grafisch dargestellt und bearbeitet wird \\ 
+\hline Abgrenzung & Es handelt sich um keine reale Box, sondern um eine reine Computergrafik \\ 
+\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\ 
+\hline Bezeichnung & Es gibt nur eine Pipelinebox pro ausgeführtem OsmUi. Sie ist daher eindeutig \\ 
 \hline Unklarheiten & keine \\ 
 \hline Querverweise & Pipeline \\ 
 \hline 
@@ -381,11 +393,11 @@ Beim Klicken auf den Menüeintrag \textbf{Hilfe} öffnet sich ein Dialog. Der Be
 \\
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Task} \\ 
-\hline Bedeutung & Ein Bearbeitungsschritt einer Pipeline, der verschiedene Parameter enthält. Er kann neu generiert, gelöscht und geändert werden\\ 
-\hline Abgrenzung & Ein Task ist kein Parameter, er besitzt diese. Er ist keine Anwendung/Aufgabe im herkömmlichen Sinne \\ 
-\hline Gültigkeit & Der Begriff ist nur gültig für das Pipelinesystem von Osmosis\\ 
-\hline Bezeichnung & Ein Task ist durch seine gesetzten Parameter eindeutig definiert. Tasks mit den gleichen Parametern haben die gleiche Aufgabe\\ 
-\hline Unklarheiten & Keine \\ 
+\hline Bedeutung & Ein Bearbeitungsschritt einer Pipeline, der verschiedene Parameter, Ein- und Ausgänge hat. Er kann neu generiert, gelöscht und geändert werden\\ 
+\hline Abgrenzung & Ein Task ist kein Parameter, er besitzt diese. Er ist keine Anwendung/Aufgabe im herkömmlichen Sinne gemeint\\ 
+\hline Gültigkeit & Der Begriff ist nur gültig für das Pipelinesystem von Osmosis/OsmUi\\ 
+\hline Bezeichnung & Ein Task wird als eindeutiges Objekt der Benutzeroberfläche identifiziert\\ 
+\hline Unklarheiten & keine \\ 
 \hline Querverweise & Parameter, Pipeline\\ 
 \hline 
 \end{tabular}
@@ -393,8 +405,8 @@ Beim Klicken auf den Menüeintrag \textbf{Hilfe} öffnet sich ein Dialog. Der Be
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Taskauswahlbox} \\ 
 \hline Bedeutung & Der Teil der Oberfläche, in dem man die Tasks auswählen kann  \\ 
-\hline Abgrenzung & Es handelt sich um keine reale Box, sondern um ein gedankliches Konstrukt \\ 
-\hline Gültigkeit & Der Begriff gilt nur innerhalb von Osmosis \\ 
+\hline Abgrenzung & Es handelt sich um keine reale Box, sondern um ein Element der Benutzeroberfläche\\ 
+\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\ 
 \hline Bezeichnung & Es gibt nur eine Taskauswahlbox. Sie ist daher eindeutig \\ 
 \hline Unklarheiten & keine \\ 
 \hline Querverweise & Task \\ 
