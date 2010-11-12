@@ -135,7 +135,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 
 - Die gewählte Datei wird geladen
 \\ 
-\hline Sonderfall &  
+\hline Sonderfall 1)&  
  - Der Benutzer klickt auf den Lade-Button
  \newline
  - Das Lade-Menü öffnet sich
@@ -144,6 +144,18 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
  \newline
  - Der Benutzter bricht den Vorgang ab
 \\
+\hline Sonderfall 2)&
+ - Der Benutzer klickt auf den Lade-Button
+ \newline
+ - Das Lade-Menü öffnet sich
+ \newline
+ - Der Benutzer wählt die gewünschte Datei aus
+ \newline
+ - Die Datei kann nicht von OsmUi geladen werden, z.B. wegen Syntaxfehlern oder kein unterstützter Dateityp
+ \newline
+ - Es wird ein Fehlerdialog angezeigt
+ \newline
+ - Es wird nichts geladen
 \hline 
 \end{tabular} 
 \\
@@ -160,7 +172,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline
 - Die Datei wird gespeichert
 \\
-\hline Sonderfall 1) & - Der Benutzer klickt auf den Speicher-Button
+\hline Sonderfall 1) & - Der Benutzer klickt auf den Speicher-Button, aber die Datei ist vorher nicht gespeichert worden
 \newline
 - Das Speichern-unter-Menü öffnet sich
 \newline
@@ -175,8 +187,9 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Name & \textbf{Datei speichern unter} \\ 
 \hline Ziel & Die Datei soll in einem selbst gewählten Verzeichnis gespeichert werden \\ 
 \hline Vorbedingung & keine \\ 
-\hline Nachbedingung & Die Datei wurde im gewählten Verzeichnis gespeichert \\ 
-\hline Nachbedingung im Sonderfall & Die Datei wurde nicht gespeichert \\ 
+\hline Nachbedingung & Die Datei wurde im gewählten Verzeichnis gespeichert\\ 
+\hline Nachbedingung im Sonderfall 1)& Die Datei wurde nicht gespeichert\\ 
+\hline Nachbedingung im Sonderfall 2)& Die Datei wurde nicht gespeichert\\
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & - Der Benutzer klickt den Speichern-unter-Button
 \newline 
@@ -186,33 +199,34 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline
 - Die Datei wird gespeichert
 \\ 
-\hline Sonderfall & - Der Benutzer bricht den Vorgang ab \\ 
+\hline Sonderfall 1)& - Der Benutzer bricht den Vorgang ab \\ 
+\hline Sonderfall 2)& - Die Datei kann nicht geöffnet werden\\
 \hline 
 \end{tabular} 
 \\
 \\
 \begin{tabular}{|p {5cm}|p{10cm}|}
 \hline Name & \textbf{Hilfe aufrufen} \\ 
-\hline Ziel & Das Hilfe-Menü soll aufgerufen werden \\ 
+\hline Ziel & Der Hilfe-Dialog soll aufgerufen werden \\ 
 \hline Vorbedingung & keine \\ 
-\hline Nachbedingung & Das Hilfe-Menü wurde geöffnet \\ 
+\hline Nachbedingung & Der Hilfe-Dialog wurde geöffnet \\ 
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & - Der Benutzer klickt den Hilfe-Button
+\hline Normalablauf & - Der Benutzer klickt den Menüeintrag Hilfe
 \newline
-- Das Hilfe-Menü wurde geöffnet \\ 
+- Der Hilfe-Dialog wird geöffnet \\ 
 \hline 
 \end{tabular} 
 \\
 \\
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Name & \textbf{neue Datei erstellen} \\ 
-\hline Ziel & Eine neue Datei soll erstellt werden \\ 
+\hline Name & \textbf{neue Pipeline erstellen} \\ 
+\hline Ziel & Eine neue Pipeline soll erstellt werden \\ 
 \hline Vorbedingung & keine \\ 
-\hline Nachbedingung & Eine neue Datei wurde erstellt \\ 
+\hline Nachbedingung & Eine neues OsmUi Fenster mit leerer Pipeline wurde erstellt \\ 
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & - Der Benutzer klickt den Neu-Datei-erstellen-Button
+\hline Normalablauf & - Der Benutzer klickt den Neu-Button
 \newline
-- Eine neue Datei öffnet sich
+- Ein neue Instanz von OsmUi mit leerer Pipeline wird gestartet
 \\ 
 \hline 
 \end{tabular} 
@@ -221,13 +235,17 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{neuen Task hinzufügen} \\ 
 \hline Ziel & Ein neuer Task soll hinzugefügt werden \\ 
-\hline Vorbedingung & keine \\ 
+\hline Vorbedingung& keine \\
 \hline Nachbedingung & Ein neuer Task wurde hinzugefügt \\ 
+\hline Nachbedinung im Sonderfall & Ein neuer Task wird unverbunden hinzugefügt
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & - Der Benutzer wählt einen neuen Task aus und setzt die Einstellungen
-\newline
-- Der Task wird hinzugefügt
+\hline Normalablauf & - Der Nutzer selektiert einen Task dessen Ausgang verbunden werden soll
+\newline - Der Benutzer wählt aus der Liste der kompatiblen Tasks einen aus
+\newline - Der neue Task wird in die Pipeline eingebunden, an den Ausgang des selektierten Task
 \\ 
+\hline Sonderfall & - Der Benutzer hat keinen Task selektiert
+\newline - Der Benutzer wählt aus den nun verfügbaren Tasks ohne Eingang
+\newline - Der neue Task wird unverbunden in die Pipeline eingefügt\\
 \hline 
 \end{tabular}
 \\
@@ -251,9 +269,9 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \end{tabular}  
 \\
 \\\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Name & \textbf{Task ändern} \\ 
-\hline Ziel & Ein bestehender Task soll geändert werden \\ 
-\hline Vorbedingung & Es gibt mindestens einen Task \\ 
+\hline Name & \textbf{Task Parameter einstellen} \\ 
+\hline Ziel & Die Parameter eines Tasks sollen geändert werden\\ 
+\hline Vorbedingung & Es gibt mindestens einen Task\\ 
 \hline Nachbedingung & Der Task wurde geändert \\  
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & - Der Benutzer wählt den zu ändernden Task an und klickt den Ändern-Button
