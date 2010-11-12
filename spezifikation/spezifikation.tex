@@ -63,7 +63,7 @@ keine externen Abhängigkeiten bestehen und OsmUi auf allen Java SE kompatiblen 
 Eventuell wird intern die Bibliothek \textbf{JGraph} eingesetzt, diese wird dann aber direkt mit ausgeliefert
 und ist ebenso in platformunabhängigem Java geschrieben. 
 \subsubsection{Layout und Gestaltung}
-OsmUi soll ab einer Auflösung von 1024x768 benutzbar sein. Alle Fenster sollen, wenn dies sinnvoll ist, skalierbar sein und den eventuell gewonnenen Platz
+OsmUi soll ab einer Auflösung von 1024x768 und bis zu einer Systemschriftgröße 24 benutzbar sein. Alle Fenster sollen, wenn dies sinnvoll ist, skalierbar sein und den eventuell gewonnenen Platz
 nutzen. Um Benutzer von Multimonitorsystemen und exotischen Windowmanagern zu entlasten soll die Positionierung von neuen Fenstern nativ erfolgen. Es
 sollen insbesondere keine Fenster in eine errechnete Bildschirmmitte von OsmUi positioniert werden.
 \subsection{Robustheit}
@@ -95,7 +95,7 @@ Eine der Hauptfunktionen von OsmUi stellt das Laden von Aufrufscripten dar. Dabe
 sowie Textdateien, in denen nur eine Osmosis Parameterliste steht, geladen werden. Sie werden direkt im Pipelinebearbeitungsfeld angezeigt und
 stehen zur Bearbeitung bereit.
 \subsubsection{Speichern}
-Zum Speichern wählt der Benutzer entweder einen neue Datei aus, die, wenn vorhanden, überschrieben und sonst neu erstellt wird. Oder er überschreibt die gerade bearbeitete Datei.
+Zum Speichern wählt der Benutzer entweder eine neue Datei aus, die, wenn vorhanden, überschrieben und sonst neu erstellt wird. Oder er überschreibt die gerade bearbeitete Datei.
 Der Dateityp kann hierbei zwischen .sh Script und .bat gewählt werden.
 
 
@@ -122,34 +122,40 @@ den Datentyp beste Eingabemodus gewählt.\\
 \begin{center}
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Parameter_Optionen.png}
 \end{center}
-\subsubsection{Lokalisation}
-OsmUi wird eine übersetzte Benutzeroberfläche für mindestens die Sprachen Deutsch und Englisch bieten. Dabei wird die aktuell verwendete
-Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne Interaktion durch den Benutzer in dessen System einzugliedern.
+\subsubsection{Kopierleiste}
+Um die aktuell dargestellte Pipeline direkt kopieren zu können, wird sie als Osmosis-Aufruf unter der Pipelinebox angezeigt.
+\begin{center}
+\includegraphics[width=15cm]{ui_prototype/OsmUi_Leisteklein.png}
+\end{center}
+
 \subsubsection{Menüleiste}
 \begin{itemize}
 \item Datei\\
 Beim Klicken auf den Menüeintrag \textbf{Datei} öffnet sich ein Dialog. Der Benutzer kann zwischen \textbf{Neu} (Öffnen einer neuen Pipeline), \textbf{Laden...} (Laden einer gespeicherten Datei), \textbf{Speichern} (automatisches speichern der aktuellen Pipeline), \textbf{speichern unter} (speichern der vorhandenen Datei an einem selbst gewählten Ort) und \textbf{schließen} (das Programm wird geschlossen) wählen. 
 \\ 
 \begin{center}
-\includegraphics[width=15cm]{ui_prototype/OsmUi_Datei.png}
+\includegraphics[width=7cm]{ui_prototype/OsmUi_Dateiklein.png}
 \end{center}
 \item Bearbeiten\\
 Beim Klicken auf den Menüeintrag \textbf{Bearbeiten} öffnet sich ein Dialog. Der Benutzer kann zwischen \textbf{Rückgängig} (die letzte Änderung wird wieder rückgängig gemacht) und \textbf{wiederherstellen} (eine rückgängig gemachte Änderung wird wieder hergestellt) wählen.
 \\
 \begin{center}
-\includegraphics[width=15cm]{ui_prototype/OsmUi_Bearbeiten.png}
+\includegraphics[width=7cm]{ui_prototype/OsmUi_Bearbeitenklein.png}
 \end{center}
 \item Hilfe\\
 Beim Klicken auf den Menüeintrag \textbf{Hilfe} öffnet sich ein Dialog. Der Benutzer kann zwischen \textbf{Hilfe} (Onlinehilfe wird geöffnet) und \textbf{Über...} (Informationen zu OsmUi werden geöffnet) entscheiden.
 \\
 \begin{center}
-\includegraphics[width=15cm]{ui_prototype/OsmUi_Hilfe.png}
+\includegraphics[width=7cm]{ui_prototype/OsmUi_Hilfeklein.png}
 \end{center}
 \end{itemize}
 
+\subsubsection{Lokalisation}
+OsmUi wird eine übersetzte Benutzeroberfläche für mindestens die Sprachen Deutsch und Englisch bieten. Dabei wird die aktuell verwendete
+Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne Interaktion durch den Benutzer in dessen System einzugliedern.
 \subsection{Use Cases}
 
-\begin{tabular}{|c|p{10cm}|}
+\begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{Datei laden} \\ 
 \hline Ziel & gespeicherte Datei soll geladen werden \\ 
 \hline Vorbedingung & Eine gespeicherte Datei ist vorhanden \\ 
