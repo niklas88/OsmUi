@@ -270,6 +270,56 @@ $ \rightarrow$ Schritt 7b.1
 \vspace{0.7cm}
 \\
 \begin{tabular}{|p {5cm}|p{10cm}|}
+\hline Name & \textbf{aus Aufrufskript importieren}\\
+\hline Ziel & importierte Datei soll angezeigt werden\\
+\hline Vorbedingung & Eine importierbare Datei ist vorhanden
+\hline Nachbedingung & Die Datei wurde importiert und die Pipeline angezeigt\\ 
+\hline Nachbedingung im Sonderfall & OsmUi hat keine Daten importiert und zeigt den Zustand vor dem Ladeversuch \\ 
+\hline Akteure & Benutzer \\ 
+\hline Normalablauf & 1 Der Benutzer klickt auf Datei.
+\newline 
+2 OsmUi zeigt den Menüeintrag Datei
+\newline
+3 Der Benutzer klickt auf Importieren aus Datei
+\newline
+4 OsmUi zeigt den Dateiauswahldialog
+\newline 
+5 Der Benutzer wählt die gewünschte Datei aus
+\newline
+6 Der Benutzer bestätigt dies mit Klick auf Button ''Importieren''.
+\newline
+7 OsmUi importiert die Datei und zeigt sie in der Piplinebox an.
+\\ 
+\hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf ''Abrechen''
+\newline
+5a.2 OsmUi lädt keine Daten und zeigt den vorherigen Zustand.\\
+\hline Sonderfall 6a) & 6a.1 Der Benutzer klickt aber auf ''Abrechen''
+\newline
+6a.2 Osmui importiert keine Daten und zeigt den vorherigen Zustand.\\
+\hline Sonderfall 7a) & Pipelinebox ist nicht leer.
+\newline 
+7a.1 Osmui importiert die Datei in die Piplinebox einer neuen Instanz von OsmUi.\\
+\hline Sonderfall 7b)& Datei ist zwischenzeitlich nicht mehr verfügbar.
+\newline
+ 7b.1 OsmUi versucht Datei zu lesen bricht dann ab und zeigt einen entsprechenden Fehlerdialog an.
+\newline
+ 7b.2 Benutzer klickt auf Button ''Ok''.
+\newline
+$ \rightarrow$ Schritt 4
+\\
+\hline Sonderfall 7c)& Benutzer besitzt keine Leserechte zur ausgewählten Datei.
+\newline
+$ \rightarrow$ Schritt 7b.1 
+\\
+\hline Sonderfall 7d)& Dateityp wird nicht unterstützt.
+\newline
+$ \rightarrow$ Schritt 7b.1 
+\\
+\hline 
+\end{tabular}
+\vspace{0.7cm}
+\\
+\begin{tabular}{|p {5cm}|p{10cm}|}
 \hline Name & \textbf{Hilfe aufrufen} \\ 
 \hline Ziel & Der Hilfe-Dialog soll aufgerufen werden \\ 
 \hline Vorbedingung & keine \\ 
