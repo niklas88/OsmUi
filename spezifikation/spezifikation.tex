@@ -178,47 +178,34 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Ziel & gespeicherte Daten in OsmUi anzuzeigen \\ 
 \hline Vorbedingung & Eine gespeicherte Datei ist vorhanden \\
 \hline Nachbedingung & Die Datei wurde geladen und zeigt die Pipeline an\\ 
-\hline Nachbedingung im Sonderfall & Sonderfall OsmUi hat keine Daten geladen und zeigt Zustand vor dem Ladeversuch \\ 
+\hline Nachbedingung im Sonderfall 5a) & OsmUi hat keine Daten geladen und zeigt Zustand vor dem Ladeversuch \\ 
+\hline Nachbedingung im Sonderfall 6a) & OsmUi hat keine Daten geladen und zeigt Zustand vor dem Ladeversuch \\ 
+\hline Nachbedingung im Sonderfall 7a) & Daten wurden geladen\\
+\hline Nachbedingung im Sonderfall 7b) & OsmUi hat keine Daten geladen und zeigt Zustand vor dem Ladeversuch \\
+\hline Nachbedingung im Sonderfall 7c) & OsmUi hat keine Daten geladen und zeigt Zustand vor dem Ladeversuch \\
+\hline Nachbedingung im Sonderfall 7d) & OsmUi hat keine Daten geladen und zeigt Zustand vor dem Ladeversuch \\
 \hline Akteure & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer klickt auf Datei.
-\newline 
-2 OsmUi zeigt den Menüeintrag Datei
-\newline
-3 Der Benutzer klickt auf Datei laden.
-\newline
-4 OsmUi zeigt den Dateiauswahldialog
-\newline 
-5 Der Benutzer wählt die gewünschte Datei aus
-\newline
-6 Der Benutzer bestätigt dies mit Klick auf Button ''Öffnen''.
-\newline
-7 OsmUi lädt die Datei und zeigt sie in der Piplinebox an.
-\\ 
+\newline 2 OsmUi zeigt den Menüeintrag Datei
+\newline 3 Der Benutzer klickt auf Datei laden.
+\newline 4 OsmUi zeigt den Dateiauswahldialog
+\newline 5 Der Benutzer wählt die gewünschte Datei aus
+\newline 6 Der Benutzer bestätigt dies mit Klick auf Button ''Öffnen''.
+\newline 7 OsmUi lädt die Datei und zeigt sie in der Piplinebox an\\ 
 \hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf ''Abrechen''
-\newline
-5a.2 OsmUi lädt keine Daten und zeigt den vorherigen Zustand.\\
+\newline 5a.2 OsmUi lädt keine Daten und zeigt den vorherigen Zustand.\\
 \hline Sonderfall 6a) & 6a.1 Der Benutzer klickt aber auf ''Abrechen''
-\newline
-6a.2 Osmui lädt keine Daten und zeigt den vorherigen Zustand.\\
+\newline 6a.2 Osmui lädt keine Daten und zeigt den vorherigen Zustand.\\
 \hline Sonderfall 7a) & Pipelinebox ist nicht leer.
-\newline 
-7a.1 Osmui lädt die Datei in die Piplinebox einer neuen Instanz von OsmUi.\\
+\newline 7a.1 Osmui lädt die Datei in die Piplinebox einer neuen Instanz von OsmUi.\\
 \hline Sonderfall 7b)& Datei ist zwischenzeitlich nicht mehr verfügbar.
-\newline
- 7b.1 OsmUi versucht Datei zu lesen bricht dann ab und zeigt einen entsprechenden Fehlerdialog an.
-\newline
- 7b.2 Benutzer klickt auf Button ''Ok''.
-\newline
-$ \rightarrow$ Schritt 4
-\\
+\newline 7b.1 OsmUi versucht Datei zu lesen bricht dann ab und zeigt einen entsprechenden Fehlerdialog an.
+\newline 7b.2 Benutzer klickt auf Button ''Ok''.
+\newline $ \rightarrow$ Schritt 4\\
 \hline Sonderfall 7c)& Benutzer besitzt keine Leserechte zur ausgewählten Datei.
-\newline
-$ \rightarrow$ Schritt 7b.1 
-\\
+\newline $ \rightarrow$ Schritt 7b.1 \\
 \hline Sonderfall 7d)& Dateityp wird nicht unterstützt.
-\newline
-$ \rightarrow$ Schritt 7b.1 
-\\
+\newline $ \rightarrow$ Schritt 7b.1 \\
 \hline 
 \end{tabular} 
 \vspace{0.7cm}
@@ -228,12 +215,30 @@ $ \rightarrow$ Schritt 7b.1
 \hline Ziel & Aktuelle Datei soll gespeichert werden \\ 
 \hline Vorbedingung & Die aktuelle Datei wurde schon einmal gespeichert \\ 
 \hline Nachbedingung & Die Datei wurde gespeichert \\ 
-\hline Nachbedingung im Sonderfall 1) & Die Datei wurde neu gespeichert \\ 
-\hline Nachbedingung im Sonderfall 2) & Die Datei wurde nicht gespeichert\\
+\hline Nachbedingung im Sonderfall & Die Datei wurde gespeichert \\ 
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer klickt auf Datei
 \newline 2 OsmUi zeigt den Menüeintrag Datei
 \newline 3 Der Benutzer klickt auf Datei speichern
+\newline 4 Die Datei wird gespeichert\\
+\hline Sonfall 4a) & Die Datei wurde noch nie gespeichert
+\newline 4a.1 $ \rightarrow$ Use Case Speichern unter Schritt 1\\
+\hline 
+\end{tabular}
+\vspace{0.7cm}
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Name & \textbf{Datei speichern unter} \\ 
+\hline Ziel & Die Datei soll in einem selbst gewählten Verzeichnis gespeichert werden \\ 
+\hline Vorbedingung & keine \\ 
+\hline Nachbedingung & Die Datei wurde im gewählten Verzeichnis gespeichert\\ 
+\hline Nachbedingung im Sonderfall 5a)& Die Datei wurde nicht gespeichert\\ 
+\hline Nachbedingung im Sonderfall 5b)& Die Datei wurde nicht gespeichert\\
+\hline Nachbedingung im Sonderfall 6a)& Die Datei wurde nicht gespeichert\\ 
+\hline Akteur & Benutzer \\ 
+\hline Normalablauf & 1 Der Benutzer klickt auf Datei
+\newline 2 OsmUi zeigt den Menüeintrag Datei
+\newline 3 Der Benutzer klickt auf Datei speichern unter
 \newline 4 OsmUi zeigt den Dateiauswahldialog
 \newline 5 Der Benutzer wählt den gewünschten Namen und die Dateiendung aus
 \newline 6 Der Benutzer bestätigt dies mit Klick auf den Button ''Speichern'' 
@@ -250,75 +255,39 @@ $ \rightarrow$ Schritt 7b.1
 \end{tabular}
 \vspace{0.7cm}
 \\
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Name & \textbf{Datei speichern unter} \\ 
-\hline Ziel & Die Datei soll in einem selbst gewählten Verzeichnis gespeichert werden \\ 
-\hline Vorbedingung & keine \\ 
-\hline Nachbedingung & Die Datei wurde im gewählten Verzeichnis gespeichert\\ 
-\hline Nachbedingung im Sonderfall 1)& Die Datei wurde nicht gespeichert\\ 
-\hline Nachbedingung im Sonderfall 2)& Die Datei wurde nicht gespeichert\\
-\hline Akteur & Benutzer \\ 
-\hline Normalablauf & - Der Benutzer klickt den Speichern-unter-Button
-\newline 
-- Das Speichern-unter-Menü öffnet sich
-\newline
-- Der Benutzer wählt den Speicherort und den Namen
-\newline
-- Die Datei wird gespeichert
-\\ 
-\hline Sonderfall 1)& - Der Benutzer bricht den Vorgang ab \\ 
-\hline Sonderfall 2)& - Die Datei kann nicht gespeichert werden
-\newline - Es wird eine Fehlermeldung ausgegeben\\
-\hline 
-\end{tabular}
-\vspace{0.7cm}
-\\
 \begin{tabular}{|p {5cm}|p{10cm}|}
 \hline Name & \textbf{aus Aufrufskript importieren}\\
 \hline Ziel & importierte Datei soll angezeigt werden\\
 \hline Vorbedingung & Eine importierbare Datei ist vorhanden\\
 \hline Nachbedingung & Die Datei wurde importiert und die Pipeline angezeigt\\ 
-\hline Nachbedingung im Sonderfall & OsmUi hat keine Daten importiert und zeigt den Zustand vor dem Ladeversuch \\ 
+\hline Nachbedingung im Sonderfall 5a) & OsmUi hat keine Daten importiert und zeigt Zustand vor dem Importversuch \\ 
+\hline Nachbedingung im Sonderfall 6a) & OsmUi hat keine Daten importiert und zeigt Zustand vor dem Importversuch \\ 
+\hline Nachbedingung im Sonderfall 7a) & Daten wurden importiert\\
+\hline Nachbedingung im Sonderfall 7b) & OsmUi hat keine Daten importiert und zeigt Zustand vor dem Importversuch \\
+\hline Nachbedingung im Sonderfall 7c) & OsmUi hat keine Daten importiert und zeigt Zustand vor dem Importversuch \\
+\hline Nachbedingung im Sonderfall 7d) & OsmUi hat keine Daten importiert und zeigt Zustand vor dem Importversuch \\
 \hline Akteure & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer klickt auf Datei.
-\newline 
-2 OsmUi zeigt den Menüeintrag Datei
-\newline
-3 Der Benutzer klickt auf Importieren aus Datei
-\newline
-4 OsmUi zeigt den Dateiauswahldialog
-\newline 
-5 Der Benutzer wählt die gewünschte Datei aus
-\newline
-6 Der Benutzer bestätigt dies mit Klick auf Button ''Importieren''.
-\newline
-7 OsmUi importiert die Datei und zeigt sie in der Piplinebox an.
-\\ 
+\newline 2 OsmUi zeigt den Menüeintrag Datei
+\newline 3 Der Benutzer klickt auf Importieren aus Datei
+\newline 4 OsmUi zeigt den Dateiauswahldialog
+\newline 5 Der Benutzer wählt die gewünschte Datei aus
+\newline 6 Der Benutzer bestätigt dies mit Klick auf Button ''Importieren''.
+\newline 7 OsmUi importiert die Datei und zeigt sie in der Piplinebox an.\\ 
 \hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf ''Abrechen''
-\newline
-5a.2 OsmUi lädt keine Daten und zeigt den vorherigen Zustand.\\
+\newline 5a.2 OsmUi lädt keine Daten und zeigt den vorherigen Zustand.\\
 \hline Sonderfall 6a) & 6a.1 Der Benutzer klickt aber auf ''Abrechen''
-\newline
-6a.2 Osmui importiert keine Daten und zeigt den vorherigen Zustand.\\
+\newline 6a.2 Osmui importiert keine Daten und zeigt den vorherigen Zustand.\\
 \hline Sonderfall 7a) & Pipelinebox ist nicht leer.
-\newline 
-7a.1 Osmui importiert die Datei in die Piplinebox einer neuen Instanz von OsmUi.\\
+\newline 7a.1 Osmui importiert die Datei in die Piplinebox einer neuen Instanz von OsmUi.\\
 \hline Sonderfall 7b)& Datei ist zwischenzeitlich nicht mehr verfügbar.
-\newline
- 7b.1 OsmUi versucht Datei zu lesen bricht dann ab und zeigt einen entsprechenden Fehlerdialog an.
-\newline
- 7b.2 Benutzer klickt auf Button ''Ok''.
-\newline
-$ \rightarrow$ Schritt 4
-\\
+\newline 7b.1 OsmUi versucht Datei zu lesen bricht dann ab und zeigt einen entsprechenden Fehlerdialog an.
+\newline 7b.2 Benutzer klickt auf Button ''Ok''.
+\newline $ \rightarrow$ Schritt 4\\
 \hline Sonderfall 7c)& Benutzer besitzt keine Leserechte zur ausgewählten Datei.
-\newline
-$ \rightarrow$ Schritt 7b.1 
-\\
+\newline $ \rightarrow$ Schritt 7b.1 \\
 \hline Sonderfall 7d)& Dateityp wird nicht unterstützt.
-\newline
-$ \rightarrow$ Schritt 7b.1 
-\\
+\newline $ \rightarrow$ Schritt 7b.1 \\
 \hline 
 \end{tabular}
 \vspace{0.7cm}
@@ -328,32 +297,25 @@ $ \rightarrow$ Schritt 7b.1
 \hline Ziel & Der Hilfe-Dialog soll aufgerufen werden \\ 
 \hline Vorbedingung & keine \\ 
 \hline Nachbedingung & Dem Benutzer wurde geholfen \\ 
+\hline Nachbedingung im Sonderfall 5a) & Dem Benutzer wurde geholfen\\
+\hline Nachbedingung im Sonderfall 5b) & Keine Hilfe wurde gegeben\\
+\hline Nachbedingung im Sonderfall 7a) & Dem Benutzer wurde geholfen\\
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer klickt auf Hilfe
-\newline
-2 OsmUi zeigt den Menüeintrag Hilfe
-\newline
-3 Der Benutzer klickt auf Hilfe
-\newline
-4 OsmUi öffnet die Onlinehilfe
-\newline
-5 Der Benutzer klickt auf das gesuchte Stichwort
-\newline 
-6 OsmUi zeigt den entsprechenden Eintrag
-\newline
-7 Der Benutzer klickt auf ''schließen''\\ 
+\newline 2 OsmUi zeigt den Menüeintrag Hilfe
+\newline 3 Der Benutzer klickt auf Hilfe
+\newline 4 OsmUi öffnet die Onlinehilfe
+\newline 5 Der Benutzer klickt auf das gesuchte Stichwort
+\newline 6 OsmUi zeigt den entsprechenden Eintrag
+\newline 7 Der Benutzer klickt auf ''schließen''\\ 
 \hline Sonderfall 5a) & 5a.1 Der Benutzer gibt einen Suchbegriff in die Suchleiste ein
-\newline
-5a.2 Der Benutzer bestätigt die Suche
-\newline
-5a.3 OsmUi zeigt alle Einträge an, die das/die Wort/Wörter enthält
-\newline
-$ \rightarrow$ Schritt 5\\
+\newline 5a.2 Der Benutzer bestätigt die Suche
+\newline 5a.3 OsmUi zeigt alle Einträge an, die das/die Wort/Wörter enthält
+\newline $ \rightarrow$ Schritt 5\\
 \hline Sonderfall 5a2a) & $ \rightarrow$ Schritt 5\\
 \hline Sonderfall 5a2b) & $ \rightarrow$ Schritt 5b\\
 \hline Sonderfall 5b) & 5b.1 der Benutzer klickt auf ''schließen''
-\newline
-5b.2 OsmUi schließt das Menü\\
+\newline 5b.2 OsmUi schließt das Menü\\
 \hline Sonderfall 7a) & $ \rightarrow$ Schritt 5\\
 \hline
 \end{tabular}
@@ -366,12 +328,9 @@ $ \rightarrow$ Schritt 5\\
 \hline Nachbedingung & Eine neues OsmUi Fenster mit leerer Pipeline wurde erstellt \\ 
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer klickt auf bearbeiten
-\newline
-2 OsmUi zeigt den Menüeintrag bearbeiten
-\newline
-3 Der Benutzer klickt auf neu
-\newline
-4 Ein neue Instanz von OsmUi mit leerer Pipeline wird gestartet\\ 
+\newline 2 OsmUi zeigt den Menüeintrag bearbeiten
+\newline 3 Der Benutzer klickt auf neu
+\newline 4 Ein neue Instanz von OsmUi mit leerer Pipeline wird gestartet\\ 
 \hline 
 \end{tabular} 
 \vspace{0.7cm}
