@@ -438,8 +438,27 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 3 OsmUi gibt eine Warnung aus, falls dadurch eine inkonsistente Pipeline entsteht
 \newline 4 Der Benutzer klickt auf OK
 \newline 5 Der Task wird gelöscht\\ 
-\hline Sonderfall 2a) & 2a.1 Der Benutzer klickt auf den selektierten Task
+\hline Sonderfall 2a) & 2a.1 Der Benutzer klickt auf den selektierten Task oder selektiert etwas anderes
 \newline 2a.2 Der Task gilt nicht mer als selektiert\\
+\hline 
+\end{tabular}  
+\end{center}
+\subsubsection{Verbindung entfernen}
+\begin{center}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Name & \textbf{Verbindung entfernen} \\ 
+\hline Ziel & Eine Verbindung zwischen zwei Tasks soll entfernt werden \\ 
+\hline Vorbedingung & Es sind mindestens 2 Verbundene Tasks vorhanden \\ 
+\hline Nachbedingung &  Die beiden vorher verbundenen Tasks sind nicht mehr verbunden\\ 
+\hline Nachbedingung im Sonderfall & OsmUi zeigt die alte Pipeline unverändert an \\ 
+\hline Akteur & Benutzer \\ 
+\hline Normalablauf & 1 Der Benutzer selektiert die Verbindung zwischen zwei Tasks
+\newline 2 Der Benutzer drückt die Entfernen-Taste auf seiner Tastatur
+\newline 3 OsmUi gibt eine Warnung aus, dass dadurch eine inkonsistente Pipeline entsteht
+\newline 4 Der Benutzer klickt auf OK
+\newline 5 Die Verbindung wird gelöscht\\ 
+\hline Sonderfall 2a) & 2a.1 Der Benutzer klickt noch einmal auf die Verbindung oder selektiert etwas anderes
+\newline 2a.2 Die Verbindung gilt nicht mehr als selektiert\\
 \hline 
 \end{tabular}  
 \end{center}
@@ -497,31 +516,35 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Name & \textbf{Pipeline exportieren} \\ 
 \hline Ziel & Eine konsistente Pipeline soll exportiert werden \\ 
 \hline Vorbedingung & Die Pipeline muss konsistent sein \\ 
-\hline Nachbedingung & Die Datei wurde ins gewählte Verzeichnis exportiert\\ 
-\hline Nachbedingung im Sonderfall 4a) & Die Datei wurde nicht importiert\\
-\hline Nachbedingung im Sonderfall 5a)& Die Datei wurde nicht importiert\\ 
-\hline Nachbedingung im Sonderfall 5b)& Die Datei wurde nicht importiert\\
-\hline Nachbedingung im Sonderfall 6a)& Die Datei wurde nicht importiert\\ 
+\hline Nachbedingung & Die Pipeline wurde ins gewählte Verzeichnis exportiert\\ 
+\hline Nachbedingung im Sonderfall 4a) & Die Datei wurde nicht exportiert\\
+\hline Nachbedingung im Sonderfall 5a)& Die Datei wurde nicht exportiert\\ 
+\hline Nachbedingung im Sonderfall 5b)& siehe Normalablauf\\
+\hline Nachbedingung im Sonderfall 6a)& Die Datei wurde nicht exportiert\\ 
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer klickt auf Datei
-\newline 2 OsmUi zeigt den Menüeintrag Datei
-\newline 3 Der Benutzer klickt auf Datei exportieren
+\newline 2 OsmUi zeigt den Menüeintrag Exportieren
+\newline 3 Der Benutzer klickt auf Exportieren
 \newline 4 OsmUi zeigt den Dateiauswahldialog
 \newline 5 Der Benutzer wählt den gewünschten Namen und die Dateiendung aus
 \newline 6 Der Benutzer bestätigt dies mit Klick auf den Button ''exportieren'' 
-\newline 7 Die Datei wird exportiert\\
+\newline 7 Die Datei wird exportiert
+\newline 8 OsmUi zeigt die aktuelle Pipeline an\\
 \hline Sonderfall 4a) & Die Pipeline ist nicht konsistent
 \newline 4a.1 OsmUi gibt eine Fehlermeldung aus
-\newline Der Benutzer klickt auf OK
-\newline OsmUi zeigt die momentane pipeline an\\
-\hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf Abbrechen\\
+\newline 4a.2 Der Benutzer klickt auf OK
+\newline 4a.3 OsmUi zeigt die momentane Pipeline an\\
+\hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf Abbrechen
+\newline 5a.2 OsmUi zeigt die aktuelle Pipeline an\\
 \hline Sonderfall 5b) & 5b.1 Der Benutzer klickt auf eine bereits vorhandene Datei
 \newline 5b.2 OsmUi fragt, ob die Datei überschrieben werden soll
 \newline 5b.3 Der Benutzer klickt auf Ja
-\newline 5b.4 Die Datei wird exportiert\\
+\newline 5b.4 Die Datei wird exportiert
+\newline 5b.5 OsmUi zeigt die aktuelle Pipeline an\\
 \hline Sonderfall 5b3a) & 5b3a.1 Der Benutzer klickt auf Nein
 \newline $ \rightarrow$ Schritt 5\\
-\hline Sonderfall 6a) & 6a.1 Der Benutzer klickt auf abbrechen\\
+\hline Sonderfall 6a) & 6a.1 Der Benutzer klickt auf abbrechen
+\newline 6a.2 OsmUi zeigt die aktuelle Pipeline an\\
 \hline 
 \end{tabular}
 \end{center}
@@ -529,12 +552,12 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \begin{center}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{Osmosis-Aufruf kopieren} \\ 
-\hline Ziel & Die Parameter eines Tasks sollen geändert werden\\ 
-\hline Vorbedingung & Es gibt mindestens einen Task\\ 
-\hline Nachbedingung & Die Parameter wurden geändert \\  
-\hline Nachbedingung im Sonderfall & Die Parameter wurden nicht geändert\\
+\hline Ziel & Die aktuelle Pipeline soll in die Zwischenablage kopiert werden\\ 
+\hline Vorbedingung & Die Pipeline ist konsistent\\ 
+\hline Nachbedingung & Die Zwischenablage enthält die aktuelle Pipeline als Osmosis-Aufruf \\  
+\hline Nachbedingung im Sonderfall & Der Benutzer hat nichts kopiert \\
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & 1 In der Kopierleist steht ein Osmosis Aufruf und nicht ``Pipeline inkonsistent''
+\hline Normalablauf & 1 In der Kopierleist steht ein Osmosis-Aufruf und nicht ``Pipeline inkonsistent''
 \newline 2 Der Benutzer makiert die gesammte Kopierleiste (oder einen gewünschten Teil)
 \newline 3 Der Benutzer benutzt Strg+C\\ 
 \hline Sonderfall 1a) & Der Benutzer macht nichts\\
@@ -556,8 +579,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Querverweise &  Osmosis, Pipeline\\ 
 \hline 
 \end{tabular}
-\vspace{0.7cm}
-\\
+\subsection{Dialog}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Dialog}\\ 
 \hline Bedeutung & Ein sich öffnendes Fenster, in dem sich Einstellungen vornehmen lassen \\ 
@@ -568,19 +590,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Querverweise & Fenster, OsmUi \\ 
 \hline
 \end{tabular}
-\vspace{0.7cm}
-\\
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Export}\\
-\hline Bedeutung & Vorgang, bei dem ein Aufrufskript entsteht, Gegenteil von Import \\ 
-\hline Abgrenzung & Es ist kein Export im wirtschaftlichen  Sinne gemeint\\ 
-\hline Gültigkeit & Der Begriff gilt innerhalb von OsmUi \\ 
-\hline Unklarheiten & keine \\ 
-\hline Querverweise & Import, OsmUi \\ 
-\hline
-\end{tabular}
-\vspace{0.7cm}
-\\
+\subsection{Fenster}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Fenster}\\ 
 \hline Bedeutung & Ein Fenster ist ein (meist rechteckiger) Bestandteil einer grafischen Benutzerschnittstelle \\ 
@@ -591,8 +601,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Querverweise & Dialog, OsmUi \\ 
 \hline
 \end{tabular}
-\vspace{0.7cm}
-\\
+\subsection{Import}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Import}\\
 \hline Bedeutung & Vorgang, bei dem ein Aufrufskript gelesen wird, Gegenteil von Export \\ 
@@ -602,8 +611,17 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Querverweise & Export, OsmUi \\ 
 \hline
 \end{tabular}
-\vspace{0.7cm}
-\\
+\subsection{Export}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Export}\\
+\hline Bedeutung & Vorgang, bei dem ein Aufrufskript entsteht, Gegenteil von Import \\ 
+\hline Abgrenzung & Es ist kein Export im wirtschaftlichen  Sinne gemeint\\ 
+\hline Gültigkeit & Der Begriff gilt innerhalb von OsmUi \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Import, OsmUi \\ 
+\hline
+\end{tabular}
+\subsection{OsmUi}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{OsmUi}, synonym Produkt, Software, das Programm \\ 
 \hline Bedeutung & OsmUi ist das zu entwickelnde Produkt es stellt eine Benutzeroberfläche für Osmosis da \\ 
@@ -614,8 +632,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Querverweise & Osmosis \\ 
 \hline 
 \end{tabular}
-\vspace{0.7cm}
-\\
+\subsection{Osmosis}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Osmosis} synonym Osmosis Kommandozeilenwerkzeug\\ 
 \hline Bedeutung & Osmosis ist ein Kommandozeilenwerkzeug zum Bearbeiten von OpenStreetMap Daten mithilfe von Pipelines \\ 
@@ -626,8 +643,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Querverweise & OsmUi, Pipeline \\ 
 \hline 
 \end{tabular}
-\vspace{0.7cm}
-\\
+\subsection{Pipeline}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Pipeline} \\ 
 \hline Bedeutung & Eine Pipeline ist ein Konstrukt, zur Datenverarbeitung. In ihm werden Daten eingelesen, durch Tasks verarbeitet und schließlich ausgegeben\\ 
@@ -638,8 +654,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Querverweise & Osmois, OsmUi, Task \\ 
 \hline 
 \end{tabular}
-\vspace{0.7cm}
-\\
+\subsection{Pipelinebox}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Pipelinebox} \\ 
 \hline Bedeutung & Ist der Teil der Oberfläche, in der die Pipeline grafisch dargestellt und bearbeitet wird \\ 
@@ -650,8 +665,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Querverweise & OsmUi, Pipeline \\ 
 \hline 
 \end{tabular}
-\vspace{0.7cm}
-\\
+\subsection{Task}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Task} \\ 
 \hline Bedeutung & Ein Bearbeitungsschritt einer Pipeline, der verschiedene Parameter, Ein- und Ausgänge hat. Er kann neu generiert, gelöscht und geändert werden\\ 
@@ -662,8 +676,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Querverweise & Osmosis, OsmUi, Parameter, Pipeline\\ 
 \hline 
 \end{tabular}
-\vspace{0.7cm}
-\\
+\subsection{Taskpalette}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Taskpalette} \\ 
 \hline Bedeutung & Der Teil der Oberfläche, in dem man die Tasks auswählen kann  \\ 
@@ -674,8 +687,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Querverweise & OsmUi, Task\\ 
 \hline 
 \end{tabular}
-\vspace{0.7cm}
-\\
+\subsection{Parametertab}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Parametertab} \\ 
 \hline Bedeutung & Der Teil der Oberfläche, in dem man die Parameter eines Task einstellen kann  \\ 
@@ -686,8 +698,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Querverweise & Task \\ 
 \hline 
 \end{tabular}
-\vspace{0.7cm}
-\\
+\subsection{Kopierleiste}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Kopierleiste} \\ 
 \hline Bedeutung & Der Teil der Oberfläche, in dem die aktuelle Pipeline als Osmosis Aufruf angezeigt wird \\ 
@@ -698,20 +709,18 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Querverweise & Task \\ 
 \hline 
 \end{tabular}
-\vspace{0.7cm}
-\\
+\subsection{Pipeline konsistent}
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Pipeline inkonsistent} \\ 
-\hline Bedeutung & Eine Pipeline ist inkonsistent wenn es Tasks mit unverbundenen Eingängen gibt \\ 
-\hline Abgrenzung & Eine konsistente Pipeline, also eine die nicht inkonsistent ist, muss nicht von Osmosis ausführbar sein
+\hline Begriff & \textbf{Pipeline konsistent} \\ 
+\hline Bedeutung & Eine Pipeline ist konsistent wenn alle Tasks mit keine unverbundenen Eingängen haben \\ 
+\hline Abgrenzung & Eine konsistente Pipeline muss nicht von Osmosis ausführbar sein
 \newline zum Beispiel kann sie auch nur aus einem ``--read-xml'' bestehen. \\ 
 \hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\  
 \hline Unklarheiten & siehe Abgrenzung \\ 
 \hline Querverweise & Pipeline ausführbar \\ 
 \hline 
 \end{tabular}
-\vspace{0.7cm}
-\\
+\subsection{Pipeline ausführbar}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Pipeline ausführbar} \\ 
 \hline Bedeutung & Eine Pipeline ist ausführbar, wenn sie konsistent ist \textbf{und} sie von Osmosis verarbeitet werden kann\\ 
