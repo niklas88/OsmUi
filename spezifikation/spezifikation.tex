@@ -495,16 +495,33 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \begin{center}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{Pipeline exportieren} \\ 
-\hline Ziel & Die Parameter eines Tasks sollen geändert werden\\ 
-\hline Vorbedingung & Es gibt mindestens einen Task\\ 
-\hline Nachbedingung & Die Parameter wurden geändert \\  
-\hline Nachbedingung im Sonderfall & Die Parameter wurden nicht geändert\\
+\hline Ziel & Eine konsistente Pipeline soll exportiert werden \\ 
+\hline Vorbedingung & Die Pipeline muss konsistent sein \\ 
+\hline Nachbedingung & Die Datei wurde ins gewählte Verzeichnis exportiert\\ 
+\hline Nachbedingung im Sonderfall 4a) & Die Datei wurde nicht importiert\\
+\hline Nachbedingung im Sonderfall 5a)& Die Datei wurde nicht importiert\\ 
+\hline Nachbedingung im Sonderfall 5b)& Die Datei wurde nicht importiert\\
+\hline Nachbedingung im Sonderfall 6a)& Die Datei wurde nicht importiert\\ 
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & 1 Der Benutzer macht einen Doppelklick auf den zu ändernden Task
-\newline 2 OsmUi zeigt anstatt der Taskpalette die momentanen Paranetereinstellungen an
-\newline 3 Der Benutzer ändert die Parameter
-\newline 4 Der Benutzer setzt seine Arbeit beliebig fort\\ 
-\hline Sonderfall 3a) & $ \rightarrow$ Schritt 4\\
+\hline Normalablauf & 1 Der Benutzer klickt auf Datei
+\newline 2 OsmUi zeigt den Menüeintrag Datei
+\newline 3 Der Benutzer klickt auf Datei exportieren
+\newline 4 OsmUi zeigt den Dateiauswahldialog
+\newline 5 Der Benutzer wählt den gewünschten Namen und die Dateiendung aus
+\newline 6 Der Benutzer bestätigt dies mit Klick auf den Button ''exportieren'' 
+\newline 7 Die Datei wird exportiert\\
+\hline Sonderfall 4a) & Die Pipeline ist nicht konsistent
+\newline 4a.1 OsmUi gibt eine Fehlermeldung aus
+\newline Der Benutzer klickt auf OK
+\newline OsmUi zeigt die momentane pipeline an\\
+\hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf Abbrechen\\
+\hline Sonderfall 5b) & 5b.1 Der Benutzer klickt auf eine bereits vorhandene Datei
+\newline 5b.2 OsmUi fragt, ob die Datei überschrieben werden soll
+\newline 5b.3 Der Benutzer klickt auf Ja
+\newline 5b.4 Die Datei wird exportiert\\
+\hline Sonderfall 5b3a) & 5b3a.1 Der Benutzer klickt auf Nein
+\newline $ \rightarrow$ Schritt 5\\
+\hline Sonderfall 6a) & 6a.1 Der Benutzer klickt auf abbrechen\\
 \hline 
 \end{tabular}
 \end{center}
