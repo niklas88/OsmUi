@@ -231,16 +231,16 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \begin{center}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{Datei speichern} \\ 
-\hline Ziel & Aktuelle Datei soll gespeichert werden \\ 
-\hline Vorbedingung & Die aktuelle Datei wurde schon einmal gespeichert \\ 
-\hline Nachbedingung & Die Datei wurde gespeichert \\ 
-\hline Nachbedingung im Sonderfall & Die Datei wurde gespeichert \\ 
+\hline Ziel & Aktuelle Pipeline soll gespeichert werden \\ 
+\hline Vorbedingung & Die aktuelle Pipeline wurde schon einmal gespeichert \\ 
+\hline Nachbedingung & Die Pipeline wurde gespeichert \\ 
+\hline Nachbedingung im Sonderfall & Die Pipeline wurde gespeichert \\ 
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer klickt auf Datei
 \newline 2 OsmUi zeigt den Menüeintrag Datei
 \newline 3 Der Benutzer klickt auf Datei speichern
-\newline 4 Die Datei wird gespeichert\\
-\hline Sonfall 4a) & Die Datei wurde noch nie gespeichert
+\newline 4 Die Pipeline wird gespeichert\\
+\hline Sonfall 4a) & Die Pipelinei wurde noch nie gespeichert
 \newline 4a.1 $ \rightarrow$ Use Case Speichern unter Schritt 1\\
 \hline 
 \end{tabular}
@@ -249,12 +249,12 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \begin{center}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{Datei speichern unter} \\ 
-\hline Ziel & Die Datei soll in einem selbst gewählten Verzeichnis gespeichert werden \\ 
+\hline Ziel & Die Pipeline soll in einem selbst gewählten Verzeichnis gespeichert werden \\ 
 \hline Vorbedingung & keine \\ 
-\hline Nachbedingung & Die Datei wurde im gewählten Verzeichnis gespeichert\\ 
-\hline Nachbedingung im Sonderfall 5a)& Die Datei wurde nicht gespeichert\\ 
-\hline Nachbedingung im Sonderfall 5b)& Die Datei wurde nicht gespeichert\\
-\hline Nachbedingung im Sonderfall 6a)& Die Datei wurde nicht gespeichert\\ 
+\hline Nachbedingung & Die Pipeline wurde im gewählten Verzeichnis gespeichert\\ 
+\hline Nachbedingung im Sonderfall 5a)& Die Pipeline wurde nicht gespeichert\\ 
+\hline Nachbedingung im Sonderfall 5b)& Die Pipeline wurde nicht gespeichert\\
+\hline Nachbedingung im Sonderfall 6a)& Die Pipeline wurde nicht gespeichert\\ 
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer klickt auf Datei
 \newline 2 OsmUi zeigt den Menüeintrag Datei
@@ -262,12 +262,12 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 4 OsmUi zeigt den Dateiauswahldialog
 \newline 5 Der Benutzer wählt den gewünschten Namen und die Dateiendung aus
 \newline 6 Der Benutzer bestätigt dies mit Klick auf den Button ''Speichern'' 
-\newline 7 Die Datei wird gespeichert\\
+\newline 7 Die Pipeline wird gespeichert\\
 \hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf Abbrechen\\
 \hline Sonderfall 5b) & 5b.1 Der Benutzer klickt auf eine bereits vorhandene Datei
 \newline 5b.2 OsmUi fragt, ob die Datei überschrieben werden soll
 \newline 5b.3 Der Benutzer klickt auf Ja
-\newline 5b.4 Die Datei wird gespeichert\\
+\newline 5b.4 Die Pipeline wird gespeichert\\
 \hline Sonderfall 5b3a) & 5b3a.1 Der Benutzer klickt auf Nein
 \newline $ \rightarrow$ Schritt 5\\
 \hline Sonderfall 6a) & 6a.1 Der Benutzer klickt auf abbrechen\\
@@ -278,8 +278,8 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \begin{center}
 \begin{tabular}{|p {5cm}|p{10cm}|}
 \hline Name & \textbf{aus Aufrufskript importieren}\\
-\hline Ziel & importierte Datei soll angezeigt werden\\
-\hline Vorbedingung & Eine importierbare Datei ist vorhanden\\
+\hline Ziel & importierte Pipeline soll angezeigt werden\\
+\hline Vorbedingung & Eine importierbare Pipeline ist vorhanden\\
 \hline Nachbedingung & Die Datei wurde importiert und die Pipeline angezeigt\\ 
 \hline Nachbedingung im Sonderfall 5a) & OsmUi hat keine Daten importiert und zeigt Zustand vor dem Importversuch \\ 
 \hline Nachbedingung im Sonderfall 6a) & OsmUi hat keine Daten importiert und zeigt Zustand vor dem Importversuch \\ 
@@ -323,7 +323,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Normalablauf & 1 Der Benuzer klickt auf den Menüeintrag Bearbeiten
 \newline 2 OsmUi öffnet das Bearbeiten Menü
 \newline 3 Der Benutzer klickt auf Rückgängig
-\newline 4 Der letzte Schritt wird rückgängig gemacht\\
+\newline 4 Die letzte Veränderung wird rückgängig gemacht\\
 \hline 
 \end{tabular}
 \end{center}
@@ -331,14 +331,14 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \begin{center}
 \begin{tabular}{|p {5cm}|p{10cm}|}
 \hline Name & \textbf{Wiederherstellen} \\ 
-\hline Ziel & der letzte Schritt soll wieder hergestellt werden werden\\
+\hline Ziel & der zuletzt rückgängig gemachte Schritt soll wieder hergestellt werden\\
 \hline Vorbedingung & Es muss mindestens ein Schritt rückgängig gemacht worden sein\\
 \hline Nachbedingung & Der Schritt wurde wiederhergestellt gemacht\\
 \hline Akteur & Benutzer\\
 \hline Normalablauf & 1 Der Benuzer klickt auf den Menüeintrag Bearbeiten
 \newline 2 OsmUi öffnet das Bearbeiten Menü
 \newline 3 Der Benutzer klickt auf wiederherstellen
-\newline 4 Der letzte Schritt wird wiederhergestellt\\
+\newline 4 Der zuletzt rückgängig gemachte Schritt wird wiederhergestellt\\
 \hline 
 \end{tabular}
 \end{center}
@@ -359,7 +359,8 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 4 OsmUi öffnet die Onlinehilfe
 \newline 5 Der Benutzer klickt auf das gesuchte Stichwort
 \newline 6 OsmUi zeigt den entsprechenden Eintrag
-\newline 7 Der Benutzer klickt auf ''schließen''\\ 
+\newline 7 Der Benutzer klickt auf ''schließen''
+\newline 8 OsmUi zeigt wieder die aktuelle Pipeline\\
 \hline Sonderfall 5a) & 5a.1 Der Benutzer gibt einen Suchbegriff in die Suchleiste ein
 \newline 5a.2 Der Benutzer bestätigt die Suche
 \newline 5a.3 OsmUi zeigt alle Einträge an, die das/die Wort/Wörter enthält
@@ -384,7 +385,8 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 2 OsmUi zeigt den Menüeintrag Hilfe
 \newline 3 Der Benutzer klickt auf über
 \newline 4 OsmUi öffnet die Informationsseite zu OsmUi
-\newline 5 Der Benutzer klickt ausf Schließen\\
+\newline 5 Der Benutzer klickt auf Schließen
+\newline 6 OsmUi zeigt wieder die aktuelle Pipeline\\
 \hline
 \end{tabular}
 \end{center}
@@ -413,9 +415,9 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Nachbedingung im Sonderfall 1a) & Ein neuer Input-Task wurde unverbunden hinzugefügt\\
 \hline Nachbedingung im Sonderfall 1b) & Kein neuer Task wurde hinzugefügt\\
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & 1 Der Benutzer klickt auf einen Plus-Button des Tasks (bei mehreren Ausgängen gibt es mehrere Plus-Button), an den angefügt werden soll
+\hline Normalablauf & 1 Der Benutzer klickt auf den Plus-Button des Tasks, an den angefügt werden soll
 \newline 2 Der Benutzer wählt aus der Liste der kompatiblen (eventuell schon vorhandenen Tasks) Tasks einen aus (Doppelklick)
-\newline 3 Der gewälte Task wird in die Pipeline eingebunden (an den Ausgang dessen Plus gewählt wurde)\\ 
+\newline 3 Der gewälte Task wird in die Pipeline eingebunden\\ 
 \hline Sonderfall 1a) & Der Benutzer hat keinen Task selektiert
 \newline 1a.1 Der Benutzer wählt einen neuen Input-Task aus
 \newline 1a.2 Der neue Input-Task wird unverbunden in die Pipeline eingefügt\\
@@ -468,8 +470,9 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Name & \textbf{Task-Parameter einstellen} \\ 
 \hline Ziel & Die Parameter eines Tasks sollen geändert werden\\ 
 \hline Vorbedingung & Es gibt mindestens einen Task\\ 
-\hline Nachbedingung & Die Parameter wurden geändert \\  
-\hline Nachbedingung im Sonderfall & Die Parameter wurden nicht geändert\\
+\hline Nachbedingung & Die Pipeline wurde geladen\\  
+\hline Nachbedingung im Sonderfall 4a) & Die Pipeline wurde geladen\\
+\hline Nachbedingung im Sonderfall 4b) & Es wurde keine Pipeline geladen\\
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer macht einen Doppelklick auf den zu ändernden Task
 \newline 2 OsmUi zeigt anstatt der Taskpalette die momentanen Paranetereinstellungen an
@@ -492,13 +495,12 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 
 2 OsmUi zeigt den Menüeintrag Datei
 \newline
-3 Der Benutzer klickt auf ''Importieren aus Zwischenanlage''.
+3 Der Benutzer klickt auf ''Importieren aus Zwischenablage''.
 \newline
 4 OsmUi lädt die Datei und zeigt sie in der Piplinebox an.
 \\ 
-\hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf ''Abrechen''
-\newline
-4a.1 Beim Vorhandensein einer Pipeline lädt OsmUi die Zwischenablage in die Pipelinebox einer neuen Instanz von OsmUi.\\\\
+\hline Sonderfall 4a) & Es ist eine aktuelle Pipeline vorhanden
+\newline 4a.1 OsmUi lädt die Zwischenablage in die Pipelinebox einer neuen Instanz von OsmUi.\\
 \hline Sonderfall 4b)& Zwischenablage enthält kein gültigen Osmosis-Aufruf .
 \newline
  4b.1 OsmUi versucht Zwischenablage zu laden bricht dann ab und zeigt einen entsprechenden Fehlerdialog an.
