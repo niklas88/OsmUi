@@ -126,9 +126,9 @@ So wird verhindert, dass der Benutzer Pipelines bauen kann, die nicht durch Osmo
 In der Pipelinebox wird die Pipeline grafisch dargestellt und es können Tasks zum Bearbeiten ausgewählt werden. Ist ein Task ausgewählt so können seine Eigenschaften
 bearbeitet oder ein neuer Task über die Taskpalette - wie oben beschrieben - angefügt werden. Desweiteren kann eine Verbindung zu einem anderen Task, der noch offene
 Inputs hat, hergestellt werden.
-\subsubsection{Taskeinstellungsdialog}
-Wählt der Benutzer einen Task aus, so stellt OsmUi einen Dialog zur Verfügung, in dem alle - für den jeweiligen Tasktyp vorhandenen - Parameter eingegeben werden können.
-Hierbei kann die Eingabe eingeschränkt sein: als Spanne von Zahlen, als Kartenausschnitt oder als freier Text erfolgen. Dabei wird der für
+\subsubsection{Einstellungstab}
+Wählt der Benutzer einen Task aus, so zeigt OsmUi den Einstellungstab an, in dem alle - für den jeweiligen Tasktyp vorhandenen - Parameter eingegeben werden können.
+Hierbei kann die Eingabe eingeschränkt sein und als Spanne von Zahlen, als Kartenausschnitt oder als freier Text erfolgen. Dabei wird der für
 den Datentyp beste Eingabemodus gewählt.\\
 \begin{center}
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Parameter_Optionen.png}
@@ -386,9 +386,9 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Nachbedingung im Sonderfall 1a) & Ein neuer Input-Task wurde unverbunden hinzugefügt\\
 \hline Nachbedingung im Sonderfall 1b) & Kein neuer Task wurde hinzugefügt\\
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & 1 Der Benutzer klickt auf den Plus-Button des Tasks, an den angefügt werden soll
+\hline Normalablauf & 1 Der Benutzer klickt auf einen Plus-Button des Tasks (bei mehreren Ausgängen gibt es mehrere Plus-Button), an den angefügt werden soll
 \newline 2 Der Benutzer wählt aus der Liste der kompatiblen (eventuell schon vorhandenen Tasks) Tasks einen aus (Doppelklick)
-\newline 3 Der gewälte Task wird in die Pipeline eingebunden\\ 
+\newline 3 Der gewälte Task wird in die Pipeline eingebunden (an den Ausgang dessen Plus gewählt wurde)\\ 
 \hline Sonderfall 1a) & Der Benutzer hat keinen Task selektiert
 \newline 1a.1 Der Benutzer wählt einen neuen Input-Task aus
 \newline 1a.2 Der neue Input-Task wird unverbunden in die Pipeline eingefügt\\
@@ -407,7 +407,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer selektiert den zu löschenden Task
 \newline 2 Der Benutzer drückt die Entfernen-Taste auf seiner Tastatur
-\newline 3 OsmUi gibt eine Warnung aus, dass eine unkonsistente Pipeline entstehen könnte
+\newline 3 OsmUi gibt eine Warnung aus, falls dadurch eine inkonsistente Pipeline entsteht
 \newline 4 Der Benutzer klickt auf OK
 \newline 5 Der Task wird gelöscht\\ 
 \hline Sonderfall 2a) & 2a.1 Der Benutzer klickt auf den selektierten Task
@@ -428,6 +428,36 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 3 Der Benutzer ändert die Parameter
 \newline 4 Der Benutzer setzt seine Arbeit beliebig fort\\ 
 \hline Sonderfall 3a) & $ \rightarrow$ Schritt 4\\
+\hline 
+\end{tabular} 
+\vspace{0.7cm}
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Name & \textbf{Pipeline Importieren aus Zwischenablage} \\ 
+\hline Ziel & Benutzer möchte Pipeline aus Osmosis-Aufruf angezeigt haben\\ 
+\hline Vorbedingung & Osmosis-Aufruf befindet sich in Zwischenablage\\ 
+\hline Nachbedingung & Osmosis-Aufruf wurde importiert und zeigt die Pipeline an \\  
+\hline Nachbedingung im Sonderfall & Die Parameter wurden nicht geändert\\
+\hline Akteur & Benutzer \\ 
+\hline Normalablauf & 1 Der Benutzer klickt auf Datei.
+\newline 
+2 OsmUi zeigt den Menüeintrag Datei
+\newline
+3 Der Benutzer klickt auf ''Importieren aus Zwischenanlage''.
+\newline
+4 OsmUi lädt die Datei und zeigt sie in der Piplinebox an.
+\\ 
+\hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf ''Abrechen''
+\newline
+4a.1 Beim Vorhandensein einer Pipeline lädt OsmUi die Zwischenablage in die Pipelinebox einer neuen Instanz von OsmUi.\\\\
+\hline Sonderfall 7b)& Zwischenablage enthält kein gültigen Osmosis-Aufruf .
+\newline
+ 4b.1 OsmUi versucht Zwischenablage zu laden bricht dann ab und zeigt einen entsprechenden Fehlerdialog an.
+\newline
+ 4b.2 Benutzer klickt auf Button ''Ok''.
+\newline
+ 4b.3 OsmUi zeigt den Zustand der vor dem Importversuch vorhanden war.
+\\
 \hline 
 \end{tabular} 
 \vspace{0.7cm}
@@ -596,6 +626,30 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Bezeichnung & Es gibt nur eine Taskpalette. Sie ist daher eindeutig \\ 
 \hline Unklarheiten & keine \\ 
 \hline Querverweise & OsmUi, Task\\ 
+\hline 
+\end{tabular}
+\vspace{0.7cm}
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Einstellungstab} \\ 
+\hline Bedeutung & Der Teil der Oberfläche, in dem man die Tasks auswählen kann  \\ 
+\hline Abgrenzung & Es handelt sich um keine reale Box o.ä., sondern um ein Element der Benutzeroberfläche\\ 
+\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\ 
+\hline Bezeichnung & Jeder Task zeigt seine Einstellungen im gleichen Einstellungstab wenn er selektiert ist, also ist dieser eindeutig \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Task \\ 
+\hline 
+\end{tabular}
+\vspace{0.7cm}
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Kopierleiste} \\ 
+\hline Bedeutung & Der Teil der Oberfläche, in dem die aktuelle Pipeline als Osmosis Aufruf angezeigt wird \\ 
+\hline Abgrenzung & Es handelt sich nur um einen Teil der Benutzeroberfläche, nicht um einen realen Gegenstand \\ 
+\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\ 
+\hline Bezeichnung & Es gibt nur eine Kopierleiste. Sie ist daher eindeutig \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Task \\ 
 \hline 
 \end{tabular}
 \end{center}
