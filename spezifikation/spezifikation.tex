@@ -160,7 +160,7 @@ solange die Pipeline konsistent ist, andernfalls steht in der Kopierleiste ``Pip
 \subsubsection{Menüleiste}
 \begin{itemize}
 \item Datei\\
-Beim Klicken auf den Menüeintrag \textbf{Datei} öffnet sich ein Dialog. Der Benutzer kann zwischen \textbf{Neu} (Öffnen einer neuen Pipeline), \textbf{Laden...} (Laden einer gespeicherten .smu Datei), \textbf{Speichern} (speichern der aktuellen eventuell inkonsistenten Pipeline, mit Positionen der Tasks, in schon vorher gespeicherte .smu Datei.), \textbf{Speichern unter} (speichern die vorhandene eventuell inkonsistente Pipeline, mit Positionen der Tasks, an einem selbst gewählten Ort in eine .smu Datei) , \textbf{Importieren aus Datei} (Importiert eine Pipeline aus einem mit OsmUi erstellen Aufrufscript und zeigt diese an.), \textbf{Importieren aus Zwischenablage} (Importiert eine Pipeline aus der Zwischenablage und zeigt diese an.), \textbf{Exportieren} (Exportiert eine Pipeline in ein Aufrufscript) und \textbf{schließen} (das Programm wird geschlossen) wählen. 
+Beim Klicken auf den Menüeintrag \textbf{Datei} öffnet sich ein Dialog. Der Benutzer kann zwischen \textbf{Neu} (Öffnen einer neuen Pipeline), \textbf{Laden...} (Laden einer gespeicherten .smu Datei), \textbf{Speichern} (speichern der aktuellen eventuell inkonsistenten Pipeline, mit Positionen der Tasks, in schon vorher gespeicherte .smu Datei.), \textbf{Speichern unter} (speichern die vorhandene eventuell inkonsistente Pipeline, mit Positionen der Tasks, an einem selbst gewählten Ort in eine .smu Datei) , \textbf{Importieren aus Datei} (Importiert eine Pipeline aus einem mit OsmUi erstellten Aufrufscript und zeigt diese an.), \textbf{Importieren aus Zwischenablage} (Importiert eine Pipeline aus der Zwischenablage und zeigt diese an.), \textbf{Exportieren} (Exportiert eine Pipeline in ein Aufrufscript) und \textbf{Schließen} (das Programm wird geschlossen) wählen. 
 \\ 
 \begin{center}
 \includegraphics[width=7cm]{ui_prototype/OsmUi_Dateiklein.png}
@@ -241,7 +241,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 2 OsmUi zeigt den Menüeintrag Datei
 \newline 3 Der Benutzer klickt auf Datei speichern
 \newline 4 Die Pipeline wird gespeichert\\
-\hline Sonfall 4a) & Die Pipelinei wurde noch nie gespeichert
+\hline Sonderfall 4a) & Die Pipeline wurde noch nie gespeichert
 \newline 4a.1 $ \rightarrow$ Use Case Speichern unter Schritt 1\\
 \hline 
 \end{tabular}
@@ -361,7 +361,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 5 Der Benutzer klickt auf das gesuchte Stichwort
 \newline 6 OsmUi zeigt den entsprechenden Eintrag
 \newline 7 Der Benutzer klickt auf ''schließen''
-\newline 8 OsmUi zeigt wieder die aktuelle Pipeline\\
+\newline 8 OsmUi zeigt wieder die aktuelle Pipeline an\\
 \hline Sonderfall 5a) & 5a.1 Der Benutzer gibt einen Suchbegriff in die Suchleiste ein
 \newline 5a.2 Der Benutzer bestätigt die Suche
 \newline 5a.3 OsmUi zeigt alle Einträge an, die das/die Wort/Wörter enthält
@@ -387,7 +387,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 3 Der Benutzer klickt auf über
 \newline 4 OsmUi öffnet die Informationsseite zu OsmUi
 \newline 5 Der Benutzer klickt auf Schließen
-\newline 6 OsmUi zeigt wieder die aktuelle Pipeline\\
+\newline 6 OsmUi zeigt wieder die aktuelle Pipeline an\\
 \hline
 \end{tabular}
 \end{center}
@@ -417,7 +417,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Nachbedingung im Sonderfall 1b) & Kein neuer Task wurde hinzugefügt\\
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer klickt auf den Plus-Button des Tasks, an den angefügt werden soll
-\newline 2 Der Benutzer wählt aus der Liste der kompatiblen (eventuell schon vorhandenen Tasks) Tasks einen aus (Doppelklick)
+\newline 2 Der Benutzer wählt aus der Liste der kompatiblen (eventuell schon vorhandenen) Tasks einen aus (Doppelklick)
 \newline 3 Der gewälte Task wird in die Pipeline eingebunden\\ 
 \hline Sonderfall 1a) & Der Benutzer hat keinen Task selektiert
 \newline 1a.1 Der Benutzer wählt einen neuen Input-Task aus
@@ -451,7 +451,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{Verbindung entfernen} \\ 
 \hline Ziel & Eine Verbindung zwischen zwei Tasks soll entfernt werden \\ 
-\hline Vorbedingung & Es sind mindestens 2 Verbundene Tasks vorhanden \\ 
+\hline Vorbedingung & Es sind mindestens 2 verbundene Tasks vorhanden \\ 
 \hline Nachbedingung &  Die beiden vorher verbundenen Tasks sind nicht mehr verbunden\\ 
 \hline Nachbedingung im Sonderfall & OsmUi zeigt die alte Pipeline unverändert an \\ 
 \hline Akteur & Benutzer \\ 
@@ -465,7 +465,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline 
 \end{tabular}  
 \end{center}
-\subsubsection{Task-Parameter}
+\subsubsection{Task-Parameter einstellen}
 \begin{center}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{Task-Parameter einstellen} \\ 
@@ -490,7 +490,8 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Ziel & Benutzer möchte Pipeline aus Osmosis-Aufruf angezeigt haben\\ 
 \hline Vorbedingung & Osmosis-Aufruf befindet sich in Zwischenablage\\ 
 \hline Nachbedingung & Osmosis-Aufruf wurde importiert und zeigt die Pipeline an \\  
-\hline Nachbedingung im Sonderfall & Die Parameter wurden nicht geändert\\
+\hline Nachbedingung im Sonderfall 4a) & Osmosis-Aufruf wurde importiert und zeigt die Pipeline an\\
+\hline Nachbedingung im Sonderfall 4b) & Keine Daten wurden importiert und letzter Zustand wird angezeigt.\\
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer klickt auf Datei.
 \newline 
@@ -498,7 +499,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline
 3 Der Benutzer klickt auf ''Importieren aus Zwischenablage''.
 \newline
-4 OsmUi lädt die Datei und zeigt sie in der Piplinebox an.
+4 OsmUi lädt die Datei und zeigt sie in der Pipelinebox an.
 \\ 
 \hline Sonderfall 4a) & Es ist eine aktuelle Pipeline vorhanden
 \newline 4a.1 OsmUi lädt die Zwischenablage in die Pipelinebox einer neuen Instanz von OsmUi.\\
@@ -520,10 +521,10 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Ziel & Eine konsistente Pipeline soll exportiert werden \\ 
 \hline Vorbedingung & Die Pipeline muss konsistent sein \\ 
 \hline Nachbedingung & Die Pipeline wurde ins gewählte Verzeichnis exportiert\\ 
-\hline Nachbedingung im Sonderfall 4a) & Die Datei wurde nicht exportiert\\
-\hline Nachbedingung im Sonderfall 5a)& Die Datei wurde nicht exportiert\\ 
+\hline Nachbedingung im Sonderfall 4a) & Die Pipeline wurde nicht exportiert\\
+\hline Nachbedingung im Sonderfall 5a)& Die Pipeline wurde nicht exportiert\\ 
 \hline Nachbedingung im Sonderfall 5b)& siehe Normalablauf\\
-\hline Nachbedingung im Sonderfall 6a)& Die Datei wurde nicht exportiert\\ 
+\hline Nachbedingung im Sonderfall 6a)& Die Pipeline wurde nicht exportiert\\ 
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer klickt auf Datei
 \newline 2 OsmUi zeigt den Menüeintrag Exportieren
@@ -542,7 +543,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Sonderfall 5b) & 5b.1 Der Benutzer klickt auf eine bereits vorhandene Datei
 \newline 5b.2 OsmUi fragt, ob die Datei überschrieben werden soll
 \newline 5b.3 Der Benutzer klickt auf Ja
-\newline 5b.4 Die Datei wird exportiert
+\newline 5b.4 Die Pipeline wird exportiert
 \newline 5b.5 OsmUi zeigt die aktuelle Pipeline an\\
 \hline Sonderfall 5b3a) & 5b3a.1 Der Benutzer klickt auf Nein
 \newline $ \rightarrow$ Schritt 5\\
@@ -558,12 +559,10 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Ziel & Die aktuelle Pipeline soll in die Zwischenablage kopiert werden\\ 
 \hline Vorbedingung & Die Pipeline ist konsistent\\ 
 \hline Nachbedingung & Die Zwischenablage enthält die aktuelle Pipeline als Osmosis-Aufruf \\  
-\hline Nachbedingung im Sonderfall & Der Benutzer hat nichts kopiert \\
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & 1 In der Kopierleist steht ein Osmosis-Aufruf und nicht ``Pipeline inkonsistent''
-\newline 2 Der Benutzer makiert die gesammte Kopierleiste (oder einen gewünschten Teil)
+\hline Normalablauf & 1 In der Kopierleiste steht ein Osmosis-Aufruf
+\newline 2 Der Benutzer makiert die gesamte Kopierleiste (oder einen gewünschten Teil)
 \newline 3 Der Benutzer benutzt Strg+C\\ 
-\hline Sonderfall 1a) & Der Benutzer macht nichts\\
 \hline 
 \end{tabular} 
 \end{center}
