@@ -90,6 +90,10 @@ Beim Erstellen/Laden/Speichern von Verarbeitungspipelines muss OsmUi in der Lage
 eine künstliche Beschränkung nach oben besteht jedoch nicht.\\
 Werden 100 Tasks nicht überschritten und das System des Nutzers nicht unnormal ausgelastet, so muss OsmUi Benutzeraktionen, wie laden/speichern, task hinzufügen etc.
 innerhalb von 1 Sekunde ausführen. Hierbei darf ein Mittelklasserechner angenommen werden. (>= 2.6 Ghz, >= 1 GB RAM, 7200 RPM Festplatte)
+\subsection{persistente Konfiguration}
+Um Benutzerspezifische Einstellungen zu speichern verwendet OsmUi eine Konfigurationsdatei im Heimat-/Configverzeichnis des Benutzters.
+Diese Konfigurationsdatei wird ein für Menschen lesbaren XML Format gespeichert, wobei die genaue Definition in der Entwurf- bzw. Implementierungsphase
+spezifiziert wird. 
 \subsection{Laden und Speichern in OsmUi eigenem Format}
 Um Pipelines mit allen Details wie Position von verschobenen Tasks, sowie nicht ausführbare Pipelines speichern zu können verwendet OsmUi ein eigenes Dateiformat
 (.smu) außerdem ist dieses Format plattformunabhängig.
@@ -116,8 +120,8 @@ wird es ein weiteres Einstellungsfenster geben.\\
 \begin{center}
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Startseite.png}
 \end{center}
-\subsubsection{Taskpalette}
-Im linken Teil der Benutzeroberfläche wird eine Liste der gerade zum Einfügen verfügbaren Tasks dargestellt. Dabei kann die Darstellung als Icon,
+\subsubsection{Taskpalette (Tasktab)}
+Im linken Teil der Benutzeroberfläche wird Tasktab eine Liste der gerade zum Einfügen verfügbaren Tasks dargestellt. Dabei kann die Darstellung als Icon,
 Text oder Kombination erfolgen. Es werden nur Tasks angezeigt die gerade auch einfügbar sind. \\
 Am Anfang sind dies zum Beispiel alle Tasks, (z.B. read XML) die keinen Streameingang haben. Ist in der Pipelinebox ein Task ausgewählt, so
 sind nur diejenigen Tasks sichtbar, die mit dem/den Ausgang/Ausgängen des ausgewählten Task kompatibel sind.\\
@@ -133,6 +137,14 @@ den Datentyp beste Eingabemodus gewählt.\\
 \begin{center}
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Parameter_Optionen.png}
 \end{center}
+\subsubsection{Einstellungsdialog}
+Im Einstellungsdialog können Benutzerspezifische Einstellungen von OsmUi vorgenommen werden, welche persistent in einer Konfigurationsdatei gespeichert werden.\\
+Hierzu zählen:\\
+\begin{itemize}
+ \item Einstellung des Pfades zu Osmosis, welcher in Aufrufskripten verwendet werden soll
+\end{itemize}
+
+
 \subsubsection{Kopierleiste}
 Um die aktuell dargestellte Pipeline direkt kopieren zu können, wird sie als Osmosis-Aufruf unter der Pipelinebox angezeigt.
 \begin{center}
