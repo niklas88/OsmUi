@@ -231,17 +231,21 @@ $ \rightarrow$ Schritt 7b.1
 \hline Nachbedingung im Sonderfall 1) & Die Datei wurde neu gespeichert \\ 
 \hline Nachbedingung im Sonderfall 2) & Die Datei wurde nicht gespeichert\\
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & - Der Benutzer klickt den Speicher-Button 
-\newline
-- Die Datei wird gespeichert
-\\
-\hline Sonderfall 1) & - Der Benutzer klickt auf den Speicher-Button, aber die Datei ist vorher nicht gespeichert worden
-\newline
-- Das Speichern-unter-Menü öffnet sich
-\newline
-- weiter wie im Use-Case Datei speichern unter
- \\ 
- \hline Sonderfall 2) & - Der Benutzer bricht den Vorgang ab \\
+\hline Normalablauf & 1 Der Benutzer klickt auf Datei
+\newline 2 OsmUi zeigt den Menüeintrag Datei
+\newline 3 Der Benutzer klickt auf Datei speichern
+\newline 4 OsmUi zeigt den Dateiauswahldialog
+\newline 5 Der Benutzer wählt den gewünschten Namen und die Dateiendung aus
+\newline 6 Der Benutzer bestätigt dies mit Klick auf den Button ''Speichern'' 
+\newline 7 Die Datei wird gespeichert\\
+\hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf Abbrechen\\
+\hline Sonderfall 5b) & 5b.1 Der Benutzer klickt auf eine bereits vorhandene Datei
+\newline 5b.2 OsmUi fragt, ob die Datei überschrieben werden soll
+\newline 5b.3 Der Benutzer klickt auf Ja
+\newline 5b.4 Die Datei wird gespeichert\\
+\hline Sonderfall 5b3a) & 5b3a.1 Der Benutzer klickt auf Nein
+\newline $ \rightarrow$ Schritt 5\\
+\hline Sonderfall 6a) & 6a.1 Der Benutzer klickt auf abbrechen\\
 \hline 
 \end{tabular}
 \vspace{0.7cm}
@@ -272,7 +276,7 @@ $ \rightarrow$ Schritt 7b.1
 \begin{tabular}{|p {5cm}|p{10cm}|}
 \hline Name & \textbf{aus Aufrufskript importieren}\\
 \hline Ziel & importierte Datei soll angezeigt werden\\
-\hline Vorbedingung & Eine importierbare Datei ist vorhanden
+\hline Vorbedingung & Eine importierbare Datei ist vorhanden\\
 \hline Nachbedingung & Die Datei wurde importiert und die Pipeline angezeigt\\ 
 \hline Nachbedingung im Sonderfall & OsmUi hat keine Daten importiert und zeigt den Zustand vor dem Ladeversuch \\ 
 \hline Akteure & Benutzer \\ 
