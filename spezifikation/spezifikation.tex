@@ -11,7 +11,10 @@
 \usepackage{wasysym}
 \usepackage{graphicx}
 \usepackage[pdftex]{hyperref}
-\author{Verena Käfer (2551188), Niklas Schnelle (2573250), Peter Vollmer (2553704)}
+\author{
+Verena Käfer (2551188),\\
+Niklas Schnelle (2573250),\\
+Peter Vollmer (2553704)}
 \date{erstellt am 15.11.2010\\
 Version: 1.0}
 \title{\includegraphics[width=15cm]{../projektplan/Logo_Osmui.png} \\ 
@@ -147,7 +150,8 @@ Hierzu zählen:\\
 
 
 \subsubsection{Kopierleiste}
-Um die aktuell dargestellte Pipeline direkt kopieren zu können, wird sie als Osmosis-Aufruf unter der Pipelinebox angezeigt.
+Um die aktuell dargestellte Pipeline direkt kopieren zu können, wird sie als Osmosis-Aufruf unter der Pipelinebox angezeigt. Dies ist nur möglich
+solange die Pipeline konsistent ist, andernfalls steht in der Kopierleiste ``Pipeline inkonsistent''
 \begin{center}
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Leisteklein.png}
 \end{center}
@@ -184,6 +188,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \includegraphics[width=15cm]{Use-Cases.png}
 \end{center}
 \subsection{Beschreibungen}
+\subsubsection{Datei laden}
 \begin{center}
 \ \\
 \begin{tabular}{|p{5cm}|p{10cm}|}
@@ -221,8 +226,9 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline $ \rightarrow$ Schritt 7b.1 \\
 \hline 
 \end{tabular} 
-\vspace{0.7cm}
-\\
+\end{center}
+\subsubsection{Datei speichern}
+\begin{center}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{Datei speichern} \\ 
 \hline Ziel & Aktuelle Datei soll gespeichert werden \\ 
@@ -238,8 +244,9 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 4a.1 $ \rightarrow$ Use Case Speichern unter Schritt 1\\
 \hline 
 \end{tabular}
-\vspace{0.7cm}
-\\
+\end{center}
+\subsubsection{Datei speichern unter}
+\begin{center}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{Datei speichern unter} \\ 
 \hline Ziel & Die Datei soll in einem selbst gewählten Verzeichnis gespeichert werden \\ 
@@ -266,8 +273,9 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Sonderfall 6a) & 6a.1 Der Benutzer klickt auf abbrechen\\
 \hline 
 \end{tabular}
-\vspace{0.7cm}
-\\
+\end{center}
+\subsubsection{aus Aufrufscript importieren}
+\begin{center}
 \begin{tabular}{|p {5cm}|p{10cm}|}
 \hline Name & \textbf{aus Aufrufskript importieren}\\
 \hline Ziel & importierte Datei soll angezeigt werden\\
@@ -303,10 +311,11 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline $ \rightarrow$ Schritt 7b.1 \\
 \hline 
 \end{tabular}
-\vspace{0.7cm}
-\\
+\end{center}
+\subsubsection{Rückgängig machen}
+\begin{center}
 \begin{tabular}{|p {5cm}|p{10cm}|}
-\hline Name & \textbf{rückgängig machen} \\ 
+\hline Name & \textbf{Rückgängig machen} \\ 
 \hline Ziel & der letzte Schritt soll Rückgängig gemacht werden\\
 \hline Vorbedingung & Es muss mindestens ein Schritt gemacht worden sein\\
 \hline Nachbedingung & Der Schritt wurde Rückgängig gemacht\\
@@ -317,10 +326,11 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 4 Der letzte Schritt wird rückgängig gemacht\\
 \hline 
 \end{tabular}
-\vspace{0.7cm}
-\\
+\end{center}
+\subsubsection{Wiederherstellen}
+\begin{center}
 \begin{tabular}{|p {5cm}|p{10cm}|}
-\hline Name & \textbf{wiederherstellen} \\ 
+\hline Name & \textbf{Wiederherstellen} \\ 
 \hline Ziel & der letzte Schritt soll wieder hergestellt werden werden\\
 \hline Vorbedingung & Es muss mindestens ein Schritt rückgängig gemacht worden sein\\
 \hline Nachbedingung & Der Schritt wurde wiederhergestellt gemacht\\
@@ -331,8 +341,9 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 4 Der letzte Schritt wird wiederhergestellt\\
 \hline 
 \end{tabular}
-\vspace{0.7cm}
-\\
+\end{center}
+\subsubsection{Hilfe aufrufen}
+\begin{center}
 \begin{tabular}{|p {5cm}|p{10cm}|}
 \hline Name & \textbf{Hilfe aufrufen} \\ 
 \hline Ziel & Der Hilfe-Dialog soll aufgerufen werden \\ 
@@ -360,8 +371,9 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Sonderfall 7a) & $ \rightarrow$ Schritt 5\\
 \hline
 \end{tabular}
-\vspace{0.7cm}
-\\
+\end{center}
+\subsubsection{Hilfe-über aufrufen}
+\begin{center}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{Hilfe-über aufrufen} \\ 
 \hline Ziel & Informationen über OsmUi einholen\\
@@ -375,8 +387,9 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 5 Der Benutzer klickt ausf Schließen\\
 \hline
 \end{tabular}
-\vspace{0.7cm}
-\\
+\end{center}
+\subsubsection{neue Pipeline erstellen}
+\begin{center}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{neue Pipeline erstellen} \\ 
 \hline Ziel & Eine neue Pipeline soll erstellt werden \\ 
@@ -389,8 +402,9 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 4 Ein neue Instanz von OsmUi mit leerer Pipeline wird gestartet\\ 
 \hline 
 \end{tabular} 
-\vspace{0.7cm}
-\\
+\end{center}
+\subsubsection{neuen Task hinzufügen}
+\begin{center}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{neuen Task hinzufügen} \\ 
 \hline Ziel & Ein neuer Task soll hinzugefügt werden \\ 
@@ -409,8 +423,9 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 1b.2 Der Task gilt nicht mehr als selektiert\\
 \hline
 \end{tabular}
-\vspace{0.7cm}
-\\
+\end{center}
+\subsubsection{Task entfernen}
+\begin{center}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{Task entfernen} \\ 
 \hline Ziel & Ein Task soll entfernt werden \\ 
@@ -427,8 +442,9 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 2a.2 Der Task gilt nicht mer als selektiert\\
 \hline 
 \end{tabular}  
-\vspace{0.7cm}
-\\
+\end{center}
+\subsubsection{Task-Parameter}
+\begin{center}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{Task-Parameter einstellen} \\ 
 \hline Ziel & Die Parameter eines Tasks sollen geändert werden\\ 
@@ -443,10 +459,11 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Sonderfall 3a) & $ \rightarrow$ Schritt 4\\
 \hline 
 \end{tabular} 
-\vspace{0.7cm}
-\\
+\end{center}
+\subsubsection{Pipeline importieren aus Zwischenablage}
+\begin{center}
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Name & \textbf{Pipeline Importieren aus Zwischenablage} \\ 
+\hline Name & \textbf{Pipeline importieren aus Zwischenablage} \\ 
 \hline Ziel & Benutzer möchte Pipeline aus Osmosis-Aufruf angezeigt haben\\ 
 \hline Vorbedingung & Osmosis-Aufruf befindet sich in Zwischenablage\\ 
 \hline Nachbedingung & Osmosis-Aufruf wurde importiert und zeigt die Pipeline an \\  
@@ -463,7 +480,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf ''Abrechen''
 \newline
 4a.1 Beim Vorhandensein einer Pipeline lädt OsmUi die Zwischenablage in die Pipelinebox einer neuen Instanz von OsmUi.\\\\
-\hline Sonderfall 7b)& Zwischenablage enthält kein gültigen Osmosis-Aufruf .
+\hline Sonderfall 4b)& Zwischenablage enthält kein gültigen Osmosis-Aufruf .
 \newline
  4b.1 OsmUi versucht Zwischenablage zu laden bricht dann ab und zeigt einen entsprechenden Fehlerdialog an.
 \newline
@@ -473,10 +490,11 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \\
 \hline 
 \end{tabular} 
-\vspace{0.7cm}
-\\
+\end{center}
+\subsubsection{Pipeline exportieren}
+\begin{center}
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Name & \textbf{Export} \\ 
+\hline Name & \textbf{Pipeline exportieren} \\ 
 \hline Ziel & Die Parameter eines Tasks sollen geändert werden\\ 
 \hline Vorbedingung & Es gibt mindestens einen Task\\ 
 \hline Nachbedingung & Die Parameter wurden geändert \\  
@@ -489,23 +507,22 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Sonderfall 3a) & $ \rightarrow$ Schritt 4\\
 \hline 
 \end{tabular}
-\vspace{0.7cm}
-\\
+\end{center}
+\subsubsection{Osmosis-Aufruf kopieren}
+\begin{center}
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Name & \textbf{Kopierleiste} \\ 
+\hline Name & \textbf{Osmosis-Aufruf kopieren} \\ 
 \hline Ziel & Die Parameter eines Tasks sollen geändert werden\\ 
 \hline Vorbedingung & Es gibt mindestens einen Task\\ 
 \hline Nachbedingung & Die Parameter wurden geändert \\  
 \hline Nachbedingung im Sonderfall & Die Parameter wurden nicht geändert\\
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & 1 Der Benutzer macht einen Doppelklick auf den zu ändernden Task
-\newline 2 OsmUi zeigt anstatt der Taskpalette die momentanen Paranetereinstellungen an
-\newline 3 Der Benutzer ändert die Parameter
-\newline 4 Der Benutzer setzt seine Arbeit beliebig fort\\ 
-\hline Sonderfall 3a) & $ \rightarrow$ Schritt 4\\
+\hline Normalablauf & 1 In der Kopierleist steht ein Osmosis Aufruf und nicht ``Pipeline inkonsistent''
+\newline 2 Der Benutzer makiert die gesammte Kopierleiste (oder einen gewünschten Teil)
+\newline 3 Der Benutzer benutzt Strg+C\\ 
+\hline Sonderfall 1a) & Der Benutzer macht nichts\\
 \hline 
 \end{tabular} 
-
 \end{center}
 
 
@@ -662,6 +679,29 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Bezeichnung & Es gibt nur eine Kopierleiste. Sie ist daher eindeutig \\ 
 \hline Unklarheiten & keine \\ 
 \hline Querverweise & Task \\ 
+\hline 
+\end{tabular}
+\vspace{0.7cm}
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Pipeline inkonsistent} \\ 
+\hline Bedeutung & Eine Pipeline ist inkonsistent wenn es Tasks mit unverbundenen Eingängen gibt \\ 
+\hline Abgrenzung & Eine konsistente Pipeline, also eine die nicht inkonsistent ist, muss nicht von Osmosis ausführbar sein
+\newline zum Beispiel kann sie auch nur aus einem ``--read-xml'' bestehen. \\ 
+\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\  
+\hline Unklarheiten & siehe Abgrenzung \\ 
+\hline Querverweise & Pipeline ausführbar \\ 
+\hline 
+\end{tabular}
+\vspace{0.7cm}
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Pipeline ausführbar} \\ 
+\hline Bedeutung & Eine Pipeline ist ausführbar, wenn sie konsistent ist \textbf{und} sie von Osmosis verarbeitet werden kann\\ 
+\hline Abgrenzung & Eine ausführbare Pipeline ist mehr als nur konsistent \\ 
+\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\  
+\hline Unklarheiten & siehe Abgrenzung \\ 
+\hline Querverweise & Pipeline konsistent \\ 
 \hline 
 \end{tabular}
 \end{center}
