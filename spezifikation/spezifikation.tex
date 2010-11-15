@@ -399,9 +399,9 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Nachbedingung im Sonderfall 1a) & Ein neuer Input-Task wurde unverbunden hinzugefügt\\
 \hline Nachbedingung im Sonderfall 1b) & Kein neuer Task wurde hinzugefügt\\
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & 1 Der Benutzer klickt auf einen Plus-Button des Tasks (bei mehreren Ausgängen gibt es mehrere Plus-Button), an den angefügt werden soll
+\hline Normalablauf & 1 Der Benutzer klickt auf den Plus-Button des Tasks, an den angefügt werden soll
 \newline 2 Der Benutzer wählt aus der Liste der kompatiblen (eventuell schon vorhandenen Tasks) Tasks einen aus (Doppelklick)
-\newline 3 Der gewälte Task wird in die Pipeline eingebunden (an den Ausgang dessen Plus gewählt wurde)\\ 
+\newline 3 Der gewälte Task wird in die Pipeline eingebunden\\ 
 \hline Sonderfall 1a) & Der Benutzer hat keinen Task selektiert
 \newline 1a.1 Der Benutzer wählt einen neuen Input-Task aus
 \newline 1a.2 Der neue Input-Task wird unverbunden in die Pipeline eingefügt\\
@@ -420,7 +420,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer selektiert den zu löschenden Task
 \newline 2 Der Benutzer drückt die Entfernen-Taste auf seiner Tastatur
-\newline 3 OsmUi gibt eine Warnung aus, falls dadurch eine inkonsistente Pipeline entsteht
+\newline 3 OsmUi gibt eine Warnung aus, dass eine unkonsistente Pipeline entstehen könnte
 \newline 4 Der Benutzer klickt auf OK
 \newline 5 Der Task wird gelöscht\\ 
 \hline Sonderfall 2a) & 2a.1 Der Benutzer klickt auf den selektierten Task
@@ -446,36 +446,6 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \vspace{0.7cm}
 \\
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Name & \textbf{Pipeline Importieren aus Zwischenablage} \\ 
-\hline Ziel & Benutzer möchte Pipeline aus Osmosis-Aufruf angezeigt haben\\ 
-\hline Vorbedingung & Osmosis-Aufruf befindet sich in Zwischenablage\\ 
-\hline Nachbedingung & Osmosis-Aufruf wurde importiert und zeigt die Pipeline an \\  
-\hline Nachbedingung im Sonderfall & Die Parameter wurden nicht geändert\\
-\hline Akteur & Benutzer \\ 
-\hline Normalablauf & 1 Der Benutzer klickt auf Datei.
-\newline 
-2 OsmUi zeigt den Menüeintrag Datei
-\newline
-3 Der Benutzer klickt auf ''Importieren aus Zwischenanlage''.
-\newline
-4 OsmUi lädt die Datei und zeigt sie in der Piplinebox an.
-\\ 
-\hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf ''Abrechen''
-\newline
-4a.1 Beim Vorhandensein einer Pipeline lädt OsmUi die Zwischenablage in die Pipelinebox einer neuen Instanz von OsmUi.\\\\
-\hline Sonderfall 7b)& Zwischenablage enthält kein gültigen Osmosis-Aufruf .
-\newline
- 4b.1 OsmUi versucht Zwischenablage zu laden bricht dann ab und zeigt einen entsprechenden Fehlerdialog an.
-\newline
- 4b.2 Benutzer klickt auf Button ''Ok''.
-\newline
- 4b.3 OsmUi zeigt den Zustand der vor dem Importversuch vorhanden war.
-\\
-\hline 
-\end{tabular} 
-\vspace{0.7cm}
-\\
-\begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{Export} \\ 
 \hline Ziel & Die Parameter eines Tasks sollen geändert werden\\ 
 \hline Vorbedingung & Es gibt mindestens einen Task\\ 
@@ -483,7 +453,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Nachbedingung im Sonderfall & Die Parameter wurden nicht geändert\\
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer macht einen Doppelklick auf den zu ändernden Task
-\newline 2 OsmUi zeigt anstatt der Taskpalette die momentanen Paranetereinstellungen an
+\newline 2 OsmUi zeigt anstatt der Taskpalette die momentanen Parametereinstellungen an
 \newline 3 Der Benutzer ändert die Parameter
 \newline 4 Der Benutzer setzt seine Arbeit beliebig fort\\ 
 \hline Sonderfall 3a) & $ \rightarrow$ Schritt 4\\
