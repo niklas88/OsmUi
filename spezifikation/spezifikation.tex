@@ -100,7 +100,7 @@ spezifiziert wird.
 \subsection{Laden und Speichern in OsmUi eigenem Format}
 Um Pipelines mit allen Details wie Position von verschobenen Tasks, sowie nicht ausführbare Pipelines speichern zu können verwendet OsmUi ein eigenes Dateiformat
 (.smu) außerdem ist dieses Format plattformunabhängig.
-\subsection{Importieren und Exportieren von Verarbeitungspiplines aus Osmosis Aufrufen}
+\subsection{Importieren und Exportieren von Verarbeitungspipelines aus Osmosis Aufrufen}
 Um mit anderen Osmosis Oberflächen und bereits gesammelten Osmosis Aufrufen kompatibel zu bleiben bietet OsmUi verschiedene Im- und Export Funktionen
 \subsubsection{Importieren von Osmosis Aufrufen}
 OsmUi kann Osmosis Aufrufe beziehungsweise Parameterlisten der Form `--read-xml foo.osm --bb left=8 right=8.4 top=49 bottom=48 --write-xml bar.osm'' 
@@ -182,12 +182,12 @@ Beim Klicken auf den Menüeintrag \textbf{Hilfe} öffnet sich ein Dialog. Der Be
 \subsubsection{Lokalisation}
 OsmUi wird eine übersetzte Benutzeroberfläche für mindestens die Sprachen Deutsch und Englisch bieten. Dabei wird die aktuell verwendete
 Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne Interaktion durch den Benutzer in dessen System einzugliedern.
-\newpage
 \section{Use Cases}
 \subsection{Diagramm}
 \begin{center}
 \includegraphics[width=15cm]{Use-Cases.png}
 \end{center}
+\newpage
 \subsection{Beschreibungen}
 \subsubsection{Datei laden}
 \begin{center}
@@ -714,11 +714,11 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \subsection{Pipeline konsistent}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Pipeline konsistent} \\ 
-\hline Bedeutung & Eine Pipeline ist konsistent wenn alle Tasks mit keine unverbundenen Eingängen haben \\ 
+\hline Bedeutung & Eine Pipeline ist konsistent, wenn alle Tasks keine unverbundenen Eingänge haben \\ 
 \hline Abgrenzung & Eine konsistente Pipeline muss nicht von Osmosis ausführbar sein
 \newline zum Beispiel kann sie auch nur aus einem ``--read-xml'' bestehen. \\ 
 \hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\  
-\hline Unklarheiten & siehe Abgrenzung \\ 
+\hline Unklarheiten & keine \\ 
 \hline Querverweise & Pipeline ausführbar \\ 
 \hline 
 \end{tabular}
@@ -728,12 +728,12 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Bedeutung & Eine Pipeline ist ausführbar, wenn sie konsistent ist \textbf{und} sie von Osmosis verarbeitet werden kann\\ 
 \hline Abgrenzung & Eine ausführbare Pipeline ist mehr als nur konsistent \\ 
 \hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\  
-\hline Unklarheiten & siehe Abgrenzung \\ 
+\hline Unklarheiten & keine \\ 
 \hline Querverweise & Pipeline konsistent \\ 
 \hline 
 \end{tabular}
 \end{center}
-\section{Versionshistorie}
+\section{Versionshistorie} Version 1.0 - Erstellung der Spezifikation
 \begin{itemize}
 \item 
 \end{itemize}
