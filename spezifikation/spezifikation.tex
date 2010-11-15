@@ -293,6 +293,34 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \vspace{0.7cm}
 \\
 \begin{tabular}{|p {5cm}|p{10cm}|}
+\hline Name & \textbf{rückgängig machen} \\ 
+\hline Ziel & der letzte Schritt soll Rückgängig gemacht werden\\
+\hline Vorbedingung & Es muss mindestens ein Schritt gemacht worden sein\\
+\hline Nachbedingung & Der Schritt wurde Rückgängig gemacht\\
+\hline Akteur & Benutzer\\
+\hline Normalablauf & 1 Der Benuzer klickt auf den Menüeintrag Bearbeiten
+\newline 2 OsmUi öffnet das Bearbeiten Menü
+\newline 3 Der Benutzer klickt auf Rückgängig
+\newline 4 Der letzte Schritt wird rückgängig gemacht\\
+\hline 
+\end{tabular}
+\vspace{0.7cm}
+\\
+\begin{tabular}{|p {5cm}|p{10cm}|}
+\hline Name & \textbf{wiederherstellen} \\ 
+\hline Ziel & der letzte Schritt soll wieder hergestellt werden werden\\
+\hline Vorbedingung & Es muss mindestens ein Schritt rückgängig gemacht worden sein\\
+\hline Nachbedingung & Der Schritt wurde wiederhergestellt gemacht\\
+\hline Akteur & Benutzer\\
+\hline Normalablauf & 1 Der Benuzer klickt auf den Menüeintrag Bearbeiten
+\newline 2 OsmUi öffnet das Bearbeiten Menü
+\newline 3 Der Benutzer klickt auf wiederherstellen
+\newline 4 Der letzte Schritt wird wiederhergestellt\\
+\hline 
+\end{tabular}
+\vspace{0.7cm}
+\\
+\begin{tabular}{|p {5cm}|p{10cm}|}
 \hline Name & \textbf{Hilfe aufrufen} \\ 
 \hline Ziel & Der Hilfe-Dialog soll aufgerufen werden \\ 
 \hline Vorbedingung & keine \\ 
@@ -317,6 +345,21 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Sonderfall 5b) & 5b.1 der Benutzer klickt auf ''schließen''
 \newline 5b.2 OsmUi schließt das Menü\\
 \hline Sonderfall 7a) & $ \rightarrow$ Schritt 5\\
+\hline
+\end{tabular}
+\vspace{0.7cm}
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Name & \textbf{Hilfe-über aufrufen} \\ 
+\hline Ziel & Informationen über OsmUi einholen\\
+\hline Vorbedingung & keine\\
+\hline Nachbedingung & die Informationen wurden angezeigt\\
+\hline Akteur & Benutzer\\
+\hline Normalablauf & 1 Der Benutzer klickt auf Hilfe
+\newline 2 OsmUi zeigt den Menüeintrag Hilfe
+\newline 3 Der Benutzer klickt auf über
+\newline 4 OsmUi öffnet die Informationsseite zu OsmUi
+\newline 5 Der Benutzer klickt ausf Schließen\\
 \hline
 \end{tabular}
 \vspace{0.7cm}
@@ -375,22 +418,6 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \\
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{Task-Parameter einstellen} \\ 
-\hline Ziel & Die Parameter eines Tasks sollen geändert werden\\ 
-\hline Vorbedingung & Es gibt mindestens einen Task\\ 
-\hline Nachbedingung & Die Parameter wurden geändert \\  
-\hline Nachbedingung im Sonderfall & Die Parameter wurden nicht geändert\\
-\hline Akteur & Benutzer \\ 
-\hline Normalablauf & 1 Der Benutzer macht einen Doppelklick auf den zu ändernden Task
-\newline 2 OsmUi zeigt anstatt der Taskpalette die momentanen Paranetereinstellungen an
-\newline 3 Der Benutzer ändert die Parameter
-\newline 4 Der Benutzer setzt seine Arbeit beliebig fort\\ 
-\hline Sonderfall 3a) & $ \rightarrow$ Schritt 4\\
-\hline 
-\end{tabular} 
-\vspace{0.7cm}
-\\
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Name & \textbf{Import} \\ 
 \hline Ziel & Die Parameter eines Tasks sollen geändert werden\\ 
 \hline Vorbedingung & Es gibt mindestens einen Task\\ 
 \hline Nachbedingung & Die Parameter wurden geändert \\  
