@@ -190,7 +190,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 
 5 Der Benutzer wählt die gewünschte Datei aus
 \newline
-6 bestätigt die mit klick auf Button ''Öffnen''.
+6 Der Benutzer bestätigt dies mit Klick auf Button ''Öffnen''.
 \newline
 7 OsmUi lädt die Datei und zeigt sie in der Piplinebox an.
 \\ 
@@ -198,6 +198,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline
 5a.2 OsmUi lädt keine Daten und zeigt den vorherigen Zustand.\\
 \hline Sonderfall 6a) & 6a.1 Der Benutzer klickt aber auf ''Abrechen''
+\newline
 6a.2 Osmui lädt keine Daten und zeigt den vorherigen Zustand.\\
 \hline Sonderfall 7a) & Pipelinebox ist nicht leer.
 \newline 
@@ -272,12 +273,35 @@ $ \rightarrow$ Schritt 7b.1
 \hline Name & \textbf{Hilfe aufrufen} \\ 
 \hline Ziel & Der Hilfe-Dialog soll aufgerufen werden \\ 
 \hline Vorbedingung & keine \\ 
-\hline Nachbedingung & Der Hilfe-Dialog wurde geöffnet \\ 
+\hline Nachbedingung & Dem Benutzer wurde geholfen \\ 
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & - Der Benutzer klickt den Menüeintrag Hilfe
+\hline Normalablauf & 1 Der Benutzer klickt auf Hilfe
 \newline
-- Der Hilfe-Dialog wird geöffnet \\ 
-\hline 
+2 OsmUi zeigt den Menüeintrag Hilfe
+\newline
+3 Der Benutzer klickt auf Hilfe
+\newline
+4 OsmUi öffnet die Onlinehilfe
+\newline
+5 Der Benutzer klickt auf das gesuchte Stichwort
+\newline 
+6 OsmUi zeigt den entsprechenden Eintrag
+\newline
+7 Der Benutzer klickt auf ''schließen''\\ 
+\hline Sonderfall 5a) & 5a.1 Der Benutzer gibt einen Suchbegriff in die Suchleiste ein
+\newline
+5a.2 Der Benutzer bestätigt die Suche
+\newline
+5a.3 OsmUi zeigt alle Einträge an, die das/die Wort/Wörter enthält
+\newline
+$ \rightarrow$ Schritt 5\\
+\hline Sonderfall 5a2a) & $ \rightarrow$ Schritt 5\\
+\hline Sonderfall 5a2b) & $ \rightarrow$ Schritt 5b\\
+\hline Sonderfall 5b) & 5b.1 der Benutzer klickt auf ''schließen''
+\newline
+5b.2 OsmUi schließt das Menü\\
+\hline Sonderfall 7a) & $ \rightarrow$ Schritt 5\\
+\hline
 \end{tabular}
 \vspace{0.7cm}
 \\
@@ -287,10 +311,13 @@ $ \rightarrow$ Schritt 7b.1
 \hline Vorbedingung & keine \\ 
 \hline Nachbedingung & Eine neues OsmUi Fenster mit leerer Pipeline wurde erstellt \\ 
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & - Der Benutzer klickt den Neu-Button
+\hline Normalablauf & 1 Der Benutzer klickt auf bearbeiten
 \newline
-- Ein neue Instanz von OsmUi mit leerer Pipeline wird gestartet
-\\ 
+2 OsmUi zeigt den Menüeintrag bearbeiten
+\newline
+3 Der Benutzer klickt auf neu
+\newline
+4 Ein neue Instanz von OsmUi mit leerer Pipeline wird gestartet\\ 
 \hline 
 \end{tabular} 
 \vspace{0.7cm}
@@ -300,16 +327,18 @@ $ \rightarrow$ Schritt 7b.1
 \hline Ziel & Ein neuer Task soll hinzugefügt werden \\ 
 \hline Vorbedingung& keine \\
 \hline Nachbedingung & Ein neuer Task wurde hinzugefügt \\ 
-\hline Nachbedinung im Sonderfall & Ein neuer Task wird unverbunden hinzugefügt\\
+\hline Nachbedingung im Sonderfall 1a) & Ein neuer Input-Task wurde unverbunden hinzugefügt\\
+\hline Nachbedingung im Sonderfall 1b) & Kein neuer Task wurde hinzugefügt\\
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & - Der Nutzer selektiert einen Task dessen Ausgang verbunden werden soll
-\newline - Der Benutzer wählt aus der Liste der kompatiblen Tasks einen aus
-\newline - Der neue Task wird in die Pipeline eingebunden, an den Ausgang des selektierten Task
-\\ 
-\hline Sonderfall & - Der Benutzer hat keinen Task selektiert
-\newline - Der Benutzer wählt aus den nun verfügbaren Tasks ohne Eingang
-\newline - Der neue Task wird unverbunden in die Pipeline eingefügt\\
-\hline 
+\hline Normalablauf & 1 Der Benutzer klickt auf den Plus-Button des Tasks, an den angefügt werden soll
+\newline 2 Der Benutzer wählt aus der Liste der kompatiblen (eventuell schon vorhandenen Tasks) Tasks einen aus (Doppelklick)
+\newline 3 Der gewälte Task wird in die Pipeline eingebunden\\ 
+\hline Sonderfall 1a) & Der Benutzer hat keinen Task selektiert
+\newline 1a.1 Der Benutzer wählt einen neuen Input-Task aus
+\newline 1a.2 Der neue Input-Task wird unverbunden in die Pipeline eingefügt\\
+\hline Sonderfall 1b) & 1b.1 Der Benutzer klickt erneut auf den selektierten Task
+\newline 1b.2 Der Task gilt nicht mehr als selektiert\\
+\hline
 \end{tabular}
 \vspace{0.7cm}
 \\
@@ -318,30 +347,31 @@ $ \rightarrow$ Schritt 7b.1
 \hline Ziel & Ein Task soll entfernt werden \\ 
 \hline Vorbedingung & Es ist mindestens ein Task vorhanden \\ 
 \hline Nachbedingung & Der Task wurde gelöscht \\ 
-\hline Nachbedingung im Sonderfall & Eine Warnung wurde ausgsgeben \\ 
+\hline Nachbedingung im Sonderfall & Kein Task wurde gelöscht \\ 
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & - Der Benutzer wählt den zu löschenden Task aus und klickt den Löschen-Button
-\newline
-- Der Task wird gelöscht
-\\ 
-\hline Sonderfall & - Der Benutzer wählt den zu löschenden Task und klickt den Löschen-Button
-\newline
-- OsmUi gibt eine Warnung aus und der Task wird gelöscht
- \\ 
+\hline Normalablauf & 1 Der Benutzer selektiert den zu löschenden Task
+\newline 2 Der Benutzer drückt die Entfernen-Taste auf seiner Tastatur
+\newline 3 OsmUi gibt eine Warnung aus, dass eine unkonsistente Pipeline entstehen könnte
+\newline 4 Der Benutzer klickt auf OK
+\newline 5 Der Task wird gelöscht\\ 
+\hline Sonderfall 2a) & 2a.1 Der Benutzer klickt auf den selektierten Task
+\newline 2a.2 Der Task gilt nicht mer als selektiert\\
 \hline 
 \end{tabular}  
 \vspace{0.7cm}
 \\
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Name & \textbf{Task Parameter einstellen} \\ 
+\hline Name & \textbf{Task-Parameter einstellen} \\ 
 \hline Ziel & Die Parameter eines Tasks sollen geändert werden\\ 
 \hline Vorbedingung & Es gibt mindestens einen Task\\ 
-\hline Nachbedingung & Der Task wurde geändert \\  
+\hline Nachbedingung & Die Parameter wurden geändert \\  
+\hline Nachbedingung im Sonderfall & Die Parameter wurden nicht geändert\\
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & - Der Benutzer wählt den zu ändernden Task an und klickt den Ändern-Button
-\newline
-- Der Benutzer ändert die gewünschten Eigenschaften und klickt auf den OK-Button
-\\ 
+\hline Normalablauf & 1 Der Benutzer macht einen Doppelklick auf den zu ändernden Task
+\newline 2 OsmUi zeigt anstatt der Taskpalette die momentanen Paranetereinstellungen an
+\newline 3 Der Benutzer ändert die Parameter
+\newline 4 Der Benutzer setzt seine Arbeit beliebig fort\\ 
+\hline Sonderfall 3a) & $ \rightarrow$ Schritt 4\\
 \hline 
 \end{tabular} 
 \end{center}
