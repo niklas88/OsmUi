@@ -90,10 +90,6 @@ Beim Erstellen/Laden/Speichern von Verarbeitungspipelines muss OsmUi in der Lage
 eine künstliche Beschränkung nach oben besteht jedoch nicht.\\
 Werden 100 Tasks nicht überschritten und das System des Nutzers nicht unnormal ausgelastet, so muss OsmUi Benutzeraktionen, wie laden/speichern, task hinzufügen etc.
 innerhalb von 1 Sekunde ausführen. Hierbei darf ein Mittelklasserechner angenommen werden. (>= 2.6 Ghz, >= 1 GB RAM, 7200 RPM Festplatte)
-\subsection{persistente Konfiguration}
-Um Benutzerspezifische Einstellungen zu speichern verwendet OsmUi eine Konfigurationsdatei im Heimat-/Configverzeichnis des Benutzters.
-Diese Konfigurationsdatei wird ein für Menschen lesbaren XML Format gespeichert, wobei die genaue Definition in der Entwurf- bzw. Implementierungsphase
-spezifiziert wird. 
 \subsection{Laden und Speichern in OsmUi eigenem Format}
 Um Pipelines mit allen Details wie Position von verschobenen Tasks, sowie nicht ausführbare Pipelines speichern zu können verwendet OsmUi ein eigenes Dateiformat
 (.smu) außerdem ist dieses Format plattformunabhängig.
@@ -111,10 +107,8 @@ importieren, dabei stehen folgende Möglichkeiten der Eingabe zur Verfügung
 \end{itemize}
 \subsubsection{Exportieren}
 OsmUi kann Pipelines als Aufrufskript im .sh Format (mit \#!/bin/sh Shebang) für alle Posix Konformen Systeme, sowie im .bat Format für Windows exportieren.
-Der Pfad mit dem Osmosis aufgerufen wird, kann dabei vom Benutzer eingestellt werden. Falls dieser zu einer .jar Datei zeigt wird ``java -jar '' davor
-gehängt.\\ 
-Neben dem speichern als fertiges Aufrufskript, kann der Osmosis Aufruf auch aus der Kopierleiste kopiert werden
-um ihn zum Beispiel in andere Dokumente einzubinden. 
+Der Pfad mit dem Osmosis aufgerufen wird, kann dabei vom Benutzer eingestellt werden. Neben dem speichern als fertiges Aufrufskript kann
+der Osmosis Aufruf auch aus der Kopierleiste kopiert werden um ihn zum Beispiel in andere Dokumente einzubinden. 
 
 \subsection{Benutzeroberfläche}
 Die Benutzeroberfläche von OsmUi ist in zwei Teile aufgeteilt: die Taskpalette und die Pipelinebox. Desweiteren gibt es ein Anwendungsmenü und beim Bearbeiten eines Tasks
@@ -122,8 +116,8 @@ wird es ein weiteres Einstellungsfenster geben.\\
 \begin{center}
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Startseite.png}
 \end{center}
-\subsubsection{Taskpalette (Tasktab)}
-Im linken Teil der Benutzeroberfläche wird Tasktab eine Liste der gerade zum Einfügen verfügbaren Tasks dargestellt. Dabei kann die Darstellung als Icon,
+\subsubsection{Taskpalette}
+Im linken Teil der Benutzeroberfläche wird eine Liste der gerade zum Einfügen verfügbaren Tasks dargestellt. Dabei kann die Darstellung als Icon,
 Text oder Kombination erfolgen. Es werden nur Tasks angezeigt die gerade auch einfügbar sind. \\
 Am Anfang sind dies zum Beispiel alle Tasks, (z.B. read XML) die keinen Streameingang haben. Ist in der Pipelinebox ein Task ausgewählt, so
 sind nur diejenigen Tasks sichtbar, die mit dem/den Ausgang/Ausgängen des ausgewählten Task kompatibel sind.\\
@@ -132,21 +126,13 @@ So wird verhindert, dass der Benutzer Pipelines bauen kann, die nicht durch Osmo
 In der Pipelinebox wird die Pipeline grafisch dargestellt und es können Tasks zum Bearbeiten ausgewählt werden. Ist ein Task ausgewählt so können seine Eigenschaften
 bearbeitet oder ein neuer Task über die Taskpalette - wie oben beschrieben - angefügt werden. Desweiteren kann eine Verbindung zu einem anderen Task, der noch offene
 Inputs hat, hergestellt werden.
-\subsubsection{Parametertab}
-Wählt der Benutzer einen Task aus, so zeigt OsmUi den Parametertab an, in dem alle - für den jeweiligen Tasktyp vorhandenen - Parameter eingegeben werden können.
-Hierbei kann die Eingabe eingeschränkt sein und als Spanne von Zahlen, als Kartenausschnitt oder als freier Text erfolgen. Dabei wird der für
+\subsubsection{Taskeinstellungsdialog}
+Wählt der Benutzer einen Task aus, so stellt OsmUi einen Dialog zur Verfügung, in dem alle - für den jeweiligen Tasktyp vorhandenen - Parameter eingegeben werden können.
+Hierbei kann die Eingabe eingeschränkt sein: als Spanne von Zahlen, als Kartenausschnitt oder als freier Text erfolgen. Dabei wird der für
 den Datentyp beste Eingabemodus gewählt.\\
 \begin{center}
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Parameter_Optionen.png}
 \end{center}
-\subsubsection{Optionsdialog}
-Im Einstellungsdialog können Benutzerspezifische Einstellungen von OsmUi vorgenommen werden, welche persistent in einer Konfigurationsdatei gespeichert werden.\\
-Hierzu zählen:\\
-\begin{itemize}
- \item Einstellung des Pfades zu Osmosis, welcher in Aufrufskripten verwendet werden soll
-\end{itemize}
-
-
 \subsubsection{Kopierleiste}
 Um die aktuell dargestellte Pipeline direkt kopieren zu können, wird sie als Osmosis-Aufruf unter der Pipelinebox angezeigt.
 \begin{center}
@@ -609,30 +595,6 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Bezeichnung & Es gibt nur eine Taskpalette. Sie ist daher eindeutig \\ 
 \hline Unklarheiten & keine \\ 
 \hline Querverweise & OsmUi, Task\\ 
-\hline 
-\end{tabular}
-\vspace{0.7cm}
-\\
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Parametertab} \\ 
-\hline Bedeutung & Der Teil der Oberfläche, in dem man die Parameter eines Task einstellen kann  \\ 
-\hline Abgrenzung & Es handelt sich um keine reale Box o.ä., sondern um ein Element der Benutzeroberfläche\\ 
-\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\ 
-\hline Bezeichnung & Jeder Task zeigt seine Einstellungen im gleichen Parametertab wenn er selektiert ist, also ist dieser eindeutig \\ 
-\hline Unklarheiten & keine \\ 
-\hline Querverweise & Task \\ 
-\hline 
-\end{tabular}
-\vspace{0.7cm}
-\\
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Kopierleiste} \\ 
-\hline Bedeutung & Der Teil der Oberfläche, in dem die aktuelle Pipeline als Osmosis Aufruf angezeigt wird \\ 
-\hline Abgrenzung & Es handelt sich nur um einen Teil der Benutzeroberfläche, nicht um einen realen Gegenstand \\ 
-\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\ 
-\hline Bezeichnung & Es gibt nur eine Kopierleiste. Sie ist daher eindeutig \\ 
-\hline Unklarheiten & keine \\ 
-\hline Querverweise & Task \\ 
 \hline 
 \end{tabular}
 \end{center}
