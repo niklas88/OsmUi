@@ -111,8 +111,10 @@ importieren, dabei stehen folgende Möglichkeiten der Eingabe zur Verfügung
 \end{itemize}
 \subsubsection{Exportieren}
 OsmUi kann Pipelines als Aufrufskript im .sh Format (mit \#!/bin/sh Shebang) für alle Posix Konformen Systeme, sowie im .bat Format für Windows exportieren.
-Der Pfad mit dem Osmosis aufgerufen wird, kann dabei vom Benutzer eingestellt werden. Neben dem speichern als fertiges Aufrufskript kann
-der Osmosis Aufruf auch aus der Kopierleiste kopiert werden um ihn zum Beispiel in andere Dokumente einzubinden. 
+Der Pfad mit dem Osmosis aufgerufen wird, kann dabei vom Benutzer eingestellt werden. Falls dieser zu einer .jar Datei zeigt wird ``java -jar '' davor
+gehängt.\\ 
+Neben dem speichern als fertiges Aufrufskript, kann der Osmosis Aufruf auch aus der Kopierleiste kopiert werden
+um ihn zum Beispiel in andere Dokumente einzubinden. 
 
 \subsection{Benutzeroberfläche}
 Die Benutzeroberfläche von OsmUi ist in zwei Teile aufgeteilt: die Taskpalette und die Pipelinebox. Desweiteren gibt es ein Anwendungsmenü und beim Bearbeiten eines Tasks
@@ -511,8 +513,7 @@ $ \rightarrow$ Schritt 5\\
 \ \\
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Aufrufscript} synonym gespeicherte Datei, .sh/.bat Skript\\ 
-\hline Bedeutung & Ein Shell/Batch Skript welches einen Aufruf für Osmosis samt Pipeline speichert,
-\newline dies ist das Speicherformat von OsmUi \\ 
+\hline Bedeutung & Ein Shell/Batch Skript welches einen Aufruf für Osmosis samt Pipeline speichert 
 \hline Abgrenzung & Es handelt sich nicht um Osmosis selbst, sondern nur ein Skript welches Osmosis aufruft \\ 
 \hline Gültigkeit &  Der Begriff wird nur in diesem Projekt benutzt\\ 
 \hline Bezeichnung &  Jedes Aufrufskript ist eine eigene Datei und damit eindeutig\\ 
