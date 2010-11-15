@@ -164,40 +164,48 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \ \\
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{Datei laden} \\ 
-\hline Ziel & gespeicherte Datei soll geladen werden \\ 
-\hline Vorbedingung & Eine gespeicherte Datei ist vorhanden \\ 
-\hline Nachbedingung & Die Datei wurde geladen \\ 
-\hline Nachbedingung im Sonderfall & Es wurde nichts geladen \\ 
+\hline Ziel & gespeicherte Daten in OsmUi anzuzeigen \\ 
+\hline Vorbedingung & Eine gespeicherte Datei ist vorhanden \\
+\hline Nachbedingung & Die Datei wurde geladen und \\ 
+\hline Nachbedingung im Sonderfall & Sonderfall OsmUi hat keine Daten geladen und zeigt Zustand vor dem Ladeversuch \\ 
 \hline Akteure & Benutzer \\ 
-\hline Normalablauf & - Der Benutzer klickt auf den Lade-Button
+\hline Normalablauf & 1 Der Benutzer klickt auf Datei.
 \newline 
-- Das Lade-Menü öffnet sich
+2 OsmUi zeigt den Menüeintrag Datei
+\newline
+3 Der Benutzer klickt auf Datei laden.
+\newline
+4 OsmUi zeigt die Dateiauswahlroutine.
 \newline 
-- Der Benutzer wählt die gewünschte Datei aus
-\newline 
-- Die gewählte Datei wird geladen
+5 Der Benutzer wählt die gewünschte Datei aus
+\newline
+6 bestätigt die mit klick auf Button ''Öffnen''.
+\newline
+7 OsmUi lädt die Datei und zeigt sie in der Piplinebox an.
 \\ 
-\hline Sonderfall 1)&  
- - Der Benutzer klickt auf den Lade-Button
- \newline
- - Das Lade-Menü öffnet sich
- \newline
- - Der Benutzer hat noch nichts gespeichert oder will nichts laden
- \newline
- - Der Benutzter bricht den Vorgang ab
+\hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf ''Abrechen''
+\newline
+5a.2 OsmUi lädt keine Daten und zeigt den vorherigen Zustand.\\
+\hline Sonderfall 6a) & 6a.1 Der Benutzer klickt aber auf ''Abrechen''
+6a.2 Osmui lädt keine Daten und zeigt den vorherigen Zustand.\\
+\hline Sonderfall 7a) & Pipelinebox ist nicht leer.
+\newline 
+7a.1 Osmui lädt die Datei in die Piplinebox einer neuen Instanz von OsmUi.\\
+\hline Sonderfall 7b)& Datei ist zwischenzeitlich nicht mehr verfügbar.
+\newline
+ 7b.1 OsmUi versucht Datei zu lesen bricht dann ab und zeigt einen entsprechenden Fehlerdialog an.
+\newline
+ 7b.2 Benutzer klickt auf Button ''Ok''.
+\newline
+$ \rightarrow$ Schritt 4
 \\
-\hline Sonderfall 2)&
- - Der Benutzer klickt auf den Lade-Button
- \newline
- - Das Lade-Menü öffnet sich
- \newline
- - Der Benutzer wählt die gewünschte Datei aus
- \newline
- - Die Datei kann nicht von OsmUi geladen werden, z.B. wegen Syntaxfehlern oder kein unterstützter Dateityp
- \newline
- - Es wird ein Fehlerdialog angezeigt
- \newline
- - Es wird nichts geladen
+\hline Sonderfall 7c)& Benutzer besitzt keine Leserechte zur ausgewählten Datei.
+\newline
+$ \rightarrow$ Schritt 7b.1 
+\\
+\hline Sonderfall 7d)& Dateityp wird nicht unterstützt.
+\newline
+$ \rightarrow$ Schritt 7b.1 
 \\
 \hline 
 \end{tabular} 
