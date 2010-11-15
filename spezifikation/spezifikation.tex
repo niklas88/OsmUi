@@ -231,17 +231,21 @@ $ \rightarrow$ Schritt 7b.1
 \hline Nachbedingung im Sonderfall 1) & Die Datei wurde neu gespeichert \\ 
 \hline Nachbedingung im Sonderfall 2) & Die Datei wurde nicht gespeichert\\
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & - Der Benutzer klickt den Speicher-Button 
-\newline
-- Die Datei wird gespeichert
-\\
-\hline Sonderfall 1) & - Der Benutzer klickt auf den Speicher-Button, aber die Datei ist vorher nicht gespeichert worden
-\newline
-- Das Speichern-unter-Menü öffnet sich
-\newline
-- weiter wie im Use-Case Datei speichern unter
- \\ 
- \hline Sonderfall 2) & - Der Benutzer bricht den Vorgang ab \\
+\hline Normalablauf & 1 Der Benutzer klickt auf Datei
+\newline 2 OsmUi zeigt den Menüeintrag Datei
+\newline 3 Der Benutzer klickt auf Datei speichern
+\newline 4 OsmUi zeigt den Dateiauswahldialog
+\newline 5 Der Benutzer wählt den gewünschten Namen und die Dateiendung aus
+\newline 6 Der Benutzer bestätigt dies mit Klick auf den Button ''Speichern'' 
+\newline 7 Die Datei wird gespeichert\\
+\hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf Abbrechen\\
+\hline Sonderfall 5b) & 5b.1 Der Benutzer klickt auf eine bereits vorhandene Datei
+\newline 5b.2 OsmUi fragt, ob die Datei überschrieben werden soll
+\newline 5b.3 Der Benutzer klickt auf Ja
+\newline 5b.4 Die Datei wird gespeichert\\
+\hline Sonderfall 5b3a) & 5b3a.1 Der Benutzer klickt auf Nein
+\newline $ \rightarrow$ Schritt 5\\
+\hline Sonderfall 6a) & 6a.1 Der Benutzer klickt auf abbrechen\\
 \hline 
 \end{tabular}
 \vspace{0.7cm}
@@ -265,6 +269,56 @@ $ \rightarrow$ Schritt 7b.1
 \hline Sonderfall 1)& - Der Benutzer bricht den Vorgang ab \\ 
 \hline Sonderfall 2)& - Die Datei kann nicht gespeichert werden
 \newline - Es wird eine Fehlermeldung ausgegeben\\
+\hline 
+\end{tabular}
+\vspace{0.7cm}
+\\
+\begin{tabular}{|p {5cm}|p{10cm}|}
+\hline Name & \textbf{aus Aufrufskript importieren}\\
+\hline Ziel & importierte Datei soll angezeigt werden\\
+\hline Vorbedingung & Eine importierbare Datei ist vorhanden\\
+\hline Nachbedingung & Die Datei wurde importiert und die Pipeline angezeigt\\ 
+\hline Nachbedingung im Sonderfall & OsmUi hat keine Daten importiert und zeigt den Zustand vor dem Ladeversuch \\ 
+\hline Akteure & Benutzer \\ 
+\hline Normalablauf & 1 Der Benutzer klickt auf Datei.
+\newline 
+2 OsmUi zeigt den Menüeintrag Datei
+\newline
+3 Der Benutzer klickt auf Importieren aus Datei
+\newline
+4 OsmUi zeigt den Dateiauswahldialog
+\newline 
+5 Der Benutzer wählt die gewünschte Datei aus
+\newline
+6 Der Benutzer bestätigt dies mit Klick auf Button ''Importieren''.
+\newline
+7 OsmUi importiert die Datei und zeigt sie in der Piplinebox an.
+\\ 
+\hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf ''Abrechen''
+\newline
+5a.2 OsmUi lädt keine Daten und zeigt den vorherigen Zustand.\\
+\hline Sonderfall 6a) & 6a.1 Der Benutzer klickt aber auf ''Abrechen''
+\newline
+6a.2 Osmui importiert keine Daten und zeigt den vorherigen Zustand.\\
+\hline Sonderfall 7a) & Pipelinebox ist nicht leer.
+\newline 
+7a.1 Osmui importiert die Datei in die Piplinebox einer neuen Instanz von OsmUi.\\
+\hline Sonderfall 7b)& Datei ist zwischenzeitlich nicht mehr verfügbar.
+\newline
+ 7b.1 OsmUi versucht Datei zu lesen bricht dann ab und zeigt einen entsprechenden Fehlerdialog an.
+\newline
+ 7b.2 Benutzer klickt auf Button ''Ok''.
+\newline
+$ \rightarrow$ Schritt 4
+\\
+\hline Sonderfall 7c)& Benutzer besitzt keine Leserechte zur ausgewählten Datei.
+\newline
+$ \rightarrow$ Schritt 7b.1 
+\\
+\hline Sonderfall 7d)& Dateityp wird nicht unterstützt.
+\newline
+$ \rightarrow$ Schritt 7b.1 
+\\
 \hline 
 \end{tabular}
 \vspace{0.7cm}
@@ -451,7 +505,7 @@ $ \rightarrow$ Schritt 5\\
 \hline Gültigkeit &  Der Begriff wird nur in diesem Projekt benutzt\\ 
 \hline Bezeichnung &  Jedes Aufrufskript ist eine eigene Datei und damit eindeutig\\ 
 \hline Unklarheiten &  keine \\ 
-\hline Querverweise &  keine \\ 
+\hline Querverweise &  Osmosis, Pipeline\\ 
 \hline 
 \end{tabular}
 \vspace{0.7cm}
@@ -463,7 +517,18 @@ $ \rightarrow$ Schritt 5\\
 \hline Gültigkeit & Der Begriff gilt innerhalb von OsmUi \\ 
 \hline Bezeichnung & Es gibt mehrere Dialoge, die sich durch ihren Inhalt unterscheiden \\ 
 \hline Unklarheiten & keine \\ 
-\hline Querverweise & Fenster \\ 
+\hline Querverweise & Fenster, OsmUi \\ 
+\hline
+\end{tabular}
+\vspace{0.7cm}
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Export}\\
+\hline Bedeutung & Vorgang, bei dem ein Aufrufskript entsteht, Gegenteil von Import \\ 
+\hline Abgrenzung & Es ist kein Export im wirtschaftlichen  Sinne gemeint\\ 
+\hline Gültigkeit & Der Begriff gilt innerhalb von OsmUi \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Import, OsmUi \\ 
 \hline
 \end{tabular}
 \vspace{0.7cm}
@@ -475,7 +540,18 @@ $ \rightarrow$ Schritt 5\\
 \hline Gültigkeit & Der Begriff gilt innerhalb von OsmUi\\ 
 \hline Bezeichnung & Ein Fenster ist durch seinen Titel und den dargestellten Inhalt definiert \\ 
 \hline Unklarheiten & keine \\ 
-\hline Querverweise & Dialog \\ 
+\hline Querverweise & Dialog, OsmUi \\ 
+\hline
+\end{tabular}
+\vspace{0.7cm}
+\\
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Import}\\
+\hline Bedeutung & Vorgang, bei dem ein Aufrufskript gelesen wird, Gegenteil von Export \\ 
+\hline Abgrenzung & Es ist kein Import im wirtschaftlichen Sinne gemeint\\ 
+\hline Gültigkeit & Der Begriff gilt innerhalb von OsmUi \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Export, OsmUi \\ 
 \hline
 \end{tabular}
 \vspace{0.7cm}
@@ -499,7 +575,7 @@ $ \rightarrow$ Schritt 5\\
 \hline Gültigkeit & Diese Bezeichnung gilt nur innerhalb des Projekts \\ 
 \hline Bezeichnung & Osmosis gibt es nur einmal, es ist daher eindeutig \\ 
 \hline Unklarheiten & keine \\ 
-\hline Querverweise & OsmUi \\ 
+\hline Querverweise & OsmUi, Pipeline \\ 
 \hline 
 \end{tabular}
 \vspace{0.7cm}
@@ -511,7 +587,7 @@ $ \rightarrow$ Schritt 5\\
 \hline Gültigkeit & Die Bedeutung des Begriffs gilt nur im Zusammmenhang mit Osmosis/OsmUi. \\ 
 \hline Bezeichnung & Eine Pipeline ist durch die in ihr enthaltenen Tasks und deren Verbindungen eindeutig bestimmt \\ 
 \hline Unklarheiten & keine \\ 
-\hline Querverweise & Task \\ 
+\hline Querverweise & Osmois, OsmUi, Task \\ 
 \hline 
 \end{tabular}
 \vspace{0.7cm}
@@ -523,7 +599,7 @@ $ \rightarrow$ Schritt 5\\
 \hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\ 
 \hline Bezeichnung & Es gibt nur eine Pipelinebox pro ausgeführtem OsmUi. Sie ist daher eindeutig \\ 
 \hline Unklarheiten & keine \\ 
-\hline Querverweise & Pipeline \\ 
+\hline Querverweise & OsmUi, Pipeline \\ 
 \hline 
 \end{tabular}
 \vspace{0.7cm}
@@ -535,7 +611,7 @@ $ \rightarrow$ Schritt 5\\
 \hline Gültigkeit & Der Begriff ist nur gültig für das Pipelinesystem von Osmosis/OsmUi\\ 
 \hline Bezeichnung & Ein Task wird als eindeutiges Objekt der Benutzeroberfläche identifiziert\\ 
 \hline Unklarheiten & keine \\ 
-\hline Querverweise & Parameter, Pipeline\\ 
+\hline Querverweise & Osmosis, OsmUi, Parameter, Pipeline\\ 
 \hline 
 \end{tabular}
 \vspace{0.7cm}
@@ -547,7 +623,7 @@ $ \rightarrow$ Schritt 5\\
 \hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\ 
 \hline Bezeichnung & Es gibt nur eine Taskpalette. Sie ist daher eindeutig \\ 
 \hline Unklarheiten & keine \\ 
-\hline Querverweise & Task \\ 
+\hline Querverweise & OsmUi, Task\\ 
 \hline 
 \end{tabular}
 \vspace{0.7cm}
