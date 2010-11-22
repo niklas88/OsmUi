@@ -11,10 +11,10 @@
 \usepackage{wasysym}
 \usepackage{graphicx}
 \usepackage[pdftex]{hyperref}
-\author{
-Verena Käfer (2551188),\\
-Niklas Schnelle (2573250),\\
-Peter Vollmer (2553704)}
+%\author{
+%Verena Käfer (2551188),\\
+%Niklas Schnelle (2573250),\\
+%Peter Vollmer (2553704)}
 \date{erstellt am 15.11.2010\\
 Version: 1.0}
 \title{\includegraphics[width=15cm]{../projektplan/Logo_Osmui.png} \\ 
@@ -41,8 +41,7 @@ Diese Spezifikation richtet sich an:
 \subsection{Projektüberblick}
 In dem Entwicklungsprojekt OsmUi soll eine grafische Benutzeroberfläche für das Kommandozeilenwerkzeug \href{http://wiki.openstreetmap.org/wiki/Osmosis}{Osmosis}
 entwickelt werden. Zu diesem Zweck überträgt OsmUi das abstrakte Pipelinekonzept von Osmosis auf eine grafische Darstellung, welche die gesamte Funktionalität von Osmosis zugänglich macht, dabei aber deutlich benutzerfreundlicher sein soll.\\
-Während bei Osmosis ein langer Kommandozeilenaufruf eine Pipeline zur Verarbeitung von OpenStreetMap Daten beschreibt, wobei sich der Benutzer die Befehle merken
-und korrekt in der gewünschten Reihenfolge aufschreiben muss, soll es mit OsmUi möglich sein eine Verarbeitungspipeline ``zusammen zu klicken''.\\
+Während bei Osmosis ein langer Kommandozeilenaufruf eine Pipeline zur Verarbeitung von OpenStreetMap Daten beschreibt, wobei sich der Benutzer die Befehle merken und korrekt in der gewünschten Reihenfolge aufschreiben muss, soll es mit OsmUi möglich sein eine Verarbeitungspipeline ``zusammen zu klicken''.\\
 Hierbei kann die Funktionsweise der einzelnen Tasks sowie deren Interaktion der Benutzeroberfläche von OsmUi entnommen werden.
 %\subsection{Konventionen} %Kommt noch
 
@@ -115,7 +114,7 @@ importieren, dabei stehen folgende Möglichkeiten der Eingabe zur Verfügung
 OsmUi kann Pipelines als Aufrufskript im .sh Format (mit \#!/bin/sh Shebang) für alle Posix Konformen Systeme, sowie im .bat Format für Windows exportieren.
 Der Pfad mit dem Osmosis aufgerufen wird, kann dabei vom Benutzer eingestellt werden. Falls dieser zu einer .jar Datei zeigt wird ``java -jar '' davor
 gehängt.\\ 
-Neben dem speichern als fertiges Aufrufskript, kann der Osmosis Aufruf auch aus der Kopierleiste kopiert werden
+Neben dem Speichern als fertiges Aufrufskript, kann der Osmosis-Aufruf auch aus der Kopierleiste kopiert werden
 um ihn zum Beispiel in andere Dokumente einzubinden. 
 
 \subsection{Benutzeroberfläche}
@@ -125,8 +124,8 @@ wird es ein weiteres Einstellungsfenster geben.\\
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Startseite.png}
 \end{center}
 \subsubsection{Taskpalette (Tasktab)}
-Im linken Teil der Benutzeroberfläche wird Tasktab eine Liste der gerade zum Einfügen verfügbaren Tasks dargestellt. Dabei kann die Darstellung als Icon,
-Text oder Kombination erfolgen. Es werden nur Tasks angezeigt die gerade auch einfügbar sind. \\
+Im linken Teil der Benutzeroberfläche wird im Tasktab eine Liste der gerade zum Einfügen verfügbaren Tasks dargestellt. Dabei kann die Darstellung als Icon,
+Text oder Kombination erfolgen. Es werden nur Tasks angezeigt, die gerade auch einfügbar sind. \\
 Am Anfang sind dies zum Beispiel alle Tasks, (z.B. read XML) die keinen Streameingang haben. Ist in der Pipelinebox ein Task ausgewählt, so
 sind nur diejenigen Tasks sichtbar, die mit dem/den Ausgang/Ausgängen des ausgewählten Task kompatibel sind.\\
 So wird verhindert, dass der Benutzer Pipelines bauen kann, die nicht durch Osmosis ausführbar sind.
@@ -142,7 +141,7 @@ den Datentyp beste Eingabemodus gewählt.\\
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Parameter_Optionen.png}
 \end{center}
 \subsubsection{Einstellungsdialog}
-Im Einstellungsdialog können Benutzerspezifische Einstellungen von OsmUi vorgenommen werden, welche persistent in einer Konfigurationsdatei gespeichert werden.\\
+Im Einstellungsdialog können benutzerspezifische Einstellungen von OsmUi vorgenommen werden, welche persistent in einer Konfigurationsdatei gespeichert werden.\\
 Hierzu zählen:\\
 \begin{itemize}
  \item Einstellung des Pfades zu Osmosis, welcher in Aufrufskripten verwendet werden soll\\
@@ -151,7 +150,7 @@ Hierzu zählen:\\
 
 
 \subsubsection{Kopierleiste}
-Um die aktuell dargestellte Pipeline direkt kopieren zu können, wird sie als Osmosis-Aufruf unter der Pipelinebox angezeigt. Dies ist nur möglich
+Um die aktuell dargestellte Pipeline direkt kopieren zu können, wird sie als Osmosis-Aufruf unter der Pipelinebox angezeigt. Dies ist nur möglich,
 solange die Pipeline konsistent ist, andernfalls steht in der Kopierleiste ``Pipeline inkonsistent''
 \begin{center}
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Leisteklein.png}
@@ -240,7 +239,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Normalablauf & 1 Der Benutzer klickt auf Datei
 \newline 2 OsmUi zeigt den Menüeintrag Datei
 \newline 3 Der Benutzer klickt auf Datei speichern
-\newline 4 Die Pipeline wird gespeichert\\
+\newline 4 OsmUi speichert die Pipeline\\
 \hline Sonderfall 4a) & Die Pipeline wurde noch nie gespeichert
 \newline 4a.1 $ \rightarrow$ Use Case Speichern unter Schritt 1\\
 \hline 
@@ -263,7 +262,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 4 OsmUi zeigt den Dateiauswahldialog
 \newline 5 Der Benutzer wählt den gewünschten Namen und die Dateiendung aus
 \newline 6 Der Benutzer bestätigt dies mit Klick auf den Button ''Speichern'' 
-\newline 7 Die Pipeline wird gespeichert\\
+\newline 7 OsmUi speichert die Pipeline\\
 \hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf Abbrechen\\
 \hline Sonderfall 5b) & 5b.1 Der Benutzer klickt auf eine bereits vorhandene Datei
 \newline 5b.2 OsmUi fragt, ob die Datei überschrieben werden soll
@@ -324,7 +323,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Normalablauf & 1 Der Benuzer klickt auf den Menüeintrag Bearbeiten
 \newline 2 OsmUi öffnet das Bearbeiten Menü
 \newline 3 Der Benutzer klickt auf Rückgängig
-\newline 4 Die letzte Veränderung wird rückgängig gemacht\\
+\newline 4 Osmui macht die letzte Veränderung rückgängig\\
 \hline 
 \end{tabular}
 \end{center}
@@ -339,7 +338,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Normalablauf & 1 Der Benuzer klickt auf den Menüeintrag Bearbeiten
 \newline 2 OsmUi öffnet das Bearbeiten Menü
 \newline 3 Der Benutzer klickt auf wiederherstellen
-\newline 4 Der zuletzt rückgängig gemachte Schritt wird wiederhergestellt\\
+\newline 4 OsmUi stellt den zuletzt rückgängig gemachten Schritt wieder her\\
 \hline 
 \end{tabular}
 \end{center}
@@ -471,9 +470,8 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Name & \textbf{Task-Parameter einstellen} \\ 
 \hline Ziel & Die Parameter eines Tasks sollen geändert werden\\ 
 \hline Vorbedingung & Es gibt mindestens einen Task\\ 
-\hline Nachbedingung & Die Pipeline wurde geladen\\  
-\hline Nachbedingung im Sonderfall 4a) & Die Pipeline wurde geladen\\
-\hline Nachbedingung im Sonderfall 4b) & Es wurde keine Pipeline geladen\\
+\hline Nachbedingung & Der Task wurde geändert\\  
+\hline Nachbedingung im Sonderfall 3a) & Der Task wurde nicht geändert\\
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer macht einen Doppelklick auf den zu ändernden Task
 \newline 2 OsmUi zeigt anstatt der Taskpalette die momentanen Paranetereinstellungen an
