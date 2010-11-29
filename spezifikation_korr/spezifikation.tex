@@ -42,14 +42,14 @@ Diese Spezifikation richtet sich an:
 In dem Entwicklungsprojekt OsmUi soll eine grafische Benutzeroberfläche für das Kommandozeilenwerkzeug \href{http://wiki.openstreetmap.org/wiki/Osmosis}{Osmosis}
 entwickelt werden. Zu diesem Zweck überträgt OsmUi das abstrakte Pipelinekonzept von Osmosis auf eine grafische Darstellung, welche die gesamte Funktionalität von Osmosis zugänglich macht, dabei aber deutlich benutzerfreundlicher sein soll.\\
 Während bei Osmosis ein langer Kommandozeilenaufruf eine Pipeline zur Verarbeitung von OpenStreetMap Daten beschreibt, wobei sich der Benutzer die Befehle merken
-und korrekt in der gewünschten Reihenfolge aufschreiben muss, soll es mit OsmUi möglich sein eine Verarbeitungs\- pipeline \glqq zusammen zu klicken''.\\
+und korrekt in der gewünschten Reihenfolge aufschreiben muss, soll es mit OsmUi möglich sein eine Verarbeitungs\- pipeline durch grafische Bearbeitung zu erstellen.\\
 Hierbei kann die Funktionsweise der einzelnen Tasks sowie deren Interaktion der Benutzer\- oberfläche von OsmUi entnommen werden.
 \subsection{Konventionen} Kommt noch !!!!!!!!!!!!!!!!!!!!!!!!!
 
 \section{Akteure}
 \subsection{Benutzer}
 Bei OsmUi gibt es grundsätzlich nur eine Nutzerklasse. Es wird davon ausgegangen, dass OsmUi benutzt wird um eine Verarbeitungspipeline für OpenStreetMap Daten
-zu erstellen, welche anschließend durch Osmosis \glqq ausgeführt'' wird. Hierbei wird davon ausgegangen, dass der Nutzer grundlegende Kenntnisse 
+zu erstellen, welche anschließend durch Osmosis ausgeführt wird. Hierbei wird davon ausgegangen, dass der Nutzer grundlegende Kenntnisse 
 von Datenverarbeitung, Osmosis und OpenStreetMap hat.
 
 \section{Distributionsform und Installation}
@@ -70,16 +70,16 @@ keine externen Abhängigkeiten bestehen und OsmUi auf allen Java SE kompatiblen 
 und ist ebenso in platformunabhängigem Java geschrieben. 
 \subsubsection{Layout und Gestaltung}
 OsmUi soll ab einer Auflösung von 1024x768 und bis zu einer Systemschriftgröße 24 benutzbar sein. Alle Fenster sollen, wenn dies sinnvoll ist, skalierbar sein und den eventuell gewonnenen Platz
-nutzen. Um Benutzer von Multimonitorsystemen und exotischen Windowmanagern zu entlasten soll die Positionierung von neuen Fenstern nativ erfolgen. Es
+nutzen. Um Benutzer von Multimonitorsystemen und speziellen Fensterverwaltungssystemen (z.B. Tiling) zu entlasten, soll die Positionierung von neuen Fenstern durch das Betriebssystem erfolgen. Es
 sollen insbesondere keine Fenster in eine errechnete Bildschirmmitte von OsmUi positioniert werden.
 \subsection{Robustheit}
 OsmUi soll als Software möglichst robust arbeiten, d.h. unter allen Bedingungen korrekt arbeiten. Dies soll durch defensive Programmierung erreicht werden.
-Jedoch sollen Benutzereingaben möglichst früh geprüft werden, so dass tiefere Funktionen den Daten ``vertrauen'' können. Dies sichert zudem ab, dass klar ist, welcher
-Programmteil für die Prüfung zuständig ist. Nämlich immer der erste, der die nötigen Informationen hat.\\
+Wobei Benutzereingaben so früh wie möglich und immer nur einmal geprüft werden sollen. Dies sichert zudem ab, dass klar ist, welcher
+Programmteil für die Prüfung zuständig ist. Nämlich immer der erste, der alle zur Prüfung notwendigen Informationen hat.\\
 Weiterhin wird die Robustheit durch das KISS-Prinzip unterstützt, da weniger Funktionen besser entworfen und getestet werden können.
 \subsection{Portabilität}
 OsmUi soll durch den Einsatz reinen Javas auf allen Systemen mit Java SE 1.6 Unterstützung lauffähig sein. Als Exportformate für Osmosis Aufrufskripte
-werden .bat und .sh (/bin/sh) unterstützt, womit alle Posix Systeme sowie Windows abgedeckt sind.
+werden .bat und .sh (/bin/sh) unterstützt, womit alle Unix ähnlichen Systeme (Linux, BSD, Solaris, etc) sowie Windows abgedeckt sind.
 \subsection{Erweiterbarkeit}
 Das Programm muss keine besonderen Erweiterungsfunktionalitäten wie etwa ein Pluginsystem zur Verfügung stellen, jedoch werden der Programmcode und die Systemarchitektur
 so gestaltet, dass OsmUi leicht und schnell an neue oder veränderte Osmosis Funktionen angepasst werden kann.
@@ -92,7 +92,7 @@ Bei OsmUi handelt es sich um eine Einzelplatzanwendung und es wird keine Netzwer
 Beim Erstellen/Laden/Speichern von Verarbeitungspipelines muss OsmUi in der Lage sein, mit Pipelines von bis zu 100 Tasks zuverlässig zu arbeiten -
 eine künstliche Beschränkung nach oben besteht jedoch nicht.\\
 Werden 100 Tasks nicht überschritten und das System des Nutzers nicht unnormal ausgelastet, so muss OsmUi Benutzeraktionen, wie laden/speichern, task hinzufügen etc.
-innerhalb von 1 Sekunde ausführen. Hierbei darf ein Mittelklasserechner angenommen werden. (>= 2.6 Ghz, >= 1 GB RAM, 7200 RPM Festplatte)
+innerhalb von 1 Sekunde ausführen. Hierbei darf ein Mittelklasserechner angenommen werden. ($\geq$ 2.6 Ghz, $\geq$ 1 GB RAM, 7200 RPM Festplatte)
 \subsection{persistente Konfiguration}
 Um Benutzerspezifische Einstellungen zu speichern verwendet OsmUi eine Konfigurationsdatei im Heimat-/Configverzeichnis des Benutzter.
 Diese Konfigurationsdatei wird ein für Menschen lesbaren XML Format gespeichert, wobei die genaue Definition in der Entwurf- bzw. Implementierungsphase
