@@ -10,6 +10,7 @@
 \usepackage{amsmath}
 \usepackage{wasysym}
 \usepackage{graphicx}
+\usepackage[font=footnotesize]{caption}
 \usepackage[pdftex]{hyperref}
 \author{
 Verena Käfer (2551188),\\
@@ -61,7 +62,7 @@ OsmUi wird als ausführbares JAR Archiv ausgeliefert, welches direkt ausgeführt
 OsmUi wird nach dem \href{http://de.wikipedia.org/wiki/KISS-Prinzip}{KISS-Prinzip} entwickelt, d.h. entscheidend für die Qualität der Software soll
 sein, wie gut die Hauptfunktionen unterstützt werden. Bessere Hauptfunktionalität ist einem größeren Funktionsumfang unterzuordnen.\\
 Im Fall von OsmUi heißt dies, dass das Hauptaugenmerk auf dem einfachen und sinnvollen Erstellen von Verarbeitungspipelines, sowie deren Import und Export liegt.\\
-Weniger wichtig sind hingegen Zusatzfunktionen wie direktes Anzeigen des Verarbeitungsergebnisses (was auf Grund der Vielfalt der Funktionen von Osmosis
+Weniger wichtig sind hingegen Komfortfunktionen wie direktes Anzeigen des Verarbeitungsergebnisses (was auf Grund der Vielfalt der Funktionen von Osmosis
 und der Verarbeitungsdauer ohnehin nicht immer sinnvoll ist) oder das direkte Aufrufen von Osmosis.
 \subsubsection{Systemumgebung}
 Systemumgebung ist das \textbf{Java Runtime Environment in Version 1.6 und höher (SE)}. Dabei ist OsmUi als reine Java Anwendung zu entwickeln, so dass
@@ -112,7 +113,7 @@ importieren, dabei stehen folgende Möglichkeiten der Eingabe zur Verfügung
   Hierbei liest OsmUi den Osmosis Aufruf aus einem Aufrufskript, es werden sowohl .bat Dateien, als auch .sh Dateien unterstützt.
 \end{itemize}
 \subsubsection{Exportieren}
-OsmUi kann Pipelines als Aufrufskript im .sh Format (mit \#!/bin/sh Shebang) für alle Posix Konformen Systeme, sowie im .bat Format für Windows exportieren.
+OsmUi kann Pipelines als Aufrufskript im .sh Format für alle Posix Konformen Systeme, sowie im .bat Format für Windows exportieren.
 Der Pfad mit dem Osmosis aufgerufen wird, kann dabei vom Benutzer eingestellt werden. Falls dieser zu einer .jar Datei zeigt wird \glqq java -jar '' davor
 gehängt.\\ 
 Neben dem speichern als fertiges Aufrufskript, kann der Osmosis Aufruf auch aus der Kopierleiste kopiert werden
@@ -122,7 +123,10 @@ um ihn zum Beispiel in andere Dokumente einzubinden.
 Die Benutzeroberfläche von OsmUi ist in zwei Teile aufgeteilt: die Taskpalette und die Pipelinebox. Desweiteren gibt es ein Anwendungsmenü und beim Bearbeiten eines Tasks
 wird es ein weiteres Einstellungsfenster geben.\\
 \begin{center}
+\begin{figure}[h!]
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Startseite.png}
+\caption{Startseite}
+\end{figure}
 \end{center}
 \subsubsection{Taskpalette (Tasktab)}
 Im linken Teil der Benutzeroberfläche wird Tasktab eine Liste der gerade zum Einfügen verfügbaren Tasks dargestellt. Dabei kann die Darstellung als Icon,
@@ -139,20 +143,28 @@ Wählt der Benutzer einen Task aus, so zeigt OsmUi den Parametertab an, in dem a
 Hierbei kann die Eingabe eingeschränkt sein und als Spanne von Zahlen, als Kartenausschnitt oder als freier Text erfolgen. Dabei wird der für
 den Datentyp beste Eingabemodus gewählt.\\
 \begin{center}
+\begin{figure}[h!]
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Parameter_Optionen.png}
+\caption{Parametertab}
+\end{figure}
 \end{center}
 \subsubsection{Einstellungsdialog}
 Im Einstellungsdialog können Benutzerspezifische Einstellungen von OsmUi vorgenommen werden, welche persistent in einer Konfigurationsdatei gespeichert werden.\\
 Hierzu zählen:\\
 \begin{itemize}
  \item Einstellung des Pfades zu Osmosis, welcher in Aufrufskripten verwendet werden soll\\
+\begin{center}
+\begin{figure}[h!]
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Einstellungen.png}
+\caption{Parametertab}
+\end{figure}
+\end{center}
 \end{itemize}
 
 
 \subsubsection{Kopierleiste}
 Um die aktuell dargestellte Pipeline direkt kopieren zu können, wird sie als Osmosis-Aufruf unter der Pipelinebox angezeigt. Dies ist nur möglich
-solange die Pipeline konsistent ist, andernfalls steht in der Kopierleiste ``Pipeline inkonsistent''
+solange die Pipeline konsistent ist, andernfalls steht in der Kopierleiste \glqq Pipeline inkonsistent''
 \begin{center}
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Leisteklein.png}
 \end{center}
