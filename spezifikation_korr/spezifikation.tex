@@ -113,7 +113,7 @@ importieren, dabei stehen folgende Möglichkeiten der Eingabe zur Verfügung
 \begin{itemize}
   \item Aus Zwischenablage\\
   Beim Importieren aus der Zwischenablage wird der Osmosis Aufruf (s.o.) direkt aus der Zwischenablage gelesen und die Pipeline geladen.
-  \item Aus Aufrufskripten\\
+  \item Aus Aufrufskript\\
   Hierbei liest OsmUi den Osmosis Aufruf aus einem Aufrufskript, es werden sowohl .bat Dateien, als auch .sh Dateien unterstützt.
 \end{itemize}
 \subsubsection{Exportieren}
@@ -204,6 +204,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \end{center}
 \newpage
 \subsection{Beschreibungen}
+Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer installiert und gestartet.
 \subsubsection{Datei laden}
 \begin{center}
 \ \\
@@ -290,10 +291,10 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline 
 \end{tabular}
 \end{center}
-\subsubsection{aus Aufrufskript importieren}
+\subsubsection{Pipeline aus Aufrufskript importieren}
 \begin{center}
 \begin{tabular}{|p {5cm}|p{10cm}|}
-\hline Name & \textbf{aus Aufrufskript importieren}\\
+\hline Name & \textbf{Pipeline aus Aufrufskript importieren}\\
 \hline Ziel & importierte Pipeline soll angezeigt werden\\
 \hline Vorbedingung & Eine importierbare Pipeline ist vorhanden\\
 \hline Nachbedingung & Die Datei wurde importiert und die Pipeline angezeigt\\ 
@@ -310,13 +311,13 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 4 OsmUi zeigt den Dateiauswahldialog
 \newline 5 Der Benutzer wählt die gewünschte Datei aus
 \newline 6 Der Benutzer bestätigt dies mit \glqq Importieren''.
-\newline 7 OsmUi importiert die Datei und zeigt sie in der Piplinebox an.\\ 
+\newline 7 OsmUi importiert die Datei und zeigt sie in der Piplinebox graphisch an.\\ 
 \hline Sonderfall 5a) & 5a.1 Der Benutzer wählt \glqq Abrechen''
 \newline 5a.2 OsmUi lädt keine Daten und zeigt den vorherigen Zustand.\\
 \hline Sonderfall 6a) & 6a.1 Der Benutzer wählt \glqq Abrechen''
-\newline 6a.2 Osmui importiert keine Daten und zeigt den vorherigen Zustand.\\
+\newline 6a.2 OsmUi importiert keine Daten und zeigt den vorherigen Zustand.\\
 \hline Sonderfall 7a) & Pipelinebox ist nicht leer.
-\newline 7a.1 Osmui importiert die Datei in die Piplinebox einer neuen Instanz von OsmUi.\\
+\newline 7a.1 OsmUi importiert die Datei in die Piplinebox einer neu geöffneten Instanz von OsmUi.\\
 \hline Sonderfall 7b)& Datei ist zwischenzeitlich nicht mehr verfügbar.
 \newline 7b.1 OsmUi versucht Datei zu lesen bricht dann ab und zeigt einen entsprechenden Fehlerdialog an.
 \newline 7b.2 Benutzer wählt \glqq Ok''.
@@ -325,7 +326,11 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline $ \rightarrow$ Schritt 7b.1 \\
 \hline Sonderfall 7d)& Dateityp wird nicht unterstützt.
 \newline $ \rightarrow$ Schritt 7b.1 \\
-\hline 
+\hline Sonderfall 7e)& Es befinden sich mehrere Pipelines in der gewählten Datei
+\newline 7e.1 OsmUi zeigt eine Fehlermeldung, dass nur Dateien mit einer Pipeline gelesen werden können
+\newline $ \rightarrow$ Schritt 7b.2\\
+\hline Sonderfall 7f)& Datei ist nicht lesbar
+\newline $ \rightarrow$ Schritt 7b.1
 \end{tabular}
 \end{center}
 \subsubsection{Rückgängig machen}
@@ -365,9 +370,11 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Ziel & Der Hilfe-Dialog soll aufgerufen werden \\ 
 \hline Vorbedingung & keine \\ 
 \hline Nachbedingung & Dem Benutzer wurde geholfen \\ 
-\hline Nachbedingung im Sonderfall 5a) & Dem Benutzer wurde geholfen\\
-\hline Nachbedingung im Sonderfall 5b) & Keine Hilfe wurde gegeben\\
-\hline Nachbedingung im Sonderfall 7a) & Dem Benutzer wurde geholfen\\
+\hline Nachbedingung im Sonderfall 5a) & Der Benutzer hat Artikel gelesen\\
+\hline Nachbedingung im Sonderfall 5a2a) & Der Benutzer hat Artikel gelesen\\
+\hline Nachbedingung im Sonderfall 5a2b) & Der Benutzer hat Artikel gelesen\\
+\hline Nachbedingung im Sonderfall 5b) & Kein Artikel wurde gefunden\\
+\hline Nachbedingung im Sonderfall 7a) & Dem Benutzer hat Artikel gelesen\\
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer wählt Hilfe
 \newline 2 OsmUi zeigt den Menüeintrag Hilfe
