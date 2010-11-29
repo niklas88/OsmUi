@@ -124,14 +124,16 @@ Die Benutzeroberfläche von OsmUi ist in zwei Teile aufgeteilt: die Taskpalette 
 wird es ein weiteres Einstellungsfenster geben.\\
 \begin{center}
 \begin{figure}[h!]
+\begin{center}
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Startseite.png}
 \caption{Startseite}
+\end{center}
 \end{figure}
 \end{center}
-\subsubsection{Taskpalette (Tasktab)}
-Im linken Teil der Benutzeroberfläche wird Tasktab eine Liste der gerade zum Einfügen verfügbaren Tasks dargestellt. Dabei kann die Darstellung als Icon,
+\subsubsection{Taskpalette}
+Im linken Teil der Benutzeroberfläche wird im Tab "Tasks'' eine Liste der gerade zum Einfügen verfügbaren Tasks dargestellt. Dabei kann die Darstellung als Icon,
 Text oder Kombination erfolgen. Es werden nur Tasks angezeigt die gerade auch einfügbar sind. \\
-Am Anfang sind dies zum Beispiel alle Tasks, (z.B. read XML) die keinen Streameingang haben. Ist in der Pipelinebox ein Task ausgewählt, so
+Am Anfang sind dies zum Beispiel alle Tasks, (z.B. read XML) die keine eingehenden Verbindungen haben. Ist in der Pipelinebox ein Task ausgewählt, so
 sind nur diejenigen Tasks sichtbar, die mit dem/den Ausgang/Ausgängen des ausgewählten Task kompatibel sind.\\
 So wird verhindert, dass der Benutzer Pipelines bauen kann, die nicht durch Osmosis ausführbar sind.
 \subsubsection{Pipelinebox}
@@ -144,29 +146,35 @@ Hierbei kann die Eingabe eingeschränkt sein und als Spanne von Zahlen, als Kart
 den Datentyp beste Eingabemodus gewählt.\\
 \begin{center}
 \begin{figure}[h!]
+\begin{center}
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Parameter_Optionen.png}
 \caption{Parametertab}
+\end{center}
 \end{figure}
 \end{center}
 \subsubsection{Einstellungsdialog}
 Im Einstellungsdialog können Benutzerspezifische Einstellungen von OsmUi vorgenommen werden, welche persistent in einer Konfigurationsdatei gespeichert werden.\\
-Hierzu zählen:\\
-\begin{itemize}
- \item Einstellung des Pfades zu Osmosis, welcher in Aufrufskripten verwendet werden soll\\
+Hierzu zählen die Einstellungen des Pfades zu Osmosis, welcher in Aufrufskripten verwendet werden soll\\
 \begin{center}
 \begin{figure}[h!]
+\begin{center}
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Einstellungen.png}
-\caption{Parametertab}
+\caption{Einstellungendialog}
+\end{center}
 \end{figure}
 \end{center}
-\end{itemize}
 
 
 \subsubsection{Kopierleiste}
 Um die aktuell dargestellte Pipeline direkt kopieren zu können, wird sie als Osmosis-Aufruf unter der Pipelinebox angezeigt. Dies ist nur möglich
 solange die Pipeline konsistent ist, andernfalls steht in der Kopierleiste \glqq Pipeline inkonsistent''
 \begin{center}
+\begin{figure}[h!]
+\begin{center}
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Leisteklein.png}
+\caption{Kopierleiste}
+\end{center}
+\end{figure}
 \end{center}
 
 \subsubsection{Menüleiste}
@@ -175,29 +183,49 @@ solange die Pipeline konsistent ist, andernfalls steht in der Kopierleiste \glqq
 Beim Klicken auf den Menüeintrag \textbf{Datei} öffnet sich ein Dialog. Der Benutzer kann zwischen \textbf{Neu} (Öffnen einer neuen Pipeline), \textbf{Laden...} (Laden einer gespeicherten .smu Datei), \textbf{Speichern} (speichern der aktuellen eventuell inkonsistenten Pipeline, mit Positionen der Tasks, in schon vorher gespeicherte .smu Datei.), \textbf{Speichern unter} (speichern die vorhandene eventuell inkonsistente Pipeline, mit Positionen der Tasks, an einem selbst gewählten Ort in eine .smu Datei) , \textbf{Importieren aus Datei} (Importiert eine Pipeline aus einem mit OsmUi erstellten Aufrufscript und zeigt diese an.), \textbf{Importieren aus Zwischenablage} (Importiert eine Pipeline aus der Zwischenablage und zeigt diese an.), \textbf{Exportieren} (Exportiert eine Pipeline in ein Aufrufscript) und \textbf{Schließen} (das Programm wird geschlossen) wählen. 
 \\ 
 \begin{center}
+\begin{figure}[h!]
+\begin{center}
 \includegraphics[width=7cm]{ui_prototype/OsmUi_Dateiklein.png}
+\caption{Menüleiste: Datei}
+\end{center}
+\end{figure}
 \end{center}
 \item Bearbeiten\\
-Beim Klicken auf den Menüeintrag \textbf{Bearbeiten} öffnet sich ein Dialog. Der Benutzer kann zwischen \textbf{Rückgängig} (die letzte Änderung wird wieder rückgängig gemacht), \textbf{wiederherstellen} (eine rückgängig gemachte Änderung wird wieder hergestellt) und \textbf{Einstellungen} (Den Pfad zu Osmosis einstellen) wählen.
+Beim Klicken auf den Menüeintrag \textbf{Bearbeiten} öffnet sich ein Dialog. Der Benutzer kann zwischen \textbf{Rückgängig} (die letzte Änderung wird rückgängig gemacht), \textbf{wiederherstellen} (eine rückgängig gemachte Änderung wird wieder hergestellt) und \textbf{Einstellungen} (Den Pfad zu Osmosis einstellen) wählen.
 \\
 \begin{center}
+\begin{figure}[h!]
+\begin{center}
 \includegraphics[width=7cm]{ui_prototype/OsmUi_Bearbeitenklein.png}
+\caption{Menüleiste: Bearbeiten}
+\end{center}
+\end{figure}
 \end{center}
 \item Hilfe\\
 Beim Klicken auf den Menüeintrag \textbf{Hilfe} öffnet sich ein Dialog. Der Benutzer kann zwischen \textbf{Hilfe} (Onlinehilfe wird geöffnet) und \textbf{Über...} (Informationen zu OsmUi werden geöffnet) entscheiden.
 \\
 \begin{center}
+\begin{figure}[h!]
+\begin{center}
 \includegraphics[width=7cm]{ui_prototype/OsmUi_Hilfeklein.png}
+\caption{Menüleiste: Hilfe}
+\end{center}
+\end{figure}
 \end{center}
 \end{itemize}
 
 \subsubsection{Lokalisation}
 OsmUi wird eine übersetzte Benutzeroberfläche für mindestens die Sprachen Deutsch und Englisch bieten. Dabei wird die aktuell verwendete
-Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne Interaktion durch den Benutzer in dessen System einzugliedern.
+Sprache aus den hierfür vorgesehenen Systemvariablen eingelesen, um sie ohne Interaktion durch den Benutzer in dessen System einzugliedern. Sollte eine Sprache nicht vorhanden sein wir Englisch als Standardsprache verwendet.
 \section{Use Cases}
 \subsection{Diagramm}
 \begin{center}
+\begin{figure}[h!]
+\begin{center}
 \includegraphics[width=15cm]{Use-Cases.png}
+\caption{Use-Case-Diagramm}
+\end{center}
+\end{figure}
 \end{center}
 \newpage
 \subsection{Beschreibungen}
@@ -531,7 +559,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{Pipeline exportieren} \\ 
 \hline Ziel & Eine konsistente Pipeline soll exportiert werden \\ 
-\hline Vorbedingung & Die Pipeline muss konsistent sein \\ 
+\hline Vorbedingung & keine \\ 
 \hline Nachbedingung & Die Pipeline wurde ins gewählte Verzeichnis exportiert\\ 
 \hline Nachbedingung im Sonderfall 4a) & Die Pipeline wurde nicht exportiert\\
 \hline Nachbedingung im Sonderfall 5a)& Die Pipeline wurde nicht exportiert\\ 
@@ -615,6 +643,17 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Querverweise & keine \\ 
 \hline 
 \end{tabular}
+\subsection{Streameingang}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Streameingang} synonym \\ 
+\hline Bedeutung & \\
+\hline Abgrenzung & \\ 
+\hline Gültigkeit & \\ 
+\hline Bezeichnung & \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & keine \\ 
+\hline 
+\end{tabular}
 \subsection{Dialog}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Dialog}\\ 
@@ -662,7 +701,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Begriff & \textbf{OsmUi}, synonym Produkt, Software, das Programm \\ 
 \hline Bedeutung & OsmUi ist das zu entwickelnde Produkt es stellt eine Benutzeroberfläche für Osmosis da \\ 
 \hline Abgrenzung & Es ist nur das Produkt gemeint, keine andere Software o. Ä. \\ 
-\hline Gültigkeit & Diese Bezeichnung gilt nur innerhalb des Projekts \\ 
+\hline Gültigkeit & Solange dieses Open-Source-Project besteht \\ 
 \hline Bezeichnung & OsmUi gibt es nur einmal, es ist daher eindeutig \\ 
 \hline Unklarheiten & keine \\ 
 \hline Querverweise & Osmosis \\ 
@@ -672,8 +711,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Osmosis} synonym Osmosis Kommandozeilenwerkzeug\\ 
 \hline Bedeutung & Osmosis ist ein Kommandozeilenwerkzeug zum Bearbeiten von OpenStreetMap Daten mithilfe von Pipelines \\ 
-\hline Abgrenzung & Es ist nur Osmosis gemeint nicht OsmUi welches eine grafische Oberfläche für Osmosis darstellt\\ 
-\hline Gültigkeit & Diese Bezeichnung gilt nur innerhalb des Projekts \\ 
+\hline Abgrenzung & Es ist bezeichnet nur Osmosis gemeint nicht OsmUi welches eine grafische Oberfläche für Osmosis darstellt\\  
 \hline Bezeichnung & Osmosis gibt es nur einmal, es ist daher eindeutig \\ 
 \hline Unklarheiten & keine \\ 
 \hline Querverweise & OsmUi, Pipeline \\ 
@@ -710,6 +748,16 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Bezeichnung & Ein Task wird als eindeutiges Objekt der Benutzeroberfläche identifiziert\\ 
 \hline Unklarheiten & keine \\ 
 \hline Querverweise & Osmosis, OsmUi, Parameter, Pipeline\\ 
+\hline 
+\end{tabular}
+\subsection{Parameter}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Parameter} \\ 
+\hline Bedeutung & Ein Parameter ist eine Einstellung eines Tasks\\
+\hline Abgrenzung & Ist kein Task sondern eine dessen Einstellungen\\ 
+\hline Gültigkeit & Allgemein gültig\\  
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Tasks \\ 
 \hline 
 \end{tabular}
 \subsection{Taskpalette}
