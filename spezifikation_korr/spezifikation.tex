@@ -10,6 +10,7 @@
 \usepackage{amsmath}
 \usepackage{wasysym}
 \usepackage{graphicx}
+\usepackage[font=footnotesize]{caption}
 \usepackage[pdftex]{hyperref}
 \author{
 Verena Käfer (2551188),\\
@@ -54,8 +55,8 @@ Hierbei kann die Funktionsweise der einzelnen Tasks sowie deren Interaktion der 
 \section{Akteure}
 \subsection{Benutzer}
 Bei OsmUi gibt es grundsätzlich nur eine Nutzerklasse. Es wird davon ausgegangen, dass OsmUi benutzt wird um eine Verarbeitungspipeline für OpenStreetMap Daten
-zu erstellen, welche anschließend durch Osmosis ausgeführt wird. Hierbei wird davon ausgegangen, dass der Nutzer grundlegende Kentnisse 
-von Datenverarbeitung und OpenStreetMap hat.
+zu erstellen, welche anschließend durch Osmosis ausgeführt wird. Hierbei wird davon ausgegangen, dass der Nutzer grundlegende Kenntnisse 
+von Datenverarbeitung, Osmosis und OpenStreetMap hat.
 
 \section{Distributionsform und Installation}
 OsmUi wird als ausführbares JAR Archiv ausgeliefert, welches direkt ausgeführt werden kann
@@ -65,22 +66,25 @@ OsmUi wird als ausführbares JAR Archiv ausgeliefert, welches direkt ausgeführt
 \subsubsection{Entwurfskonzept}
 OsmUi wird nach dem \href{http://de.wikipedia.org/wiki/KISS-Prinzip}{KISS-Prinzip} entwickelt, d.h. entscheidend für die Qualität der Software soll sein, wie gut die Hauptfunktionen unterstützt werden. Bessere Hauptfunktionalität ist einem größeren Funktionsumfang unterzuordnen.\\
 Im Fall von OsmUi heißt dies, dass das Hauptaugenmerk auf dem einfachen und sinnvollen Erstellen von Verarbeitungspipelines, sowie deren Import und Export liegt.\\
-Weniger wichtig sind hingegen ``Luxusfunktionen'' wie direktes Anzeigen des Verarbeitungsergebnisses (was auf Grund der Vielfalt der Funktionen von Osmosis
+Weniger wichtig sind hingegen Komfortfunktionen wie direktes Anzeigen des Verarbeitungsergebnisses (was auf Grund der Vielfalt der Funktionen von Osmosis
 und der Verarbeitungsdauer ohnehin nicht immer sinnvoll ist) oder das direkte Aufrufen von Osmosis.
 \subsubsection{Systemumgebung}
-Systemumgebung ist das \textbf{Java Runtime Environment in Version 1.6 und höher (SE)}. Dabei ist OsmUi als reine Java Anwendung zu entwickeln, so dass keine externen Abhängigkeiten bestehen und OsmUi auf allen Java SE kompatiblen Systemen eingesetzt werden kann.
-Eventuell wird intern die Bibliothek \textbf{JGraph} eingesetzt, diese wird dann aber direkt mit ausgeliefert und ist ebenso in plattformunabhängigem Java geschrieben. 
+Systemumgebung ist das \textbf{Java Runtime Environment in Version 1.6 und höher (SE)}. Dabei ist OsmUi als reine Java Anwendung zu entwickeln, so dass
+keine externen Abhängigkeiten bestehen und OsmUi auf allen Java SE kompatiblen Systemen eingesetzt werden kann.
+\mbox{Eventuell} wird intern die Bibliothek \textbf{JGraph} eingesetzt, diese wird dann aber direkt mit ausgeliefert
+und ist ebenso in platformunabhängigem Java geschrieben. 
 \subsubsection{Layout und Gestaltung}
-OsmUi soll ab einer Auflösung von 1024x768 und bis zu einer Systemschriftgröße 24 benutzbar sein. Alle Fenster sollen, wenn dies sinnvoll ist, skalierbar sein und den eventuell gewonnenen Platz nutzen. Um Benutzer von Multimonitorsystemen und exotischen Windowmanagern zu entlasten soll die Positionierung von neuen Fenstern nativ erfolgen. Es
+OsmUi soll ab einer Auflösung von 1024x768 und bis zu einer Systemschriftgröße 24 benutzbar sein. Alle Fenster sollen, wenn dies sinnvoll ist, skalierbar sein und den eventuell gewonnenen Platz
+nutzen. Um Benutzer von Multimonitorsystemen und speziellen Fensterverwaltungssystemen (z.B. Tiling) zu entlasten, soll die Positionierung von neuen Fenstern durch das Betriebssystem erfolgen. Es
 sollen insbesondere keine Fenster in eine errechnete Bildschirmmitte von OsmUi positioniert werden.
 \subsection{Robustheit}
 OsmUi soll als Software möglichst robust arbeiten, d.h. unter allen Bedingungen korrekt arbeiten. Dies soll durch defensive Programmierung erreicht werden.
-Jedoch sollen Benutzereingaben möglichst früh geprüft werden, so dass tiefere Funktionen den Daten ``vertrauen'' können. Dies sichert zudem ab, dass klar ist, welcher
-Programmteil für die Prüfung zuständig ist. Nämlich immer der erste, der die nötigen Informationen hat.\\
+Wobei Benutzereingaben so früh wie möglich und immer nur einmal geprüft werden sollen. Dies sichert zudem ab, dass klar ist, welcher
+Programmteil für die Prüfung zuständig ist. Nämlich immer der erste, der alle zur Prüfung notwendigen Informationen hat.\\
 Weiterhin wird die Robustheit durch das KISS-Prinzip unterstützt, da weniger Funktionen besser entworfen und getestet werden können.
 \subsection{Portabilität}
 OsmUi soll durch den Einsatz reinen Javas auf allen Systemen mit Java SE 1.6 Unterstützung lauffähig sein. Als Exportformate für Osmosis Aufrufskripte
-werden .bat und .sh (/bin/sh) unterstützt, womit alle Posix Systeme sowie Windows abgedeckt sind.
+werden .bat und .sh (/bin/sh) unterstützt, womit alle Unix ähnlichen Systeme (Linux, BSD, Solaris, etc) sowie Windows abgedeckt sind.
 \subsection{Erweiterbarkeit}
 Das Programm muss keine besonderen Erweiterungsfunktionalitäten wie etwa ein Pluginsystem zur Verfügung stellen, jedoch werden der Programmcode und die Systemarchitektur
 so gestaltet, dass OsmUi leicht und schnell an neue oder veränderte Osmosis Funktionen angepasst werden kann.
@@ -93,7 +97,7 @@ Bei OsmUi handelt es sich um eine Einzelplatzanwendung und es wird keine Netzwer
 Beim Erstellen/Laden/Speichern von Verarbeitungspipelines muss OsmUi in der Lage sein, mit Pipelines von bis zu 100 Tasks zuverlässig zu arbeiten -
 eine künstliche Beschränkung nach oben besteht jedoch nicht.\\
 Werden 100 Tasks nicht überschritten und das System des Nutzers nicht unnormal ausgelastet, so muss OsmUi Benutzeraktionen, wie laden/speichern, task hinzufügen etc.
-innerhalb von 1 Sekunde ausführen. Hierbei darf ein Mittelklasserechner angenommen werden. (>= 2.6 Ghz, >= 1 GB RAM, 7200 RPM Festplatte)
+innerhalb von 1 Sekunde ausführen. Hierbei darf ein Mittelklasserechner angenommen werden. ($\geq$ 2.6 Ghz, $\geq$ 1 GB RAM, 7200 RPM Festplatte)
 \subsection{persistente Konfiguration}
 Um Benutzerspezifische Einstellungen zu speichern verwendet OsmUi eine Konfigurationsdatei im Heimat-/Configverzeichnis des Benutzers.
 Diese Konfigurationsdatei wird ein für Menschen lesbaren XML Format gespeichert, wobei die genaue Definition in der Entwurf- bzw. Implementierungsphase
@@ -113,8 +117,8 @@ importieren, dabei stehen folgende Möglichkeiten der Eingabe zur Verfügung
   Hierbei liest OsmUi den Osmosis Aufruf aus einem Aufrufskript, es werden sowohl .bat Dateien, als auch .sh Dateien unterstützt.
 \end{itemize}
 \subsubsection{Exportieren}
-OsmUi kann Pipelines als Aufrufskript im .sh Format (mit \#!/bin/sh Shebang) für alle Posix Konformen Systeme, sowie im .bat Format für Windows exportieren.
-Der Pfad mit dem Osmosis aufgerufen wird, kann dabei vom Benutzer eingestellt werden. Falls dieser zu einer .jar Datei zeigt wird ``java -jar '' davor
+OsmUi kann Pipelines als Aufrufskript im .sh Format für alle Posix Konformen Systeme, sowie im .bat Format für Windows exportieren.
+Der Pfad mit dem Osmosis aufgerufen wird, kann dabei vom Benutzer eingestellt werden. Falls dieser zu einer .jar Datei zeigt wird \glqq java -jar '' davor
 gehängt.\\ 
 Neben dem speichern als fertiges Aufrufskript, kann der Osmosis Aufruf auch aus der Kopierleiste kopiert werden
 um ihn zum Beispiel in andere Dokumente einzubinden. 
@@ -123,7 +127,10 @@ um ihn zum Beispiel in andere Dokumente einzubinden.
 Die Benutzeroberfläche von OsmUi ist in zwei Teile aufgeteilt: die Taskpalette und die Pipelinebox. Desweiteren gibt es ein Anwendungsmenü und beim Bearbeiten eines Tasks
 wird es ein weiteres Einstellungsfenster geben.\\
 \begin{center}
+\begin{figure}[h!]
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Startseite.png}
+\caption{Startseite}
+\end{figure}
 \end{center}
 \subsubsection{Taskpalette (Tasktab)}
 Im linken Teil der Benutzeroberfläche wird Tasktab eine Liste der gerade zum Einfügen verfügbaren Tasks dargestellt. Dabei kann die Darstellung als Icon,
@@ -139,19 +146,28 @@ Inputs hat, hergestellt werden.
 Wählt der Benutzer einen Task aus, so zeigt OsmUi den Parametertab an, in dem alle - für den jeweiligen Tasktyp vorhandenen - Parameter eingegeben werden können.
 Hierbei kann die Eingabe eingeschränkt sein und als Spanne von Zahlen, als Kartenausschnitt oder als freier Text erfolgen. Dabei wird der für den Datentyp beste Eingabemodus gewählt.\\
 \begin{center}
+\begin{figure}[h!]
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Parameter_Optionen.png}
+\caption{Parametertab}
+\end{figure}
 \end{center}
 \subsubsection{Einstellungsdialog}
 Im Einstellungsdialog können Benutzerspezifische Einstellungen von OsmUi vorgenommen werden, welche persistent in einer Konfigurationsdatei gespeichert werden.\\
 Hierzu zählen:\\
 \begin{itemize}
  \item Einstellung des Pfades zu Osmosis, welcher in Aufrufskripten verwendet werden soll\\
+\begin{center}
+\begin{figure}[h!]
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Einstellungen.png}
+\caption{Parametertab}
+\end{figure}
+\end{center}
 \end{itemize}
 
 
 \subsubsection{Kopierleiste}
-Um die aktuell dargestellte Pipeline direkt kopieren zu können, wird sie als Osmosis-Aufruf unter der Pipelinebox angezeigt. Dies ist nur möglich, solange die Pipeline konsistent ist, andernfalls steht in der Kopierleiste \glqq Pipeline inkonsistent''
+Um die aktuell dargestellte Pipeline direkt kopieren zu können, wird sie als Osmosis-Aufruf unter der Pipelinebox angezeigt. Dies ist nur möglich
+solange die Pipeline konsistent ist, andernfalls steht in der Kopierleiste \glqq Pipeline inkonsistent''
 \begin{center}
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Leisteklein.png}
 \end{center}
@@ -208,11 +224,11 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline 3 Der Benutzer wählt \glqq Datei laden''.
 \newline 4 OsmUi zeigt den Dateiauswahldialog
 \newline 5 Der Benutzer wählt die gewünschte Datei aus
-\newline 6 Der Benutzer bestätigt dies mit \glqq Öffnen''.
+\newline 6 Der Benutzer bestätigt dies mit Klick auf Button \glqq Öffnen''.
 \newline 7 OsmUi lädt die Datei und zeigt sie in der Piplinebox an\\ 
-\hline Sonderfall 5a) & 5a.1 Der Benutzer wählt '\glqq Abrechen''
+\hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf \glqq Abrechen''
 \newline 5a.2 OsmUi lädt keine Daten und zeigt den vorherigen Zustand.\\
-\hline Sonderfall 6a) & 6a.1 Der Benutzer wählt \glqq Abrechen''
+\hline Sonderfall 6a) & 6a.1 Der Benutzer klickt aber auf \glqq Abrechen''
 \newline 6a.2 Osmui lädt keine Daten und zeigt den vorherigen Zustand.\\
 \hline Sonderfall 7a) & Pipelinebox ist nicht leer.
 \newline 7a.1 Osmui lädt die Datei in die Piplinebox einer neuen Instanz von OsmUi.\\
@@ -568,8 +584,8 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 
 
 \section{Begriffslexikon}
+\subsection{Aufrufscript}
 \begin{center}
-\ \\
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Aufrufskript} synonym gespeicherte Datei, .sh/.bat Skript\\ 
 \hline Bedeutung & Ein Shell/Batch Skript welches einen Aufruf für Osmosis samt Pipeline speichert \\
@@ -578,6 +594,28 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Bezeichnung &  Jedes Aufrufskript ist eine eigene Datei und damit eindeutig\\ 
 \hline Unklarheiten &  keine \\ 
 \hline Querverweise &  Osmosis, Pipeline\\ 
+\hline 
+\end{tabular}
+\subsection{OpenStreetMap}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{OpenStreetMap} synonym OSM\\ 
+\hline Bedeutung & OpenStreetMap ist eine frei bearbeitbare Karte der ganzen Welt\\
+\hline Abgrenzung & \\ 
+\hline Gültigkeit & \\ 
+\hline Bezeichnung & \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & keine \\ 
+\hline 
+\end{tabular}
+\subsection{KISS}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{KISS} synonym \glqq Keep it stupid and simple''\\ 
+\hline Bedeutung & \\
+\hline Abgrenzung & \\ 
+\hline Gültigkeit & \\ 
+\hline Bezeichnung & \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & keine \\ 
 \hline 
 \end{tabular}
 \subsection{Dialog}
