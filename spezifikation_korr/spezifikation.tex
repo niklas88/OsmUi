@@ -588,6 +588,30 @@ Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer inst
 \hline 
 \end{tabular} 
 \end{center}
+\subsubsection{Programm schließen}
+\begin{center}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Name & \textbf{Programm schließen} \\ 
+\hline Ziel & OsmUi soll geschlossen werden\\ 
+\hline Vorbedingung & OsmUi ist geöffnet\\ 
+\hline Nachbedingung & OsmUi wurde geschlossen \\  
+\hline Akteur & Benutzer \\ 
+\hline Normalablauf & 1 Der Benutzer wählt Datei
+\newline 2 OsmUi zeigt den Menüeintrag Datei
+\newline 3 Der Benutzer wählt \glqq schließen''
+\newline 4 OsmUi schließt das Programm\\
+\hline Sonderfall 4a)& Die aktuelle Pipeline wurde noch nicht gespeichert
+\newline 4a.1 OsmUi zeigt eine Fehlermeldung
+\newline 4a.2 Der Benutzer wählt \glqq speichern''
+\newline 4a.3 $ \rightarrow$ Use Case speichern
+\newline 4a.4 $ \rightarrow$ Schritt 4\\
+\hline Sonderfall 4a2.a & 4a2a.1 Der Benutzer wählt \glqq nicht speichern''
+\newline 4a2a.2 OsmUi schließt ohne zu speichern\\
+\hline Sonderfall 4a2b & 4a2b.1 Der Benutzer wählt \glqq abbrechen''
+\newline OsmUi zeigt wieder die aktuelle Pipeline\\
+\hline
+\end{tabular} 
+\end{center}
 
 
 \section{Begriffslexikon}
