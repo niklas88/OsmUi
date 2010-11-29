@@ -16,7 +16,7 @@
 Verena Käfer (2551188),\\
 Niklas Schnelle (2573250),\\
 Peter Vollmer (2553704)}
-\date{erstellt am 15.11.2010\\
+\date{erstellt am 30.11.2010\\
 Version: 1.1}
 \title{\includegraphics[width=15cm]{../projektplan/Logo_Osmui.png} \\ 
 Spezifikation von OsmUi}
@@ -655,39 +655,6 @@ Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer inst
 \hline Querverweise &  Osmosis, Pipeline\\ 
 \hline 
 \end{tabular}
-\subsection{OpenStreetMap}
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{OpenStreetMap} synonym OSM\\ 
-\hline Bedeutung & OpenStreetMap ist eine frei bearbeitbare Karte der ganzen Welt\\
-\hline Abgrenzung & keine\\ 
-\hline Gültigkeit & OpenStreetMap ist allgemein gültig\\ 
-\hline Bezeichnung & keine\\ 
-\hline Unklarheiten & keine \\ 
-\hline Querverweise & keine \\ 
-\hline 
-\end{tabular}
-\subsection{KISS}
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{KISS} synonym \glqq Keep it stupid and simple''\\ 
-\hline Bedeutung & Ein Programmier-Prinzip, nach dem eine möglichst einfache Lösung für ein Problem gewählt werden soll \\
-\hline Abgrenzung & Es ist genau das Programmierprinzip gemeint, kein Kuss o.Ä.\\ 
-\hline Gültigkeit & in der Programmier-Welt allgemein gültig\\ 
-\hline Bezeichnung & keine\\ 
-\hline Unklarheiten & keine \\ 
-\hline Querverweise & keine \\ 
-\hline 
-\end{tabular}
-\subsection{Streameingang}
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Streameingang} synonym \\ 
-\hline Bedeutung & \\
-\hline Abgrenzung & \\ 
-\hline Gültigkeit & \\ 
-\hline Bezeichnung & \\ 
-\hline Unklarheiten & keine \\ 
-\hline Querverweise & keine \\ 
-\hline 
-\end{tabular}
 \subsection{Dialog}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Dialog}\\ 
@@ -697,6 +664,16 @@ Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer inst
 \hline Bezeichnung & Es gibt mehrere Dialoge, die sich durch ihren Inhalt unterscheiden \\ 
 \hline Unklarheiten & keine \\ 
 \hline Querverweise & Fenster, OsmUi \\ 
+\hline
+\end{tabular}
+\subsection{Export}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Export}\\
+\hline Bedeutung & Vorgang, bei dem ein Aufrufskript entsteht, Gegenteil von Import \\ 
+\hline Abgrenzung & Es ist kein Export im wirtschaftlichen  Sinne gemeint\\ 
+\hline Gültigkeit & Der Begriff gilt innerhalb von OsmUi \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Import, OsmUi \\ 
 \hline
 \end{tabular}
 \subsection{Fenster}
@@ -720,100 +697,15 @@ Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer inst
 \hline Querverweise & Export, OsmUi \\ 
 \hline
 \end{tabular}
-\subsection{Export}
+\subsection{KISS}
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Export}\\
-\hline Bedeutung & Vorgang, bei dem ein Aufrufskript entsteht, Gegenteil von Import \\ 
-\hline Abgrenzung & Es ist kein Export im wirtschaftlichen  Sinne gemeint\\ 
-\hline Gültigkeit & Der Begriff gilt innerhalb von OsmUi \\ 
+\hline Begriff & \textbf{KISS} synonym \glqq Keep it stupid and simple''\\ 
+\hline Bedeutung & Ein Programmier-Prinzip, nach dem eine möglichst einfache Lösung für ein Problem gewählt werden soll \\
+\hline Abgrenzung & Es ist genau das Programmierprinzip gemeint, kein Kuss o.Ä.\\ 
+\hline Gültigkeit & in der Programmier-Welt allgemein gültig\\ 
+\hline Bezeichnung & keine\\ 
 \hline Unklarheiten & keine \\ 
-\hline Querverweise & Import, OsmUi \\ 
-\hline
-\end{tabular}
-\subsection{OsmUi}
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{OsmUi}, synonym Produkt, Software, das Programm \\ 
-\hline Bedeutung & OsmUi ist das zu entwickelnde Produkt es stellt eine Benutzeroberfläche für Osmosis da \\ 
-\hline Abgrenzung & Es ist nur das Produkt gemeint, keine andere Software o. Ä. \\ 
-\hline Gültigkeit & Solange dieses Open-Source-Project besteht \\ 
-\hline Bezeichnung & OsmUi gibt es nur einmal, es ist daher eindeutig \\ 
-\hline Unklarheiten & keine \\ 
-\hline Querverweise & Osmosis \\ 
-\hline 
-\end{tabular}
-\subsection{Osmosis}
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Osmosis} synonym Osmosis Kommandozeilenwerkzeug\\ 
-\hline Bedeutung & Osmosis ist ein Kommandozeilenwerkzeug zum Bearbeiten von OpenStreetMap Daten mithilfe von Pipelines \\ 
-\hline Abgrenzung & Es ist bezeichnet nur Osmosis gemeint nicht OsmUi welches eine grafische Oberfläche für Osmosis darstellt\\  
-\hline Bezeichnung & Osmosis gibt es nur einmal, es ist daher eindeutig \\ 
-\hline Unklarheiten & keine \\ 
-\hline Querverweise & OsmUi, Pipeline \\ 
-\hline 
-\end{tabular}
-\subsection{Pipeline}
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Pipeline} \\ 
-\hline Bedeutung & Eine Pipeline ist ein Konstrukt, zur Datenverarbeitung. In ihm werden Daten eingelesen, durch Tasks verarbeitet und schließlich ausgegeben\\ 
-\hline Abgrenzung & Es ist kein reales Rohrsysteme gemeint, sondern ein reines Gedanken-Konstrukt \\ 
-\hline Gültigkeit & Die Bedeutung des Begriffs gilt nur im Zusammmenhang mit Osmosis/OsmUi. \\ 
-\hline Bezeichnung & Eine Pipeline ist durch die in ihr enthaltenen Tasks und deren Verbindungen eindeutig bestimmt \\ 
-\hline Unklarheiten & keine \\ 
-\hline Querverweise & Osmois, OsmUi, Task \\ 
-\hline 
-\end{tabular}
-\subsection{Pipelinebox}
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Pipelinebox} \\ 
-\hline Bedeutung & Ist der Teil der Oberfläche, in der die Pipeline grafisch dargestellt und bearbeitet wird \\ 
-\hline Abgrenzung & Es handelt sich um keine reale Box, sondern um eine reine Computergrafik \\ 
-\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\ 
-\hline Bezeichnung & Es gibt nur eine Pipelinebox pro ausgeführtem OsmUi. Sie ist daher eindeutig \\ 
-\hline Unklarheiten & keine \\ 
-\hline Querverweise & OsmUi, Pipeline \\ 
-\hline 
-\end{tabular}
-\subsection{Task}
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Task} \\ 
-\hline Bedeutung & Ein Bearbeitungsschritt einer Pipeline, der verschiedene Parameter, Ein- und Ausgänge hat. Er kann neu generiert, gelöscht und geändert werden\\ 
-\hline Abgrenzung & Ein Task ist kein Parameter, er besitzt diese. Er ist keine Anwendung/Aufgabe im herkömmlichen Sinne gemeint\\ 
-\hline Gültigkeit & Der Begriff ist nur gültig für das Pipelinesystem von Osmosis/OsmUi\\ 
-\hline Bezeichnung & Ein Task wird als eindeutiges Objekt der Benutzeroberfläche identifiziert\\ 
-\hline Unklarheiten & keine \\ 
-\hline Querverweise & Osmosis, OsmUi, Parameter, Pipeline\\ 
-\hline 
-\end{tabular}
-\subsection{Parameter}
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Parameter} \\ 
-\hline Bedeutung & Ein Parameter ist eine Einstellung eines Tasks\\
-\hline Abgrenzung & Ist kein Task sondern eine dessen Einstellungen\\ 
-\hline Gültigkeit & Allgemein gültig\\  
-\hline Unklarheiten & keine \\ 
-\hline Querverweise & Tasks \\ 
-\hline 
-\end{tabular}
-\subsection{Taskpalette}
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Taskpalette} \\ 
-\hline Bedeutung & Der Teil der Oberfläche, in dem man die Tasks auswählen kann  \\ 
-\hline Abgrenzung & Es handelt sich um keine reale Box, sondern um ein Element der Benutzeroberfläche\\ 
-\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\ 
-\hline Bezeichnung & Es gibt nur eine Taskpalette. Sie ist daher eindeutig \\ 
-\hline Unklarheiten & keine \\ 
-\hline Querverweise & OsmUi, Task\\ 
-\hline 
-\end{tabular}
-\subsection{Parametertab}
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Parametertab} \\ 
-\hline Bedeutung & Der Teil der Oberfläche, in dem man die Parameter eines Task einstellen kann  \\ 
-\hline Abgrenzung & Es handelt sich um keine reale Box o.ä., sondern um ein Element der Benutzeroberfläche\\ 
-\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\ 
-\hline Bezeichnung & Jeder Task zeigt seine Einstellungen im gleichen Parametertab wenn er selektiert ist, also ist dieser eindeutig \\ 
-\hline Unklarheiten & keine \\ 
-\hline Querverweise & Task \\ 
+\hline Querverweise & keine \\ 
 \hline 
 \end{tabular}
 \subsection{Kopierleiste}
@@ -827,15 +719,68 @@ Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer inst
 \hline Querverweise & Task \\ 
 \hline 
 \end{tabular}
-\subsection{Pipeline konsistent}
+\subsection{OpenStreetMap}
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Pipeline konsistent} \\ 
-\hline Bedeutung & Eine Pipeline ist konsistent, wenn alle Tasks keine unverbundenen Eingänge haben \\ 
-\hline Abgrenzung & Eine konsistente Pipeline muss nicht von Osmosis ausführbar sein
-\newline zum Beispiel kann sie auch nur aus einem ``--read-xml'' bestehen. \\ 
-\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\  
+\hline Begriff & \textbf{OpenStreetMap} synonym OSM\\ 
+\hline Bedeutung & OpenStreetMap ist eine frei bearbeitbare Karte der ganzen Welt\\
+\hline Abgrenzung & keine\\ 
+\hline Gültigkeit & OpenStreetMap ist allgemein gültig\\ 
+\hline Bezeichnung & keine\\ 
 \hline Unklarheiten & keine \\ 
-\hline Querverweise & Pipeline ausführbar \\ 
+\hline Querverweise & keine \\ 
+\hline 
+\end{tabular}
+\subsection{Osmosis}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Osmosis} synonym Osmosis Kommandozeilenwerkzeug\\ 
+\hline Bedeutung & Osmosis ist ein Kommandozeilenwerkzeug zum Bearbeiten von OpenStreetMap Daten mithilfe von Pipelines \\ 
+\hline Abgrenzung & Es ist bezeichnet nur Osmosis gemeint nicht OsmUi welches eine grafische Oberfläche für Osmosis darstellt\\  
+\hline Bezeichnung & Osmosis gibt es nur einmal, es ist daher eindeutig \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & OsmUi, Pipeline \\ 
+\hline 
+\end{tabular}
+\subsection{OsmUi}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{OsmUi}, synonym Produkt, Software, das Programm \\ 
+\hline Bedeutung & OsmUi ist das zu entwickelnde Produkt es stellt eine Benutzeroberfläche für Osmosis da \\ 
+\hline Abgrenzung & Es ist nur das Produkt gemeint, keine andere Software o. Ä. \\ 
+\hline Gültigkeit & Solange dieses Open-Source-Project besteht \\ 
+\hline Bezeichnung & OsmUi gibt es nur einmal, es ist daher eindeutig \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Osmosis \\ 
+\hline 
+\end{tabular}
+\subsection{Parameter}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Parameter} \\ 
+\hline Bedeutung & Ein Parameter ist eine Einstellung eines Tasks\\
+\hline Abgrenzung & Ist kein Task sondern eine dessen Einstellungen\\ 
+\hline Gültigkeit & Allgemein gültig\\  
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Tasks \\ 
+\hline 
+\end{tabular}
+\subsection{Parametertab}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Parametertab} \\ 
+\hline Bedeutung & Der Teil der Oberfläche, in dem man die Parameter eines Task einstellen kann  \\ 
+\hline Abgrenzung & Es handelt sich um keine reale Box o.ä., sondern um ein Element der Benutzeroberfläche\\ 
+\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\ 
+\hline Bezeichnung & Jeder Task zeigt seine Einstellungen im gleichen Parametertab wenn er selektiert ist, also ist dieser eindeutig \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Task \\ 
+\hline 
+\end{tabular}
+\subsection{Pipeline}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Pipeline} \\ 
+\hline Bedeutung & Eine Pipeline ist ein Konstrukt, zur Datenverarbeitung. In ihm werden Daten eingelesen, durch Tasks verarbeitet und schließlich ausgegeben\\ 
+\hline Abgrenzung & Es ist kein reales Rohrsysteme gemeint, sondern ein reines Gedanken-Konstrukt \\ 
+\hline Gültigkeit & Die Bedeutung des Begriffs gilt nur im Zusammmenhang mit Osmosis/OsmUi. \\ 
+\hline Bezeichnung & Eine Pipeline ist durch die in ihr enthaltenen Tasks und deren Verbindungen eindeutig bestimmt \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Osmois, OsmUi, Task \\ 
 \hline 
 \end{tabular}
 \subsection{Pipeline ausführbar}
@@ -848,9 +793,54 @@ Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer inst
 \hline Querverweise & Pipeline konsistent \\ 
 \hline 
 \end{tabular}
+\subsection{Pipelinebox}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Pipelinebox} \\ 
+\hline Bedeutung & Ist der Teil der Oberfläche, in der die Pipeline grafisch dargestellt und bearbeitet wird \\ 
+\hline Abgrenzung & Es handelt sich um keine reale Box, sondern um eine reine Computergrafik \\ 
+\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\ 
+\hline Bezeichnung & Es gibt nur eine Pipelinebox pro ausgeführtem OsmUi. Sie ist daher eindeutig \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & OsmUi, Pipeline \\ 
+\hline 
+\end{tabular}
+\subsection{Pipeline konsistent}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Pipeline konsistent} \\ 
+\hline Bedeutung & Eine Pipeline ist konsistent, wenn alle Tasks keine unverbundenen Eingänge haben \\ 
+\hline Abgrenzung & Eine konsistente Pipeline muss nicht von Osmosis ausführbar sein
+\newline zum Beispiel kann sie auch nur aus einem ``--read-xml'' bestehen. \\ 
+\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\  
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Pipeline ausführbar \\ 
+\hline 
+\end{tabular}
+\subsection{Task}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Task} \\ 
+\hline Bedeutung & Ein Bearbeitungsschritt einer Pipeline, der verschiedene Parameter, Ein- und Ausgänge hat. Er kann neu generiert, gelöscht und geändert werden\\ 
+\hline Abgrenzung & Ein Task ist kein Parameter, er besitzt diese. Er ist keine Anwendung/Aufgabe im herkömmlichen Sinne gemeint\\ 
+\hline Gültigkeit & Der Begriff ist nur gültig für das Pipelinesystem von Osmosis/OsmUi\\ 
+\hline Bezeichnung & Ein Task wird als eindeutiges Objekt der Benutzeroberfläche identifiziert\\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Osmosis, OsmUi, Parameter, Pipeline\\ 
+\hline 
+\end{tabular}
+\subsection{Taskpalette}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Taskpalette} \\ 
+\hline Bedeutung & Der Teil der Oberfläche, in dem man die Tasks auswählen kann  \\ 
+\hline Abgrenzung & Es handelt sich um keine reale Box, sondern um ein Element der Benutzeroberfläche\\ 
+\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\ 
+\hline Bezeichnung & Es gibt nur eine Taskpalette. Sie ist daher eindeutig \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & OsmUi, Task\\ 
+\hline 
+\end{tabular}
 \end{center}
-\section{Versionshistorie} Version 1.0 - Erstellung der Spezifikation
+\section{Versionshistorie} 
 \begin{itemize}
-\item 29.11.10	Korrekturen nach dem Review
+\item Version 1.0 - Erstellung der Spezifikation (15.11.10)
+\item Version 1.1 -	Korrekturen nach dem Review (29.11.10)
 \end{itemize}
 \end{document}
