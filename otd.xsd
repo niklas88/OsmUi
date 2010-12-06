@@ -1,0 +1,392 @@
+<?xml version="1.0" ?>
+<schema
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:otd="http://uni-stuttgart.de/iev/osmosisTaskDescription"
+    targetNamespace="http://uni-stuttgart.de/iev/osmosisTaskDescription"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+
+  <complexType name="tHasDescription" abstract="true">
+    <annotation>
+      <documentation>
+        A base type for every element that has a description.
+      </documentation>
+    </annotation>
+    <sequence>
+      <element name="description" type="string" minOccurs="0" maxOccurs="1">
+        <annotation>
+          <documentation>
+            Contains a text description of a parent element.
+          </documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+
+  <complexType name="tEnumValue">
+    <annotation>
+      <documentation>
+        Describes an enumeration value available for use in a parameter with the "enum" data type.
+      </documentation>
+    </annotation>
+    <complexContent>
+      <extension base="otd:tHasDescription">
+        <attribute name="value" type="string" use="required">
+          <annotation>
+            <documentation>The enumeration literal of the enumeration element.</documentation>
+          </annotation>
+        </attribute>
+        <attribute name="friendlyName" type="string">
+          <annotation>
+            <documentation>The human-understandable name of the enumeration element.</documentation>
+          </annotation>
+        </attribute>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <complexType name="tParameter">
+    <annotation>
+      <documentation>Describes a task parameter.</documentation>
+    </annotation>
+    <complexContent>
+      <extension base="otd:tHasDescription">
+        <sequence>
+          <element name="enumValue" type="otd:tEnumValue" minOccurs="0" maxOccurs="unbounded">
+            <annotation>
+              <documentation>Possible values of the enumeration. Ignored if the type attribute is not "enum".</documentation>
+            </annotation>
+          </element>
+        </sequence>
+        <attribute name="name" type="string" use="required">
+          <annotation>
+            <documentation>The name of the parameter as it appears on the Osmosis command line.</documentation>
+          </annotation>
+        </attribute>
+        <attribute name="friendlyName" type="string">
+          <annotation>
+            <documentation>A short human-readable name of the parameter.</documentation>
+          </annotation>
+        </attribute>
+        <attribute name="required" type="boolean" default="false">
+          <annotation>
+            <documentation>True if the parameter is required by the Osmosis task.</documentation>
+          </annotation>
+        </attribute>
+        <attribute name="defaultParameter" type="boolean" default="false">
+          <annotation>
+            <documentation>
+              True if the parameter is the default parameter of the task.
+              The name of a default parameter may be omitted on the command line.
+              No more than a single parameter of a given task should be declared default,
+              otherwise the processing is undefined.
+            </documentation>
+          </annotation>
+        </attribute>
+        <attribute name="type" use="required">
+          <annotation>
+            <documentation>The data type of the parameter.</documentation>
+          </annotation>
+          <simpleType>
+            <restriction base="string">
+              <enumeration value="int">
+                <annotation>
+                  <documentation>The parameter has an integer value.</documentation>
+                </annotation>
+              </enumeration>
+              <enumeration value="string">
+                <annotation>
+                  <documentation>The parameter has a string value.</documentation>
+                </annotation>
+              </enumeration>
+              <enumeration value="boolean">
+                <annotation>
+                  <documentation>The parameter has a boolean value.</documentation>
+                </annotation>
+              </enumeration>
+              <enumeration value="enum">
+                <annotation>
+                  <documentation>The parameter has a value specified in child enumValue elements.</documentation>
+                </annotation>
+              </enumeration>
+              <enumeration value="filename">
+                <annotation>
+                  <documentation>The parameter value is a file name.</documentation>
+                </annotation>
+              </enumeration>
+              <enumeration value="directory">
+                <annotation>
+                  <documentation>The parameter value is a directory name.</documentation>
+                </annotation>
+              </enumeration>
+              <enumeration value="uri">
+                <annotation>
+                  <documentation>The parameter value is an Uniform Resource Identifier.</documentation>
+                </annotation>
+              </enumeration>
+              <enumeration value="instant">
+                <annotation>
+                  <documentation>The parameter value represents an instant (date and time).</documentation>
+                </annotation>
+              </enumeration>
+              <enumeration value="bbox">
+                <annotation>
+                  <documentation>
+                    The parameter value is a bounding box.
+
+                    This is a virtual parameter. On the command line, the bounding box can be specified in two ways.
+                    The first way is using the left, top, right and bottom parameters which take polar coordinates (latitude and longitude).
+                    The second way is to specify x1, x2, y1, y2 and zoom parameters which take the tile numbers and a zoom level,
+                    respectively, referring to the main OpenStreetMap slippy map.
+                  </documentation>
+                </annotation>
+              </enumeration>
+            </restriction>
+          </simpleType>
+        </attribute>
+        <attribute name="booleanEncoding" default="yesno">
+          <annotation>
+            <documentation>Specifies the encoding of the boolean values on the Osmosis command line for boolean parameters.</documentation>
+          </annotation>
+          <simpleType>
+            <restriction base="xsd:string">
+              <enumeration value="yesno">
+                <annotation>
+                  <documentation>True/false is mapped to yes/no.</documentation>
+                </annotation>
+              </enumeration>
+              <enumeration value="truefalse">
+                <annotation>
+                  <documentation>True/false is mapped to true/false.</documentation>
+                </annotation>
+              </enumeration>
+            </restriction>
+          </simpleType>
+        </attribute>
+        <attribute name="defaultValue" type="string">
+          <annotation>
+            <documentation>The default value of a parameter.</documentation>
+          </annotation>
+        </attribute>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <complexType name="tPipe">
+    <annotation>
+      <documentation>Describes an input or output pipe of a task.</documentation>
+    </annotation>
+    <complexContent>
+      <extension base="otd:tHasDescription">
+        <attribute name="type" use="required">
+          <annotation>
+            <documentation>
+              Specifies the type of the stream compatible with this pipe.
+            </documentation>
+          </annotation>
+          <simpleType>
+            <restriction base="xsd:string">
+              <enumeration value="entity">
+                <annotation>
+                  <documentation>
+                    The pipe consumes or produces an entity stream.
+                  </documentation>
+                </annotation>
+              </enumeration>
+              <enumeration value="change">
+                <annotation>
+                  <documentation>
+                    The pipe consumes or produces a change stream.
+                  </documentation>
+                </annotation>
+              </enumeration>
+              <enumeration value="dataset">
+                <annotation>
+                  <documentation>
+                    The pipe consumes or produces a dataset.
+                  </documentation>
+                </annotation>
+              </enumeration>
+            </restriction>
+          </simpleType>
+        </attribute>
+        <attribute name="count" use="required">
+          <annotation>
+            <documentation>Describes the multiplicity of the pipe.</documentation>
+          </annotation>
+          <simpleType>
+            <restriction base="string">
+              <enumeration value="single">
+                <annotation>
+                  <documentation>
+                    The element describes a single pipe. The index is given in the index attribute.
+                  </documentation>
+                </annotation>
+              </enumeration>
+              <enumeration value="variable">
+                <annotation>
+                  <documentation>
+                    The element describes a variable number of pipes of the same kind.
+                    The parameter specifying the number of pipes is given in the specifiedBy attribute.
+                  </documentation>
+                </annotation>
+              </enumeration>
+            </restriction>
+          </simpleType>
+        </attribute>
+        <attribute name="index" type="nonNegativeInteger">
+          <annotation>
+            <documentation>The index of a single pipe.</documentation>
+          </annotation>
+        </attribute>
+        <attribute name="specifiedBy" type="string">
+          <annotation>
+            <documentation>
+              The name of the parameters specifying the actual number of pipes of a task instance (for multiple pipes).
+            </documentation>
+          </annotation>
+        </attribute>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <element name="parameter" type="otd:tParameter" >
+    <annotation>
+      <documentation>A parameter of the task.</documentation>
+    </annotation>
+  </element>
+
+  <element name="inputPipe" type="otd:tPipe">
+    <annotation>
+      <documentation>List of the input pipes of the task.</documentation>
+    </annotation>
+  </element>
+
+  <element name="outputPipe" type="otd:tPipe">
+    <annotation>
+      <documentation>An output pipes of the task.</documentation>
+    </annotation>
+  </element>
+
+  <complexType name="tTask">
+    <annotation>
+      <documentation>Describes a single Osmosis task.</documentation>
+    </annotation>
+    <complexContent>
+      <extension base="otd:tHasDescription">
+        <sequence>
+          <element ref="otd:inputPipe" minOccurs="0" maxOccurs="unbounded" />
+          <element ref="otd:outputPipe" minOccurs="0" maxOccurs="unbounded" />
+          <element ref="otd:parameter" minOccurs="0" maxOccurs="unbounded" />
+        </sequence>
+        <attribute name="name" type="string" use="required">
+          <annotation>
+            <documentation>The long name of the task as it appears on the Osmosis command line.</documentation>
+          </annotation>
+        </attribute>
+        <attribute name="shortName" type="string">
+          <annotation>
+            <documentation>The short name of the task as it appears on the Osmosis command line.</documentation>
+          </annotation>
+        </attribute>
+        <attribute name="friendlyName" type="string">
+          <annotation>
+            <documentation>A short human-readable name of the task.</documentation>
+          </annotation>
+        </attribute>
+        <attribute name="helpURI" type="anyURI">
+          <annotation>
+            <documentation>Location of the extended help information.</documentation>
+          </annotation>
+        </attribute>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <element name="task" type="otd:tTask">
+    <annotation>
+      <documentation>The list of tasks in this group.</documentation>
+    </annotation>
+
+    <unique name="inputPipeIndex">
+      <selector xpath="otd:inputPipe" />
+      <field xpath="@index" />
+    </unique>
+
+    <unique name="outputPipeIndex">
+      <selector xpath="otd:outputPipe" />
+      <field xpath="@index" />
+    </unique>
+
+    <unique name="parameterName">
+      <selector xpath="otd:parameter" />
+      <field xpath="@name" />
+    </unique>
+  </element>
+
+  <complexType name="tTaskGroup">
+    <annotation>
+      <documentation>Describes a group of tasks.</documentation>
+    </annotation>
+    <complexContent>
+      <extension base="otd:tHasDescription">
+        <sequence>
+          <element ref="otd:task" minOccurs="0" maxOccurs="unbounded" />
+        </sequence>
+        <attribute name="id" type="string" use="required">
+          <annotation>
+            <documentation>The internal unique id for this group.</documentation>
+          </annotation>
+        </attribute>
+        <attribute name="friendlyName" type="string">
+          <annotation>
+            <documentation>The human-readable name of this group.</documentation>
+          </annotation>
+        </attribute>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <element name="taskGroup" type="otd:tTaskGroup">
+    <annotation>
+      <documentation>List of the task groups contained in this description.</documentation>
+    </annotation>
+  </element>
+
+  <element name="osmosisTaskDescription">
+    <annotation>
+      <documentation>The root element.</documentation>
+    </annotation>
+
+    <complexType>
+      <sequence>
+        <element ref="otd:taskGroup" minOccurs="0" maxOccurs="unbounded" />
+      </sequence>
+
+      <attribute name="formatVersion" type="string" use="required">
+        <annotation>
+          <documentation>The version of the description schema used.</documentation>
+        </annotation>
+      </attribute>
+
+      <attribute name="osmosisVersion" type="string" use="required">
+        <annotation>
+          <documentation>The Osmosis version of the described tasks.</documentation>
+        </annotation>
+      </attribute>
+    </complexType>
+
+    <unique name="taskGroupId">
+      <selector xpath="otd:taskGroup" />
+      <field xpath="@id" />
+    </unique>
+
+    <unique name="taskName">
+      <selector xpath="otd:taskGroup/otd:task" />
+      <field xpath="@name" />
+    </unique>
+
+  </element>
+
+</schema>
