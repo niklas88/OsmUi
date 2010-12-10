@@ -58,7 +58,7 @@ public class OsmosisTaskImportDemo {
 			 * Beispiel 2: Zulässige Parameter für den Task '--read-apidb'
 			 * bestimmen
 			 */
-			TTask taskReadApiDb = tasks.get("read-apidb");
+			TTask taskReadApiDb = tasks.get("bounding-box");
 			if (taskReadApiDb != null) {
 				System.out.println("\n\nParameter für Task "
 						+ taskReadApiDb.getName()

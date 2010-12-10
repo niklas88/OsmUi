@@ -64,6 +64,11 @@
             <documentation>The name of the parameter as it appears on the Osmosis command line.</documentation>
           </annotation>
         </attribute>
+        <attribute name="value" type="string">
+          <annotation>
+            <documentation>The value of this specific parameter as it appears on the Osmosis command line.</documentation>
+          </annotation>
+        </attribute>
         <attribute name="friendlyName" type="string">
           <annotation>
             <documentation>A short human-readable name of the parameter.</documentation>
