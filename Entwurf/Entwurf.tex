@@ -29,22 +29,128 @@ Entwurf von OsmUi}
 \section{Einleitung}
 Die folgenden Abschnitte beschreiben den Entwurf und die Architektur von OsmUi.
 \subsection{Das Software-System}
-OsmUi stellt eine Benutzeroberfläche für das Kommandozeilen-Tool Osmosis dar. Die Implementierung erfolgt in Java, die Oberfläche wird mit Swing realisiert. Für die graphische Darstellung der Pipelines wird auf JGraph zurückgegeriffen. Die Pipelines werden entweder in xml-Dateien oder in smu-Dateien gespeichert.
+OsmUi stellt eine Benutzeroberfläche für das Kommandozeilen-Tool Osmosis dar. Die Implementierung erfolgt in Java 6, die Oberfläche wird mit Swing realisiert. Für die graphische Darstellung der Pipelines wird auf JGraph zurückgegeriffen. Die Pipelines werden entweder in smu-Dateien gespeichert oder als Kommandozeilenscripst exportiert.
 \subsection{Entwurfsprinzipien}
 
 \subsection{Überblick über den Entwurf}
-In den folgenden Abschnitten werden zuerst die Architektur (Kapitel 2) und dann die einzelnen Komponenten (Kapitel 3) beschrieben. Die genaue Dokumentation der Klassen und Methoden erfolg direkt im Programm als JavaDoc.
+In den folgenden Abschnitten werden zuerst die Architektur (Kapitel 2) und dann die einzelnen Komponenten (Kapitel 3) beschrieben. Die genaue Dokumentation der Klassen und Methoden erfolgt direkt im Programm als JavaDoc.
 
 \section{Architektur}
-\subsection{Komponentenübergreifende Funktionen}
+Osmui setzt sich aus mehreren Komponenten zusammen. Diese sollen so organisiert werden, dass der Zusammenhalt innerhalb der Komponenten groß und die Kopplung zwischen ihnen möglichst klein ist. Zur Strukturierung des Systems sollen weiterhin GUI-Komponenten klar von den dahinter liegenden Modellen getrennt werden. Da OsmUi jedoch selbst Oberfläche für ein Kommandozeilenwerkzeug ist, existiert keine klare Frontend/Backend-Trennung.\\
+Im folgenden sind die Komponenten beschrieben, wobei jeder Komponente im später System einer Java-Klasse entspricht.
+
+%\subsection{Komponentenübergreifende Funktionen}
 
 \section{Komponenten}
-\subsection{Komponente: XYZ}
+\subsection{Komponente: TaskBox}
+Die TaskBox implementiert eine GUI Komponente die alle zum momentan selektierten Task kompatiblen Tasks anzeigt. Ist kein Task selektiert zeigt sie nur die Tasks an, die keine Vorbedingungen haben. Auch kann über sie ein Task zum TaskModel hinzugefügt werden.
+\subsubsection{Schnittstelle}
+Die TaskBox implementiert die Interfaces TaskSelectEventListener und TaskForAddEventListener. Der  Konstruktor übernimmt ein PipeModel, in das die TaskBox neue Tasks einfügen soll. 
+\begin{center}
+\includegraphics[width=17cm]{Schnittstelle_Taskbox.png}
+\end{center}
+\subsubsection{Protokoll}
+Nach der Konstruktion muss die TaskBox noch als EventListener registriert und zur Benutzeroberfläche hinzugefügt werden.
+%\subsubsection{Verhalten}
+
+%\subsubsection{Interne Realisierung}
+\subsubsection{Realisierte Anforderungen}
+Diese Komponente ermöglicht das Hinzufügen von neuen Tasks.
+
+\subsection{Komponente: PipelineBox}
+Die PipelineBox zeigt die aktuelle Pipeline an und ermöglicht dem Benutzer Tasks zu selektieren, zu verschieben und zu löschen. 
+\subsubsection{Schnittstelle}
+
+\subsubsection{Protokoll}
+Wird ein Tasks selektiert, so wird ein TaskSelectEvent ausgelöst. Wird kein Task selektiert, so wird ein TaskSelectEvent mit Source gleich null ausgelöst. Ein Doppelklick auf ein Task löst ein TaskSelectEvent und ein TaskDoubleclickEvent aus.
+\subsubsection{Verhalten}
+
+\subsubsection{Interne Realisierung}
+\subsubsection{Realisierte Anforderungen}
+
+\subsection{Komponente: ParameterBox}
+Die ParameterBox zeigt die Parameter des aktuell selektierten Tasks an und ermöglicht dem Benutzer diese zu ändern. 
 \subsubsection{Schnittstelle}
 \subsubsection{Protokoll}
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
 \subsubsection{Realisierte Anforderungen}
+
+\subsection{Komponente: Application}
+Die Application stellt das Hauptfenster bereit, in dem alle Oberflächenelemente enthalten sind.
+\subsubsection{Schnittstelle}
+\subsubsection{Protokoll}
+\subsubsection{Verhalten}
+\subsubsection{Interne Realisierung}
+\subsubsection{Realisierte Anforderungen}
+
+\subsection{Komponente: TaskManager}
+Der TaskManager verwaltet die Informationen zu Taskstypen , prüft Kompatibilitäten zwischen Tasks und dient als Factory für Tasks.
+\subsubsection{Schnittstelle}
+\subsubsection{Protokoll}
+\subsubsection{Verhalten}
+\subsubsection{Interne Realisierung}
+\subsubsection{Realisierte Anforderungen}
+
+\newpage
+\subsection{Komponente: PipelineModel}
+Das PipelineModel hält die interne nichtgrafische Representation der Pipeline und bietet Schnittstellen für die Verwaltung von Tasks aus der Pipeline und der Validierung einer Pipeline. 
+\subsubsection{Schnittstelle}
+\subsubsection{Protokoll}
+\subsubsection{Verhalten}
+\subsubsection{Interne Realisierung}
+\subsubsection{Realisierte Anforderungen}
+
+
+\subsection{Komponente: PipeImEx}
+Die Komponente PipeImEx übernimmt die Funktionalität des Importierens und Exportierens.
+\subsubsection{Schnittstelle}
+\subsubsection{Protokoll}
+\subsubsection{Verhalten}
+\subsubsection{Interne Realisierung}
+\subsubsection{Realisierte Anforderungen}
+
+
+\subsection{Komponente: Help}
+Die Komponente Help übernimmt die Funktionalität der Hilfe.
+\subsubsection{Schnittstelle}
+\subsubsection{Protokoll}
+\subsubsection{Verhalten}
+\subsubsection{Interne Realisierung}
+\subsubsection{Realisierte Anforderungen}
+
+\subsection{Komponente: UndoRedoManager}
+Die Komponente UndoRedoManager übernimmt die Funktionalität von Rückgängig und von Wiederherstellen.
+\subsubsection{Schnittstelle}
+\subsubsection{Protokoll}
+\subsubsection{Verhalten}
+\subsubsection{Interne Realisierung}
+\subsubsection{Realisierte Anforderungen}
+
+\subsection{Komponente: BoundingBoxChooser}
+Die Komponente BoundingBoxChooser übernimmt die Funktionalität um einen Kartenausschnitt grafisch auszuwählen.
+\subsubsection{Schnittstelle}
+\subsubsection{Protokoll}
+\subsubsection{Verhalten}
+\subsubsection{Interne Realisierung}
+\subsubsection{Realisierte Anforderungen}
+
+\subsection{Komponente: I18N}
+Die Komponente I18N übernimmt die Funktionalität der Internationalisierung.
+\subsubsection{Schnittstelle}
+\subsubsection{Protokoll}
+\subsubsection{Verhalten}
+\subsubsection{Interne Realisierung}
+\subsubsection{Realisierte Anforderungen}
+
+\subsection{Komponente: PipeStore}
+Die Komponente PipeStore übernimmt die Funktionalität des Ladens und Speicherns von Pipelines.
+\subsubsection{Schnittstelle}
+\subsubsection{Protokoll}
+\subsubsection{Verhalten}
+\subsubsection{Interne Realisierung}
+\subsubsection{Realisierte Anforderungen}
+
 \subsection{Verbindungen}
 
 \section{Externe Schnittstellen}
