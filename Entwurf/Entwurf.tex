@@ -47,7 +47,7 @@ Die TaskBox implementiert eine GUI Komponente die alle zum momentan selektierten
 \subsubsection{Schnittstelle}
 Die TaskBox implementiert die Interfaces TaskSelectEventListener und TaskForAddEventListener. Der  Konstruktor übernimmt ein PipeModel, in das die TaskBox neue Tasks einfügen soll. 
 \begin{center}
-\includegraphics[width=17cm]{Schnittstelle_Taskbox.png}
+\includegraphics[width=17cm]{Schnittstelle_TaskBox.png}
 \end{center}
 \subsubsection{Protokoll}
 Nach der Konstruktion muss die TaskBox noch als EventListener registriert und zur Benutzeroberfläche hinzugefügt werden.
@@ -71,6 +71,9 @@ Wird ein Tasks selektiert, so wird ein TaskSelectEvent ausgelöst. Wird kein Tas
 \subsection{Komponente: ParameterBox}
 Die ParameterBox zeigt die Parameter des aktuell selektierten Tasks an und ermöglicht dem Benutzer diese zu ändern. 
 \subsubsection{Schnittstelle}
+\begin{center}
+\includegraphics[width=17cm]{Schnittstelle_ParameterBox.png}
+\end{center}
 \subsubsection{Protokoll}
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
@@ -87,6 +90,9 @@ Die Application stellt das Hauptfenster bereit, in dem alle Oberflächenelemente
 \subsection{Komponente: TaskManager}
 Der TaskManager verwaltet die Informationen zu Taskstypen , prüft Kompatibilitäten zwischen Tasks und dient als Factory für Tasks.
 \subsubsection{Schnittstelle}
+\begin{center}
+\includegraphics[width=8cm]{Schnittstelle_TaskManager.png}
+\end{center}
 \subsubsection{Protokoll}
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
@@ -96,6 +102,9 @@ Der TaskManager verwaltet die Informationen zu Taskstypen , prüft Kompatibilit�
 \subsection{Komponente: PipelineModel}
 Das PipelineModel hält die interne nichtgrafische Representation der Pipeline und bietet Schnittstellen für die Verwaltung von Tasks aus der Pipeline und der Validierung einer Pipeline. 
 \subsubsection{Schnittstelle}
+\begin{center}
+\includegraphics[width=17cm]{Schnittstelle_PipelineModel.png}
+\end{center}
 \subsubsection{Protokoll}
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
@@ -105,6 +114,9 @@ Das PipelineModel hält die interne nichtgrafische Representation der Pipeline u
 \subsection{Komponente: PipeImEx}
 Die Komponente PipeImEx übernimmt die Funktionalität des Importierens und Exportierens.
 \subsubsection{Schnittstelle}
+\begin{center}
+\includegraphics[width=17cm]{Schnittstelle_PipeImEx.png}
+\end{center}
 \subsubsection{Protokoll}
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
@@ -119,17 +131,10 @@ Die Komponente Help übernimmt die Funktionalität der Hilfe.
 \subsubsection{Interne Realisierung}
 \subsubsection{Realisierte Anforderungen}
 
-\subsection{Komponente: UndoRedoManager}
-Die Komponente UndoRedoManager übernimmt die Funktionalität von Rückgängig und von Wiederherstellen.
-\subsubsection{Schnittstelle}
-\subsubsection{Protokoll}
-\subsubsection{Verhalten}
-\subsubsection{Interne Realisierung}
-\subsubsection{Realisierte Anforderungen}
-
 \subsection{Komponente: BoundingBoxChooser}
 Die Komponente BoundingBoxChooser übernimmt die Funktionalität um einen Kartenausschnitt grafisch auszuwählen.
 \subsubsection{Schnittstelle}
+Die Schnittstellen übernehmen die API.
 \subsubsection{Protokoll}
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
@@ -138,14 +143,31 @@ Die Komponente BoundingBoxChooser übernimmt die Funktionalität um einen Karten
 \subsection{Komponente: I18N}
 Die Komponente I18N übernimmt die Funktionalität der Internationalisierung.
 \subsubsection{Schnittstelle}
+\begin{center}
+\includegraphics[width=8cm]{Schnittstelle_I18N.png}
+\end{center}
 \subsubsection{Protokoll}
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
 \subsubsection{Realisierte Anforderungen}
 
-\subsection{Komponente: PipeStore}
+\subsection{Komponente: IPipeStore}
 Die Komponente PipeStore übernimmt die Funktionalität des Ladens und Speicherns von Pipelines.
 \subsubsection{Schnittstelle}
+\begin{center}
+\includegraphics[width=8cm]{Schnittstelle_IPipeStore.png}
+\end{center}
+\subsubsection{Protokoll}
+\subsubsection{Verhalten}
+\subsubsection{Interne Realisierung}
+\subsubsection{Realisierte Anforderungen}
+
+\subsection{Komponente: ConfigurationsManager}
+Die Komponente ConfigurationsManager übernimmt die Funktionalität der Konfiguration von OsmUi.
+\subsubsection{Schnittstelle}
+\begin{center}
+\includegraphics[width=7cm]{Schnittstelle_ConfigurationManager.png}
+\end{center}
 \subsubsection{Protokoll}
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
