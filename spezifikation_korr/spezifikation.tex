@@ -136,7 +136,7 @@ wird es ein weiteres Einstellungsfenster geben.\\
 \end{center}
 \subsubsection{Taskpalette}
 Im linken Teil der Benutzeroberfläche wird im Tab "Tasks'' eine Liste der gerade zum Einfügen verfügbaren Tasks dargestellt. Dabei kann die Darstellung als Icon,
-Text oder Kombination erfolgen. Es werden nur Tasks angezeigt die gerade auch einfügbar sind. \\
+Text oder Kombination erfolgen. Es werden nur Tasks angezeigt, die gerade auch einfügbar sind. \\
 Am Anfang sind dies zum Beispiel alle Tasks, (z.B. read XML) die keine eingehenden Verbindungen haben. Ist in der Pipelinebox ein Task ausgewählt, so
 sind nur diejenigen Tasks sichtbar, die mit dem/den Ausgang/Ausgängen des ausgewählten Task kompatibel sind.\\
 So wird verhindert, dass der Benutzer Pipelines bauen kann, die nicht durch Osmosis ausführbar sind.
@@ -145,7 +145,7 @@ In der Pipelinebox wird die Pipeline grafisch dargestellt und es können Tasks z
 bearbeitet oder ein neuer Task über die Taskpalette - wie oben beschrieben - angefügt werden. Desweiteren kann eine Verbindung zu einem anderen Task, der noch offene
 Inputs hat, hergestellt werden.
 \subsubsection{Parametertab}
-Wählt der Benutzer einen Task aus, so zeigt OsmUi den Parametertab an, in dem alle - für den jeweiligen Tasktyp vorhandenen - Parameter eingegeben werden können.
+Wählt der Benutzer einen Task aus (Doppelklick), so zeigt OsmUi den Parametertab an, in dem alle - für den jeweiligen Tasktyp vorhandenen - Parameter eingegeben werden können.
 Hierbei kann die Eingabe eingeschränkt sein und als Spanne von Zahlen, als Kartenausschnitt oder als freier Text erfolgen. Dabei wird der für den Datentyp beste Eingabemodus gewählt.\\
 \begin{center}
 \begin{figure}[h!]
@@ -220,6 +220,22 @@ Beim Selektieren des Menüeintrags \textbf{Hilfe} öffnet sich ein Dialog. Der B
 \subsubsection{Lokalisation}
 OsmUi wird eine übersetzte Benutzeroberfläche für mindestens die Sprachen Deutsch und Englisch bieten. Dabei wird die aktuell verwendete
 Sprache aus den hierfür vorgesehenen Systemvariablen eingelesen, um sie ohne Interaktion durch den Benutzer in dessen System einzugliedern. Sollte eine Sprache nicht vorhanden sein wir Englisch als Standardsprache verwendet.
+
+\section{Usabillity Patterns}
+Um die Verwendung von OsmUi für den Benutzer so komfortabel wie möglich zu gestalten, werden einige Usabillity Patterns verwendet
+\subsection{Direkte Validierung}
+OsmUi validiert die Eingaben des Benutzers insofern, dass es prüft, ob zwingend notwendige Felder leer gelassen wurden.
+\subsection{Warnung}
+Wenn der Benutzer das Programm schließen möchte, ohne zuvor gespeichert zu haben, gibt das Programm eine Warnung aus.
+\subsection{Undo}
+Um Fehler leicht rückgängig machen zu können, bietet OsmUi die möglichkeit den letzten gemachten Schritt rückgängig zu machen.
+\subsection{Redo}
+Ein rückgängig gemachter Schritt kann wieder hergestellt werden.
+\subsection{Filter}
+Um dem Benutzer die Erstellung einer korrekten Pipeline zu vereinfachen, werden in der Taskbox nur die kompatiblen Tasks angezeigt. Ebeno können in der Pipelinebox nur kompatible Tasks angehängt werden.
+\subsection{gute Standardwerte}
+Damit der Benutzer möglichst wenige Werte eingeben muss, werden die Parameter eines Tasks zuerst mit sinnvollen Standardwerten gefüllt. Diese kann der Benutzer selbs ändern.
+
 \section{Use Cases}
 \subsection{Diagramm}
 \begin{center}
@@ -465,15 +481,22 @@ Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer inst
 \hline Nachbedingung & Ein neuer Task wurde hinzugefügt \\ 
 \hline Nachbedingung im Sonderfall 1a) & Ein neuer Input-Task wurde unverbunden hinzugefügt\\
 \hline Nachbedingung im Sonderfall 1b) & Kein neuer Task wurde hinzugefügt\\
+\hline Nachbedingung im Sonderfall 2a) & Ein bereits vorhandener Task wurde angefügt\\
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & 1 Der Benutzer klickt auf den Plus-Button des Tasks, an den angefügt werden soll
-\newline 2 Der Benutzer wählt aus der Liste der kompatiblen (eventuell schon vorhandenen) Tasks einen aus (Doppelklick)
+\hline Normalablauf & 1 Der Benutzer selektiert den Task, an den angefügt werden soll
+\newline 2 Der Benutzer wählt aus der Liste der kompatiblen Tasks in der Taskpalette einen aus (Doppelklick oder Bestätigung auf \glqq einfügen'')
 \newline 3 Der gewälte Task wird in die Pipeline eingebunden\\ 
 \hline Sonderfall 1a) & Der Benutzer hat keinen Task selektiert
 \newline 1a.1 Der Benutzer wählt einen neuen Input-Task aus
 \newline 1a.2 Der neue Input-Task wird unverbunden in die Pipeline eingefügt\\
 \hline Sonderfall 1b) & 1b.1 Der Benutzer klickt erneut auf den selektierten Task
 \newline 1b.2 Der Task gilt nicht mehr als selektiert\\
+\hline Sonderfall 2a) & 2a.1 Der Benutzer klickt rechts auf einen Task in der Pipelinebox
+\newline 2a.2 OsmUi zeigt den Punkt \glqq anfügen''
+\newline 2a.3 Der Benutzer wählt \glqq anfügen''
+\newline 2a.4 Der Task wird an den selektierten Task a\\ngefügt\\
+\hline Sonderfall 2a2a) & Der Punkt \glqq anfügen'' ist ausgegraut
+\newline $ \rightarrow$ Schritt 2\\
 \hline
 \end{tabular}
 \end{center}
@@ -521,15 +544,18 @@ Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer inst
 \hline Name & \textbf{Task-Parameter einstellen} \\ 
 \hline Ziel & Die Parameter eines Tasks sollen geändert werden\\ 
 \hline Vorbedingung & Es gibt mindestens einen Task\\ 
-\hline Nachbedingung & Die Pipeline wurde geladen\\  
-\hline Nachbedingung im Sonderfall 4a) & Die Pipeline wurde geladen\\
-\hline Nachbedingung im Sonderfall 4b) & Es wurde keine Pipeline geladen\\
+\hline Nachbedingung & Die Parameter wurden geändert\\  
+\hline Nachbedingung im Sonderfall 3a) & Die Parameter wurden nicht geändert\\
+\hline Nachbedingung im Sonderfall 4b) & Die Parameter wurden geändert?\\
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer macht einen Doppelklick auf den zu ändernden Task
 \newline 2 OsmUi zeigt anstatt der Taskpalette die momentanen Paranetereinstellungen an
 \newline 3 Der Benutzer ändert die Parameter
-\newline 4 Der Benutzer setzt seine Arbeit beliebig fort\\ 
+\newline 4 \textbf{Direkte Validierung:} OsmUi prüft die Eingaben auf leer gleassene Felder
+\newline 5 Der Benutzer setzt seine Arbeit beliebig fort\\ 
 \hline Sonderfall 3a) & $ \rightarrow$ Schritt 4\\
+\hline Sonderfall 5a) & 5a.1 OsmUi zeigt eine Fehlermeldung an, der Benutzer bestätigt diese
+\newline 5a.2 $ \rightarrow$ Schritt 3\\
 \hline 
 \end{tabular} 
 \end{center}
@@ -629,7 +655,7 @@ Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer inst
 \newline 3 Der Benutzer wählt \glqq schließen''
 \newline 4 OsmUi schließt das Programm\\
 \hline Sonderfall 4a)& Die aktuelle Pipeline wurde noch nicht gespeichert
-\newline 4a.1 OsmUi zeigt eine Fehlermeldung
+\newline 4a.1 \textbf{Warnung:} OsmUi zeigt eine Fehlermeldung
 \newline 4a.2 Der Benutzer wählt \glqq speichern''
 \newline 4a.3 $ \rightarrow$ Use Case speichern
 \newline 4a.4 $ \rightarrow$ Schritt 4\\
@@ -842,5 +868,7 @@ Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer inst
 \begin{itemize}
 \item Version 1.0 - Erstellung der Spezifikation (15.11.10)
 \item Version 1.1 -	Korrekturen nach dem Review (29.11.10)
+\item Version 1.2 - Änderung des Use Case Task einfügen (10.12.10)
+\item Version 1.3 - Hinzufügen von Usabillity Patterns (11.12.10)
 \end{itemize}
 \end{document}
