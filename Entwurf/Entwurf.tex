@@ -103,7 +103,7 @@ Bereitstellen einer abstrahierten Form für Osmosis Tasks die leicht erweiterbar
 
 \newpage
 \subsection{Komponente: PipelineModel}
-Das PipelineModel hält die interne nichtgrafische Repräsentation der Pipeline und bietet Schnittstellen für die Verwaltung von Tasks in der Pipeline und der Validierung einer Pipeline. (Feststellen ob sie Ausführbar ist)
+Das PipelineModel hält die interne nichtgrafische Repräsentation der Pipeline und bietet Schnittstellen für die Verwaltung von Tasks in der Pipeline und der Validierung einer Pipeline. (Feststellen ob sie ausführbar ist)
 \subsubsection{Schnittstelle}
 Der Zugriff auf Tasks erfolgt direkt über Referenzen auf konkrete Task Objekte, dies können zum Beispiel erreicht werden
 indem die Pipeline von den SourceTasks (also denjenigen ohne eingehende Pipes) durchlaufen wird. Über Task Referenzen können Tasks im PipelineModel verbunden oder gelöscht werden. Desweiteren löst das TaskModel ein ModelChangedEvent aus sobald das Modell verändert wurde. Nur für die Interaktion mit der PipelineBox vorgesehen ist der direkte Zugriff auf die eingebettete mxGraph Komponente.
@@ -111,6 +111,7 @@ indem die Pipeline von den SourceTasks (also denjenigen ohne eingehende Pipes) d
 \includegraphics[width=17cm]{Schnittstelle_PipelineModel.png}
 \end{center}
 \subsubsection{Protokoll}
+Die Komponente bekommt Anfragen über das Model und gibt die passenden Informationen zurück.
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
 Das PipelineModel benutzt zum Speichern der Pipeline eine mxGraph Komponente, hierbei wird jedoch versucht durch entsprechendes Design des PipelineModels sowie der Task Objekte (die eigene Methoden implementieren um von einer Task zu
