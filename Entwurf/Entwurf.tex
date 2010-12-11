@@ -177,9 +177,18 @@ Die Komponente ConfigurationsManager übernimmt die Funktionalität der Konfigur
 
 \section{Externe Schnittstellen}
 \subsection{Dauerhafte Datenspeicherung}
-\subsubsection{Datei/Datenbank: XYZ}
-\subsection{Externer Zugriff}
-\subsubsection{Schnittstelle: XYZ}
+Die geplante Implementierung, sieht vor Pipelines aus/in bash- und bat-Scripten zu importieren/exportieren, Pipelines aus der Zwischenablage zu importieren und aus/in .smu Dateien Piplines zu Laden/Speichern. Außerdem soll die Programmkonfiguration in in das Heimat-/Konfigurationsverzeichnisses des Benutzers gespeichert werden. Diese Speicherung erfolgt in einem für Menschen lesbaren XML Format in eine .conf Datei.
+\subsubsection{Datei/Datenbank: .smu}
+In dieser Datei wird die Pipline. Um die Daten in/aus dieser Datei zu speichern/laden wir das Serialisierungsverfahren von Java benutzt 
+\subsubsection{Datei/Datenbank: .conf}
+Diese  Dateiformat dient dazu die Systemeinstellungen von Osmui zu speichern die geschieht im XML-Format. Zu den zu speichernden Informationen gehören der Osmosis-Pfad.
+\subsubsection{Datei/Datenbank: .dat}
+Dieses Dateiformat dient dazu ein Script bereitzustellen, mit dem der Benutzer den generierten Osmosis Aufruf unter Windows Systemen leicht ausführen kann. Dies wird dadurch realisiert, dass der Osmosispfad mit den zugehörigen Tasks und deren Parametern der ersten Zeile steht.
+\subsubsection{Datei/Datenbank: .sh}
+Dieses Dateiformat dient dazu ein Script bereitzustellen, mit dem der Benutzer den generierten Osmosis Aufruf unter Unix Systemen leicht ausführen kann. Dies wird dadurch realisiert, dass als Header \glqq \#!/bin/sh" geschrieben ist. In der darauf folgenden Zeile befindet sich der Osmosis-Pfad mit den zugehörigen Tasks und deren Parametern.
+%\subsection{Externer Zugriff}
+
+%\subsubsection{Schnittstelle: XYZ}
 
 \appendix%
 
@@ -193,6 +202,7 @@ Die Komponente ConfigurationsManager übernimmt die Funktionalität der Konfigur
 \item Version 1.0 8.12.2010 : Initialisierung
 \item Version 1.1 9.12.2010 : Komponentennamen festgelegt
 \item Version 1.2 10.12.2010 : Klassendiagramme für Komponenten hinzugefügt
+\item Version 1.3 11.12.2010 : Komponentenbeschreibungen, Externe Schnittstellen hinzugefügt
 \end{itemize}
 
 \end{document}
