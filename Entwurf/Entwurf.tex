@@ -72,6 +72,7 @@ Wird ein Tasks selektiert, so wird ein TaskSelectEvent ausgelöst. Wird kein Tas
 Die ParameterBox zeigt die Parameter des aktuell selektierten Tasks an und ermöglicht dem Benutzer diese zu ändern. 
 \subsubsection{Schnittstelle}
 \subsubsection{Protokoll}
+Um die Boundingbox zu benutzen, muss sie als erstes geöffnet werden (TaskDoubleklickEvent). Dann können die Daten geändert werden. Danach wird sie wieder geschlossen.
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
 \subsubsection{Realisierte Anforderungen}
@@ -106,6 +107,10 @@ Das PipelineModel hält die interne nichtgrafische Representation der Pipeline u
 Die Komponente PipeImEx übernimmt die Funktionalität des Importierens und Exportierens.
 \subsubsection{Schnittstelle}
 \subsubsection{Protokoll}
+Importieren: \\
+Die Komponente bekommt einen filename und importiert diese Pipeline dann.\\
+Exportieren: \\
+Die Komponente bekommt einen filename und eine Pipeline. Diese wird dann exporiert.
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
 \subsubsection{Realisierte Anforderungen}
