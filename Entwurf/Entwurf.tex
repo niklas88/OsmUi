@@ -78,9 +78,9 @@ Die ParameterBox zeigt die Parameter des aktuell selektierten Tasks an und ermö
 \includegraphics[width=17cm]{Schnittstelle_ParameterBox.png}
 \end{center}
 \subsubsection{Protokoll}
+Um die ParameterBox zu benutzen, muss sie als erstes geöffnet werden (TaskDoubleklickEvent). Dann können die Daten geändert werden. Danach wird sie wieder geschlossen.
 \subsubsection{Verhalten}
-Die ParameterBox wird über die Auswahl eines Tasks durch taskSelectedEvents informiert und kommt über das EventObject an das eigentliche Task Objekt, in ihm werden die Parameter direkt verändert.
-%\subsubsection{Interne Realisierung}
+\subsubsection{Interne Realisierung}
 \subsubsection{Realisierte Anforderungen}
 Einstellen von Task Parametern
 
@@ -94,6 +94,7 @@ von der Form \glqq fast-read-xml'' dies ermöglicht ein einfacheres und zugleich
 \includegraphics[width=8cm]{Schnittstelle_TaskManager.png}
 \end{center}
 \subsubsection{Protokoll}
+Der Taskmanager bekommt eine Anfrage zu einem Task und gibt dann die passenden Informationen heraus.
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
 \subsubsection{Realisierte Anforderungen}
@@ -109,6 +110,7 @@ indem die Pipeline von den SourceTasks (also denjenigen ohne eingehende Pipes) d
 \includegraphics[width=17cm]{Schnittstelle_PipelineModel.png}
 \end{center}
 \subsubsection{Protokoll}
+Das PopelineModel bekommt Änderungen and der aktuellenn Pipeline übergeben und speichert diese dann. Es gibt dann die Informationen über die Pipeline zurück, damit diese grafisch dargestellt werden kann.
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
 Das PipelineModel benutzt zum Speichern der Pipeline eine mxGraph Komponente, hierbei wird jedoch versucht durch entsprechendes Design des PipelineModels sowie der Task Objekte (die eigene Methoden implementieren um von einer Task zu
@@ -125,6 +127,10 @@ Die Komponente PipeImEx übernimmt die Funktionalität des Importierens und Expo
 \includegraphics[width=17cm]{Schnittstelle_PipeImEx.png}
 \end{center}
 \subsubsection{Protokoll}
+Importieren: \\
+Die Komponente bekommt einen filename und importiert diese Pipeline dann.\\
+Exportieren: \\
+Die Komponente bekommt einen filename und eine Pipeline. Diese wird dann exporiert.
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
 Die Komponente nutzt ein allgemeines Interface sowie eine dieses Interface realisierende Klasse, die den eigentlichen Shell Im-/Export übernimmt. Für das eigentliche Erzeugen des Osmosis Aufrufs wird eine Helferklasse Namens CommandlineTranslator verwendet, die es ermöglicht diese mehrfach benötigte relativ komplexe Arbeit zu kapseln.
@@ -142,7 +148,7 @@ Es wird eventuell eine Library verwendet um die Hilfe anzuzeigen.
 \subsubsection{Realisierte Anforderungen}
 Bereitstellen einer Online-Hilfe
 \subsection{Komponente: BoundingBoxChooser}
-Die Komponente BoundingBoxChooser übernimmt die Funktionalität um einen Kartenausschnitt grafisch auszuwählen.
+Die Komponente BoundingBoxChooser übernimmt die Funktionalität einen Kartenausschnitt grafisch auszuwählen.
 \subsubsection{Schnittstelle}
 Die Schnittstelle wird durch die API bereit gestellt.
 %subsubsection{Protokoll}
@@ -158,6 +164,7 @@ Die Komponente I18N übernimmt die Funktionalität der Internationalisierung.
 \includegraphics[width=8cm]{Schnittstelle_I18N.png}
 \end{center}
 \subsubsection{Protokoll}
+Die Komponente bekommt eine Sprache und einen Platzhalter übermittelt und gibt den entsprechendenb Text in der richtigen Sprache heraus.
 \subsubsection{Verhalten}
 Diese Komponente ermöglicht es zu einem Keystring eine lokalisierte Version zu finden und verwaltet die Sprachdateien, sowie die Auswahl der richtigen Sprache.
 \subsubsection{Interne Realisierung}
@@ -172,6 +179,10 @@ Die Komponente PipeStore übernimmt die Funktionalität des Ladens und Speichern
 \includegraphics[width=8cm]{Schnittstelle_IPipeStore.png}
 \end{center}
 \subsubsection{Protokoll}
+Laden: \\
+Die Komponente bekommt einen Filename und lädt dann die Datei.
+Speichern: \\
+Die Komponente bekommt einen Filename und PipelineModel und speichert dann.
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
 \subsubsection{Realisierte Anforderungen}
@@ -183,6 +194,7 @@ Die Komponente ConfigurationsManager übernimmt die Funktionalität der Konfigur
 \includegraphics[width=7cm]{Schnittstelle_ConfigurationManager.png}
 \end{center}
 \subsubsection{Protokoll}
+Die Komponente gibt auf Anfrage Informationen über die Konfiguration zurück.
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
 \subsubsection{Realisierte Anforderungen}
