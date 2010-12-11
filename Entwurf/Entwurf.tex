@@ -29,11 +29,11 @@ Entwurf von OsmUi}
 \section{Einleitung}
 Die folgenden Abschnitte beschreiben den Entwurf und die Architektur von OsmUi.
 \subsection{Das Software-System}
-OsmUi stellt eine Benutzeroberfläche für das Kommandozeilen-Tool Osmosis dar. Die Implementierung erfolgt in Java 6, die Oberfläche wird mit Swing realisiert. Für die graphische Darstellung der Pipelines wird auf JGraph zurückgegeriffen. Die Pipelines werden entweder in smu-Dateien gespeichert oder als Kommandozeilenscripst exportiert.
+OsmUi stellt eine Benutzeroberfläche für das Kommandozeilen-Tool Osmosis dar. Die Implementierung erfolgt in Java 6, die Oberfläche wird mit Swing realisiert. Für die graphische Darstellung der Pipelines wird auf JGraph zurückgegriffen. Die Pipelines werden entweder in smu-Dateien gespeichert oder als Kommandozeilenscript exportiert.
 \subsection{Entwurfsprinzipien}
 
 \subsection{Überblick über den Entwurf}
-In den folgenden Abschnitten werden zuerst die Architektur (Kapitel 2) und dann die einzelnen Komponenten (Kapitel 3) beschrieben. Die genaue Dokumentation der Klassen und Methoden erfolgt direkt im Programm als JavaDoc. Desweiteren soll dieses Dokument, die Entwurfsentscheidungen dokumentieren.
+In den folgenden Abschnitten werden zuerst die Architektur (Kapitel 2) und dann die einzelnen Komponenten (Kapitel 3) beschrieben. Die genaue Dokumentation der Klassen und Methoden erfolgt direkt im Programm als JavaDoc. Des weiteren soll dieses Dokument, die Entwurfsentscheidungen dokumentieren.
 
 \section{Architektur}
 Osmui setzt sich aus mehreren Komponenten zusammen. Diese sollen so organisiert werden, dass der Zusammenhalt innerhalb der Komponenten groß und die Kopplung zwischen ihnen möglichst klein ist. Zur Strukturierung des Systems sollen weiterhin GUI-Komponenten klar von den dahinter liegenden Modellen getrennt werden. Da OsmUi jedoch selbst Oberfläche für ein Kommandozeilenwerkzeug ist, existiert keine klare Frontend/Backend-Trennung.\\
@@ -103,10 +103,10 @@ Bereitstellen einer abstrahierten Form für Osmosis Tasks die leicht erweiterbar
 
 \newpage
 \subsection{Komponente: PipelineModel}
-Das PipelineModel hält die interne nichtgrafische Repräsentation der Pipeline und bietet Schnittstellen für die Verwaltung von Tasks in der Pipeline und der Validierung einer Pipeline. (Feststellen ob sie Ausführbar ist)
+Das PipelineModel hält die interne nicht grafische Repräsentation der Pipeline und bietet Schnittstellen für die Verwaltung von Tasks in der Pipeline und der Validierung einer Pipeline. (Feststellen ob sie Ausführbar ist)
 \subsubsection{Schnittstelle}
 Der Zugriff auf Tasks erfolgt direkt über Referenzen auf konkrete Task Objekte, dies können zum Beispiel erreicht werden
-indem die Pipeline von den SourceTasks (also denjenigen ohne eingehende Pipes) durchlaufen wird. Über Task Referenzen können Tasks im PipelineModel verbunden oder gelöscht werden. Desweiteren löst das TaskModel ein ModelChangedEvent aus sobald das Modell verändert wurde. Nur für die Interaktion mit der PipelineBox vorgesehen ist der direkte Zugriff auf die eingebettete mxGraph Komponente.
+indem die Pipeline von den SourceTasks (also denjenigen ohne eingehende Pipes) durchlaufen wird. Über Task Referenzen können Tasks im PipelineModel verbunden oder gelöscht werden. Des weiteren löst das TaskModel ein ModelChangedEvent aus sobald das Modell verändert wurde. Nur für die Interaktion mit der PipelineBox vorgesehen ist der direkte Zugriff auf die eingebettete mxGraph Komponente.
 \begin{center}
 \includegraphics[width=17cm]{Schnittstelle_PipelineModel.png}
 \end{center}
@@ -114,7 +114,7 @@ indem die Pipeline von den SourceTasks (also denjenigen ohne eingehende Pipes) d
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
 Das PipelineModel benutzt zum Speichern der Pipeline eine mxGraph Komponente, hierbei wird jedoch versucht durch entsprechendes Design des PipelineModels sowie der Task Objekte (die eigene Methoden implementieren um von einer Task zu
-den angeschlossenen nachbar Tasks zu gelangen und die Kanten (Pipes) zu inspizieren) die Funktionalität des mxGrap Modells
+den angeschlossenen Nachbar-Tasks zu gelangen und die Kanten (Pipes) zu inspizieren) die Funktionalität des mxGrap Modells
 weitestgehend zu Kapseln so, dass dieses gegebenenfalls ersetzt werden kann ohne anderen Code ändern zu müssen.
 Dabei ist es wichtig darauf zu achten, die getGraph() Methode nur äußerst sparsam einzusetzen, genauer gesagt nur in der TaskBox Komponente. (Leider ist eine bessere Kapselung wie zum Beispiel mit C++ friend Klassen in Java nicht auf dieser Ebene realisierbar)
 \subsubsection{Realisierte Anforderungen}
@@ -219,13 +219,13 @@ Zusammenführen der Komponenten
 \subsection{Verbindungen}
 \section{Externe Schnittstellen}
 \subsection{Dauerhafte Datenspeicherung}
-Die geplante Implementierung, sieht vor Pipelines aus/in bash- und bat-Scripten zu importieren/exportieren, Pipelines aus der Zwischenablage zu importieren und aus/in .smu Dateien Piplines zu Laden/Speichern. Außerdem soll die Programmkonfiguration in in das Heimat-/Konfigurationsverzeichnisses des Benutzers gespeichert werden. Diese Speicherung erfolgt in einem für Menschen lesbaren XML Format in eine .conf Datei.
+Die geplante Implementierung, sieht vor Pipelines aus/in bash- und bat-Scripten zu importieren/exportieren, Pipelines aus der Zwischenablage zu importieren und aus/in .smu Dateien Pipelines zu Laden/Speichern. Außerdem soll die Programmkonfiguration in in das Heimat-/Konfigurationsverzeichnisses des Benutzers gespeichert werden. Diese Speicherung erfolgt in einem für Menschen lesbaren XML Format in eine .conf Datei.
 \subsubsection{Datei/Datenbank: .smu}
-In dieser Datei wird die Pipline. Um die Daten in/aus dieser Datei zu speichern/laden wir das Serialisierungsverfahren von Java benutzt 
+In dieser Datei wird die Pipeline. Um die Daten in/aus dieser Datei zu speichern/laden wir das Serialisierungsverfahren von Java benutzt 
 \subsubsection{Datei/Datenbank: .conf}
 Diese  Dateiformat dient dazu die Systemeinstellungen von Osmui zu speichern die geschieht im XML-Format. Zu den zu speichernden Informationen gehören der Osmosis-Pfad.
 \subsubsection{Datei/Datenbank: .dat}
-Dieses Dateiformat dient dazu ein Script bereitzustellen, mit dem der Benutzer den generierten Osmosis Aufruf unter Windows Systemen leicht ausführen kann. Dies wird dadurch realisiert, dass der Osmosispfad mit den zugehörigen Tasks und deren Parametern der ersten Zeile steht.
+Dieses Dateiformat dient dazu ein Script bereitzustellen, mit dem der Benutzer den generierten Osmosis Aufruf unter Windows Systemen leicht ausführen kann. Dies wird dadurch realisiert, dass der Osmosis-Pfad mit den zugehörigen Tasks und deren Parametern der ersten Zeile steht.
 \subsubsection{Datei/Datenbank: .sh}
 Dieses Dateiformat dient dazu ein Script bereitzustellen, mit dem der Benutzer den generierten Osmosis Aufruf unter Unix Systemen leicht ausführen kann. Dies wird dadurch realisiert, dass als Header \glqq \#!/bin/sh" geschrieben ist. In der darauf folgenden Zeile befindet sich der Osmosis-Pfad mit den zugehörigen Tasks und deren Parametern.
 %\subsection{Externer Zugriff}
