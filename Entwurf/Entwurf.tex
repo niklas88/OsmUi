@@ -78,6 +78,7 @@ Die ParameterBox zeigt die Parameter des aktuell selektierten Tasks an und ermö
 \includegraphics[width=17cm]{Schnittstelle_ParameterBox.png}
 \end{center}
 \subsubsection{Protokoll}
+Um die Boundingbox zu benutzen, muss sie als erstes geöffnet werden (TaskDoubleklickEvent). Dann können die Daten geändert werden. Danach wird sie wieder geschlossen.
 \subsubsection{Verhalten}
 Die ParameterBox wird über die Auswahl eines Tasks durch taskSelectedEvents informiert und kommt über das EventObject an das eigentliche Task Objekt, in ihm werden die Parameter direkt verändert.
 %\subsubsection{Interne Realisierung}
@@ -94,6 +95,7 @@ von der Form \glqq fast-read-xml'' dies ermöglicht ein einfacheres und zugleich
 \includegraphics[width=8cm]{Schnittstelle_TaskManager.png}
 \end{center}
 \subsubsection{Protokoll}
+Der Taskmanager bekommt eine Anfrage zu einem Task und gibt dann die passenden Informationen heraus.
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
 \subsubsection{Realisierte Anforderungen}
@@ -125,6 +127,10 @@ Die Komponente PipeImEx übernimmt die Funktionalität des Importierens und Expo
 \includegraphics[width=17cm]{Schnittstelle_PipeImEx.png}
 \end{center}
 \subsubsection{Protokoll}
+Importieren: \\
+Die Komponente bekommt einen filename und importiert diese Pipeline dann.\\
+Exportieren: \\
+Die Komponente bekommt einen filename und eine Pipeline. Diese wird dann exporiert.
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
 Die Komponente nutzt ein allgemeines Interface sowie eine dieses Interface realisierende Klasse, die den eigentlichen Shell Im-/Export übernimmt. Für das eigentliche Erzeugen des Osmosis Aufrufs wird eine Helferklasse Namens CommandlineTranslator verwendet, die es ermöglicht diese mehrfach benötigte relativ komplexe Arbeit zu kapseln.
@@ -172,6 +178,10 @@ Die Komponente PipeStore übernimmt die Funktionalität des Ladens und Speichern
 \includegraphics[width=8cm]{Schnittstelle_IPipeStore.png}
 \end{center}
 \subsubsection{Protokoll}
+Laden: \\
+Die Komponente bekommt einen Filename und lädt dann die Datei.
+Speichern: \\
+Die Komponente bekommt einen Filename und PipelineModel und speichert dann.
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
 \subsubsection{Realisierte Anforderungen}
@@ -183,6 +193,7 @@ Die Komponente ConfigurationsManager übernimmt die Funktionalität der Konfigur
 \includegraphics[width=7cm]{Schnittstelle_ConfigurationManager.png}
 \end{center}
 \subsubsection{Protokoll}
+Die Komponente gibt auf Anfrage Informationen über die Konfiguration zurück.
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
 \subsubsection{Realisierte Anforderungen}
@@ -194,6 +205,10 @@ Sie verkabelt die Eventhandler der anderen Komponenten und kümmert sich um die 
 \subsubsection{Schnittstelle}
 Die Application hat keine externen Schnittstellen, abgesehen von ihrem Konstruktor
 \subsubsection{Protokoll}
+Laden: \\
+Die Komponente bekommt einen Filename und lädt dann die Datei.
+Speichern: \\
+Die Komponente bekommt einen Filename und PipelineModel und speichert dann.
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
 Die Application nutzt das Singelton pattern um ihre Singularität innerhalb von OsmUi zu verdeutlichen und eventuell Zugriff durch die anderen Komponenten zu ermöglichen.
