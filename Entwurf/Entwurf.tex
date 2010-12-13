@@ -15,8 +15,8 @@
 Verena Käfer (2551188),\\
 Niklas Schnelle (2573250),\\
 Peter Vollmer (2553704)}
-\date{erstellt am 08.12.2010\\
-Version: 1.2}
+\date{erstellt am 11.12.2010\\
+Version: 1.3}
 \title{\includegraphics[width=15cm]{../projektplan/Logo_Osmui.png} \\ 
 Entwurf von OsmUi}
 
@@ -29,15 +29,15 @@ Entwurf von OsmUi}
 \section{Einleitung}
 Die folgenden Abschnitte beschreiben den Entwurf und die Architektur von OsmUi.
 \subsection{Das Software-System}
-OsmUi stellt eine Benutzeroberfläche für das Kommandozeilen-Tool Osmosis dar. Die Implementierung erfolgt in Java 6, die Oberfläche wird mit Swing realisiert. Für die graphische Darstellung der Pipelines wird auf JGraph zurückgegriffen. Die Pipelines werden entweder in smu-Dateien gespeichert oder als Kommandozeilenscript exportiert.
+OsmUi stellt eine Benutzeroberfläche für das Kommandozeilen-Tool Osmosis dar. Die Implementierung erfolgt in Java 6, die Oberfläche wird mit Swing realisiert. Für die graphische Darstellung der Pipelines wird auf JGraph zurückgegriffen. Die Pipelines werden entweder in smu-Dateien gespeichert oder als Kommandozeilenskript exportiert.
 \subsection{Entwurfsprinzipien}
 
 \subsection{Überblick über den Entwurf}
-In den folgenden Abschnitten werden zuerst die Architektur (Kapitel 2) und dann die einzelnen Komponenten (Kapitel 3) beschrieben. Die genaue Dokumentation der Klassen und Methoden erfolgt direkt im Programm als JavaDoc. Des weiteren soll dieses Dokument, die Entwurfsentscheidungen dokumentieren.
+In den folgenden Abschnitten werden zuerst die Architektur (Kapitel 2) und dann die einzelnen Komponenten (Kapitel 3) beschrieben. Die genaue Dokumentation der Klassen und Methoden erfolgt direkt im Programm als JavaDoc. Des weiteren soll dieses Dokument die Entwurfsentscheidungen dokumentieren.
 
 \section{Architektur}
-Osmui setzt sich aus mehreren Komponenten zusammen. Diese sollen so organisiert werden, dass der Zusammenhalt innerhalb der Komponenten groß und die Kopplung zwischen ihnen möglichst klein ist. Zur Strukturierung des Systems sollen weiterhin GUI-Komponenten klar von den dahinter liegenden Modellen getrennt werden. Da OsmUi jedoch selbst Oberfläche für ein Kommandozeilenwerkzeug ist, existiert keine klare Frontend/Backend-Trennung.\\
-Im folgenden sind die Komponenten beschrieben, wobei jeder Komponente im später System einer Java-Klasse entspricht.
+OsmUi setzt sich aus mehreren Komponenten zusammen. Diese sollen so organisiert werden, dass der Zusammenhalt innerhalb der Komponenten groß und die Kopplung zwischen ihnen möglichst klein ist. Zur Strukturierung des Systems sollen weiterhin GUI-Komponenten klar von den dahinter liegenden Modellen getrennt werden. Da OsmUi jedoch selbst Oberfläche für ein Kommandozeilenwerkzeug ist, existiert keine klare Frontend/Backend-Trennung.\\
+Im folgenden sind die Komponenten beschrieben, wobei jede Komponente im späteren System einer Java-Klasse entspricht.
 
 %\subsection{Komponentenübergreifende Funktionen}
 
@@ -62,7 +62,9 @@ Die PipelineBox zeigt die aktuelle Pipeline an und ermöglicht dem Benutzer Task
 \subsubsection{Schnittstelle}
 Die PipelineBox interagiert mit anderen Komponenten durch das erzeugen von TaskSelectEvent's und TaskDoubleclickEvent's.
 Sie ist dadurch gut vom Rest des Systems getrennt. Dies ist möglich, da sie alle komplexeren Interaktion mit dem Benutzer wie das verschieben von Tasks, löschen von Tasks und verbinden von Tasks intern und unter Benutzung anderer Komponenten regeln kann.
+\begin{center}
 \includegraphics[width=17cm]{Schnittstelle_PipelineBox.png}
+\end{center}
 \subsubsection{Protokoll}
 Wird ein Tasks selektiert, so wird ein TaskSelectEvent ausgelöst. Wird kein Task selektiert, so wird ein TaskSelectEvent mit Source gleich null ausgelöst. Ein Doppelklick auf ein Task löst ein TaskSelectEvent und ein TaskDoubleclickEvent aus.
 \subsubsection{Verhalten}
@@ -136,7 +138,7 @@ Die Komponente bekommt einen filename und eine Pipeline. Diese wird dann exporie
 \subsubsection{Interne Realisierung}
 Die Komponente nutzt ein allgemeines Interface sowie eine dieses Interface realisierende Klasse, die den eigentlichen Shell Im-/Export übernimmt. Für das eigentliche Erzeugen des Osmosis Aufrufs wird eine Helferklasse Namens CommandlineTranslator verwendet, die es ermöglicht diese mehrfach benötigte relativ komplexe Arbeit zu kapseln.
 \subsubsection{Realisierte Anforderungen}
-Importieren und Exportieren von Pipelines in Shellscripte.
+Importieren und Exportieren von Pipelines in Shellskripte.
 
 \subsection{Komponente: Help}
 Diese Komponente stellt einen Dialog zum einsehen der Online-Hilfe bereit.
@@ -224,7 +226,7 @@ Die geplante Implementierung, sieht vor Pipelines aus/in bash- und bat-Scripten 
 \subsubsection{Datei/Datenbank: .smu}
 In dieser Datei wird die Pipeline. Um die Daten in/aus dieser Datei zu speichern/laden wir das Serialisierungsverfahren von Java benutzt 
 \subsubsection{Datei/Datenbank: .conf}
-Diese  Dateiformat dient dazu die Systemeinstellungen von Osmui zu speichern die geschieht im XML-Format. Zu den zu speichernden Informationen gehören der Osmosis-Pfad.
+Diese  Dateiformat dient dazu die Systemeinstellungen von OsmUi zu speichern die geschieht im XML-Format. Zu den zu speichernden Informationen gehören der Osmosis-Pfad.
 \subsubsection{Datei/Datenbank: .dat}
 Dieses Dateiformat dient dazu ein Script bereitzustellen, mit dem der Benutzer den generierten Osmosis Aufruf unter Windows Systemen leicht ausführen kann. Dies wird dadurch realisiert, dass der Osmosis-Pfad mit den zugehörigen Tasks und deren Parametern der ersten Zeile steht.
 \subsubsection{Datei/Datenbank: .sh}
@@ -237,9 +239,9 @@ Dieses Dateiformat dient dazu ein Script bereitzustellen, mit dem der Benutzer d
 
 \section{Anhang}
 
-\section{Literatur zum Entwurf}
-\subsection{Entwurf}
-\subsection{Entwurfsmuster}
+%\section{Literatur zum Entwurf}
+%\subsection{Entwurf}
+%\subsection{Entwurfsmuster}
 \section{Versionshistorie}
 \begin{itemize}
 \item Version 1.0 8.12.2010 : Initialisierung
