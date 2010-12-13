@@ -91,13 +91,13 @@ Einstellen von Task Parametern
 Der TaskManager verwaltet die Informationen zu Taskstypen, prüft Kompatibilitäten zwischen Tasks und dient als Factory für Tasks. Diese werden dabei aus den TaskDescription Objekten erzeugt, welche aus einer \glqq osmosis-tasks.xml'' Datei gelesen wurden. Die Spezifikation der TaskDescription Klasse und weiterer hierfür notwenidiger Klassen wird mit Hilfe
 der \glqq Java Architecture for XML Binding`` erzeugt.
 \subsubsection{Schnittstelle}
-Der Zugriff aus TaskDescriptions und das erzeugen von Tasks mit Hilfe des TaskManagers erfolgt durch Angabe des Tasknamens
-von der Form \glqq fast-read-xml'' dies ermöglicht ein einfacheres und zugleich erweiterbares Interface, welches nicht von der Realisierung der Task Objekte abhängt.
+Der Zugriff auf TaskDescriptions und das erzeugen von Tasks mit Hilfe des TaskManagers erfolgt durch Angabe des Tasknamens
+von der Form \glqq fast-read-xml'' dies ermöglicht ein einfaches und zugleich erweiterbares Interface, welches nicht von der Realisierung der Task Objekte abhängt.
 \begin{center}
 \includegraphics[width=8cm]{Schnittstelle_TaskManager.png}
 \end{center}
 \subsubsection{Protokoll}
-Der Taskmanager bekommt eine Anfrage zu einem Task und gibt dann die passenden Informationen heraus.
+Der TaskManager bekommt eine Anfrage zu einem Task und gibt dann die passenden Informationen heraus.
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
 \subsubsection{Realisierte Anforderungen}
@@ -107,8 +107,8 @@ Bereitstellen einer abstrahierten Form für Osmosis Tasks die leicht erweiterbar
 \subsection{Komponente: PipelineModel}
 Das PipelineModel hält die interne nicht grafische Repräsentation der Pipeline und bietet Schnittstellen für die Verwaltung von Tasks in der Pipeline und der Validierung einer Pipeline. (Feststellen ob sie Ausführbar ist)
 \subsubsection{Schnittstelle}
-Der Zugriff auf Tasks erfolgt direkt über Referenzen auf konkrete Task Objekte, dies können zum Beispiel erreicht werden
-indem die Pipeline von den SourceTasks (also denjenigen ohne eingehende Pipes) durchlaufen wird. Über Task Referenzen können Tasks im PipelineModel verbunden oder gelöscht werden. Des weiteren löst das TaskModel ein ModelChangedEvent aus sobald das Modell verändert wurde. Nur für die Interaktion mit der PipelineBox vorgesehen ist der direkte Zugriff auf die eingebettete mxGraph Komponente.
+Der Zugriff auf Tasks erfolgt direkt über Referenzen auf konkrete Task Objekte, diese können zum Beispiel gefunden werden
+indem die Pipeline, ausgehend von den SourceTasks (also denjenigen ohne eingehende Pipes), durchlaufen wird. Über Task Referenzen können Tasks im PipelineModel verbunden oder gelöscht werden. Des weiteren löst das TaskModel ein ModelChangedEvent aus sobald das Modell verändert wurde. Nur für die Interaktion mit der PipelineBox vorgesehen ist der direkte Zugriff auf die eingebettete mxGraph Komponente.
 \begin{center}
 \includegraphics[width=17cm]{Schnittstelle_PipelineModel.png}
 \end{center}
@@ -174,7 +174,7 @@ Diese Komponente wird als Singelton realisiert
 \subsubsection{Realisierte Anforderungen}
 Lokalisierung
 
-\subsection{Komponente: IPipeStore}
+\subsection{Komponente: PipeStore}
 Die Komponente PipeStore übernimmt die Funktionalität des Ladens und Speicherns von Pipelines.
 \subsubsection{Schnittstelle}
 \begin{center}
@@ -185,22 +185,24 @@ Laden: \\
 Die Komponente bekommt einen Filename und lädt dann die Datei.
 Speichern: \\
 Die Komponente bekommt einen Filename und PipelineModel und speichert dann.
-\subsubsection{Verhalten}
+%\subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
+Die Pipestore Komponente besteht aus einer allgemein gehaltenen Interface Klasse, sowie einer Realsierung dieses Interfaces, welches
+zum Speichern Java Serialisierung verwendet.
 \subsubsection{Realisierte Anforderungen}
 
-\subsection{Komponente: ConfigurationsManager}
-Die Komponente ConfigurationsManager übernimmt die Funktionalität der Konfiguration von OsmUi.
+\subsection{Komponente: ConfigurationManager}
+Die Komponente ConfigurationManager übernimmt die Funktionalität der Konfiguration von OsmUi.
 \subsubsection{Schnittstelle}
 \begin{center}
 \includegraphics[width=7cm]{Schnittstelle_ConfigurationManager.png}
 \end{center}
 \subsubsection{Protokoll}
 Die Komponente gibt auf Anfrage Informationen über die Konfiguration zurück.
-\subsubsection{Verhalten}
-\subsubsection{Interne Realisierung}
+%\subsubsection{Verhalten}
+%\subsubsection{Interne Realisierung}
 \subsubsection{Realisierte Anforderungen}
-
+Speichern der Konfiguration
 
 \subsection{Komponente: Application}
 Die Application stellt das Hauptfenster bereit, in dem alle Oberflächenelemente enthalten sind.
@@ -214,7 +216,7 @@ Speichern: \\
 Die Komponente bekommt einen Filename und PipelineModel und speichert dann.
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
-Die Application nutzt das Singelton pattern um ihre Singularität innerhalb von OsmUi zu verdeutlichen und eventuell Zugriff durch die anderen Komponenten zu ermöglichen.
+Die Application nutzt das Singelton Pattern um ihre Singularität innerhalb von OsmUi zu verdeutlichen und eventuell Zugriff durch die anderen Komponenten zu ermöglichen.
 \subsubsection{Realisierte Anforderungen}
 Zusammenführen der Komponenten
 
