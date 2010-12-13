@@ -15,8 +15,8 @@
 Verena Käfer (2551188),\\
 Niklas Schnelle (2573250),\\
 Peter Vollmer (2553704)}
-\date{erstellt am 11.12.2010\\
-Version: 1.3}
+\date{erstellt am 13.12.2010\\
+Version: 1.4}
 \title{\includegraphics[width=15cm]{../projektplan/Logo_Osmui.png} \\ 
 Entwurf von OsmUi}
 
@@ -29,7 +29,7 @@ Entwurf von OsmUi}
 \section{Einleitung}
 Die folgenden Abschnitte beschreiben den Entwurf und die Architektur von OsmUi.
 \subsection{Das Software-System}
-OsmUi stellt eine Benutzeroberfläche für das Kommandozeilen-Tool Osmosis dar. Die Implementierung erfolgt in Java 6, die Oberfläche wird mit Swing realisiert. Für die graphische Darstellung der Pipelines wird auf JGraph zurückgegriffen. Die Pipelines werden entweder in smu-Dateien gespeichert oder als Kommandozeilenskript exportiert.
+OsmUi stellt eine Benutzeroberfläche für das Kommandozeilen-Tool Osmosis dar. Die Implementierung erfolgt in Java 6, die Oberfläche wird mit Swing realisiert. Für die grafische Darstellung der Pipelines wird auf JGraph zurückgegriffen. Die Pipelines werden entweder in smu-Dateien gespeichert oder als Kommandozeilenskript exportiert.
 \subsection{Entwurfsprinzipien}
 
 \subsection{Überblick über den Entwurf}
@@ -52,7 +52,7 @@ Die TaskBox implementiert das Interface TaskSelectEventListener um auf die Selek
 \subsubsection{Protokoll}
 Nach der Konstruktion muss die TaskBox noch als EventListener registriert und zur Benutzeroberfläche hinzugefügt werden.
 \subsubsection{Verhalten}
-Die Taskbox fügt ausgelöst durch Nutzerinteraktion neue Tasks in das PipelineModel ein.
+Die Taskbox fügt, ausgelöst durch Nutzerinteraktion, neue Tasks in das PipelineModel ein.
 %\subsubsection{Interne Realisierung}
 \subsubsection{Realisierte Anforderungen}
 Diese Komponente ermöglicht das Hinzufügen von neuen Tasks.
@@ -60,15 +60,15 @@ Diese Komponente ermöglicht das Hinzufügen von neuen Tasks.
 \subsection{Komponente: PipelineBox}
 Die PipelineBox zeigt die aktuelle Pipeline an und ermöglicht dem Benutzer Tasks zu selektieren, zu verschieben und zu löschen. 
 \subsubsection{Schnittstelle}
-Die PipelineBox interagiert mit anderen Komponenten durch das erzeugen von TaskSelectEvent's und TaskDoubleclickEvent's.
-Sie ist dadurch gut vom Rest des Systems getrennt. Dies ist möglich, da sie alle komplexeren Interaktion mit dem Benutzer wie das verschieben von Tasks, löschen von Tasks und verbinden von Tasks intern und unter Benutzung anderer Komponenten regeln kann.
+Die PipelineBox interagiert mit anderen Komponenten durch das erzeugen von TaskSelectEvents und TaskDoubleclickEvents.
+Sie ist dadurch gut vom Rest des Systems getrennt. Dies ist möglich, da sie alle komplexeren Interaktion mit dem Benutzer wie das Verschieben von Tasks, Löschen von Tasks und Verbinden von Tasks intern und unter Benutzung anderer Komponenten regeln kann.
 \begin{center}
 \includegraphics[width=17cm]{Schnittstelle_PipelineBox.png}
 \end{center}
 \subsubsection{Protokoll}
 Wird ein Tasks selektiert, so wird ein TaskSelectEvent ausgelöst. Wird kein Task selektiert, so wird ein TaskSelectEvent mit Source gleich null ausgelöst. Ein Doppelklick auf ein Task löst ein TaskSelectEvent und ein TaskDoubleclickEvent aus.
 \subsubsection{Verhalten}
-Die PipelineBox regelt die grafische Interaktion des Benutzers mit der Pipeline, wobei das hinzufügen von Tasks wiederum durch die TaskBox realisiert wird.
+Die PipelineBox regelt die grafische Interaktion des Benutzers mit der Pipeline, wobei das Hinzufügen von Tasks wiederum durch die TaskBox realisiert wird.
 \subsubsection{Interne Realisierung}
 \subsubsection{Realisierte Anforderungen}
 Grafische Darstellung der Osmosis Pipeline
@@ -80,7 +80,7 @@ Die ParameterBox zeigt die Parameter des aktuell selektierten Tasks an und ermö
 \includegraphics[width=17cm]{Schnittstelle_ParameterBox.png}
 \end{center}
 \subsubsection{Protokoll}
-Um die Boundingbox zu benutzen, muss sie als erstes geöffnet werden (TaskDoubleklickEvent). Dann können die Daten geändert werden. Danach wird sie wieder geschlossen.
+Um die ParameterBox zu benutzen, muss sie als erstes geöffnet werden (TaskDoubleklickEvent). Dann können die Daten geändert werden. Danach wird sie wieder geschlossen.
 \subsubsection{Verhalten}
 Die ParameterBox wird über die Auswahl eines Tasks durch taskSelectedEvents informiert und kommt über das EventObject an das eigentliche Task Objekt, in ihm werden die Parameter direkt verändert.
 %\subsubsection{Interne Realisierung}
@@ -88,38 +88,35 @@ Die ParameterBox wird über die Auswahl eines Tasks durch taskSelectedEvents inf
 Einstellen von Task Parametern
 
 \subsection{Komponente: TaskManager}
-Der TaskManager verwaltet die Informationen zu Taskstypen, prüft Kompatibilitäten zwischen Tasks und dient als Factory für Tasks. Diese werden dabei aus den TaskDescription Objekten erzeugt, welche aus einer \glqq osmosis-tasks.xml'' Datei gelesen wurden. Die Spezifikation der TaskDescription Klasse und weiterer hierfür notwenidiger Klassen wird mit Hilfe
+Der TaskManager verwaltet die Informationen zu Taskstypen, prüft Kompatibilitäten zwischen Tasks und dient als Factory für Tasks. Diese werden dabei aus den TaskDescription Objekten erzeugt, welche aus einer \glqq osmosis-tasks.xml'' Datei gelesen wurden. Die Spezifikation der TaskDescription Klasse und weiterer hierfür notwendiger Klassen wird mit Hilfe
 der \glqq Java Architecture for XML Binding`` erzeugt.
 \subsubsection{Schnittstelle}
-Der Zugriff auf TaskDescriptions und das erzeugen von Tasks mit Hilfe des TaskManagers erfolgt durch Angabe des Tasknamens
-von der Form \glqq fast-read-xml'' dies ermöglicht ein einfaches und zugleich erweiterbares Interface, welches nicht von der Realisierung der Task Objekte abhängt.
+Der Zugriff aus TaskDescriptions und das Erzeugen von Tasks mit Hilfe des TaskManagers erfolgt durch Angabe des Tasknamens
+von der Form \glqq fast-read-xml''. Dies ermöglicht ein einfacheres und zugleich erweiterbares Interface, welches nicht von der Realisierung der Task Objekte abhängt.
 \begin{center}
 \includegraphics[width=8cm]{Schnittstelle_TaskManager.png}
 \end{center}
 \subsubsection{Protokoll}
-Der TaskManager bekommt eine Anfrage zu einem Task und gibt dann die passenden Informationen heraus.
-\subsubsection{Verhalten}
+Der Taskmanager bekommt eine Anfrage zu einem Task und gibt dann die passenden Informationen heraus.
+%\subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
+Der TaskManager wird als Singelton realisiert.
 \subsubsection{Realisierte Anforderungen}
-Bereitstellen einer abstrahierten Form für Osmosis Tasks die leicht erweiterbar und flexibel ist.
+Bereitstellen einer abstrahierten Form für Osmosis Tasks, die leicht erweiterbar und flexibel ist.
 
 \newpage
 \subsection{Komponente: PipelineModel}
-Das PipelineModel hält die interne nicht grafische Repräsentation der Pipeline und bietet Schnittstellen für die Verwaltung von Tasks in der Pipeline und der Validierung einer Pipeline. (Feststellen ob sie Ausführbar ist)
+Das PipelineModel hält die interne nicht grafische Repräsentation der Pipeline und bietet Schnittstellen für die Verwaltung von Tasks in der Pipeline und der Validierung einer Pipeline an. (Feststellen, ob sie Ausführbar ist)
 \subsubsection{Schnittstelle}
-Der Zugriff auf Tasks erfolgt direkt über Referenzen auf konkrete Task Objekte, diese können zum Beispiel gefunden werden
-indem die Pipeline, ausgehend von den SourceTasks (also denjenigen ohne eingehende Pipes), durchlaufen wird. Über Task Referenzen können Tasks im PipelineModel verbunden oder gelöscht werden. Des weiteren löst das TaskModel ein ModelChangedEvent aus sobald das Modell verändert wurde. Nur für die Interaktion mit der PipelineBox vorgesehen ist der direkte Zugriff auf die eingebettete mxGraph Komponente.
+Der Zugriff auf Tasks erfolgt direkt über Referenzen auf konkrete Task Objekte, diese können zum Beispiel erreicht werden, indem die Pipeline von den SourceTasks (also denjenigen ohne eingehende Pipes) durchlaufen wird. Über Task Referenzen können Tasks im PipelineModel verbunden oder gelöscht werden. Des weiteren löst das TaskModel ein ModelChangedEvent aus, sobald das Modell verändert wurde. Nur für die Interaktion mit der PipelineBox vorgesehen ist der direkte Zugriff auf die eingebettete mxGraph Komponente.
 \begin{center}
 \includegraphics[width=17cm]{Schnittstelle_PipelineModel.png}
 \end{center}
 \subsubsection{Protokoll}
 Die Komponente bekommt Anfragen über das Model und gibt die passenden Informationen zurück.
-\subsubsection{Verhalten}
+%\subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
-Das PipelineModel benutzt zum Speichern der Pipeline eine mxGraph Komponente, hierbei wird jedoch versucht durch entsprechendes Design des PipelineModels sowie der Task Objekte (die eigene Methoden implementieren um von einer Task zu
-den angeschlossenen Nachbar-Tasks zu gelangen und die Kanten (Pipes) zu inspizieren) die Funktionalität des mxGrap Modells
-weitestgehend zu Kapseln so, dass dieses gegebenenfalls ersetzt werden kann ohne anderen Code ändern zu müssen.
-Dabei ist es wichtig darauf zu achten, die getGraph() Methode nur äußerst sparsam einzusetzen, genauer gesagt nur in der TaskBox Komponente. (Leider ist eine bessere Kapselung wie zum Beispiel mit C++ friend Klassen in Java nicht auf dieser Ebene realisierbar)
+Das PipelineModel benutzt zum Speichern der Pipeline eine mxGraph Komponente. Hierbei wird jedoch versucht durch entsprechendes Design des PipelineModels sowie der Task-Klasse (die eigene Methoden implementiert um von einer Task zu den angeschlossenen Nachbar-Tasks zu gelangen und die Kanten (Pipes) zu inspizieren) die Funktionalität des mxGrap Modells weitestgehend so zu kapseln, dass dieses gegebenenfalls ersetzt werden kann ohne anderen Code ändern zu müssen. Dabei ist es wichtig darauf zu achten, die getGraph() Methode nur äußerst sparsam einzusetzen, genauer gesagt nur in der TaskBox Komponente. (Leider ist eine bessere Kapselung wie zum Beispiel mit C++ friend Klassen in Java nicht auf dieser Ebene realisierbar)
 \subsubsection{Realisierte Anforderungen}
 Modellieren einer Pipeline.
 
@@ -131,17 +128,17 @@ Die Komponente PipeImEx übernimmt die Funktionalität des Importierens und Expo
 \end{center}
 \subsubsection{Protokoll}
 Importieren: \\
-Die Komponente bekommt einen filename und importiert diese Pipeline dann.\\
+Die Komponente bekommt einen Filename und importiert diese Pipeline dann.\\
 Exportieren: \\
-Die Komponente bekommt einen filename und eine Pipeline. Diese wird dann exporiert.
+Die Komponente bekommt einen Filename und eine Pipeline. Diese wird dann exportiert.
 \subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
 Die Komponente nutzt ein allgemeines Interface sowie eine dieses Interface realisierende Klasse, die den eigentlichen Shell Im-/Export übernimmt. Für das eigentliche Erzeugen des Osmosis Aufrufs wird eine Helferklasse Namens CommandlineTranslator verwendet, die es ermöglicht diese mehrfach benötigte relativ komplexe Arbeit zu kapseln.
 \subsubsection{Realisierte Anforderungen}
-Importieren und Exportieren von Pipelines in Shellskripte.
+Importieren und Exportieren von Pipelines in Shell-Skripte.
 
 \subsection{Komponente: Help}
-Diese Komponente stellt einen Dialog zum einsehen der Online-Hilfe bereit.
+Diese Komponente stellt einen Dialog zum Einsehen der Online-Hilfe bereit.
 \subsubsection{Schnittstelle}
 Der Hilfe Dialog wird erzeugt und arbeitet dann selbstständig.
 %\subsubsection{Protokoll}
@@ -150,6 +147,7 @@ Der Hilfe Dialog wird erzeugt und arbeitet dann selbstständig.
 Es wird eventuell eine Library verwendet um die Hilfe anzuzeigen.
 \subsubsection{Realisierte Anforderungen}
 Bereitstellen einer Online-Hilfe
+
 \subsection{Komponente: BoundingBoxChooser}
 Die Komponente BoundingBoxChooser übernimmt die Funktionalität um einen Kartenausschnitt grafisch auszuwählen.
 \subsubsection{Schnittstelle}
@@ -167,14 +165,15 @@ Die Komponente I18N übernimmt die Funktionalität der Internationalisierung.
 \includegraphics[width=8cm]{Schnittstelle_I18N.png}
 \end{center}
 \subsubsection{Protokoll}
+Die Komponente bekommt einen Schlüssel-String übergeben und liefert den entsprechenden Dialog zurück. 
 \subsubsection{Verhalten}
-Diese Komponente ermöglicht es zu einem Keystring eine lokalisierte Version zu finden und verwaltet die Sprachdateien, sowie die Auswahl der richtigen Sprache.
+Diese Komponente ermöglicht es zu einem Schlüssel-String eine lokalisierte Version zu finden und verwaltet die Sprachdateien, sowie die Auswahl der richtigen Sprache.
 \subsubsection{Interne Realisierung}
 Diese Komponente wird als Singelton realisiert
 \subsubsection{Realisierte Anforderungen}
 Lokalisierung
 
-\subsection{Komponente: PipeStore}
+\subsection{Komponente: IPipeStore}
 Die Komponente PipeStore übernimmt die Funktionalität des Ladens und Speicherns von Pipelines.
 \subsubsection{Schnittstelle}
 \begin{center}
@@ -182,17 +181,15 @@ Die Komponente PipeStore übernimmt die Funktionalität des Ladens und Speichern
 \end{center}
 \subsubsection{Protokoll}
 Laden: \\
-Die Komponente bekommt einen Filename und lädt dann die Datei.
+Die Komponente bekommt einen Filename und lädt dann die Datei.\\
 Speichern: \\
 Die Komponente bekommt einen Filename und PipelineModel und speichert dann.
 %\subsubsection{Verhalten}
-\subsubsection{Interne Realisierung}
-Die Pipestore Komponente besteht aus einer allgemein gehaltenen Interface Klasse, sowie einer Realsierung dieses Interfaces, welches
-zum Speichern Java Serialisierung verwendet.
-\subsubsection{Realisierte Anforderungen}
+%\subsubsection{Interne Realisierung}
+%\subsubsection{Realisierte Anforderungen}
 
-\subsection{Komponente: ConfigurationManager}
-Die Komponente ConfigurationManager übernimmt die Funktionalität der Konfiguration von OsmUi.
+\subsection{Komponente: ConfigurationsManager}
+Die Komponente ConfigurationsManager übernimmt die Funktionalität der Konfiguration von OsmUi.
 \subsubsection{Schnittstelle}
 \begin{center}
 \includegraphics[width=7cm]{Schnittstelle_ConfigurationManager.png}
@@ -201,20 +198,16 @@ Die Komponente ConfigurationManager übernimmt die Funktionalität der Konfigura
 Die Komponente gibt auf Anfrage Informationen über die Konfiguration zurück.
 %\subsubsection{Verhalten}
 %\subsubsection{Interne Realisierung}
-\subsubsection{Realisierte Anforderungen}
-Speichern der Konfiguration
+%\subsubsection{Realisierte Anforderungen}
+
 
 \subsection{Komponente: Application}
 Die Application stellt das Hauptfenster bereit, in dem alle Oberflächenelemente enthalten sind.
 Sie verkabelt die Eventhandler der anderen Komponenten und kümmert sich um die restliche Benutzerinteraktion wie zum Beispiel die Menüleiste oder die Kopierleiste.
 \subsubsection{Schnittstelle}
 Die Application hat keine externen Schnittstellen, abgesehen von ihrem Konstruktor
-\subsubsection{Protokoll}
-Laden: \\
-Die Komponente bekommt einen Filename und lädt dann die Datei.
-Speichern: \\
-Die Komponente bekommt einen Filename und PipelineModel und speichert dann.
-\subsubsection{Verhalten}
+%\subsubsection{Protokoll}
+%\subsubsection{Verhalten}
 \subsubsection{Interne Realisierung}
 Die Application nutzt das Singelton Pattern um ihre Singularität innerhalb von OsmUi zu verdeutlichen und eventuell Zugriff durch die anderen Komponenten zu ermöglichen.
 \subsubsection{Realisierte Anforderungen}
@@ -224,32 +217,33 @@ Zusammenführen der Komponenten
 \subsection{Verbindungen}
 \section{Externe Schnittstellen}
 \subsection{Dauerhafte Datenspeicherung}
-Die geplante Implementierung, sieht vor Pipelines aus/in bash- und bat-Scripten zu importieren/exportieren, Pipelines aus der Zwischenablage zu importieren und aus/in .smu Dateien Pipelines zu Laden/Speichern. Außerdem soll die Programmkonfiguration in in das Heimat-/Konfigurationsverzeichnisses des Benutzers gespeichert werden. Diese Speicherung erfolgt in einem für Menschen lesbaren XML Format in eine .conf Datei.
+Die geplante Implementierung sieht vor, Pipelines aus/in bash- und bat-Skripten zu importieren/exportieren, Pipelines aus der Zwischenablage zu importieren und aus/in .smu Dateien Pipelines zu laden/speichern. Außerdem soll die Programmkonfiguration in das Heimat-/Konfigurationsverzeichnis des Benutzers gespeichert werden. Diese Speicherung erfolgt in eine .conf Datei.
 \subsubsection{Datei/Datenbank: .smu}
-In dieser Datei wird die Pipeline. Um die Daten in/aus dieser Datei zu speichern/laden wir das Serialisierungsverfahren von Java benutzt 
+Um die Daten in/aus dieser Datei zu speichern/laden wird das Serialisierungsverfahren von Java benutzt. 
 \subsubsection{Datei/Datenbank: .conf}
-Diese  Dateiformat dient dazu die Systemeinstellungen von OsmUi zu speichern die geschieht im XML-Format. Zu den zu speichernden Informationen gehören der Osmosis-Pfad.
+Dieses  Dateiformat dient dazu, die Systemeinstellungen von OsmUi zu speichern. Dies geschieht im XML-Format. Zu den zu speichernden Informationen gehört der Osmosis-Pfad.
 \subsubsection{Datei/Datenbank: .dat}
-Dieses Dateiformat dient dazu ein Script bereitzustellen, mit dem der Benutzer den generierten Osmosis Aufruf unter Windows Systemen leicht ausführen kann. Dies wird dadurch realisiert, dass der Osmosis-Pfad mit den zugehörigen Tasks und deren Parametern der ersten Zeile steht.
+Dieses Dateiformat dient dazu, ein Skript bereitzustellen, mit dem der Benutzer den generierten Osmosis Aufruf unter Windows Systemen leicht ausführen kann. Dies wird dadurch realisiert, dass der Osmosis-Pfad mit den zugehörigen Tasks und deren Parametern in der ersten Zeile steht.
 \subsubsection{Datei/Datenbank: .sh}
-Dieses Dateiformat dient dazu ein Script bereitzustellen, mit dem der Benutzer den generierten Osmosis Aufruf unter Unix Systemen leicht ausführen kann. Dies wird dadurch realisiert, dass als Header \glqq \#!/bin/sh" geschrieben ist. In der darauf folgenden Zeile befindet sich der Osmosis-Pfad mit den zugehörigen Tasks und deren Parametern.
+Dieses Dateiformat dient dazu, ein Skript bereitzustellen, mit dem der Benutzer den generierten Osmosis Aufruf unter Unix Systemen leicht ausführen kann. Dies wird dadurch realisiert, dass als Header \glqq \#!/bin/sh" geschrieben ist. In der darauf folgenden Zeile befindet sich der Osmosis-Pfad mit den zugehörigen Tasks und deren Parametern.
 %\subsection{Externer Zugriff}
 
 %\subsubsection{Schnittstelle: XYZ}
 
 \appendix%
 
-\section{Anhang}
+%\section{Anhang}
 
 %\section{Literatur zum Entwurf}
 %\subsection{Entwurf}
 %\subsection{Entwurfsmuster}
 \section{Versionshistorie}
 \begin{itemize}
-\item Version 1.0 8.12.2010 : Initialisierung
-\item Version 1.1 9.12.2010 : Komponentennamen festgelegt
+\item Version 1.0 08.12.2010 : Initialisierung
+\item Version 1.1 09.12.2010 : Komponentennamen festgelegt
 \item Version 1.2 10.12.2010 : Klassendiagramme für Komponenten hinzugefügt
 \item Version 1.3 11.12.2010 : Komponentenbeschreibungen, Externe Schnittstellen hinzugefügt
+\item Version 1.4 13.12.2010 : Rechtschreibung und Feinschliff
 \end{itemize}
 
 \end{document}
