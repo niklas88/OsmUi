@@ -1,4 +1,4 @@
-package ui;
+package de.osmui.ui;
 
 public class Application {
 

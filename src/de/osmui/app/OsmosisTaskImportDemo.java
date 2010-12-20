@@ -1,4 +1,4 @@
-package app;
+package de.osmui.app;
 
 import java.io.File;
 import java.util.HashMap;
@@ -7,10 +7,10 @@ import java.util.Map;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
-import model.osm.OsmosisTaskDescription;
-import model.osm.TParameter;
-import model.osm.TTask;
-import model.osm.TTaskGroup;
+import de.osmui.model.osm.OsmosisTaskDescription;
+import de.osmui.model.osm.TParameter;
+import de.osmui.model.osm.TTask;
+import de.osmui.model.osm.TTaskGroup;
 
 /**
  * Einfache Demo: Dynamisches Einlesen der Osmosis-Taskdefinitionen (d.h. der
@@ -32,7 +32,7 @@ public class OsmosisTaskImportDemo {
 			 * generierten Klassen liegen)
 			 */
 			JAXBContext jc;
-			jc = JAXBContext.newInstance("model.osm");
+			jc = JAXBContext.newInstance("de.osmui.model.osm");
 
 			/* XML-Datei mit Osmosis-Task-Beschreibungen einlesen */
 			File xmlTasksFile = new File("osmosis-tasks.xml"); //

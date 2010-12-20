@@ -1,2 +1,2 @@
 #!/bin/sh
-xjc -p model.osm otd.xsd -d src
+xjc -p de.osmui.model.osm otd.xsd -d src
