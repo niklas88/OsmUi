@@ -20,7 +20,7 @@
           If set to yes, the dates in the osm xml file will be parsed, otherwise all dates will be set to a
           single time approximately equal to application startup. Setting this to no is only useful if
           the input file doesn't contain timestamps. It used to improve performance but date parsing
-          now incurs low overhead.
+          now incurs low overhead.inst
         </description>
       </parameter>
       <parameter name="compressionMethod" type="enum" defaultValue="none">
@@ -210,7 +210,7 @@
       </parameter>
       <parameter name="snapshotInstant" defaultParameter="false" required="false" type="instant">
         <description>
-          Defines the point in time for which to produce a data snapshot. Format is format is "yyyy-MM-dd_HH:mm:ss".
+          Defines the point in time for which to produce a data snapshot. Format is "yyyy-MM-dd_HH:mm:ss".
         </description>
       </parameter>
     </task>
