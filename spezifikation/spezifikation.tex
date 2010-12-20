@@ -10,13 +10,14 @@
 \usepackage{amsmath}
 \usepackage{wasysym}
 \usepackage{graphicx}
+\usepackage[font=footnotesize]{caption}
 \usepackage[pdftex]{hyperref}
 \author{
 Verena Käfer (2551188),\\
 Niklas Schnelle (2573250),\\
 Peter Vollmer (2553704)}
-\date{erstellt am 15.11.2010\\
-Version: 1.0}
+\date{erstellt am 30.11.2010\\
+Version: 1.1}
 \title{\includegraphics[width=15cm]{../projektplan/Logo_Osmui.png} \\ 
 Spezifikation von OsmUi}
 
@@ -30,7 +31,7 @@ Spezifikation von OsmUi}
 \subsection{Zweck der Spezifikation}
 Bei der Spezifikation handelt es sich um das zentrale Projektdokument. Sie ist Basis aller weiteren Dokumente und
 Bezugspunkt in Funktionalitätsfragen. Sie ist daher unbedingt aktuell und konsistent zu halten.\\
-Die Spezifikation beschreibt die Funktionen und Anforderungen an das Produkt OsmUi und das zugehörige Projekt.
+Die Spezifikation beschreibt die Funktionen und Anforderungen an das Produkt OsmUi und das zugehörige Projekt. Deswegen orientieren sich alle Entwickler und Tester an ihr.
 \subsection{Leserkreis}
 Diese Spezifikation richtet sich an:
 \begin{itemize}
@@ -41,15 +42,21 @@ Diese Spezifikation richtet sich an:
 \subsection{Projektüberblick}
 In dem Entwicklungsprojekt OsmUi soll eine grafische Benutzeroberfläche für das Kommandozeilenwerkzeug \href{http://wiki.openstreetmap.org/wiki/Osmosis}{Osmosis}
 entwickelt werden. Zu diesem Zweck überträgt OsmUi das abstrakte Pipelinekonzept von Osmosis auf eine grafische Darstellung, welche die gesamte Funktionalität von Osmosis zugänglich macht, dabei aber deutlich benutzerfreundlicher sein soll.\\
-Während bei Osmosis ein langer Kommandozeilenaufruf eine Pipeline zur Verarbeitung von OpenStreetMap Daten beschreibt, wobei sich der Benutzer die Befehle merken und korrekt in der gewünschten Reihenfolge aufschreiben muss, soll es mit OsmUi möglich sein eine Verarbeitungspipeline ``zusammen zu klicken''.\\
+Während bei Osmosis ein langer Kommandozeilenaufruf eine Pipeline zur Verarbeitung von OpenStreetMap Daten beschreibt, wobei sich der Benutzer die Befehle merken
+und korrekt in der gewünschten Reihenfolge aufschreiben muss, soll es mit OsmUi möglich sein eine Verarbeitungspipeline ``zusammen zu klicken''.\\
 Hierbei kann die Funktionsweise der einzelnen Tasks sowie deren Interaktion der Benutzeroberfläche von OsmUi entnommen werden.
-%\subsection{Konventionen} %Kommt noch
+
+\subsection{Konventionen}
+\begin{itemize}
+\item Buttons werden in \glqq Anführungszeichen'' geschrieben.
+\item Begriffe aus dem Begriffslexikon werden \textit{fett} gedruckt
+\end{itemize}
 
 \section{Akteure}
 \subsection{Benutzer}
 Bei OsmUi gibt es grundsätzlich nur eine Nutzerklasse. Es wird davon ausgegangen, dass OsmUi benutzt wird um eine Verarbeitungspipeline für OpenStreetMap Daten
-zu erstellen, welche anschließend durch Osmosis ``ausgeführt'' wird. Hierbei wird davon ausgegangen, dass der Nutzer grundlegende Kentnisse 
-von Datenverarbeitung und OpenStreetMap hat.
+zu erstellen, welche anschließend durch Osmosis ausgeführt wird. Hierbei wird davon ausgegangen, dass der Nutzer grundlegende Kenntnisse 
+von Datenverarbeitung, Osmosis und OpenStreetMap hat.
 
 \section{Distributionsform und Installation}
 OsmUi wird als ausführbares JAR Archiv ausgeliefert, welches direkt ausgeführt werden kann
@@ -57,28 +64,27 @@ OsmUi wird als ausführbares JAR Archiv ausgeliefert, welches direkt ausgeführt
 \section{Nichtfunktionale Anforderungen}
 \subsection{Entwurfseinschränkungen}
 \subsubsection{Entwurfskonzept}
-OsmUi wird nach dem \href{http://de.wikipedia.org/wiki/KISS-Prinzip}{KISS-Prinzip} entwickelt, d.h. entscheidend für die Qualität der Software soll
-sein, wie gut die Hauptfunktionen unterstützt werden. Bessere Hauptfunktionalität ist einem größeren Funktionsumfang unterzuordnen.\\
+OsmUi wird nach dem \href{http://de.wikipedia.org/wiki/KISS-Prinzip}{KISS-Prinzip} entwickelt, d.h. entscheidend für die Qualität der Software soll sein, wie gut die Hauptfunktionen unterstützt werden. Bessere Hauptfunktionalität ist einem größeren Funktionsumfang unterzuordnen.\\
 Im Fall von OsmUi heißt dies, dass das Hauptaugenmerk auf dem einfachen und sinnvollen Erstellen von Verarbeitungspipelines, sowie deren Import und Export liegt.\\
-Weniger wichtig sind hingegen ``Luxusfunktionen'' wie direktes Anzeigen des Verarbeitungsergebnisses (was auf Grund der Vielfalt der Funktionen von Osmosis
+Weniger wichtig sind hingegen Komfortfunktionen wie direktes Anzeigen des Verarbeitungsergebnisses (was auf Grund der Vielfalt der Funktionen von Osmosis
 und der Verarbeitungsdauer ohnehin nicht immer sinnvoll ist) oder das direkte Aufrufen von Osmosis.
 \subsubsection{Systemumgebung}
 Systemumgebung ist das \textbf{Java Runtime Environment in Version 1.6 und höher (SE)}. Dabei ist OsmUi als reine Java Anwendung zu entwickeln, so dass
 keine externen Abhängigkeiten bestehen und OsmUi auf allen Java SE kompatiblen Systemen eingesetzt werden kann.
-Eventuell wird intern die Bibliothek \textbf{JGraph} eingesetzt, diese wird dann aber direkt mit ausgeliefert
+\mbox{Eventuell} wird intern die Bibliothek \textbf{JGraph} eingesetzt, diese wird dann aber direkt mit ausgeliefert
 und ist ebenso in platformunabhängigem Java geschrieben. 
 \subsubsection{Layout und Gestaltung}
 OsmUi soll ab einer Auflösung von 1024x768 und bis zu einer Systemschriftgröße 24 benutzbar sein. Alle Fenster sollen, wenn dies sinnvoll ist, skalierbar sein und den eventuell gewonnenen Platz
-nutzen. Um Benutzer von Multimonitorsystemen und exotischen Windowmanagern zu entlasten soll die Positionierung von neuen Fenstern nativ erfolgen. Es
+nutzen. Um Benutzer von Multimonitorsystemen und speziellen Fensterverwaltungssystemen (z.B. Tiling) zu entlasten, soll die Positionierung von neuen Fenstern durch das Betriebssystem erfolgen. Es
 sollen insbesondere keine Fenster in eine errechnete Bildschirmmitte von OsmUi positioniert werden.
 \subsection{Robustheit}
 OsmUi soll als Software möglichst robust arbeiten, d.h. unter allen Bedingungen korrekt arbeiten. Dies soll durch defensive Programmierung erreicht werden.
-Jedoch sollen Benutzereingaben möglichst früh geprüft werden, so dass tiefere Funktionen den Daten ``vertrauen'' können. Dies sichert zudem ab, dass klar ist, welcher
-Programmteil für die Prüfung zuständig ist. Nämlich immer der erste, der die nötigen Informationen hat.\\
+Wobei Benutzereingaben so früh wie möglich und immer nur einmal geprüft werden sollen. Dies sichert zudem ab, dass klar ist, welcher
+Programmteil für die Prüfung zuständig ist. Nämlich immer der erste, der alle zur Prüfung notwendigen Informationen hat.\\
 Weiterhin wird die Robustheit durch das KISS-Prinzip unterstützt, da weniger Funktionen besser entworfen und getestet werden können.
 \subsection{Portabilität}
 OsmUi soll durch den Einsatz reinen Javas auf allen Systemen mit Java SE 1.6 Unterstützung lauffähig sein. Als Exportformate für Osmosis Aufrufskripte
-werden .bat und .sh (/bin/sh) unterstützt, womit alle Posix Systeme sowie Windows abgedeckt sind.
+werden .bat und .sh (/bin/sh) unterstützt, womit alle Unix ähnlichen Systeme (Linux, BSD, Solaris, etc) sowie Windows abgedeckt sind.
 \subsection{Erweiterbarkeit}
 Das Programm muss keine besonderen Erweiterungsfunktionalitäten wie etwa ein Pluginsystem zur Verfügung stellen, jedoch werden der Programmcode und die Systemarchitektur
 so gestaltet, dass OsmUi leicht und schnell an neue oder veränderte Osmosis Funktionen angepasst werden kann.
@@ -91,42 +97,47 @@ Bei OsmUi handelt es sich um eine Einzelplatzanwendung und es wird keine Netzwer
 Beim Erstellen/Laden/Speichern von Verarbeitungspipelines muss OsmUi in der Lage sein, mit Pipelines von bis zu 100 Tasks zuverlässig zu arbeiten -
 eine künstliche Beschränkung nach oben besteht jedoch nicht.\\
 Werden 100 Tasks nicht überschritten und das System des Nutzers nicht unnormal ausgelastet, so muss OsmUi Benutzeraktionen, wie laden/speichern, task hinzufügen etc.
-innerhalb von 1 Sekunde ausführen. Hierbei darf ein Mittelklasserechner angenommen werden. (>= 2.6 Ghz, >= 1 GB RAM, 7200 RPM Festplatte)
+innerhalb von 1 Sekunde ausführen. Hierbei darf ein Mittelklasserechner angenommen werden. ($\geq$ 2.6 Ghz, $\geq$ 1 GB RAM, 7200 RPM Festplatte)
 \subsection{persistente Konfiguration}
-Um Benutzerspezifische Einstellungen zu speichern verwendet OsmUi eine Konfigurationsdatei im Heimat-/Configverzeichnis des Benutzters.
+Um Benutzerspezifische Einstellungen zu speichern verwendet OsmUi eine Konfigurationsdatei im Heimat-/Configverzeichnis des Benutzers.
 Diese Konfigurationsdatei wird ein für Menschen lesbaren XML Format gespeichert, wobei die genaue Definition in der Entwurf- bzw. Implementierungsphase
 spezifiziert wird. 
 \subsection{Laden und Speichern in OsmUi eigenem Format}
 Um Pipelines mit allen Details wie Position von verschobenen Tasks, sowie nicht ausführbare Pipelines speichern zu können verwendet OsmUi ein eigenes Dateiformat
-(.smu) außerdem ist dieses Format plattformunabhängig.
+(.smu). Außerdem ist dieses Format plattformunabhängig.
 \subsection{Importieren und Exportieren von Verarbeitungspipelines aus Osmosis Aufrufen}
 Um mit anderen Osmosis Oberflächen und bereits gesammelten Osmosis Aufrufen kompatibel zu bleiben bietet OsmUi verschiedene Im- und Export Funktionen
 \subsubsection{Importieren von Osmosis Aufrufen}
-OsmUi kann Osmosis Aufrufe beziehungsweise Parameterlisten der Form `--read-xml foo.osm --bb left=8 right=8.4 top=49 bottom=48 --write-xml bar.osm'' 
+OsmUi kann Osmosis Aufrufe beziehungsweise Parameterlisten der Form \glqq --read-xml foo.osm --bb left=8 right=8.4 top=49 bottom=48 --write-xml bar.osm'' 
 importieren, dabei stehen folgende Möglichkeiten der Eingabe zur Verfügung
 \begin{itemize}
   \item Aus Zwischenablage\\
   Beim Importieren aus der Zwischenablage wird der Osmosis Aufruf (s.o.) direkt aus der Zwischenablage gelesen und die Pipeline geladen.
-  \item Aus Aufrufskripten\\
+  \item Aus Aufrufskript\\
   Hierbei liest OsmUi den Osmosis Aufruf aus einem Aufrufskript, es werden sowohl .bat Dateien, als auch .sh Dateien unterstützt.
 \end{itemize}
 \subsubsection{Exportieren}
-OsmUi kann Pipelines als Aufrufskript im .sh Format (mit \#!/bin/sh Shebang) für alle Posix Konformen Systeme, sowie im .bat Format für Windows exportieren.
-Der Pfad mit dem Osmosis aufgerufen wird, kann dabei vom Benutzer eingestellt werden. Falls dieser zu einer .jar Datei zeigt wird ``java -jar '' davor
+OsmUi kann Pipelines als Aufrufskript im .sh Format für alle Posix Konformen Systeme, sowie im .bat Format für Windows exportieren.
+Der Pfad mit dem Osmosis aufgerufen wird, kann dabei vom Benutzer eingestellt werden. Falls dieser zu einer .jar Datei zeigt wird \glqq java -jar '' davor
 gehängt.\\ 
-Neben dem Speichern als fertiges Aufrufskript, kann der Osmosis-Aufruf auch aus der Kopierleiste kopiert werden
+Neben dem speichern als fertiges Aufrufskript, kann der Osmosis Aufruf auch aus der Kopierleiste kopiert werden
 um ihn zum Beispiel in andere Dokumente einzubinden. 
 
 \subsection{Benutzeroberfläche}
 Die Benutzeroberfläche von OsmUi ist in zwei Teile aufgeteilt: die Taskpalette und die Pipelinebox. Desweiteren gibt es ein Anwendungsmenü und beim Bearbeiten eines Tasks
 wird es ein weiteres Einstellungsfenster geben.\\
 \begin{center}
+\begin{figure}[h!]
+\begin{center}
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Startseite.png}
+\caption{Startseite}
 \end{center}
-\subsubsection{Taskpalette (Tasktab)}
-Im linken Teil der Benutzeroberfläche wird im Tasktab eine Liste der gerade zum Einfügen verfügbaren Tasks dargestellt. Dabei kann die Darstellung als Icon,
+\end{figure}
+\end{center}
+\subsubsection{Taskpalette}
+Im linken Teil der Benutzeroberfläche wird im Tab "Tasks'' eine Liste der gerade zum Einfügen verfügbaren Tasks dargestellt. Dabei kann die Darstellung als Icon,
 Text oder Kombination erfolgen. Es werden nur Tasks angezeigt, die gerade auch einfügbar sind. \\
-Am Anfang sind dies zum Beispiel alle Tasks, (z.B. read XML) die keinen Streameingang haben. Ist in der Pipelinebox ein Task ausgewählt, so
+Am Anfang sind dies zum Beispiel alle Tasks, (z.B. read XML) die keine eingehenden Verbindungen haben. Ist in der Pipelinebox ein Task ausgewählt, so
 sind nur diejenigen Tasks sichtbar, die mit dem/den Ausgang/Ausgängen des ausgewählten Task kompatibel sind.\\
 So wird verhindert, dass der Benutzer Pipelines bauen kann, die nicht durch Osmosis ausführbar sind.
 \subsubsection{Pipelinebox}
@@ -134,60 +145,110 @@ In der Pipelinebox wird die Pipeline grafisch dargestellt und es können Tasks z
 bearbeitet oder ein neuer Task über die Taskpalette - wie oben beschrieben - angefügt werden. Desweiteren kann eine Verbindung zu einem anderen Task, der noch offene
 Inputs hat, hergestellt werden.
 \subsubsection{Parametertab}
-Wählt der Benutzer einen Task aus, so zeigt OsmUi den Parametertab an, in dem alle - für den jeweiligen Tasktyp vorhandenen - Parameter eingegeben werden können.
-Hierbei kann die Eingabe eingeschränkt sein und als Spanne von Zahlen, als Kartenausschnitt oder als freier Text erfolgen. Dabei wird der für
-den Datentyp beste Eingabemodus gewählt.\\
+Wählt der Benutzer einen Task aus (Doppelklick), so zeigt OsmUi den Parametertab an, in dem alle - für den jeweiligen Tasktyp vorhandenen - Parameter eingegeben werden können.
+Hierbei kann die Eingabe eingeschränkt sein und als Spanne von Zahlen, als Kartenausschnitt oder als freier Text erfolgen. Dabei wird der für den Datentyp beste Eingabemodus gewählt.\\
+\begin{center}
+\begin{figure}[h!]
 \begin{center}
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Parameter_Optionen.png}
+\caption{Parametertab}
+\end{center}
+\end{figure}
 \end{center}
 \subsubsection{Einstellungsdialog}
-Im Einstellungsdialog können benutzerspezifische Einstellungen von OsmUi vorgenommen werden, welche persistent in einer Konfigurationsdatei gespeichert werden.\\
-Hierzu zählen:\\
-\begin{itemize}
- \item Einstellung des Pfades zu Osmosis, welcher in Aufrufskripten verwendet werden soll\\
+Im Einstellungsdialog können Benutzerspezifische Einstellungen von OsmUi vorgenommen werden, welche persistent in einer Konfigurationsdatei gespeichert werden.\\
+Hierzu zählen die Einstellungen des Pfades zu Osmosis, welcher in Aufrufskripten verwendet werden soll\\
+\begin{center}
+\begin{figure}[h!]
+\begin{center}
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Einstellungen.png}
-\end{itemize}
+\caption{Einstellungendialog}
+\end{center}
+\end{figure}
+\end{center}
 
 
 \subsubsection{Kopierleiste}
-Um die aktuell dargestellte Pipeline direkt kopieren zu können, wird sie als Osmosis-Aufruf unter der Pipelinebox angezeigt. Dies ist nur möglich,
-solange die Pipeline konsistent ist, andernfalls steht in der Kopierleiste ``Pipeline inkonsistent''
+Um die aktuell dargestellte Pipeline direkt kopieren zu können, wird sie als Osmosis-Aufruf unter der Pipelinebox angezeigt. Dies ist nur möglich
+solange die Pipeline konsistent ist, andernfalls steht in der Kopierleiste \glqq Pipeline inkonsistent''
+\begin{center}
+\begin{figure}[h!]
 \begin{center}
 \includegraphics[width=15cm]{ui_prototype/OsmUi_Leisteklein.png}
+\caption{Kopierleiste}
+\end{center}
+\end{figure}
 \end{center}
 
 \subsubsection{Menüleiste}
 \begin{itemize}
 \item Datei\\
-Beim Klicken auf den Menüeintrag \textbf{Datei} öffnet sich ein Dialog. Der Benutzer kann zwischen \textbf{Neu} (Öffnen einer neuen Pipeline), \textbf{Laden...} (Laden einer gespeicherten .smu Datei), \textbf{Speichern} (speichern der aktuellen eventuell inkonsistenten Pipeline, mit Positionen der Tasks, in schon vorher gespeicherte .smu Datei.), \textbf{Speichern unter} (speichern die vorhandene eventuell inkonsistente Pipeline, mit Positionen der Tasks, an einem selbst gewählten Ort in eine .smu Datei) , \textbf{Importieren aus Datei} (Importiert eine Pipeline aus einem mit OsmUi erstellten Aufrufscript und zeigt diese an.), \textbf{Importieren aus Zwischenablage} (Importiert eine Pipeline aus der Zwischenablage und zeigt diese an.), \textbf{Exportieren} (Exportiert eine Pipeline in ein Aufrufscript) und \textbf{Schließen} (das Programm wird geschlossen) wählen. 
+Beim Selektieren des Menüeintrags \textbf{Datei} öffnet sich ein Dialog. Der Benutzer kann zwischen \textbf{Neu} (Öffnen einer neuen Pipeline), \textbf{Laden...} (Laden einer gespeicherten .smu Datei), \textbf{Speichern} (speichern der aktuellen eventuell inkonsistenten Pipeline, mit Positionen der Tasks, in schon vorher gespeicherte .smu Datei.), \textbf{Speichern unter} (speichern die vorhandene eventuell inkonsistente Pipeline, mit Positionen der Tasks, an einem selbst gewählten Ort in eine .smu Datei) , \textbf{Importieren aus Datei} (Importiert eine Pipeline aus einem mit OsmUi erstellten Aufrufskript und zeigt diese an.), \textbf{Importieren aus Zwischenablage} (Importiert eine Pipeline aus der Zwischenablage und zeigt diese an.), \textbf{Exportieren} (Exportiert eine Pipeline in ein Aufrufskript) und \textbf{Schließen} (das Programm wird geschlossen) wählen. 
 \\ 
 \begin{center}
+\begin{figure}[h!]
+\begin{center}
 \includegraphics[width=7cm]{ui_prototype/OsmUi_Dateiklein.png}
+\caption{Menüleiste: Datei}
+\end{center}
+\end{figure}
 \end{center}
 \item Bearbeiten\\
-Beim Klicken auf den Menüeintrag \textbf{Bearbeiten} öffnet sich ein Dialog. Der Benutzer kann zwischen \textbf{Rückgängig} (die letzte Änderung wird wieder rückgängig gemacht), \textbf{wiederherstellen} (eine rückgängig gemachte Änderung wird wieder hergestellt) und \textbf{Einstellungen} (Den Pfad zu Osmosis einstellen) wählen.
+Beim Selektieren des Menüeintrags \textbf{Bearbeiten} öffnet sich ein Dialog. Der Benutzer kann zwischen \textbf{Rückgängig} (die letzte Änderung wird wieder rückgängig gemacht), \textbf{wiederherstellen} (eine rückgängig gemachte Änderung wird wieder hergestellt) und \textbf{Einstellungen} (Den Pfad zu Osmosis einstellen) wählen.
 \\
+\begin{center}
+\begin{figure}[h!]
 \begin{center}
 \includegraphics[width=7cm]{ui_prototype/OsmUi_Bearbeitenklein.png}
+\caption{Menüleiste: Bearbeiten}
+\end{center}
+\end{figure}
 \end{center}
 \item Hilfe\\
-Beim Klicken auf den Menüeintrag \textbf{Hilfe} öffnet sich ein Dialog. Der Benutzer kann zwischen \textbf{Hilfe} (Onlinehilfe wird geöffnet) und \textbf{Über...} (Informationen zu OsmUi werden geöffnet) entscheiden.
+Beim Selektieren des Menüeintrags \textbf{Hilfe} öffnet sich ein Dialog. Der Benutzer kann zwischen \textbf{Hilfe} (Onlinehilfe wird geöffnet) und \textbf{Über...} (Informationen zu OsmUi werden geöffnet) entscheiden.
 \\
 \begin{center}
+\begin{figure}[h!]
+\begin{center}
 \includegraphics[width=7cm]{ui_prototype/OsmUi_Hilfeklein.png}
+\caption{Menüleiste: Hilfe}
+\end{center}
+\end{figure}
 \end{center}
 \end{itemize}
 
 \subsubsection{Lokalisation}
 OsmUi wird eine übersetzte Benutzeroberfläche für mindestens die Sprachen Deutsch und Englisch bieten. Dabei wird die aktuell verwendete
-Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne Interaktion durch den Benutzer in dessen System einzugliedern.
+Sprache aus den hierfür vorgesehenen Systemvariablen eingelesen, um sie ohne Interaktion durch den Benutzer in dessen System einzugliedern. Sollte eine Sprache nicht vorhanden sein wir Englisch als Standardsprache verwendet.
+
+\section{Usability Patterns}
+Um die Verwendung von OsmUi für den Benutzer so komfortabel wie möglich zu gestalten, werden einige Usability Patterns verwendet
+\subsection{Direkte Validierung}
+OsmUi validiert die Eingaben des Benutzers insofern, dass es prüft, ob zwingend notwendige Felder leer gelassen wurden.
+\subsection{Warnung}
+Wenn der Benutzer das Programm schließen möchte, ohne zuvor gespeichert zu haben, gibt das Programm eine Warnung aus.
+\subsection{Undo}
+Um Fehler leicht rückgängig machen zu können, bietet OsmUi die Möglichkeit den letzten gemachten Schritt rückgängig zu machen.
+\subsection{Redo}
+Ein rückgängig gemachter Schritt kann wieder hergestellt werden.
+\subsection{Filter}
+Um dem Benutzer die Erstellung einer korrekten Pipeline zu vereinfachen, werden in der Taskbox nur die kompatiblen Tasks angezeigt. Ebenso können in der Pipelinebox nur kompatible Tasks angehängt werden.
+\subsection{gute Standardwerte}
+Damit der Benutzer möglichst wenige Werte eingeben muss, werden die Parameter eines Tasks zuerst mit sinnvollen Standardwerten gefüllt. Diese kann der Benutzer selbst ändern.
+
 \section{Use Cases}
 \subsection{Diagramm}
 \begin{center}
+\begin{figure}[h!]
+\begin{center}
 \includegraphics[width=15cm]{Use-Cases.png}
+\caption{Use-Case-Diagramm}
+\end{center}
+\end{figure}
 \end{center}
 \newpage
 \subsection{Beschreibungen}
+Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer installiert und gestartet.
 \subsubsection{Datei laden}
 \begin{center}
 \ \\
@@ -203,22 +264,22 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Nachbedingung im Sonderfall 7c) & OsmUi hat keine Daten geladen und zeigt Zustand vor dem Ladeversuch \\
 \hline Nachbedingung im Sonderfall 7d) & OsmUi hat keine Daten geladen und zeigt Zustand vor dem Ladeversuch \\
 \hline Akteure & Benutzer \\ 
-\hline Normalablauf & 1 Der Benutzer klickt auf Datei.
+\hline Normalablauf & 1 Der Benutzer wählt \glqq Datei''.
 \newline 2 OsmUi zeigt den Menüeintrag Datei
-\newline 3 Der Benutzer klickt auf Datei laden.
+\newline 3 Der Benutzer wählt \glqq Datei laden''.
 \newline 4 OsmUi zeigt den Dateiauswahldialog
 \newline 5 Der Benutzer wählt die gewünschte Datei aus
-\newline 6 Der Benutzer bestätigt dies mit Klick auf Button ''Öffnen''.
+\newline 6 Der Benutzer bestätigt dies mit \glqq Öffnen''.
 \newline 7 OsmUi lädt die Datei und zeigt sie in der Piplinebox an\\ 
-\hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf ''Abrechen''
+\hline Sonderfall 5a) & 5a.1 Der Benutzer wählt \glqq Abrechen''
 \newline 5a.2 OsmUi lädt keine Daten und zeigt den vorherigen Zustand.\\
-\hline Sonderfall 6a) & 6a.1 Der Benutzer klickt aber auf ''Abrechen''
+\hline Sonderfall 6a) & 6a.1 Der Benutzer wählt \glqq Abrechen''
 \newline 6a.2 Osmui lädt keine Daten und zeigt den vorherigen Zustand.\\
 \hline Sonderfall 7a) & Pipelinebox ist nicht leer.
 \newline 7a.1 Osmui lädt die Datei in die Piplinebox einer neuen Instanz von OsmUi.\\
 \hline Sonderfall 7b)& Datei ist zwischenzeitlich nicht mehr verfügbar.
 \newline 7b.1 OsmUi versucht Datei zu lesen bricht dann ab und zeigt einen entsprechenden Fehlerdialog an.
-\newline 7b.2 Benutzer klickt auf Button ''Ok''.
+\newline 7b.2 Benutzer wählt \glqq Ok''.
 \newline $ \rightarrow$ Schritt 4\\
 \hline Sonderfall 7c)& Benutzer besitzt keine Leserechte zur ausgewählten Datei.
 \newline $ \rightarrow$ Schritt 7b.1 \\
@@ -236,10 +297,10 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Nachbedingung & Die Pipeline wurde gespeichert \\ 
 \hline Nachbedingung im Sonderfall & Die Pipeline wurde gespeichert \\ 
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & 1 Der Benutzer klickt auf Datei
+\hline Normalablauf & 1 Der Benutzer wählt \glqq Datei''
 \newline 2 OsmUi zeigt den Menüeintrag Datei
-\newline 3 Der Benutzer klickt auf Datei speichern
-\newline 4 OsmUi speichert die Pipeline\\
+\newline 3 Der Benutzer wählt \glqq Datei speichern''
+\newline 4 Die Pipeline wird gespeichert\\
 \hline Sonderfall 4a) & Die Pipeline wurde noch nie gespeichert
 \newline 4a.1 $ \rightarrow$ Use Case Speichern unter Schritt 1\\
 \hline 
@@ -256,28 +317,28 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Nachbedingung im Sonderfall 5b)& Die Pipeline wurde nicht gespeichert\\
 \hline Nachbedingung im Sonderfall 6a)& Die Pipeline wurde nicht gespeichert\\ 
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & 1 Der Benutzer klickt auf Datei
+\hline Normalablauf & 1 Der Benutzer wählt \glqq Datei''
 \newline 2 OsmUi zeigt den Menüeintrag Datei
-\newline 3 Der Benutzer klickt auf Datei speichern unter
+\newline 3 Der Benutzer wählt \glqq Datei speichern unter''
 \newline 4 OsmUi zeigt den Dateiauswahldialog
 \newline 5 Der Benutzer wählt den gewünschten Namen und die Dateiendung aus
-\newline 6 Der Benutzer bestätigt dies mit Klick auf den Button ''Speichern'' 
-\newline 7 OsmUi speichert die Pipeline\\
-\hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf Abbrechen\\
-\hline Sonderfall 5b) & 5b.1 Der Benutzer klickt auf eine bereits vorhandene Datei
+\newline 6 Der Benutzer bestätigt dies mit ''Speichern'' 
+\newline 7 Die Pipeline wird gespeichert\\
+\hline Sonderfall 5a) & 5a.1 Der Benutzer wählt \glqq Abbrechen''\\
+\hline Sonderfall 5b) & 5b.1 Der Benutzer wählt eine bereits vorhandene Datei
 \newline 5b.2 OsmUi fragt, ob die Datei überschrieben werden soll
-\newline 5b.3 Der Benutzer klickt auf Ja
+\newline 5b.3 Der Benutzer wählt \glqq Ja''
 \newline 5b.4 Die Pipeline wird gespeichert\\
-\hline Sonderfall 5b3a) & 5b3a.1 Der Benutzer klickt auf Nein
+\hline Sonderfall 5b3a) & 5b3a.1 Der Benutzer wählt \glqq Nein''
 \newline $ \rightarrow$ Schritt 5\\
-\hline Sonderfall 6a) & 6a.1 Der Benutzer klickt auf abbrechen\\
+\hline Sonderfall 6a) & 6a.1 Der Benutzer wählt \glqq abbrechen''\\
 \hline 
 \end{tabular}
 \end{center}
-\subsubsection{aus Aufrufscript importieren}
+\subsubsection{Pipeline aus Aufrufskript importieren}
 \begin{center}
 \begin{tabular}{|p {5cm}|p{10cm}|}
-\hline Name & \textbf{aus Aufrufskript importieren}\\
+\hline Name & \textbf{Pipeline aus Aufrufskript importieren}\\
 \hline Ziel & importierte Pipeline soll angezeigt werden\\
 \hline Vorbedingung & Eine importierbare Pipeline ist vorhanden\\
 \hline Nachbedingung & Die Datei wurde importiert und die Pipeline angezeigt\\ 
@@ -288,28 +349,32 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Nachbedingung im Sonderfall 7c) & OsmUi hat keine Daten importiert und zeigt Zustand vor dem Importversuch \\
 \hline Nachbedingung im Sonderfall 7d) & OsmUi hat keine Daten importiert und zeigt Zustand vor dem Importversuch \\
 \hline Akteure & Benutzer \\ 
-\hline Normalablauf & 1 Der Benutzer klickt auf Datei.
+\hline Normalablauf & 1 Der Benutzer wählt \glqq Datei''.
 \newline 2 OsmUi zeigt den Menüeintrag Datei
-\newline 3 Der Benutzer klickt auf Importieren aus Datei
+\newline 3 Der Benutzer wählt \glqq Importieren aus Datei''
 \newline 4 OsmUi zeigt den Dateiauswahldialog
 \newline 5 Der Benutzer wählt die gewünschte Datei aus
-\newline 6 Der Benutzer bestätigt dies mit Klick auf Button ''Importieren''.
-\newline 7 OsmUi importiert die Datei und zeigt sie in der Piplinebox an.\\ 
-\hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf ''Abrechen''
+\newline 6 Der Benutzer bestätigt dies mit \glqq Importieren''.
+\newline 7 OsmUi importiert die Datei und zeigt sie in der Piplinebox graphisch an.\\ 
+\hline Sonderfall 5a) & 5a.1 Der Benutzer wählt \glqq Abrechen''
 \newline 5a.2 OsmUi lädt keine Daten und zeigt den vorherigen Zustand.\\
-\hline Sonderfall 6a) & 6a.1 Der Benutzer klickt aber auf ''Abrechen''
-\newline 6a.2 Osmui importiert keine Daten und zeigt den vorherigen Zustand.\\
+\hline Sonderfall 6a) & 6a.1 Der Benutzer wählt \glqq Abrechen''
+\newline 6a.2 OsmUi importiert keine Daten und zeigt den vorherigen Zustand.\\
 \hline Sonderfall 7a) & Pipelinebox ist nicht leer.
-\newline 7a.1 Osmui importiert die Datei in die Piplinebox einer neuen Instanz von OsmUi.\\
+\newline 7a.1 OsmUi importiert die Datei in die Piplinebox einer neu geöffneten Instanz von OsmUi.\\
 \hline Sonderfall 7b)& Datei ist zwischenzeitlich nicht mehr verfügbar.
 \newline 7b.1 OsmUi versucht Datei zu lesen bricht dann ab und zeigt einen entsprechenden Fehlerdialog an.
-\newline 7b.2 Benutzer klickt auf Button ''Ok''.
+\newline 7b.2 Benutzer wählt \glqq Ok''.
 \newline $ \rightarrow$ Schritt 4\\
 \hline Sonderfall 7c)& Benutzer besitzt keine Leserechte zur ausgewählten Datei.
 \newline $ \rightarrow$ Schritt 7b.1 \\
 \hline Sonderfall 7d)& Dateityp wird nicht unterstützt.
 \newline $ \rightarrow$ Schritt 7b.1 \\
-\hline 
+\hline Sonderfall 7e)& Es befinden sich mehrere Pipelines in der gewählten Datei
+\newline 7e.1 OsmUi zeigt eine Fehlermeldung, dass nur Dateien mit einer Pipeline gelesen werden können
+\newline $ \rightarrow$ Schritt 7b.2\\
+\hline Sonderfall 7f)& Datei ist nicht lesbar
+\newline $ \rightarrow$ Schritt 7b.1
 \end{tabular}
 \end{center}
 \subsubsection{Rückgängig machen}
@@ -320,14 +385,14 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Vorbedingung & Es muss mindestens ein Schritt gemacht worden sein\\
 \hline Nachbedingung & Der Schritt wurde Rückgängig gemacht\\
 \hline Akteur & Benutzer\\
-\hline Normalablauf & 1 Der Benuzer klickt auf den Menüeintrag Bearbeiten
+\hline Normalablauf & 1 Der Benuzer wählt den Menüeintrag Bearbeiten
 \newline 2 OsmUi öffnet das Bearbeiten Menü
-\newline 3 Der Benutzer klickt auf Rückgängig
-\newline 4 Osmui macht die letzte Veränderung rückgängig\\
+\newline 3 Der Benutzer wählt \glqq Rückgängig''
+\newline 4 Die letzte Veränderung wird rückgängig gemacht\\
 \hline 
 \end{tabular}
 \end{center}
-\subsubsection{Wiederherstellen}
+\subsubsection{Pipeline Wiederherstellen}
 \begin{center}
 \begin{tabular}{|p {5cm}|p{10cm}|}
 \hline Name & \textbf{Wiederherstellen} \\ 
@@ -335,10 +400,10 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Vorbedingung & Es muss mindestens ein Schritt rückgängig gemacht worden sein\\
 \hline Nachbedingung & Der Schritt wurde wiederhergestellt gemacht\\
 \hline Akteur & Benutzer\\
-\hline Normalablauf & 1 Der Benuzer klickt auf den Menüeintrag Bearbeiten
+\hline Normalablauf & 1 Der Benuzer wählt den Menüeintrag Bearbeiten
 \newline 2 OsmUi öffnet das Bearbeiten Menü
-\newline 3 Der Benutzer klickt auf wiederherstellen
-\newline 4 OsmUi stellt den zuletzt rückgängig gemachten Schritt wieder her\\
+\newline 3 Der Benutzer wählt \glqq wiederherstellen''
+\newline 4 Der zuletzt rückgängig gemachte Schritt wird wiederhergestellt\\
 \hline 
 \end{tabular}
 \end{center}
@@ -349,17 +414,19 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Ziel & Der Hilfe-Dialog soll aufgerufen werden \\ 
 \hline Vorbedingung & keine \\ 
 \hline Nachbedingung & Dem Benutzer wurde geholfen \\ 
-\hline Nachbedingung im Sonderfall 5a) & Dem Benutzer wurde geholfen\\
-\hline Nachbedingung im Sonderfall 5b) & Keine Hilfe wurde gegeben\\
-\hline Nachbedingung im Sonderfall 7a) & Dem Benutzer wurde geholfen\\
+\hline Nachbedingung im Sonderfall 5a) & Der Benutzer hat Artikel gelesen\\
+\hline Nachbedingung im Sonderfall 5a2a) & Der Benutzer hat Artikel gelesen\\
+\hline Nachbedingung im Sonderfall 5a2b) & Der Benutzer hat Artikel gelesen\\
+\hline Nachbedingung im Sonderfall 5b) & Kein Artikel wurde gefunden\\
+\hline Nachbedingung im Sonderfall 7a) & Dem Benutzer hat Artikel gelesen\\
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & 1 Der Benutzer klickt auf Hilfe
+\hline Normalablauf & 1 Der Benutzer wählt Hilfe
 \newline 2 OsmUi zeigt den Menüeintrag Hilfe
-\newline 3 Der Benutzer klickt auf Hilfe
+\newline 3 Der Benutzer wählt \glqq Hilfe''
 \newline 4 OsmUi öffnet die Onlinehilfe
-\newline 5 Der Benutzer klickt auf das gesuchte Stichwort
+\newline 5 Der Benutzer wählt das gesuchte Stichwort
 \newline 6 OsmUi zeigt den entsprechenden Eintrag
-\newline 7 Der Benutzer klickt auf ''schließen''
+\newline 7 Der Benutzer wählt \glqq schließen''
 \newline 8 OsmUi zeigt wieder die aktuelle Pipeline an\\
 \hline Sonderfall 5a) & 5a.1 Der Benutzer gibt einen Suchbegriff in die Suchleiste ein
 \newline 5a.2 Der Benutzer bestätigt die Suche
@@ -367,7 +434,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline $ \rightarrow$ Schritt 5\\
 \hline Sonderfall 5a2a) & $ \rightarrow$ Schritt 5\\
 \hline Sonderfall 5a2b) & $ \rightarrow$ Schritt 5b\\
-\hline Sonderfall 5b) & 5b.1 der Benutzer klickt auf ''schließen''
+\hline Sonderfall 5b) & 5b.1 der Benutzer wählt \glqq schließen''
 \newline 5b.2 OsmUi schließt das Menü\\
 \hline Sonderfall 7a) & $ \rightarrow$ Schritt 5\\
 \hline
@@ -381,11 +448,11 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Vorbedingung & keine\\
 \hline Nachbedingung & die Informationen wurden angezeigt\\
 \hline Akteur & Benutzer\\
-\hline Normalablauf & 1 Der Benutzer klickt auf Hilfe
+\hline Normalablauf & 1 Der Benutzer wählt Hilfe
 \newline 2 OsmUi zeigt den Menüeintrag Hilfe
-\newline 3 Der Benutzer klickt auf über
+\newline 3 Der Benutzer wählt \glqq über''
 \newline 4 OsmUi öffnet die Informationsseite zu OsmUi
-\newline 5 Der Benutzer klickt auf Schließen
+\newline 5 Der Benutzer wählt \glqq Schließen''
 \newline 6 OsmUi zeigt wieder die aktuelle Pipeline an\\
 \hline
 \end{tabular}
@@ -398,9 +465,9 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Vorbedingung & keine \\ 
 \hline Nachbedingung & Eine neues OsmUi Fenster mit leerer Pipeline wurde erstellt \\ 
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & 1 Der Benutzer klickt auf bearbeiten
-\newline 2 OsmUi zeigt den Menüeintrag bearbeiten
-\newline 3 Der Benutzer klickt auf neu
+\hline Normalablauf & 1 Der Benutzer wählt \glqq Datei''
+\newline 2 OsmUi zeigt den Menüeintrag Datei
+\newline 3 Der Benutzer wählt \glqq Neu''
 \newline 4 Ein neue Instanz von OsmUi mit leerer Pipeline wird gestartet\\ 
 \hline 
 \end{tabular} 
@@ -414,15 +481,22 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Nachbedingung & Ein neuer Task wurde hinzugefügt \\ 
 \hline Nachbedingung im Sonderfall 1a) & Ein neuer Input-Task wurde unverbunden hinzugefügt\\
 \hline Nachbedingung im Sonderfall 1b) & Kein neuer Task wurde hinzugefügt\\
+\hline Nachbedingung im Sonderfall 2a) & Ein bereits vorhandener Task wurde angefügt\\
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & 1 Der Benutzer klickt auf den Plus-Button des Tasks, an den angefügt werden soll
-\newline 2 Der Benutzer wählt aus der Liste der kompatiblen (eventuell schon vorhandenen) Tasks einen aus (Doppelklick)
+\hline Normalablauf & 1 Der Benutzer selektiert den Task, an den angefügt werden soll
+\newline 2 Der Benutzer wählt aus der Liste der kompatiblen Tasks in der Taskpalette einen aus (Doppelklick oder Bestätigung auf \glqq einfügen'')
 \newline 3 Der gewälte Task wird in die Pipeline eingebunden\\ 
 \hline Sonderfall 1a) & Der Benutzer hat keinen Task selektiert
 \newline 1a.1 Der Benutzer wählt einen neuen Input-Task aus
 \newline 1a.2 Der neue Input-Task wird unverbunden in die Pipeline eingefügt\\
 \hline Sonderfall 1b) & 1b.1 Der Benutzer klickt erneut auf den selektierten Task
 \newline 1b.2 Der Task gilt nicht mehr als selektiert\\
+\hline Sonderfall 2a) & 2a.1 Der Benutzer klickt rechts auf einen Task in der Pipelinebox
+\newline 2a.2 OsmUi zeigt den Punkt \glqq anfügen''
+\newline 2a.3 Der Benutzer wählt \glqq anfügen''
+\newline 2a.4 Der Task wird an den selektierten Task a\\ngefügt\\
+\hline Sonderfall 2a2a) & Der Punkt \glqq anfügen'' ist ausgegraut
+\newline $ \rightarrow$ Schritt 2\\
 \hline
 \end{tabular}
 \end{center}
@@ -438,9 +512,9 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Normalablauf & 1 Der Benutzer selektiert den zu löschenden Task
 \newline 2 Der Benutzer drückt die Entfernen-Taste auf seiner Tastatur
 \newline 3 OsmUi gibt eine Warnung aus, falls dadurch eine inkonsistente Pipeline entsteht
-\newline 4 Der Benutzer klickt auf OK
+\newline 4 Der Benutzer wählt \glqq OK''
 \newline 5 Der Task wird gelöscht\\ 
-\hline Sonderfall 2a) & 2a.1 Der Benutzer klickt auf den selektierten Task oder selektiert etwas anderes
+\hline Sonderfall 2a) & 2a.1 Der Benutzer klickt auf den gewählten Task oder selektiert etwas anderes
 \newline 2a.2 Der Task gilt nicht mer als selektiert\\
 \hline 
 \end{tabular}  
@@ -457,7 +531,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Normalablauf & 1 Der Benutzer selektiert die Verbindung zwischen zwei Tasks
 \newline 2 Der Benutzer drückt die Entfernen-Taste auf seiner Tastatur
 \newline 3 OsmUi gibt eine Warnung aus, dass dadurch eine inkonsistente Pipeline entsteht
-\newline 4 Der Benutzer klickt auf OK
+\newline 4 Der Benutzer wählt \glqq OK''
 \newline 5 Die Verbindung wird gelöscht\\ 
 \hline Sonderfall 2a) & 2a.1 Der Benutzer klickt noch einmal auf die Verbindung oder selektiert etwas anderes
 \newline 2a.2 Die Verbindung gilt nicht mehr als selektiert\\
@@ -470,14 +544,18 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Name & \textbf{Task-Parameter einstellen} \\ 
 \hline Ziel & Die Parameter eines Tasks sollen geändert werden\\ 
 \hline Vorbedingung & Es gibt mindestens einen Task\\ 
-\hline Nachbedingung & Der Task wurde geändert\\  
-\hline Nachbedingung im Sonderfall 3a) & Der Task wurde nicht geändert\\
+\hline Nachbedingung & Die Parameter wurden geändert\\  
+\hline Nachbedingung im Sonderfall 3a) & Die Parameter wurden nicht geändert\\
+\hline Nachbedingung im Sonderfall 5a) & Die Parameter wurden geändert\\
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer macht einen Doppelklick auf den zu ändernden Task
 \newline 2 OsmUi zeigt anstatt der Taskpalette die momentanen Paranetereinstellungen an
 \newline 3 Der Benutzer ändert die Parameter
-\newline 4 Der Benutzer setzt seine Arbeit beliebig fort\\ 
+\newline 4 \textbf{Direkte Validierung:} OsmUi prüft die Eingaben auf leer gleassene Felder
+\newline 5 Der Benutzer setzt seine Arbeit beliebig fort\\ 
 \hline Sonderfall 3a) & $ \rightarrow$ Schritt 4\\
+\hline Sonderfall 5a) & 5a.1 OsmUi zeigt eine Fehlermeldung an, der Benutzer bestätigt diese
+\newline 5a.2 $ \rightarrow$ Schritt 3\\
 \hline 
 \end{tabular} 
 \end{center}
@@ -487,15 +565,15 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Name & \textbf{Pipeline importieren aus Zwischenablage} \\ 
 \hline Ziel & Benutzer möchte Pipeline aus Osmosis-Aufruf angezeigt haben\\ 
 \hline Vorbedingung & Osmosis-Aufruf befindet sich in Zwischenablage\\ 
-\hline Nachbedingung & Osmosis-Aufruf wurde importiert und zeigt die Pipeline an \\  
-\hline Nachbedingung im Sonderfall 4a) & Osmosis-Aufruf wurde importiert und zeigt die Pipeline an\\
+\hline Nachbedingung & Osmosis-Aufruf wurde importiert und OsmUi zeigt die Pipeline an \\  
+\hline Nachbedingung im Sonderfall 4a) & Osmosis-Aufruf wurde importiert und OsmUi zeigt die Pipeline an\\
 \hline Nachbedingung im Sonderfall 4b) & Keine Daten wurden importiert und letzter Zustand wird angezeigt.\\
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & 1 Der Benutzer klickt auf Datei.
+\hline Normalablauf & 1 Der Benutzer wählt Datei.
 \newline 
 2 OsmUi zeigt den Menüeintrag Datei
 \newline
-3 Der Benutzer klickt auf ''Importieren aus Zwischenablage''.
+3 Der Benutzer wählt \glqq Importieren aus Zwischenablage''.
 \newline
 4 OsmUi lädt die Datei und zeigt sie in der Pipelinebox an.
 \\ 
@@ -505,7 +583,7 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \newline
  4b.1 OsmUi versucht Zwischenablage zu laden bricht dann ab und zeigt einen entsprechenden Fehlerdialog an.
 \newline
- 4b.2 Benutzer klickt auf Button ''Ok''.
+ 4b.2 Benutzer wählt \glqq Ok''.
 \newline
  4b.3 OsmUi zeigt den Zustand der vor dem Importversuch vorhanden war.
 \\
@@ -517,35 +595,35 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Name & \textbf{Pipeline exportieren} \\ 
 \hline Ziel & Eine konsistente Pipeline soll exportiert werden \\ 
-\hline Vorbedingung & Die Pipeline muss konsistent sein \\ 
+\hline Vorbedingung & keine \\ 
 \hline Nachbedingung & Die Pipeline wurde ins gewählte Verzeichnis exportiert\\ 
 \hline Nachbedingung im Sonderfall 4a) & Die Pipeline wurde nicht exportiert\\
 \hline Nachbedingung im Sonderfall 5a)& Die Pipeline wurde nicht exportiert\\ 
 \hline Nachbedingung im Sonderfall 5b)& siehe Normalablauf\\
 \hline Nachbedingung im Sonderfall 6a)& Die Pipeline wurde nicht exportiert\\ 
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & 1 Der Benutzer klickt auf Datei
+\hline Normalablauf & 1 Der Benutzer wählt Datei
 \newline 2 OsmUi zeigt den Menüeintrag Exportieren
-\newline 3 Der Benutzer klickt auf Exportieren
+\newline 3 Der Benutzer wählt \glqq exportieren''
 \newline 4 OsmUi zeigt den Dateiauswahldialog
 \newline 5 Der Benutzer wählt den gewünschten Namen und die Dateiendung aus
-\newline 6 Der Benutzer bestätigt dies mit Klick auf den Button ''exportieren'' 
+\newline 6 Der Benutzer bestätigt dies mit \glqq exportieren'' 
 \newline 7 Die Datei wird exportiert
 \newline 8 OsmUi zeigt die aktuelle Pipeline an\\
 \hline Sonderfall 4a) & Die Pipeline ist nicht konsistent
 \newline 4a.1 OsmUi gibt eine Fehlermeldung aus
-\newline 4a.2 Der Benutzer klickt auf OK
+\newline 4a.2 Der Benutzer wählt \glqq OK''
 \newline 4a.3 OsmUi zeigt die momentane Pipeline an\\
-\hline Sonderfall 5a) & 5a.1 Der Benutzer klickt auf Abbrechen
+\hline Sonderfall 5a) & 5a.1 Der Benutzer wählt \glqq Abbrechen''
 \newline 5a.2 OsmUi zeigt die aktuelle Pipeline an\\
-\hline Sonderfall 5b) & 5b.1 Der Benutzer klickt auf eine bereits vorhandene Datei
+\hline Sonderfall 5b) & 5b.1 Der Benutzer wählt eine bereits vorhandene Datei
 \newline 5b.2 OsmUi fragt, ob die Datei überschrieben werden soll
-\newline 5b.3 Der Benutzer klickt auf Ja
+\newline 5b.3 Der Benutzer wählt \glqq Ja''
 \newline 5b.4 Die Pipeline wird exportiert
 \newline 5b.5 OsmUi zeigt die aktuelle Pipeline an\\
-\hline Sonderfall 5b3a) & 5b3a.1 Der Benutzer klickt auf Nein
+\hline Sonderfall 5b3a) & 5b3a.1 Der Benutzer wählt \glqq Nein''
 \newline $ \rightarrow$ Schritt 5\\
-\hline Sonderfall 6a) & 6a.1 Der Benutzer klickt auf abbrechen
+\hline Sonderfall 6a) & 6a.1 Der Benutzer wählt \glqq abbrechen''
 \newline 6a.2 OsmUi zeigt die aktuelle Pipeline an\\
 \hline 
 \end{tabular}
@@ -560,19 +638,43 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 In der Kopierleiste steht ein Osmosis-Aufruf
 \newline 2 Der Benutzer makiert die gesamte Kopierleiste (oder einen gewünschten Teil)
-\newline 3 Der Benutzer benutzt Strg+C\\ 
+\newline 3 Der Benutzer benutzt Strg+C auf seiner Tastatur\\ 
 \hline 
+\end{tabular} 
+\end{center}
+\subsubsection{Programm schließen}
+\begin{center}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Name & \textbf{Programm schließen} \\ 
+\hline Ziel & OsmUi soll geschlossen werden\\ 
+\hline Vorbedingung & OsmUi ist geöffnet\\ 
+\hline Nachbedingung & OsmUi wurde geschlossen \\  
+\hline Akteur & Benutzer \\ 
+\hline Normalablauf & 1 Der Benutzer wählt Datei
+\newline 2 OsmUi zeigt den Menüeintrag Datei
+\newline 3 Der Benutzer wählt \glqq schließen''
+\newline 4 OsmUi schließt das Programm\\
+\hline Sonderfall 4a)& Die aktuelle Pipeline wurde noch nicht gespeichert
+\newline 4a.1 \textbf{Warnung:} OsmUi zeigt eine Fehlermeldung
+\newline 4a.2 Der Benutzer wählt \glqq speichern''
+\newline 4a.3 $ \rightarrow$ Use Case speichern
+\newline 4a.4 $ \rightarrow$ Schritt 4\\
+\hline Sonderfall 4a2.a & 4a2a.1 Der Benutzer wählt \glqq nicht speichern''
+\newline 4a2a.2 OsmUi schließt ohne zu speichern\\
+\hline Sonderfall 4a2b & 4a2b.1 Der Benutzer wählt \glqq abbrechen''
+\newline OsmUi zeigt wieder die aktuelle Pipeline\\
+\hline
 \end{tabular} 
 \end{center}
 
 
 \section{Begriffslexikon}
+\subsection{Aufrufscript}
 \begin{center}
-\ \\
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Aufrufscript} synonym gespeicherte Datei, .sh/.bat Skript\\ 
+\hline Begriff & \textbf{Aufrufskript} synonym gespeicherte Datei, .sh/.bat Skript\\ 
 \hline Bedeutung & Ein Shell/Batch Skript welches einen Aufruf für Osmosis samt Pipeline speichert \\
-\hline Abgrenzung & Es handelt sich nicht um Osmosis selbst, sondern nur ein Skript welches Osmosis aufruft \\ 
+\hline Abgrenzung & Es handelt sich nicht um Osmosis selbst, sondern nur ein Skript, welches Osmosis aufruft \\ 
 \hline Gültigkeit &  Der Begriff wird nur in diesem Projekt benutzt \\ 
 \hline Bezeichnung &  Jedes Aufrufskript ist eine eigene Datei und damit eindeutig\\ 
 \hline Unklarheiten &  keine \\ 
@@ -588,6 +690,16 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Bezeichnung & Es gibt mehrere Dialoge, die sich durch ihren Inhalt unterscheiden \\ 
 \hline Unklarheiten & keine \\ 
 \hline Querverweise & Fenster, OsmUi \\ 
+\hline
+\end{tabular}
+\subsection{Export}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Export}\\
+\hline Bedeutung & Vorgang, bei dem ein Aufrufskript entsteht, Gegenteil von Import \\ 
+\hline Abgrenzung & Es ist kein Export im wirtschaftlichen  Sinne gemeint\\ 
+\hline Gültigkeit & Der Begriff gilt innerhalb von OsmUi \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Import, OsmUi \\ 
 \hline
 \end{tabular}
 \subsection{Fenster}
@@ -611,36 +723,79 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Querverweise & Export, OsmUi \\ 
 \hline
 \end{tabular}
-\subsection{Export}
+\subsection{KISS}
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Export}\\
-\hline Bedeutung & Vorgang, bei dem ein Aufrufskript entsteht, Gegenteil von Import \\ 
-\hline Abgrenzung & Es ist kein Export im wirtschaftlichen  Sinne gemeint\\ 
-\hline Gültigkeit & Der Begriff gilt innerhalb von OsmUi \\ 
+\hline Begriff & \textbf{KISS} synonym \glqq Keep it stupid and simple''\\ 
+\hline Bedeutung & Ein Programmier-Prinzip, nach dem eine möglichst einfache Lösung für ein Problem gewählt werden soll \\
+\hline Abgrenzung & Es ist genau das Programmierprinzip gemeint, kein Kuss o.Ä.\\ 
+\hline Gültigkeit & in der Programmier-Welt allgemein gültig\\ 
+\hline Bezeichnung & keine\\ 
 \hline Unklarheiten & keine \\ 
-\hline Querverweise & Import, OsmUi \\ 
-\hline
+\hline Querverweise & keine \\ 
+\hline 
 \end{tabular}
-\subsection{OsmUi}
+\subsection{Kopierleiste}
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{OsmUi}, synonym Produkt, Software, das Programm \\ 
-\hline Bedeutung & OsmUi ist das zu entwickelnde Produkt es stellt eine Benutzeroberfläche für Osmosis da \\ 
-\hline Abgrenzung & Es ist nur das Produkt gemeint, keine andere Software o. Ä. \\ 
-\hline Gültigkeit & Diese Bezeichnung gilt nur innerhalb des Projekts \\ 
-\hline Bezeichnung & OsmUi gibt es nur einmal, es ist daher eindeutig \\ 
+\hline Begriff & \textbf{Kopierleiste} \\ 
+\hline Bedeutung & Der Teil der Oberfläche, in dem die aktuelle Pipeline als Osmosis Aufruf angezeigt wird \\ 
+\hline Abgrenzung & Es handelt sich nur um einen Teil der Benutzeroberfläche, nicht um einen realen Gegenstand \\ 
+\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\ 
+\hline Bezeichnung & Es gibt nur eine Kopierleiste. Sie ist daher eindeutig \\ 
 \hline Unklarheiten & keine \\ 
-\hline Querverweise & Osmosis \\ 
+\hline Querverweise & Task \\ 
+\hline 
+\end{tabular}
+\subsection{OpenStreetMap}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{OpenStreetMap} synonym OSM\\ 
+\hline Bedeutung & OpenStreetMap ist eine frei bearbeitbare Karte der ganzen Welt\\
+\hline Abgrenzung & keine\\ 
+\hline Gültigkeit & OpenStreetMap ist allgemein gültig\\ 
+\hline Bezeichnung & keine\\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & keine \\ 
 \hline 
 \end{tabular}
 \subsection{Osmosis}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Osmosis} synonym Osmosis Kommandozeilenwerkzeug\\ 
 \hline Bedeutung & Osmosis ist ein Kommandozeilenwerkzeug zum Bearbeiten von OpenStreetMap Daten mithilfe von Pipelines \\ 
-\hline Abgrenzung & Es ist nur Osmosis gemeint nicht OsmUi welches eine grafische Oberfläche für Osmosis darstellt\\ 
-\hline Gültigkeit & Diese Bezeichnung gilt nur innerhalb des Projekts \\ 
+\hline Abgrenzung & Es ist bezeichnet nur Osmosis gemeint nicht OsmUi welches eine grafische Oberfläche für Osmosis darstellt\\  
 \hline Bezeichnung & Osmosis gibt es nur einmal, es ist daher eindeutig \\ 
 \hline Unklarheiten & keine \\ 
 \hline Querverweise & OsmUi, Pipeline \\ 
+\hline 
+\end{tabular}
+\subsection{OsmUi}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{OsmUi}, synonym Produkt, Software, das Programm \\ 
+\hline Bedeutung & OsmUi ist das zu entwickelnde Produkt es stellt eine Benutzeroberfläche für Osmosis da \\ 
+\hline Abgrenzung & Es ist nur das Produkt gemeint, keine andere Software o. Ä. \\ 
+\hline Gültigkeit & Solange dieses Open-Source-Project besteht \\ 
+\hline Bezeichnung & OsmUi gibt es nur einmal, es ist daher eindeutig \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Osmosis \\ 
+\hline 
+\end{tabular}
+\subsection{Parameter}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Parameter} \\ 
+\hline Bedeutung & Ein Parameter ist eine Einstellung eines Tasks\\
+\hline Abgrenzung & Ist kein Task sondern eine dessen Einstellungen\\ 
+\hline Gültigkeit & Allgemein gültig\\  
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Tasks \\ 
+\hline 
+\end{tabular}
+\subsection{Parametertab}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Parametertab} \\ 
+\hline Bedeutung & Der Teil der Oberfläche, in dem man die Parameter eines Task einstellen kann  \\ 
+\hline Abgrenzung & Es handelt sich um keine reale Box o.ä., sondern um ein Element der Benutzeroberfläche\\ 
+\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\ 
+\hline Bezeichnung & Jeder Task zeigt seine Einstellungen im gleichen Parametertab wenn er selektiert ist, also ist dieser eindeutig \\ 
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Task \\ 
 \hline 
 \end{tabular}
 \subsection{Pipeline}
@@ -654,6 +809,16 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Querverweise & Osmois, OsmUi, Task \\ 
 \hline 
 \end{tabular}
+\subsection{Pipeline ausführbar}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Pipeline ausführbar} \\ 
+\hline Bedeutung & Eine Pipeline ist ausführbar, wenn sie konsistent ist \textbf{und} sie von Osmosis verarbeitet werden kann\\ 
+\hline Abgrenzung & Eine ausführbare Pipeline ist mehr als nur konsistent \\ 
+\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\  
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Pipeline konsistent \\ 
+\hline 
+\end{tabular}
 \subsection{Pipelinebox}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline Begriff & \textbf{Pipelinebox} \\ 
@@ -663,6 +828,17 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Bezeichnung & Es gibt nur eine Pipelinebox pro ausgeführtem OsmUi. Sie ist daher eindeutig \\ 
 \hline Unklarheiten & keine \\ 
 \hline Querverweise & OsmUi, Pipeline \\ 
+\hline 
+\end{tabular}
+\subsection{Pipeline konsistent}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline Begriff & \textbf{Pipeline konsistent} \\ 
+\hline Bedeutung & Eine Pipeline ist konsistent, wenn alle Tasks keine unverbundenen Eingänge haben \\ 
+\hline Abgrenzung & Eine konsistente Pipeline muss nicht von Osmosis ausführbar sein
+\newline zum Beispiel kann sie auch nur aus einem ``--read-xml'' bestehen. \\ 
+\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\  
+\hline Unklarheiten & keine \\ 
+\hline Querverweise & Pipeline ausführbar \\ 
 \hline 
 \end{tabular}
 \subsection{Task}
@@ -687,52 +863,12 @@ Sprache aus den hierfür vorgesehenen Umgebungsvariablen eingelesen, um sie ohne
 \hline Querverweise & OsmUi, Task\\ 
 \hline 
 \end{tabular}
-\subsection{Parametertab}
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Parametertab} \\ 
-\hline Bedeutung & Der Teil der Oberfläche, in dem man die Parameter eines Task einstellen kann  \\ 
-\hline Abgrenzung & Es handelt sich um keine reale Box o.ä., sondern um ein Element der Benutzeroberfläche\\ 
-\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\ 
-\hline Bezeichnung & Jeder Task zeigt seine Einstellungen im gleichen Parametertab wenn er selektiert ist, also ist dieser eindeutig \\ 
-\hline Unklarheiten & keine \\ 
-\hline Querverweise & Task \\ 
-\hline 
-\end{tabular}
-\subsection{Kopierleiste}
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Kopierleiste} \\ 
-\hline Bedeutung & Der Teil der Oberfläche, in dem die aktuelle Pipeline als Osmosis Aufruf angezeigt wird \\ 
-\hline Abgrenzung & Es handelt sich nur um einen Teil der Benutzeroberfläche, nicht um einen realen Gegenstand \\ 
-\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\ 
-\hline Bezeichnung & Es gibt nur eine Kopierleiste. Sie ist daher eindeutig \\ 
-\hline Unklarheiten & keine \\ 
-\hline Querverweise & Task \\ 
-\hline 
-\end{tabular}
-\subsection{Pipeline konsistent}
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Pipeline konsistent} \\ 
-\hline Bedeutung & Eine Pipeline ist konsistent, wenn alle Tasks keine unverbundenen Eingänge haben \\ 
-\hline Abgrenzung & Eine konsistente Pipeline muss nicht von Osmosis ausführbar sein
-\newline zum Beispiel kann sie auch nur aus einem ``--read-xml'' bestehen. \\ 
-\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\  
-\hline Unklarheiten & keine \\ 
-\hline Querverweise & Pipeline ausführbar \\ 
-\hline 
-\end{tabular}
-\subsection{Pipeline ausführbar}
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline Begriff & \textbf{Pipeline ausführbar} \\ 
-\hline Bedeutung & Eine Pipeline ist ausführbar, wenn sie konsistent ist \textbf{und} sie von Osmosis verarbeitet werden kann\\ 
-\hline Abgrenzung & Eine ausführbare Pipeline ist mehr als nur konsistent \\ 
-\hline Gültigkeit & Der Begriff gilt nur innerhalb von OsmUi \\  
-\hline Unklarheiten & keine \\ 
-\hline Querverweise & Pipeline konsistent \\ 
-\hline 
-\end{tabular}
 \end{center}
-\section{Versionshistorie} Version 1.0 - Erstellung der Spezifikation
+\section{Versionshistorie} 
 \begin{itemize}
-\item 
+\item Version 1.0 - Erstellung der Spezifikation (15.11.10)
+\item Version 1.1 -	Korrekturen nach dem Review (29.11.10)
+\item Version 1.2 - Änderung des Use Case Task einfügen (10.12.10)
+\item Version 1.3 - Hinzufügen von Usability Patterns (11.12.10)
 \end{itemize}
 \end{document}
