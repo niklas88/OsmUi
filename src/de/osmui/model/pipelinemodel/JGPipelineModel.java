@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.osmui.model.exceptions.TasksNotCompatibleException;
+import de.osmui.model.exceptions.TasksNotInModelException;
 
 import com.mxgraph.model.mxCell;
 import com.mxgraph.view.mxGraph;
@@ -35,10 +36,10 @@ public class JGPipelineModel extends AbstractPipelineModel {
 		//Remember we always add sourceTasks to the front so we can break after
 		//finding the first non sourceTask
 		for(JGTaskDecorator task: tasks){
-			if(task.getInputPipes().isEmpty()){
+			if(task.getInputPorts().isEmpty()){
 				// We return the Task objects without their decorator here so that
 				// subclass functionality might be accessed
-				sourceTasks.add(task.undecorate());
+				sourceTasks.add(task);
 			} else {
 				break;
 			}
@@ -76,7 +77,7 @@ public class JGPipelineModel extends AbstractPipelineModel {
 			throws TasksNotCompatibleException {
 		
 		
-		if(!task.getInputPipes().isEmpty()){
+		if(!task.getInputPorts().isEmpty()){
 			addTask(task);
 			notifyObservers(task);
 		} else {
@@ -90,7 +91,7 @@ public class JGPipelineModel extends AbstractPipelineModel {
 	 */
 	@Override
 	public void addTask(AbstractTask parent, AbstractTask child)
-			throws TasksNotCompatibleException {
+			throws TasksNotCompatibleException, TasksNotInModelException {
 		boolean taskInList = false;
 		
 		//Find the parent task
@@ -108,7 +109,7 @@ public class JGPipelineModel extends AbstractPipelineModel {
 			
 			notifyObservers(child);
 		} else {
-			throw new TasksNotCompatibleException("Parent task not in model");
+			throw new TasksNotInModelException("parent not in model");
 		} 
 
 	}
@@ -127,17 +128,50 @@ public class JGPipelineModel extends AbstractPipelineModel {
 	 * @see de.osmui.model.pipelinemodel.AbstractModel#connectTasks(de.osmui.model.pipelinemodel.AbstractTask, de.osmui.model.pipelinemodel.AbstractTask)
 	 */
 	@Override
-	public void connectTasks(AbstractTask parent, AbstractTask child)
-			throws TasksNotCompatibleException {
-		//TODO
+	public AbstractPipe connectTasks(AbstractTask parent, AbstractTask child)
+			throws TasksNotCompatibleException, TasksNotInModelException {
+
+		// First find out whether the tasks are in the model
+		// so we also guarantee they are decorated properly
+		JGTaskDecorator jgparent = null;
+		JGTaskDecorator jgchild = null;
+		for(JGTaskDecorator it : tasks){
+			if(it.equals(parent)){
+				jgparent = it;
+			} else if(it.equals(child)){
+				jgchild = it;
+			} else if(jgparent != null && jgchild != null){
+				//both found done
+				break;
+			}
+		}
+		if(jgchild == null && jgparent == null){
+			throw new TasksNotInModelException("Either parent or child is not in the model");
+		}
+		
+		// Make the normal connection, the cast here is legal because we checked they are in the model and 
+		// therefore also decorated
+		JGPipeDecorator jgpipe = (JGPipeDecorator) super.connectTasks(jgparent, jgchild);		
+		// Setup the jgraphx madness
+		Object graphparent = graph.getDefaultParent();
+
+		graph.getModel().beginUpdate();
+		try{			
+			jgpipe.setCell((mxCell) graph.insertEdge(graphparent, null, jgpipe, jgparent.getCell(), jgchild.getCell()));
+		}
+		finally{
+			graph.getModel().endUpdate();
+		}
+		return jgpipe;
 	}
 
 	/* (non-Javadoc)
 	 * @see de.osmui.model.pipelinemodel.AbstractModel#disconnectTasks(de.osmui.model.pipelinemodel.AbstractTask, de.osmui.model.pipelinemodel.AbstractTask)
 	 */
 	@Override
-	public void disconnectTasks(AbstractTask parent, AbstractTask child) {
-		// TODO Auto-generated method stub
+	public AbstractPipe disconnectTasks(AbstractTask parent, AbstractTask child) {
+		return super.disconnectTasks(parent, child);
+		//TODO
 	}
 
 	/* (non-Javadoc)

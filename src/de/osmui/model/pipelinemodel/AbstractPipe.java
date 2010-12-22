@@ -13,7 +13,7 @@ public abstract class AbstractPipe {
 	protected String name;
 	protected AbstractTask source;
 	//The target must be null if not connected
-	protected AbstractTask target = null;
+	protected AbstractPort target = null;
 	
 	/**
 	 * Returns whether this pipe has a user defined name or a name should be auto generated on export
@@ -24,6 +24,14 @@ public abstract class AbstractPipe {
 		return name==null;
 	}
 	
+	/**
+	 * Gets whether this pipe is connected to a port
+	 * 
+	 * @return true if connected, false otherwise
+	 */
+	public boolean isConnected(){
+		return target != null;
+	}
 	/**
 	 * Sets the name of this pipe this name
 	 * 
@@ -47,17 +55,41 @@ public abstract class AbstractPipe {
 	 * 
 	 * @return target may be null
 	 */
-	public AbstractTask getTarget(){
+	public AbstractPort getTarget(){
 		return target;
 	}
 	
 	/**
-	 * Sets the target of this pipe
+	 * If possible (i.e. types match) connects this pipe with the given target port, returns true if successful, false otherwise.
 	 * 
 	 * @param target
+	 * @return true if connect was successful, false otherwise
 	 */
-	public void setTarget(AbstractTask target){
-		this.target = target;
+	public boolean connect(AbstractPort target){
+		if(target != null && this.getType().equals(target.getType())){
+			this.target = target;
+			if(target.connect(this)){
+				return true;
+			} else {
+				this.target = null;
+				return false;
+			}
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public void disconnect(){
+		if(target != null && target.isConnected()){
+			// A little tricky as AbstractPorts disconnect also tries this disconnect method
+			// this ensures disconnect on either end works
+			AbstractPort tempTarget = target;
+			target = null;
+			tempTarget.disconnect();
+		} else {
+			target = null;
+		}
 	}
 	
 	public abstract String getType();

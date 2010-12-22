@@ -22,6 +22,13 @@ public class JGTaskDecorator extends AbstractTask {
 	
 	public JGTaskDecorator(AbstractTask toDecorate){
 		this.decoratedTask = toDecorate;
+		//Now we also need to decorate all pipes, make it look really nice :-)
+		List<AbstractPipe> pipes = this.decoratedTask.getOutputPipes();
+		JGPipeDecorator jgpipe;
+		for(int i=0; i<pipes.size(); ++i){
+			jgpipe = new JGPipeDecorator(pipes.get(i));
+			pipes.set(i, jgpipe);
+		}
 		//Needs to be set explicitly
 		this.cell = null;
 	}
@@ -47,6 +54,13 @@ public class JGTaskDecorator extends AbstractTask {
 	 * that may exist. NOTE: The task might still contain decorated pipes
 	 */
 	public AbstractTask undecorate(){
+		//First undecorate all pipes
+		List<AbstractPipe> pipes = this.decoratedTask.getOutputPipes();
+		JGPipeDecorator jgpipe;
+		for(int i=0; i<pipes.size(); ++i){
+			jgpipe = (JGPipeDecorator) pipes.get(i);
+			pipes.set(i, jgpipe.undecorate());
+		}
 		return decoratedTask;
 	}
 
@@ -62,8 +76,8 @@ public class JGTaskDecorator extends AbstractTask {
 	 * @see de.osmui.model.pipelinemodel.AbstractTask#getInputPipes()
 	 */
 	@Override
-	public List<AbstractPipe> getInputPipes() {
-		return decoratedTask.getInputPipes();
+	public List<AbstractPort> getInputPorts() {
+		return decoratedTask.getInputPorts();
 	}
 
 	/* (non-Javadoc)

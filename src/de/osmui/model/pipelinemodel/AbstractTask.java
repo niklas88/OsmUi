@@ -56,10 +56,10 @@ public abstract class AbstractTask {
 	public abstract Map<String, AbstractParameter> getParameters();
 	
 	/**
-	 * Gets the list of both connected and unconnected inputPipes
-	 * @return list of inputPipes null if this is a source
+	 * Gets the list of both connected and unconnected inputPorts
+	 * @return list of inputPorts null if this is a source
 	 */
-	public abstract List<AbstractPipe> getInputPipes();
+	public abstract List<AbstractPort> getInputPorts();
 	
 	/**
 	 * Gets the list of both connected and unconnected outputPipes
