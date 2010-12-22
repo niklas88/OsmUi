@@ -4,6 +4,7 @@
 package de.osmui.model.pipelinemodel;
 
 import java.util.List;
+import java.util.Map;
 
 import de.osmui.model.osm.TTask;
 
@@ -29,7 +30,7 @@ public abstract class AbstractTask {
 	/**
 	 * @param description the description to set
 	 */
-	public void setDescription(TTask description) {
+	protected void setDescription(TTask description) {
 		this.description = description;
 	}
 
@@ -42,7 +43,6 @@ public abstract class AbstractTask {
 	}
 	
 	/**
-	 * Sets the name of this task e.g. 'read-xml'
 	 * @param the new name
 	 */
 	public void setName(String s){
@@ -53,7 +53,7 @@ public abstract class AbstractTask {
 	 * Gets the list of Parameters associated with this task 
 	 * @return the parameter list or null if no parameters exist
 	 */
-	public abstract List<AbstractParameter> getParameters();
+	public abstract Map<String, AbstractParameter> getParameters();
 	
 	/**
 	 * Gets the list of both connected and unconnected inputPipes
