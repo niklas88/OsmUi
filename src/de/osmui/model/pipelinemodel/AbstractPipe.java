@@ -12,19 +12,8 @@ package de.osmui.model.pipelinemodel;
 public abstract class AbstractPipe {
 	protected String name;
 	protected AbstractTask source;
-	protected AbstractTask target;
-	
-	/**
-	 * Constructor all subclasses must define that takes the source of this pipe,
-	 * all pipes must have a fixed source that is the task they belong to, the target is not fixed
-	 * 
-	 * @param source for this pipe
-	 */
-	protected AbstractPipe(AbstractTask source){
-		this.name=null;
-		this.target=null;
-		this.source=source;
-	}
+	//The target must be null if not connected
+	protected AbstractTask target = null;
 	
 	/**
 	 * Returns whether this pipe has a user defined name or a name should be auto generated on export
@@ -45,7 +34,7 @@ public abstract class AbstractPipe {
 	}
 	
 	/**
-	 * Gets the source of this pipe
+	 * Gets the source of this pipe, there is no setter, the source should be set in the constructor
 	 * 
 	 * @return source
 	 */
@@ -62,5 +51,15 @@ public abstract class AbstractPipe {
 		return target;
 	}
 	
+	/**
+	 * Sets the target of this pipe
+	 * 
+	 * @param target
+	 */
+	public void setTarget(AbstractTask target){
+		this.target = target;
+	}
+	
+	public abstract String getType();
 
 }

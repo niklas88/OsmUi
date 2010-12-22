@@ -4,9 +4,10 @@
 package de.osmui.model.pipelinemodel;
 
 import java.util.List;
+import java.util.Observable;
 
 import de.osmui.model.exceptions.TasksNotCompatibleException;
-import de.osmui.util.ModelChangedListener;
+
 
 /**
  * This is the abstract base class for all pipeline models
@@ -14,7 +15,8 @@ import de.osmui.util.ModelChangedListener;
  * @author Niklas Schnelle
  *
  */
-public abstract class AbstractModel {
+public abstract class AbstractPipelineModel extends Observable{
+	
 	/**
 	 * Gets all Source Tasks in the model, that is the Tasks without any inputPipes one
 	 * normally traverses the model from the SourceTasks to the drains using the Task objects
@@ -51,21 +53,28 @@ public abstract class AbstractModel {
 	public abstract boolean removeTask(AbstractTask task);
 	
 	/**
-	 * Gets whether this model currently represents a excutable pipeline that is a pipeline that can be executed by osmosis
+	 * Connects the given tasks using the first parameter as parent task of the second parameter. If there is no 
+	 * compatible pipe left a TasksNotCompatibleException will be thrown
 	 * 
-	 * @return true if excutable false otherwise
+	 * @param parent
+	 * @param child
+	 * @throws TasksNotCompatibleException
 	 */
-	public abstract boolean isExcutable();
+	public abstract void connectTasks(AbstractTask parent, AbstractTask child) throws TasksNotCompatibleException;
 	
 	/**
-	 * Registers a ModelChangedListener for this model
+	 * Disconnects the two tasks if they were connected, does nothing otherwise
 	 * 
-	 * @param listener
+	 * @param parent
+	 * @param child
 	 */
-	public abstract void registerModelChangedListener(ModelChangedListener listener);
+	public abstract void disconnectTasks(AbstractTask parent, AbstractTask child);
 	
 	/**
-	 * Fires a ModelChangedEvent
+	 * Gets whether this model currently represents a executable pipeline that is a pipeline that can be executed by osmosis
+	 * 
+	 * @return true if executable false otherwise
 	 */
-	protected abstract void fireModelChanged();
+	public abstract boolean isExecutable();
+	
 }
