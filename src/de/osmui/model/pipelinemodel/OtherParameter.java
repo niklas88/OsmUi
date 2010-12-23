@@ -3,6 +3,8 @@
  */
 package de.osmui.model.pipelinemodel;
 
+import de.osmui.model.osm.TParameter;
+
 /**
  * This class is used to store all Parameters of types not covered by another specific class
  * 
@@ -12,6 +14,10 @@ package de.osmui.model.pipelinemodel;
 public class OtherParameter extends AbstractParameter {
 	protected String value;
 
+	public OtherParameter(TParameter desc, String value){
+		super(desc, value);
+	}
+	
 	/* (non-Javadoc)
 	 * @see de.osumi.model.pipelinemodel.AbstractParameter#getCommandlineForm()
 	 */

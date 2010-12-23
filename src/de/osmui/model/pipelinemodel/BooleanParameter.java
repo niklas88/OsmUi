@@ -15,8 +15,7 @@ public class BooleanParameter extends AbstractParameter {
 	private boolean value;
 	
 	public BooleanParameter(TParameter desc, String value){
-		this.description=desc;
-
+		super(desc, value);
 	}
 
 	/* (non-Javadoc)
