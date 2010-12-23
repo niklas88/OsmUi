@@ -1,8 +1,6 @@
 package de.osmui.ui;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 

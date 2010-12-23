@@ -28,16 +28,16 @@ public class Content extends JPanel {
 		PipelineBox pipelineBox =new PipelineBox();
 		
 
-        // Creates the inner split pane that contains the library with the
-        // palettes and the graph outline on the left side of the window
+        // Creates the right split pane that contains the pipelineBox with the
+        // pipeline's graph representation and the copyBox on the lower side of this split.
         JSplitPane right = new JSplitPane(JSplitPane.VERTICAL_SPLIT, pipelineBox, copyBox);
         right.setDividerLocation(720);
         right.setResizeWeight(1);
         right.setDividerSize(6);
         right.setBorder(null);
 		
-		// Creates the outer split pane that contains the inner split pane and
-        // the graph component on the right side of the window
+		// Creates the main split pane that contains the right split pane and
+        // the tabBox component on the left side of this split.
         JSplitPane content = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, tabBox, right);
         content.setOneTouchExpandable(true);
         content.setDividerLocation(200);
