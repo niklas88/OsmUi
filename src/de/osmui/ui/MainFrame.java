@@ -14,17 +14,17 @@ public class MainFrame extends JFrame {
 
 	// Verhindere die Erzeugung des Objektes über andere Methoden
 	private MainFrame() {
+		System.out.println("1");
 		Menu menu = new Menu();
 		this.setJMenuBar(menu);
-
+		System.out.println("2");
 		Content content = new Content();
-
+		System.out.println("3");
 		setLayout(new BorderLayout());
 		/*
 		 * add(getToolbar(), BorderLayout.NORTH);
 		 */
 		add(content, BorderLayout.CENTER);
-		Util.loadConfiguration();
 
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
