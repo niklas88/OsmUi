@@ -39,6 +39,7 @@ public class BooleanParameter extends AbstractParameter {
 			return (value)?"true":"false";
 		}
 	}
+	
 	/* (non-Javadoc)
 	 * @see de.osumi.model.pipelinemodel.AbstractParameter#setValue(java.lang.String)
 	 */
@@ -70,7 +71,7 @@ public class BooleanParameter extends AbstractParameter {
 	 * Sets the value to the specified boolean
 	 * @param value the value to set
 	 */
-	public void setValue(boolean value) {
+	public void setValueBoolean(boolean value) {
 		this.value = value;
 	}
 

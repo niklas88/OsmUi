@@ -40,6 +40,7 @@ public class VariablePort extends CommonPort {
 			success = newPort.connect(pipe);
 			if(success){
 				getParent().getInputPorts().add(newPort);
+				referencedParam.setValueInteger(referencedParam.getValueInteger()+1);
 			}
 		}
 		

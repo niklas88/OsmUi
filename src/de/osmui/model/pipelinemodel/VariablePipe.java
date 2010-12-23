@@ -44,6 +44,7 @@ public class VariablePipe extends CommonPipe {
 			success = newPipe.connect(port);
 			if(success){
 				getSource().getOutputPipes().add(newPipe);
+				referencedParam.setValueInteger(referencedParam.getValueInteger()+1);
 			}
 		}
 		

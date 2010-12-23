@@ -46,6 +46,15 @@ public class IntParameter extends AbstractParameter {
 		return value;
 	}
 
+	/**
+	 * Sets the value as native integer
+	 * 
+	 * @param value representation of the value
+	 */
+	public void setValueInteger(int value){
+		this.value = value;
+	}
+	
 	/* (non-Javadoc)
 	 * @see de.osmui.model.pipelinemodel.AbstractParameter#setValue(java.lang.String)
 	 */
