@@ -1,6 +1,9 @@
 package de.osmui.ui;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,27 +14,28 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 
 public class Application extends JFrame {
+	
 
 	public Application() {
 		Menu menu = new Menu();
 		this.setJMenuBar(menu);
 		
-		JTabbedPane tabBox = new JTabbedPane(JTabbedPane.TOP,JTabbedPane.SCROLL_TAB_LAYOUT);
-		JPanel taskTab = new JPanel();
-		taskTab.add(new JLabel("Testen"));
-		JPanel parameterTab = new JPanel();
-		tabBox.add("Tasks",taskTab);
-		tabBox.add("Parameter",parameterTab);
-		FlowLayout mainLayout = new FlowLayout();
-		mainLayout.addLayoutComponent("Test", tabBox);
-		mainLayout.addLayoutComponent("klo", new JButton("test"));
-		this.setLayout(mainLayout);
+		Content content = new Content();
+		
+		setLayout(new BorderLayout());
+        /*
+         * add(getToolbar(), BorderLayout.NORTH);
+         */
+        add(content, BorderLayout.CENTER);
 	}
+	
 
 	/**
 	 * @param args
