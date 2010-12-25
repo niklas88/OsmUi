@@ -3,13 +3,12 @@ package de.osmui.ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 
-import de.osmui.util.Util;
+import de.osmui.util.ConfigurationManager;
 import de.osmui.i18n.I18N;
 public class Menu extends JMenuBar {
 
@@ -95,7 +94,7 @@ public class Menu extends JMenuBar {
 		JMenuItem close = new JMenuItem(I18N.getString("Menu.exit")); //$NON-NLS-1$
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Util.saveConfiguration();
+				ConfigurationManager.saveConfiguration();
 			}
 		});
 		fileMenu.add(close);
