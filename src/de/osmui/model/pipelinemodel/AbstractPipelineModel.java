@@ -55,8 +55,9 @@ public abstract class AbstractPipelineModel extends Observable {
 	 * 
 	 * @param task
 	 * @return boolean indicating success
+	 * @throws TasksNotInModelException 
 	 */
-	public abstract boolean removeTask(AbstractTask task);
+	public abstract boolean removeTask(AbstractTask task) throws TasksNotInModelException;
 
 	/**
 	 * Connects the given tasks using the first parameter as parent task of the
@@ -83,14 +84,30 @@ public abstract class AbstractPipelineModel extends Observable {
 			// the child
 			List<AbstractPipe> pipes = parent.getOutputPipes();
 			List<AbstractPort> ports = child.getInputPorts();
+			boolean outVariable = false;
+			boolean inVariable = false;
 			for (AbstractPipe out : pipes) {
-				if(out.isConnectable()){
+				// Only set to true if it is variable AND we need to know
+				outVariable = out.isConnected() && out instanceof VariablePipe;
+				if(!out.isConnected() || outVariable){
 					for (AbstractPort in : ports) {
-						// Just try to connect and stop if successful
-						if (in.isConnectable() && out.connect(in)) {
-							return out;
+						// Same as above if it's unconnected we don't care if it's variable
+						inVariable = in.isConnected() && in instanceof VariablePort;
+						// test if types match
+						if(out.getType().equals(in.getType())){
+							if(outVariable){
+								// Lets create a new pipe and reuse out
+								out = ((VariablePipe) out).createPipe();
+							}
+							if(inVariable){
+								// Lets create a new port and reuse in
+								in = ((VariablePort) in).createPort();
+							}
+							if(out.connect(in)){
+								return out;
+							}
 						}
-					}
+					}				
 				}
 			}
 			// We haven't returned in the loop so no compatible pipe/port was
@@ -100,7 +117,7 @@ public abstract class AbstractPipelineModel extends Observable {
 		}
 	}
 	/**
-	 * Connects the given ouput pipe with the given input pipe, if both corresponding tasks are in this
+	 * Connects the given output pipe with the given input port, if both corresponding tasks are in this
 	 * model
 	 * 
 	 * @param output
@@ -118,7 +135,7 @@ public abstract class AbstractPipelineModel extends Observable {
 			AbstractTask parent = output.getSource();
 			if(child.getModel() != this || parent.getModel() != this){
 				throw new TasksNotInModelException("Either parent or child isn't in the model");
-			} else if (output.isConnectable() && input.isConnectable() && !output.connect(input)){
+			} else if (output.isConnected() || input.isConnected() || !output.connect(input)){
 				throw new TasksNotCompatibleException("Parent and child weren't compatible on this pipe/port");
 			}
 			

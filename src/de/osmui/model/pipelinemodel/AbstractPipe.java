@@ -34,18 +34,7 @@ public abstract class AbstractPipe {
 	}
 	
 	/**
-	 * Gets whether this pipe is ready to be connected, this is
-	 * usually the not of isConnected but differs for variable pipes, remember this
-	 * when using this method
-	 * 
-	 * @return whether this pipe is ready to be connected
-	 */
-	public boolean isConnectable(){
-		return !isConnected();
-	}
-	
-	/**
-	 * Sets the name of this pipe this name
+	 * Sets the name of this pipe
 	 * 
 	 * @param name to set for this pipe
 	 */

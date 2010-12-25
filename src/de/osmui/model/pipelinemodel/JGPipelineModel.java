@@ -86,26 +86,17 @@ public class JGPipelineModel extends AbstractPipelineModel {
 	@Override
 	public void addTask(AbstractTask parent, AbstractTask child)
 			throws TasksNotCompatibleException, TasksNotInModelException {
-		boolean taskInList = false;
 		
-		//Find the parent task
-		for(AbstractTask task : tasks){
-			if(task.equals(parent)){
-				taskInList = true;
-				break;
-			}
-		}
-		
-		if(taskInList){
-			//First add the child and then use our internal connect method to wire things up
-			addTask(child);
-			connectTasks(parent, child);
-			
-			notifyObservers(child);
-		} else {
+		if(parent.getModel() != this){
 			throw new TasksNotInModelException("parent not in model");
 		} 
 
+		//First add the child and then use our internal connect method to wire things up
+		addTask(child);
+		connectTasks(parent, child);
+		
+		notifyObservers(child);
+		
 	}
 
 
@@ -113,8 +104,24 @@ public class JGPipelineModel extends AbstractPipelineModel {
 	 * @see de.osmui.model.pipelinemodel.AbstractModel#removeTask(de.osmui.model.pipelinemodel.AbstractTask)
 	 */
 	@Override
-	public boolean removeTask(AbstractTask task) {
-		//Find the task
+	public boolean removeTask(AbstractTask task) throws TasksNotInModelException {
+		if(task.getModel() != this){
+			throw new TasksNotInModelException("The task to remove is not in the model");
+		}
+		
+		JGTaskDecorator jgtask = (JGTaskDecorator) task;
+		// Disconnect all connected pipes
+		for(AbstractPipe out : jgtask.getOutputPipes()){
+			if(out.isConnected()){
+				disconnectTasks(jgtask, out.getTarget().getParent());
+			}
+		}
+		
+		Object[] cellArray = new Object[1];
+		cellArray[0] = jgtask.getCell();
+		
+		graph.removeCells(cellArray);
+		task.setModel(null);
 		return tasks.remove(task);
 	}
 
@@ -149,8 +156,12 @@ public class JGPipelineModel extends AbstractPipelineModel {
 	 */
 	@Override
 	public AbstractPipe disconnectTasks(AbstractTask parent, AbstractTask child) throws TasksNotInModelException {
-		return super.disconnectTasks(parent, child);
-		//TODO
+		AbstractPipe removedPipe = super.disconnectTasks(parent, child);
+		Object[] cellArray = new Object[1];
+		cellArray[0] = ((JGPipeDecorator) removedPipe).getCell();		
+		graph.removeCells(cellArray);
+		
+		return removedPipe;
 	}
 
 	/* (non-Javadoc)

@@ -36,16 +36,6 @@ public abstract class AbstractPort {
 		return incoming == null;
 	}
 	
-	/**
-	 * Gets whether this port is ready to be connected to, this is
-	 * usually the not of isConnected but differs for variable ports, remember this
-	 * when using this method
-	 * 
-	 * @return whether this port is ready to be connected to
-	 */
-	public boolean isConnectable(){
-		return !isConnected();
-	}
 	
 	/**
 	 * If the given pipe has this port as target set connected otherwise leave unconnected.
