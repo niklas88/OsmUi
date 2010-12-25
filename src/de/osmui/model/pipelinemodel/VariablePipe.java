@@ -18,37 +18,19 @@ public class VariablePipe extends CommonPipe {
 		super(owner, type);
 	}
 	
-	/**
-	 * Variable pipes are always connectable
-	 * @return true
-	 */
-	@Override
-	public boolean isConnectable(){
-		return true;
-	}
 	
 	/**
-	 * Our version of connect will, if this pipe is already connected create a copy of this pipe, connect it
-	 * and if successful add it to our sources pipes
-	 * 
-	 * @param port the port to connect to
+	 * This method creates a pipe of the same type as this variable pipe and adds it to
+	 * it's source task
 	 */
-	@Override
-	public boolean connect(AbstractPort port){
-		boolean success = false;
-		if(!this.isConnected()){
-			success = connect(port);
-		} else if(this.getType().equals(port.getType())) {
-			// Clone this pipe, add it to our source and update the right parameter
-			AbstractPipe newPipe = new VariablePipe(getSource(), referencedParam, getType());
-			success = newPipe.connect(port);
-			if(success){
-				getSource().getOutputPipes().add(newPipe);
-				referencedParam.setValueInteger(referencedParam.getValueInteger()+1);
-			}
-		}
+	public AbstractPipe createPipe(){
 		
-		return success;
+		// Clone this pipe, add it to our source and update the right parameter
+		AbstractPipe newPipe = new VariablePipe(getSource(), referencedParam, getType());
+		getSource().getOutputPipes().add(newPipe);
+		referencedParam.setValueInteger(referencedParam.getValueInteger()+1);
+	
+		return newPipe;
 	}
 
 }
