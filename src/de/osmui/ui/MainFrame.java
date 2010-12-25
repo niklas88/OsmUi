@@ -6,7 +6,8 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 
-import de.osmui.util.Util;
+import de.osmui.util.ConfigurationManager;
+
 
 public class MainFrame extends JFrame {
 
@@ -21,7 +22,7 @@ public class MainFrame extends JFrame {
 		add(content, BorderLayout.CENTER);
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				Util.saveConfiguration();
+				ConfigurationManager.saveConfiguration();
 			}
 
 		});

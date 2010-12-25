@@ -2,7 +2,7 @@ package de.osmui.ui;
 
 import javax.swing.SwingUtilities;
 
-import de.osmui.util.Util;
+import de.osmui.util.ConfigurationManager;
 
 public class Application {
 	
@@ -14,7 +14,7 @@ public class Application {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				MainFrame osmUi = MainFrame.getInstance();
-				Util.loadConfiguration();
+				ConfigurationManager.loadConfiguration();
 				osmUi.setVisible(true);
 			}
 
