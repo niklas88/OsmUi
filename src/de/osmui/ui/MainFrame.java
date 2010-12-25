@@ -12,20 +12,13 @@ public class MainFrame extends JFrame {
 
 	private static MainFrame instance;
 
-	// Verhindere die Erzeugung des Objektes über andere Methoden
+	// Prevents the creation of the object with other methods
 	private MainFrame() {
-		System.out.println("1");
 		Menu menu = new Menu();
 		this.setJMenuBar(menu);
-		System.out.println("2");
 		Content content = new Content();
-		System.out.println("3");
 		setLayout(new BorderLayout());
-		/*
-		 * add(getToolbar(), BorderLayout.NORTH);
-		 */
 		add(content, BorderLayout.CENTER);
-
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				Util.saveConfiguration();
@@ -34,9 +27,8 @@ public class MainFrame extends JFrame {
 		});
 	}
 
-	// Eine Zugriffsmethode auf Klassenebene, welches dir '''einmal''' ein
-	// konkretes
-	// Objekt erzeugt und dieses zurückliefert.
+	// A accessmethod on class level, which creates only once a instance a concrete object
+	// in a session of OsmUi and returns it.
 	public static MainFrame getInstance() {
 		if (MainFrame.instance == null) {
 			MainFrame.instance = new MainFrame();

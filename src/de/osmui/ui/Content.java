@@ -9,6 +9,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 
+import de.osmui.i18n.I18N;
+
 public class Content extends JPanel {
 
 	public Content() {
@@ -16,10 +18,10 @@ public class Content extends JPanel {
 		JTabbedPane tabBox = new JTabbedPane(JTabbedPane.TOP,JTabbedPane.SCROLL_TAB_LAYOUT);
         JPanel taskTab = new JPanel();
 		taskTab.add(new JList());
-        tabBox.add("Tasks",taskTab);
+        tabBox.add(I18N.getString("Content.tabBox"),taskTab); //$NON-NLS-1$
 		JPanel parameterTab = new JPanel();
 		parameterTab.add(new JTable());
-		tabBox.add("Parameter",parameterTab);
+		tabBox.add(I18N.getString("Content.pipelineBox"),parameterTab); //$NON-NLS-1$
 		
 
 		
