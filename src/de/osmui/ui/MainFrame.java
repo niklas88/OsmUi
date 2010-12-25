@@ -11,6 +11,11 @@ import de.osmui.util.ConfigurationManager;
 
 public class MainFrame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4767348652713972190L;
+	
 	private static MainFrame instance;
 
 	// Prevents the creation of the object with other methods

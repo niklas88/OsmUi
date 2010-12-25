@@ -12,6 +12,11 @@ import de.osmui.util.ConfigurationManager;
 import de.osmui.i18n.I18N;
 public class Menu extends JMenuBar {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6521196530844239528L;
+
 	public Menu() {
 		/*
 		 * Menu "File"
