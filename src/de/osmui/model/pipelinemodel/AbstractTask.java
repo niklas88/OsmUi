@@ -6,7 +6,6 @@ package de.osmui.model.pipelinemodel;
 import java.util.List;
 import java.util.Map;
 
-import de.osmui.model.osm.TTask;
 
 
 /**
@@ -18,21 +17,27 @@ import de.osmui.model.osm.TTask;
  */
 public abstract class AbstractTask {
 	protected String name;
-	protected TTask description;
+	protected AbstractPipelineModel model;
 	
 	/**
-	 * @return the description
+	 * Gets the model to which this task belongs, null if the task has not yet been added
+	 * to a model or has been removed from a model.
+	 * 
+	 * @return model this task belongs to
 	 */
-	public TTask getDescription() {
-		return description;
+	public AbstractPipelineModel getModel(){
+		return model;
 	}
-
+	
 	/**
-	 * @param description the description to set
+	 * Sets the model to which this task belongs
+	 * 
+	 * @param model
 	 */
-	protected void setDescription(TTask description) {
-		this.description = description;
+	public void setModel(AbstractPipelineModel model){
+		this.model = model;
 	}
+	
 
 	/**
 	 * Gets the name of this task e.g. 'read-xml'

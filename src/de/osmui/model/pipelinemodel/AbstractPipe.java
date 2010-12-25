@@ -32,6 +32,18 @@ public abstract class AbstractPipe {
 	public boolean isConnected(){
 		return target != null;
 	}
+	
+	/**
+	 * Gets whether this pipe is ready to be connected, this is
+	 * usually the not of isConnected but differs for variable pipes, remember this
+	 * when using this method
+	 * 
+	 * @return whether this pipe is ready to be connected
+	 */
+	public boolean isConnectable(){
+		return !isConnected();
+	}
+	
 	/**
 	 * Sets the name of this pipe this name
 	 * 
@@ -39,6 +51,15 @@ public abstract class AbstractPipe {
 	 */
 	public void setName(String name){
 		this.name=name;
+	}
+	
+	/**
+	 * Gets the name associated with this Pipe, null if unnamed
+	 * 
+	 * @return name, null if unnamed
+	 */
+	public String getName(){
+		return this.name;
 	}
 	
 	/**
