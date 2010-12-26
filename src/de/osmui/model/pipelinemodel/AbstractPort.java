@@ -3,13 +3,18 @@
  */
 package de.osmui.model.pipelinemodel;
 
+import java.io.Serializable;
+
 /**
  * This is the abstract base class for all port classes, ports are what pipes connect to. That is they are the inputs to a task
  * 
  * @author Niklas Schnelle
  *
  */
-public abstract class AbstractPort {
+public abstract class AbstractPort implements Serializable{
+
+	private static final long serialVersionUID = 4926805105607543325L;
+	
 	protected AbstractPipe incoming;
 	protected AbstractTask parent;
 	
@@ -35,16 +40,22 @@ public abstract class AbstractPort {
 	public boolean isConnected(){
 		return incoming == null;
 	}
-	
 	/**
-	 * Gets whether this port is ready to be connected to, this is
-	 * usually the not of isConnected but differs for variable ports, remember this
-	 * when using this method
+	 * Gets whether this port is variable
 	 * 
-	 * @return whether this port is ready to be connected to
+	 * @return false
 	 */
-	public boolean isConnectable(){
-		return !isConnected();
+	public boolean isVariable() {
+		return false;
+	}
+
+	/**
+	 * If this pipe is variable returns a new Port and adds it to the parents port list, otherwise returns null
+	 * 
+	 * @return null
+	 */
+	public AbstractPort createPort() {
+		return null;
 	}
 	
 	/**

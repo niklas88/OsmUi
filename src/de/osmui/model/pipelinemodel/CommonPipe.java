@@ -11,6 +11,9 @@ package de.osmui.model.pipelinemodel;
  *
  */
 public class CommonPipe extends AbstractPipe {
+
+	private static final long serialVersionUID = 2265995161991321428L;
+
 	protected String type;
 	
 	public CommonPipe(AbstractTask owner, String type){

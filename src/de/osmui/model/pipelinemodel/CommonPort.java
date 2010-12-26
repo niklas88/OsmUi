@@ -10,6 +10,9 @@ package de.osmui.model.pipelinemodel;
  *
  */
 public class CommonPort extends AbstractPort {
+
+	private static final long serialVersionUID = 1559841158133665484L;
+
 	protected String type;
 	
 	/**

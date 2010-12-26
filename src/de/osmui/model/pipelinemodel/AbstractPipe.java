@@ -3,13 +3,18 @@
  */
 package de.osmui.model.pipelinemodel;
 
+import java.io.Serializable;
+
 /**
  * This class represents a Pipe within the pipelinemodel, that is an edge in the graph
  * 
  * @author Niklas Schnelle
  *
  */
-public abstract class AbstractPipe {
+public abstract class AbstractPipe implements Serializable{
+
+	private static final long serialVersionUID = 7962518716366164284L;
+
 	protected String name;
 	protected AbstractTask source;
 	//The target must be null if not connected
@@ -34,18 +39,7 @@ public abstract class AbstractPipe {
 	}
 	
 	/**
-	 * Gets whether this pipe is ready to be connected, this is
-	 * usually the not of isConnected but differs for variable pipes, remember this
-	 * when using this method
-	 * 
-	 * @return whether this pipe is ready to be connected
-	 */
-	public boolean isConnectable(){
-		return !isConnected();
-	}
-	
-	/**
-	 * Sets the name of this pipe this name
+	 * Sets the name of this pipe
 	 * 
 	 * @param name to set for this pipe
 	 */
@@ -78,6 +72,25 @@ public abstract class AbstractPipe {
 	 */
 	public AbstractPort getTarget(){
 		return target;
+	}
+	
+	/**
+	 * Gets whether this pipe is variable, so that new pipes can be created from it,
+	 * 
+	 * @return
+	 */
+	public boolean isVariable(){
+		// Had to put it here because foo instanceof VariablePipe wouldn't work with the Decorator pattern
+		return false;
+	}
+	
+	/**
+	 * This method is used to create new Pipes, if this pipe is variable, if it's not it just returns null
+	 * 
+	 * @return
+	 */
+	public AbstractPipe createPipe() {
+		return null;
 	}
 	
 	/**
@@ -114,5 +127,7 @@ public abstract class AbstractPipe {
 	}
 	
 	public abstract String getType();
+
+
 
 }
