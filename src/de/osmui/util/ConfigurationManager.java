@@ -1,11 +1,10 @@
 package de.osmui.util;
 
-import java.awt.Toolkit;
-import java.util.prefs.Preferences;
 
+import java.util.prefs.Preferences;
 import javax.swing.JFrame;
 
-import de.osmui.ui.Application;
+
 import de.osmui.ui.MainFrame;
 
 public class ConfigurationManager {

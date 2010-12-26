@@ -2,7 +2,6 @@ package de.osmui.ui;
 
 import java.awt.BorderLayout;
 
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -12,6 +11,11 @@ import javax.swing.JTable;
 import de.osmui.i18n.I18N;
 
 public class Content extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5856610254528356675L;
 
 	public Content() {
 		
