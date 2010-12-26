@@ -14,11 +14,21 @@ public class VariablePort extends CommonPort {
 		super(owner, type);
 	}
 	
-
+	/**
+	 * Gets whether this pipe is variable
+	 * 
+	 * @return true
+	 */
+	@Override
+	public boolean isVariable(){
+		return true;
+	}
+	
 	/**
 	 * This method creates a pipe of the same type as this variable pipe and adds it to
 	 * it's source task
 	 */
+	@Override
 	public AbstractPort createPort(){
 		
 		// Clone this pipe, add it to our source and update the right parameter

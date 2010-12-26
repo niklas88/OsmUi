@@ -54,10 +54,54 @@ public class JGPipeDecorator extends AbstractPipe {
 	public AbstractPipe undecorate(){
 		return decoratedPipe;
 	}
+	/*
+	 * The following operations will be handed over to the decorated pipe
+	 */
+	
 
 	@Override
 	public String getType() {
 		return decoratedPipe.getType();
+	}
+	
+	@Override
+	public boolean isVariable(){
+		return decoratedPipe.isVariable();
+	}
+	
+	@Override
+	public AbstractPipe createPipe(){
+		return decoratedPipe.createPipe();
+	}
+	
+	@Override
+	public boolean connect(AbstractPort target){
+		return decoratedPipe.connect(target);
+	}
+	
+	@Override
+	public void disconnect(){
+		decoratedPipe.disconnect();
+	}
+	
+	@Override
+	public boolean isNamed(){
+		return decoratedPipe.isNamed();
+	}
+	
+	@Override
+	public String getName(){
+		return decoratedPipe.getName();
+	}
+	
+	@Override
+	public AbstractTask getSource(){
+		return decoratedPipe.getSource();
+	}
+	
+	@Override
+	public AbstractPort getTarget(){
+		return decoratedPipe.getTarget();
 	}
 
 }

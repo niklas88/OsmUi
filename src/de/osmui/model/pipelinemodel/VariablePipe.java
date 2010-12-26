@@ -17,12 +17,20 @@ public class VariablePipe extends CommonPipe {
 	public VariablePipe(AbstractTask owner, IntParameter param, String type) {
 		super(owner, type);
 	}
-	
+	/**
+	 * Gets that this is a variable pipe
+	 * 
+	 */
+	@Override
+	public boolean isVariable(){
+		return true;
+	}
 	
 	/**
 	 * This method creates a pipe of the same type as this variable pipe and adds it to
 	 * it's source task
 	 */
+	@Override
 	public AbstractPipe createPipe(){
 		
 		// Clone this pipe, add it to our source and update the right parameter

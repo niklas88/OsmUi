@@ -35,7 +35,23 @@ public abstract class AbstractPort {
 	public boolean isConnected(){
 		return incoming == null;
 	}
-	
+	/**
+	 * Gets whether this port is variable
+	 * 
+	 * @return false
+	 */
+	public boolean isVariable() {
+		return false;
+	}
+
+	/**
+	 * If this pipe is variable returns a new Port and adds it to the parents port list, otherwise returns null
+	 * 
+	 * @return null
+	 */
+	public AbstractPort createPort() {
+		return null;
+	}
 	
 	/**
 	 * If the given pipe has this port as target set connected otherwise leave unconnected.
