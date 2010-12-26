@@ -12,6 +12,9 @@ package de.osmui.model.pipelinemodel;
  *
  */
 public class VariablePipe extends CommonPipe {
+
+	private static final long serialVersionUID = 8630873926692554364L;
+
 	protected IntParameter referencedParam;
 
 	public VariablePipe(AbstractTask owner, IntParameter param, String type) {

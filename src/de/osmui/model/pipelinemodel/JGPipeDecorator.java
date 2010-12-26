@@ -13,6 +13,9 @@ import com.mxgraph.model.mxCell;
  */
 public class JGPipeDecorator extends AbstractPipe {
 	
+
+	private static final long serialVersionUID = -9172610493196783362L;
+
 	protected AbstractPipe decoratedPipe;
 	//The mxCell for the edge belonging to this pipe, only valid if the pipe is connected.
 	protected mxCell cell;

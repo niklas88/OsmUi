@@ -3,13 +3,18 @@
  */
 package de.osmui.model.pipelinemodel;
 
+import java.io.Serializable;
+
 /**
  * This is the abstract base class for all port classes, ports are what pipes connect to. That is they are the inputs to a task
  * 
  * @author Niklas Schnelle
  *
  */
-public abstract class AbstractPort {
+public abstract class AbstractPort implements Serializable{
+
+	private static final long serialVersionUID = 4926805105607543325L;
+	
 	protected AbstractPipe incoming;
 	protected AbstractTask parent;
 	

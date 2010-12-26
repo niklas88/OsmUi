@@ -3,13 +3,18 @@
  */
 package de.osmui.model.pipelinemodel;
 
+import java.io.Serializable;
+
 /**
  * This class represents a Pipe within the pipelinemodel, that is an edge in the graph
  * 
  * @author Niklas Schnelle
  *
  */
-public abstract class AbstractPipe {
+public abstract class AbstractPipe implements Serializable{
+
+	private static final long serialVersionUID = 7962518716366164284L;
+
 	protected String name;
 	protected AbstractTask source;
 	//The target must be null if not connected

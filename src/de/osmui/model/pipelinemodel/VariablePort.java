@@ -8,6 +8,10 @@ package de.osmui.model.pipelinemodel;
  *
  */
 public class VariablePort extends CommonPort {
+	
+
+	private static final long serialVersionUID = 1526665480238004437L;
+
 	protected IntParameter referencedParam;
 
 	public VariablePort(AbstractTask owner, IntParameter param, String type) {
