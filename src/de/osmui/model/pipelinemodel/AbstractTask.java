@@ -3,6 +3,7 @@
  */
 package de.osmui.model.pipelinemodel;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,10 @@ import java.util.Map;
  * @author Niklas Schnelle
  *
  */
-public abstract class AbstractTask {
+public abstract class AbstractTask implements Serializable{
+
+	private static final long serialVersionUID = 5857409627267578769L;
+
 	protected String name;
 	protected AbstractPipelineModel model;
 	

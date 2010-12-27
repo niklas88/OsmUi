@@ -17,6 +17,9 @@ import com.mxgraph.model.mxCell;
  *
  */
 public class JGTaskDecorator extends AbstractTask {
+
+	private static final long serialVersionUID = -5676949819875895046L;
+
 	protected AbstractTask decoratedTask;
 	protected mxCell cell;
 	

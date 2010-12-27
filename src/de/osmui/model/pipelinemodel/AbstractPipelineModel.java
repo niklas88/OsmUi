@@ -88,20 +88,20 @@ public abstract class AbstractPipelineModel extends Observable {
 			boolean inVariable = false;
 			for (AbstractPipe out : pipes) {
 				// Only set to true if it is variable AND we need to know
-				outVariable = out.isConnected() && out instanceof VariablePipe;
+				outVariable = out.isConnected() && out.isVariable();
 				if(!out.isConnected() || outVariable){
 					for (AbstractPort in : ports) {
 						// Same as above if it's unconnected we don't care if it's variable
-						inVariable = in.isConnected() && in instanceof VariablePort;
+						inVariable = in.isConnected() && in.isVariable();
 						// test if types match
 						if(out.getType().equals(in.getType())){
 							if(outVariable){
 								// Lets create a new pipe and reuse out
-								out = ((VariablePipe) out).createPipe();
+								out = out.createPipe();
 							}
 							if(inVariable){
 								// Lets create a new port and reuse in
-								in = ((VariablePort) in).createPort();
+								in = in.createPort();
 							}
 							if(out.connect(in)){
 								return out;
