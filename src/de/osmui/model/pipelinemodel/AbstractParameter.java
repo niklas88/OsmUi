@@ -16,8 +16,10 @@ public abstract class AbstractParameter {
 	protected String name;
 	protected TParameter description;
 	
+	
 	public AbstractParameter(TParameter desc, String value){
 		this.description = desc;
+		this.name = desc.getName();
 		setValue(value);
 	}
 	
@@ -35,6 +37,15 @@ public abstract class AbstractParameter {
 	 */
 	public TParameter getDescription(){
 		return this.description;
+	}
+	
+	/**
+	 * Gets whether this parameter is the default parameter of it's parent task
+	 * 
+	 * @return
+	 */
+	public boolean isDefaultParam(){
+		return description.isDefaultParameter();
 	}
 	
 	/**
