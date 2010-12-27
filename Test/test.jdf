@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tests SYSTEM "project.dtd">
 <tests product="TestDataManager" team="05" version="1.0">
-<sequence created="23.12.2010" creator="VerenaKfer" name="Projekt" number="0">
+<sequence created="27.12.2010" creator="VerenaKfer" name="Projekt" number="0">
 <description>Dies ist der Wurzelknoten des Projekts. Er enthält alle anderen Testsequenzen und Testfälle</description>
 <pre/>
 <sequence created="21.12.2010" creator="VerenaKfer" name="Unit-Test" number="1">
@@ -477,6 +477,273 @@ gestartet
 <tags/>
 </testcase>
 </sequence>
+<sequence created="27.12.2010" creator="VerenaKfer" name="neuen Task hinzufügen/verbinden" number="76">
+<description>ein neuer Task soll hinuigefügt bzw eiun bestehender Task verbunden werden</description>
+<pre>keine</pre>
+<sequence created="27.12.2010" creator="VerenaKfer" name="Task hinzufügen" number="77">
+<description>ein neuer Task soll hinzugefügt werden</description>
+<pre>keine</pre>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="79" priority="A" title="Task selektieren">
+<description>ein Task in der Pipelinebox wird selektiert</description>
+<pre>mind ein Task vorhanden</pre>
+<actions>- Task anklicken</actions>
+<post>der Task ist selektiert</post>
+<tags/>
+</testcase>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="82" priority="B" title="Task nicht mehr selektieren">
+<description>ein selektierter Task wird nicht mehr selektiert</description>
+<pre>ein Task ist selektiert</pre>
+<actions>- nochmals auf den Task klicken</actions>
+<post>Der Task ist nicht mehr selektiert</post>
+<tags/>
+</testcase>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="80" priority="A" title="standard">
+<description>ein Task in der Pipelinebox wird selektiert und ein neuer daran angefügt</description>
+<pre>mind ein Task vorhanden</pre>
+<actions>- Task anklicken
+(in der Taskbox erscheinen die kompatiblen Tasks)
+- Task auswählen (Doppelklick oder "bestätigen")</actions>
+<post>Der gewählte Task wird angefügt</post>
+<tags/>
+</testcase>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="81" priority="A" title="Input Task">
+<description>ein neuer Input-Task wird unverbunden eingefügt</description>
+<pre>kein Task vorhanden, die Taskbox zeigt die Input-Tasks an</pre>
+<actions>- Task wählen
+- bestätigen</actions>
+<post>Der Task wird ubnverbunden eingefügt</post>
+<tags/>
+</testcase>
+</sequence>
+<sequence created="27.12.2010" creator="VerenaKfer" name="Task verbinden" number="78">
+<description>bestehende Tasks sollen verbunden werden</description>
+<pre>mind 2 Tasks sind vorhanden</pre>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="01:00" number="83" priority="A" title="standard">
+<description>zwei kompatible Tasks werden verbunden</description>
+<pre>es sind mind 2 kompatible Tasks vorhanden</pre>
+<actions>- Task selektieren
+- Rechtsklick auf anderen Task
+(Menü ist nicht ausgegraut)
+-"verbinden" wählen</actions>
+<post>Die Tasks werden verbunden</post>
+<tags/>
+</testcase>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="84" priority="A" title="nicht kompatible Tasks">
+<description/>
+<pre>zweinicht kompatible Tasks sind vorhanden</pre>
+<actions>- Task selektieren
+-Rechtsklick auf anderen task
+</actions>
+<post>Das Menü ist ausgegraut</post>
+<tags/>
+</testcase>
+</sequence>
+</sequence>
+<sequence created="27.12.2010" creator="VerenaKfer" name="Task entfernen" number="85">
+<description>ein Task soll entfernt werden</description>
+<pre>mind ein Task ist vorhanden</pre>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="86" priority="A" title="standard">
+<description/>
+<pre>mind ein Task ist vorhanden</pre>
+<actions>- task selektieren
+- Entfernen-Taste drücken
+(Warnung kommt)
+- Warnung bestätigen</actions>
+<post>Der Task wird gelöscht, das Warn-Fenster geht zu</post>
+<tags/>
+</testcase>
+</sequence>
+<sequence created="27.12.2010" creator="VerenaKfer" name="Verbindung entfernen" number="87">
+<description>Die Verbindung zwischen zwei Tasks soll entfernt werden</description>
+<pre/>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="88" priority="A" title="standard">
+<description>die Verbindung zwischen zwei Tasks soll entfernt werden</description>
+<pre>es sind zwei vorhandene Tasks vorhanden</pre>
+<actions>- Verbindung selektieren
+- Entfernen-Taste betätigen
+(Warnung wird angezeigt)
+- Warnung bestätigen</actions>
+<post>Die Verbindung wird grlöscht und die Warnung nicht mehr angezeigt</post>
+<tags/>
+</testcase>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="89" priority="A" title="Verbindung nicht mehr selektieren">
+<description>eine selektierte Verbindung ist nicht mehr selektiert</description>
+<pre>eine Verbindung ist selektiert</pre>
+<actions>- nochmals auf die Verbindung klicken</actions>
+<post>die Verbindung ist nicht mehr selektiert</post>
+<tags/>
+</testcase>
+</sequence>
+<sequence created="27.12.2010" creator="VerenaKfer" name="Task-Parameter einstellen" number="90">
+<description>Die Parameter isnes Tasks werden eingestellt</description>
+<pre>es ist mind ein Task vorhanden</pre>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:03" number="91" priority="A" title="standard">
+<description>Die Parameter isnes Tasks werden eingestellt</description>
+<pre>es ist mind ein Task vorhanden</pre>
+<actions>- Doppelklick auf den Task
+(Die Parameterbox geht auf)
+- korrekte Parameter eingeben
+- bestätigen
+</actions>
+<post>Die Parameter wurden geändert</post>
+<tags/>
+</testcase>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:03" number="93" priority="A" title="falsche Parameter">
+<description>Die Parameter isnes Tasks werden eingestellt</description>
+<pre>es ist mind ein Task vorhanden</pre>
+<actions>- Doppelklick auf den Task
+(Die Parameterbox geht auf)
+- Felder leer lassen
+- bestätigen
+(Warnung)
+- Felder füllen</actions>
+<post>Die Parameter wurden geändert</post>
+<tags/>
+</testcase>
+</sequence>
+<sequence created="27.12.2010" creator="VerenaKfer" name="Pipeline Importieren aus Zwischenablage" number="94">
+<description>Benutzer möchte Pipeline aus Osmosis-Aufruf angezeigt haben
+</description>
+<pre>Osmosis-Aufruf befindet sich in Zwischenablage
+</pre>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="95" priority="B" title="standard ohne Pipelien">
+<description/>
+<pre>gültiger Osmosis-Aufruf befindet sich in Zwischenablage und es ist keine aktuelle Pipeline vorhanden
+</pre>
+<actions>- aus Zwischenablage importieren wählen
+</actions>
+<post>Die Datei wird geladen und angezeigt</post>
+<tags/>
+</testcase>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="96" priority="B" title="standard mit Pipelien">
+<description/>
+<pre>gültiger Osmosis-Aufruf befindet sich in Zwischenablage und es ist eine aktuelle Pipeline vorhanden
+</pre>
+<actions>- aus Zwischenablage importieren wählen
+</actions>
+<post>Die Datei wird geladen in eine neue Instanz geladen und angezeigt</post>
+<tags/>
+</testcase>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:00" number="97" priority="C" title="kein gültiger Osmosis-Aufruf">
+<description/>
+<pre>ungültiger Osmosis-Aufruf in Zwischenablage</pre>
+<actions>- aus Zwischenablage kopieren wählen
+(Fehlermeldung)
+- bestätigen</actions>
+<post>Zustand vor dem Lade-Versuch wird angezeigt</post>
+<tags/>
+</testcase>
+</sequence>
+<sequence created="27.12.2010" creator="VerenaKfer" name="Pipeline exportieren" number="98">
+<description>eine Pipeline soll exportiert werden</description>
+<pre>keine</pre>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="99" priority="A" title="standard">
+<description/>
+<pre>konsistente Pipeline ist vorhanden</pre>
+<actions>- exportieren wählen
+(Dialog öffnte sich)
+- Name und endung wählen
+- bestätigen</actions>
+<post>Pipeline wurde korrekt exportiert</post>
+<tags/>
+</testcase>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="102" priority="A" title="abbrechen statt exportieren">
+<description/>
+<pre>konsistente Pipeline ist vorhanden</pre>
+<actions>- exportieren wählen
+(Dialog öffnte sich)
+- Name und Endung wählen
+- abbrechen</actions>
+<post>Pipeline wird wieder angezeigt</post>
+<tags/>
+</testcase>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="105" priority="A" title="abbrechen am Anfang">
+<description/>
+<pre>konsistente Pipeline ist vorhanden</pre>
+<actions>- exportieren wählen
+(Dialog öffnte sich)
+- beenden</actions>
+<post>Pipeline wird wieder angezeigt</post>
+<tags/>
+</testcase>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="103" priority="A" title="überschreiben">
+<description/>
+<pre>konsistente Pipeline ist vorhanden und bereits einmal exportiert worden</pre>
+<actions>- exportieren wählen
+(Dialog öffnte sich)
+- bestehende Datei wählen
+- bestätigen
+(Dialo erscheint)
+überschreiben bestätigen</actions>
+<post>Datei wurde überschrieben</post>
+<tags/>
+</testcase>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="104" priority="A" title="überschreiben ablehnen">
+<description/>
+<pre>konsistente Pipeline ist vorhanden und bereits einmal exportiert worden</pre>
+<actions>- exportieren wählen
+(Dialog öffnte sich)
+- bestehende Datei wählen
+- bestätigen
+(Dialo erscheint)
+überschreiben abbrechen</actions>
+<post>Es erscheint wieder der Export-Dialog</post>
+<tags/>
+</testcase>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:00" number="100" priority="C" title="keine konsistente Pipeline">
+<description/>
+<pre>Pipeline ist nicht konsistent</pre>
+<actions>- exportieren wählen
+(Fehlermeldung)
+- bestätigen</actions>
+<post>Fehlermeldung wurde korrekt angezeigt und es ist wieder die Pipeline zu sehen</post>
+<tags/>
+</testcase>
+</sequence>
+<sequence created="27.12.2010" creator="VerenaKfer" name="Osmosis-Aufruf kopieren" number="106">
+<description/>
+<pre>Die Zwischenablage enth ̈lt die aktuelle Pipeline als Osmosis-Aufruf
+</pre>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:00" number="107" priority="C" title="Aufruf kopieren">
+<description/>
+<pre>Die Zwischenablage enth ̈lt die aktuelle Pipeline als Osmosis-Aufruf
+</pre>
+<actions>- Aufruf markieren
+- Strg + C drücken
+</actions>
+<post>Der Aufruf ist kopiert</post>
+<tags/>
+</testcase>
+</sequence>
+<sequence created="27.12.2010" creator="VerenaKfer" name="Programm schließen" number="108">
+<description/>
+<pre>Programm ist geröffnet</pre>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:00" number="110" priority="C" title="gespeichert">
+<description/>
+<pre>die aktuelle Pipeline ist gespeichert</pre>
+<actions>- schließen wählen</actions>
+<post>das Programm wird geschlossen</post>
+<tags/>
+</testcase>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:00" number="111" priority="C" title="nicht gespeichert, speichern bestätigen">
+<description/>
+<pre>die aktuelle Pipeline ist nicht gespeichert</pre>
+<actions>- schließen wählen
+(Warnung)
+- speichern bestätigen</actions>
+<post>das Programm wird gespeichert und geschlossen</post>
+<tags/>
+</testcase>
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:00" number="112" priority="C" title="nicht gespeichert, abbrechen">
+<description/>
+<pre>die aktuelle Pipeline ist gespeichert</pre>
+<actions>- schließen wählen
+(Warnung)
+- abbrechen wählen</actions>
+<post>das Programm wird geschlossen</post>
+<tags/>
+</testcase>
+</sequence>
 </sequence>
 <sequence created="21.12.2010" creator="VerenaKfer" name="Black-Box-Test" number="5">
 <description/>
@@ -631,20 +898,50 @@ gestartet
 <relatedsequence>51</relatedsequence>
 </tsa>
 </tsa>
-<tsa name="Rückgängig machen" number="62" revId="2">
+<tsa name="Rückgängig machen" number="62" revId="1">
 <relatedsequence>62</relatedsequence>
 </tsa>
-<tsa name="Wiederherstellen" number="65" revId="2">
+<tsa name="Wiederherstellen" number="65" revId="1">
 <relatedsequence>65</relatedsequence>
 </tsa>
-<tsa name="Hilfe aufrufen" number="69" revId="2">
+<tsa name="Hilfe aufrufen" number="69" revId="1">
 <relatedsequence>69</relatedsequence>
 </tsa>
-<tsa name="Hilfe über aufrufen" number="71" revId="2">
+<tsa name="Hilfe über aufrufen" number="71" revId="1">
 <relatedsequence>71</relatedsequence>
 </tsa>
-<tsa name="Neue Pipeline erstellen" number="73" revId="2">
+<tsa name="Neue Pipeline erstellen" number="73" revId="1">
 <relatedsequence>73</relatedsequence>
+</tsa>
+<tsa name="neuen Task hinzufügen/verbinden" number="76" revId="1">
+<relatedsequence>76</relatedsequence>
+<tsa name="Task hinzufügen" number="77" revId="1">
+<relatedsequence>77</relatedsequence>
+</tsa>
+<tsa name="Task verbinden" number="78" revId="1">
+<relatedsequence>78</relatedsequence>
+</tsa>
+</tsa>
+<tsa name="Task entfernen" number="85" revId="1">
+<relatedsequence>85</relatedsequence>
+</tsa>
+<tsa name="Verbindung entfernen" number="87" revId="1">
+<relatedsequence>87</relatedsequence>
+</tsa>
+<tsa name="Task-Parameter einstellen" number="90" revId="2">
+<relatedsequence>90</relatedsequence>
+</tsa>
+<tsa name="Pipeline Importieren aus Zwischenablage" number="94" revId="2">
+<relatedsequence>94</relatedsequence>
+</tsa>
+<tsa name="Pipeline exportieren" number="98" revId="2">
+<relatedsequence>98</relatedsequence>
+</tsa>
+<tsa name="Osmosis-Aufruf kopieren" number="106" revId="2">
+<relatedsequence>106</relatedsequence>
+</tsa>
+<tsa name="Programm schließen" number="108" revId="2">
+<relatedsequence>108</relatedsequence>
 </tsa>
 </tsa>
 <tsa name="Black-Box-Test" number="5" revId="1">
@@ -678,5 +975,5 @@ gestartet
 <author active="Y" firstname="" lastname="Verena Käfer" uid="VerenaKfer">
 <extension name="standarduser" value="Y"/>
 </author>
-<extension name="maxid" value="75"/>
+<extension name="maxid" value="112"/>
 </tests>
