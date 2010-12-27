@@ -3,9 +3,10 @@
  */
 package de.osmui.model.pipelinemodel;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
-import de.osmui.model.osm.TTask;
 
 
 /**
@@ -15,23 +16,32 @@ import de.osmui.model.osm.TTask;
  * @author Niklas Schnelle
  *
  */
-public abstract class AbstractTask {
+public abstract class AbstractTask implements Serializable{
+
+	private static final long serialVersionUID = 5857409627267578769L;
+
 	protected String name;
-	protected TTask description;
+	protected AbstractPipelineModel model;
 	
 	/**
-	 * @return the description
+	 * Gets the model to which this task belongs, null if the task has not yet been added
+	 * to a model or has been removed from a model.
+	 * 
+	 * @return model this task belongs to
 	 */
-	public TTask getDescription() {
-		return description;
+	public AbstractPipelineModel getModel(){
+		return model;
 	}
-
+	
 	/**
-	 * @param description the description to set
+	 * Sets the model to which this task belongs
+	 * 
+	 * @param model
 	 */
-	public void setDescription(TTask description) {
-		this.description = description;
+	public void setModel(AbstractPipelineModel model){
+		this.model = model;
 	}
+	
 
 	/**
 	 * Gets the name of this task e.g. 'read-xml'
@@ -42,7 +52,6 @@ public abstract class AbstractTask {
 	}
 	
 	/**
-	 * Sets the name of this task e.g. 'read-xml'
 	 * @param the new name
 	 */
 	public void setName(String s){
@@ -53,13 +62,13 @@ public abstract class AbstractTask {
 	 * Gets the list of Parameters associated with this task 
 	 * @return the parameter list or null if no parameters exist
 	 */
-	public abstract List<AbstractParameter> getParameters();
+	public abstract Map<String, AbstractParameter> getParameters();
 	
 	/**
-	 * Gets the list of both connected and unconnected inputPipes
-	 * @return list of inputPipes null if this is a source
+	 * Gets the list of both connected and unconnected inputPorts
+	 * @return list of inputPorts null if this is a source
 	 */
-	public abstract List<AbstractPipe> getInputPipes();
+	public abstract List<AbstractPort> getInputPorts();
 	
 	/**
 	 * Gets the list of both connected and unconnected outputPipes

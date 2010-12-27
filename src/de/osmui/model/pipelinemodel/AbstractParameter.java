@@ -16,6 +16,11 @@ public abstract class AbstractParameter {
 	protected String name;
 	protected TParameter description;
 	
+	public AbstractParameter(TParameter desc, String value){
+		this.description = desc;
+		setValue(value);
+	}
+	
 	/**
 	 * Gets the parameter's name in it's standard for e.g. 'file'
 	 * @return the paramete's name
@@ -33,7 +38,7 @@ public abstract class AbstractParameter {
 	}
 	
 	/**
-	 * Returns whether this parameter's value differs from the default, allows leaving it awat otherwise
+	 * Returns whether this parameter's value differs from the default, allows leaving it away otherwise
 	 * @return true if this parameter's value equals the default
 	 */
 	public boolean isDefaultValue() {
