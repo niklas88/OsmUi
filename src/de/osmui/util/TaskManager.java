@@ -31,12 +31,14 @@ public class TaskManager {
 	static protected TaskManager instance;
 
 	protected HashMap<String, TTask> taskMap;
+	protected HashMap<String, String> shortNameTable;
 	protected OsmosisTaskDescription taskDescriptions;
 	/**
 	 * The protected constructor for the Singelton pattern
 	 */
 	protected TaskManager() {
 		taskMap = new HashMap<String, TTask>();
+		shortNameTable = new HashMap<String, String>();
 		try {
 			/*
 			 * Get the JAXBContext
@@ -56,8 +58,11 @@ public class TaskManager {
 				System.out.println(group.getFriendlyName() + ":");
 				for (TTask task : group.getTask()) {
 					taskMap.put(task.getName(), task);
-					System.out.println("---- " + task + " ----");
-					System.out.println("   " + task.getName());
+					if(task.getShortName() != null){
+						shortNameTable.put(task.getShortName(), task.getName());
+					}
+					//System.out.println("---- " + task + " ----");
+					System.out.println(task.getShortName() + " <=> " + task.getName());
 				}
 			}
 
@@ -81,6 +86,18 @@ public class TaskManager {
 		}
 
 	}
+	
+	/**
+	 * Gets the long version of a taskname e.g. 'read-xml' for 'rx', if a long name can't be found
+	 * the name is returned unaltered.
+	 * 
+	 * @param name
+	 * @return the possibly unshortened name
+	 */
+	public String unshortenTaskname(String name){
+		String longName = shortNameTable.get(name);
+		return (longName != null)? longName: name;
+	}
 
 	/**
 	 * Creates a new task Object when given the name of the task e.g. 'read-xml'
@@ -91,31 +108,36 @@ public class TaskManager {
 	 */
 	public AbstractTask createTask(String taskName)
 			throws TaskNameUnknownException {
-		AbstractTask newTask = new CommonTask();
+		
 		TTask taskDescription = getTaskDescription(taskName);
 		if (taskDescription == null) {
 			throw new TaskNameUnknownException();
 		}
-
+		AbstractTask newTask = new CommonTask(taskName);
+		
 		Map<String, AbstractParameter> pMap = newTask.getParameters();
+		AbstractParameter newParameter;
 		// Generate the parameters of the task object
 		for (TParameter paramDesc : taskDescription.getParameter()) {
+
 			if (paramDesc.getType().equals("int")) {
-				pMap.put(paramDesc.getName(), new IntParameter(paramDesc,
-						paramDesc.getDefaultValue()));
+				newParameter = new IntParameter(paramDesc, paramDesc.getDefaultValue());
 			} else if (paramDesc.getType().equals("boolean")) {
-				pMap.put(paramDesc.getName(), new BooleanParameter(paramDesc,
-						paramDesc.getDefaultValue()));
+				newParameter = new BooleanParameter(paramDesc, paramDesc.getDefaultValue());
 			} else {
-				pMap.put(paramDesc.getName(), new OtherParameter(paramDesc,
-						paramDesc.getDefaultValue()));
+				newParameter = new OtherParameter(paramDesc, paramDesc.getDefaultValue());
 			}
+			if(newParameter.isDefaultParam()){
+				newTask.setDefaultParameter(newParameter);
+			}
+			pMap.put(paramDesc.getName(), newParameter);
 		}
 
 		List<AbstractPort> portList = newTask.getInputPorts();
+		AbstractPort newPort;
 		// Generate list of inputPorts from described input_Pipes_
 		for (TPipe pipeDesc : taskDescription.getInputPipe()) {
-			AbstractPort newPort;
+
 			if (pipeDesc.getCount().equals("single")) {
 				newPort = new CommonPort(newTask, pipeDesc.getType());
 			} else {
@@ -127,9 +149,10 @@ public class TaskManager {
 		}
 
 		List<AbstractPipe> pipeList = newTask.getOutputPipes();
+		AbstractPipe newPipe;
 		// Generate list of outputPipes from described outputPipes
 		for (TPipe pipeDesc : taskDescription.getInputPipe()) {
-			AbstractPipe newPipe;
+			
 			if (pipeDesc.getCount().equals("single")) {
 				newPipe = new CommonPipe(newTask, pipeDesc.getType());
 			} else {
@@ -174,7 +197,7 @@ public class TaskManager {
 	 * 
 	 * @return
 	 */
-	public TaskManager getInstance() {
+	public static TaskManager getInstance() {
 		if (instance == null) {
 			instance = new TaskManager();
 		}

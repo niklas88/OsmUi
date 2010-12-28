@@ -66,7 +66,18 @@ public class JGTaskDecorator extends AbstractTask {
 		}
 		return decoratedTask;
 	}
-
+	
+	/** The following methods must be forwarded to the encapsulated Task **/
+	
+	/*
+	 * (non-Javadoc)
+	 * @see de.osmui.model.pipelinemodel.AbstractTask#getDefaultParameter()
+	 */
+	@Override
+	public AbstractParameter getDefaultParameter(){
+		return decoratedTask.getDefaultParameter();
+	}
+	
 	/* (non-Javadoc)
 	 * @see de.osmui.model.pipelinemodel.AbstractTask#getParameters()
 	 */
@@ -90,6 +101,59 @@ public class JGTaskDecorator extends AbstractTask {
 	public List<AbstractPipe> getOutputPipes() {
 		return decoratedTask.getOutputPipes();
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see de.osmui.model.pipelinemodel.AbstractTask#getModel()
+	 */
+	public AbstractPipelineModel getModel(){
+		return decoratedTask.getModel();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see de.osmui.model.pipelinemodel.AbstractTask#setModel(de.osmui.model.pipelinemodel.AbstractPipelineModel)
+	 */
+	public void setModel(AbstractPipelineModel model){
+		decoratedTask.setModel(model);
+	}
+	
+
+	/*
+	 * (non-Javadoc)
+	 * @see de.osmui.model.pipelinemodel.AbstractTask#getName()
+	 */
+	@Override
+	public String getName(){
+		return decoratedTask.getName();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see de.osmui.model.pipelinemodel.AbstractTask#setName(java.lang.String)
+	 */
+	@Override
+	public void setName(String s){
+		decoratedTask.setName(s);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see de.osmui.model.pipelinemodel.AbstractTask#setDefaultParameter(de.osmui.model.pipelinemodel.AbstractParameter)
+	 */
+	@Override
+	public void setDefaultParameter(AbstractParameter p){
+		decoratedTask.setDefaultParameter(p);
+	}
+	/*
+	 * (non-Javadoc)
+	 * @see de.osmui.model.pipelinemodel.AbstractTask#getCommandlineForm()
+	 */
+	@Override
+	public String getCommandlineForm() {
+		return decoratedTask.getCommandlineForm();
+	}
+
 	/**
 	 * We override equals so that this decorator can be associated with references to the undecorated object easily
 	 * @param the object to compare with
@@ -107,5 +171,6 @@ public class JGTaskDecorator extends AbstractTask {
 	public int hashCode(){
 		return decoratedTask.hashCode();
 	}
+
 
 }

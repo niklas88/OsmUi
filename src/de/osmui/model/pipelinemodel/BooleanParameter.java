@@ -34,9 +34,9 @@ public class BooleanParameter extends AbstractParameter {
 		String booleanEncoding = description.getBooleanEncoding();
 		
 		if(booleanEncoding.equals("truefalse")){
-			return (value)?"yes":"no";
-		} else {
 			return (value)?"true":"false";
+		} else {			
+			return (value)?"yes":"no";
 		}
 	}
 	
@@ -45,26 +45,30 @@ public class BooleanParameter extends AbstractParameter {
 	 */
 	@Override
 	public void setValue(String s) throws IllegalArgumentException {
-		String booleanEncoding = description.getBooleanEncoding();
-		
-		if(booleanEncoding.equals("truefalse")){
-			if(s.equals("true")) {
-				value=true;
-			} else if (s.equals("false")){
-				value=false;
-			} else {
-				throw new IllegalArgumentException();
-			}
+		//Default values can be 'true' even if encoding is 'yesno' so be lax
+		if(s.equals("true")) {
+			value=true;
+		} else if (s.equals("false")){
+			value=false;
+		} else if(s.equals("yes")) {
+			value=true;
+		} else if (s.equals("no")){
+			value=false;
 		} else {
-			//yesno is default
-			if(s.equals("yes")) {
-				value=true;
-			} else if (s.equals("no")){
-				value=false;
-			} else {
-				throw new IllegalArgumentException();
-			}
-		} 
+			throw new IllegalArgumentException(s);
+		}
+		
+	}
+	/**
+	 * We have to override this here because we need to consider default value true=yes, false=no
+	 * because this is used throughout osmosis-tasks-xml
+	 */
+	@Override
+	public boolean isDefaultValue() {
+		String defVal = description.getDefaultValue();
+		// :-)
+		return 	(value && (defVal.equals("yes") || defVal.equals("true")))
+				|| (!value && (defVal.equals("no") || defVal.equals("false")));
 	}
 	
 	/**
