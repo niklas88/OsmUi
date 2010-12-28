@@ -126,7 +126,7 @@
       </parameter>
     </task>
 
-    <task name="write-xml-change" friendlyName="Write OSM XML change" shortName="wx">
+    <task name="write-xml-change" friendlyName="Write OSM XML change" shortName="wxc">
       <description>Writes changes to an OSM XML change file.</description>
       <inputPipe index="0" count="single" type="change">
         <description>
@@ -543,7 +543,7 @@
         </description>
       </parameter>
     </task>
-    <task name="bounding-polygon">
+    <task name="bounding-polygon" shortName="bp">
       <description>
         Extracts data within a polygon defined by series of lat/lon coordinates loaded from a polygon file.
       </description>

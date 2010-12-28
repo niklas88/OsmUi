@@ -22,6 +22,7 @@ public abstract class AbstractTask implements Serializable{
 
 	protected String name;
 	protected AbstractPipelineModel model;
+	protected AbstractParameter defaultParameter;
 	
 	/**
 	 * Gets the model to which this task belongs, null if the task has not yet been added
@@ -57,6 +58,28 @@ public abstract class AbstractTask implements Serializable{
 	public void setName(String s){
 		this.name=s;
 	}
+	/**
+	 * Sets the default parameter for this task
+	 * @param p
+	 */
+	public void setDefaultParameter(AbstractParameter p){
+		defaultParameter = p;
+	}
+	
+	/**
+	 * Gets the default parameter for this task
+	 * @return the default parameter
+	 */
+	public AbstractParameter getDefaultParameter(){
+		return defaultParameter;
+	}
+	
+	/**
+	 * Gets the string representation of this task as used by osmosis' command line, however
+	 * the pipe connections are not included here use CommandlineTranslator
+	 * @return 
+	 */
+	public abstract String getCommandlineForm();
 	
 	/**
 	 * Gets the list of Parameters associated with this task 
