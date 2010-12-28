@@ -36,6 +36,12 @@ public class Content extends JPanel {
 //		JList taskBoxList = new JList(listModel);
 		TaskBoxTableModel taskBoxTableModel = new TaskBoxTableModel();
 		JTable taskBoxTable = new JTable(taskBoxTableModel);
+		try {
+			taskBoxTableModel.addTasks(null);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         JScrollPane taskScrollPane = new JScrollPane(taskBoxTable);
         taskScrollPane.setPreferredSize(new Dimension(180, 600));
         taskTab.add(taskScrollPane);

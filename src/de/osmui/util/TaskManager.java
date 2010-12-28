@@ -4,6 +4,7 @@
 package de.osmui.util;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,8 @@ import de.osmui.util.exceptions.TaskNameUnknownException;
 
 /**
  * This class provides factory methods for Task objects and access to their
- * descriptions. It implements the Singelton pattern, as well as being a Factory for tasks
+ * descriptions. It implements the Singelton pattern, as well as being a Factory
+ * for tasks
  * 
  * @author Niklas Schnelle
  * 
@@ -34,6 +36,7 @@ public class TaskManager {
 	protected HashMap<String, TTask> taskMap;
 	protected HashMap<String, String> shortNameTable;
 	protected OsmosisTaskDescription taskDescriptions;
+
 	/**
 	 * The protected constructor for the Singelton pattern
 	 */
@@ -54,16 +57,20 @@ public class TaskManager {
 					.unmarshal(xmlTasksFile);
 
 			/* Fill the map of taskDescriptions and output some Debug info */
-			/*TODO: Find a way to store the groups and make it suitable for TaskBox */
+			/*
+			 * TODO: Find a way to store the groups and make it suitable for
+			 * TaskBox
+			 */
 			for (TTaskGroup group : taskDescriptions.getTaskGroup()) {
 				System.out.println(group.getFriendlyName() + ":");
 				for (TTask task : group.getTask()) {
 					taskMap.put(task.getName(), task);
-					if(task.getShortName() != null){
+					if (task.getShortName() != null) {
 						shortNameTable.put(task.getShortName(), task.getName());
 					}
-					//System.out.println("---- " + task + " ----");
-					System.out.println(task.getShortName() + " <=> " + task.getName());
+					// System.out.println("---- " + task + " ----");
+					System.out.println(task.getShortName() + " <=> "
+							+ task.getName());
 				}
 			}
 
@@ -87,17 +94,17 @@ public class TaskManager {
 		}
 
 	}
-	
+
 	/**
-	 * Gets the long version of a taskname e.g. 'read-xml' for 'rx', if a long name can't be found
-	 * the name is returned unaltered.
+	 * Gets the long version of a taskname e.g. 'read-xml' for 'rx', if a long
+	 * name can't be found the name is returned unaltered.
 	 * 
 	 * @param name
 	 * @return the possibly unshortened name
 	 */
-	public String unshortenTaskname(String name){
+	public String unshortenTaskname(String name) {
 		String longName = shortNameTable.get(name);
-		return (longName != null)? longName: name;
+		return (longName != null) ? longName : name;
 	}
 
 	/**
@@ -109,26 +116,29 @@ public class TaskManager {
 	 */
 	public AbstractTask createTask(String taskName)
 			throws TaskNameUnknownException {
-		
+
 		TTask taskDescription = getTaskDescription(taskName);
 		if (taskDescription == null) {
 			throw new TaskNameUnknownException();
 		}
 		AbstractTask newTask = new CommonTask(taskName);
-		
+
 		Map<String, AbstractParameter> pMap = newTask.getParameters();
 		AbstractParameter newParameter;
 		// Generate the parameters of the task object
 		for (TParameter paramDesc : taskDescription.getParameter()) {
 
 			if (paramDesc.getType().equals("int")) {
-				newParameter = new IntParameter(paramDesc, paramDesc.getDefaultValue());
+				newParameter = new IntParameter(paramDesc,
+						paramDesc.getDefaultValue());
 			} else if (paramDesc.getType().equals("boolean")) {
-				newParameter = new BooleanParameter(paramDesc, paramDesc.getDefaultValue());
+				newParameter = new BooleanParameter(paramDesc,
+						paramDesc.getDefaultValue());
 			} else {
-				newParameter = new OtherParameter(paramDesc, paramDesc.getDefaultValue());
+				newParameter = new OtherParameter(paramDesc,
+						paramDesc.getDefaultValue());
 			}
-			if(newParameter.isDefaultParam()){
+			if (newParameter.isDefaultParam()) {
 				newTask.setDefaultParameter(newParameter);
 			}
 			pMap.put(paramDesc.getName(), newParameter);
@@ -153,7 +163,7 @@ public class TaskManager {
 		AbstractPipe newPipe;
 		// Generate list of outputPipes from described outputPipes
 		for (TPipe pipeDesc : taskDescription.getInputPipe()) {
-			
+
 			if (pipeDesc.getCount().equals("single")) {
 				newPipe = new CommonPipe(newTask, pipeDesc.getType());
 			} else {
@@ -163,7 +173,7 @@ public class TaskManager {
 			}
 			pipeList.add(newPipe);
 		}
-		
+
 		return newTask;
 	}
 
@@ -192,26 +202,29 @@ public class TaskManager {
 			throws TaskNameUnknownException {
 		return getTaskDescription(task.getName());
 	}
-	
+
 	/**
-	 * Searches the compatible Tasks of given name of a Task
-	 * and returns them with themselves Descriptions. 
+	 * Searches the compatible Tasks of given name of a Task and returns there
+	 * Names.
 	 * 
 	 * @param taskName
 	 * @return compatibleTasks
 	 */
-	public Vector<String[]> getCompatibleTasks (String taskName) throws TaskNameUnknownException{
-		Vector<String[]> compatibleTasks = new Vector<String[]>();
-		if (!taskName.equals(null)){
-			
-		}else{
-			
+	public Vector<String> getCompatibleTasks(String taskName)
+			throws TaskNameUnknownException {
+		Vector<String> compatibleTasks = new Vector<String>();
+		Collection<TTask> taskNames = taskMap.values();
+		for (TTask actualTask : taskNames) {
+
+			if (taskName != null) {
+
+			} else if (actualTask.getInputPipe() == null) {
+				compatibleTasks.add(actualTask.getName());
+			}
 		}
-		
 		return compatibleTasks;
 	}
-	
-	
+
 	/**
 	 * Gets the instance
 	 * 
