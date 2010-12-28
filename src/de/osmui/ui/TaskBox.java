@@ -1,9 +1,15 @@
 package de.osmui.ui;
 
-public class TaskBox {
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JTable;
+
+public class TaskBox extends JTable {
 
 	public TaskBox() {
-		// TODO Auto-generated constructor stub
+		final DefaultListModel listModel= new DefaultListModel();
+		JList taskBoxList = new JList(listModel);
+		listModel.addElement("Test");
 	}
 
 }

@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
@@ -168,7 +169,26 @@ public class TaskManager {
 			throws TaskNameUnknownException {
 		return getTaskDescription(task.getName());
 	}
-
+	
+	/**
+	 * Searches the compatible Tasks of given name of a Task
+	 * and returns them with themselves Descriptions. 
+	 * 
+	 * @param taskName
+	 * @return compatibleTasks
+	 */
+	public Vector<String[]> getCompatibleTasks (String taskName) throws TaskNameUnknownException{
+		Vector<String[]> compatibleTasks = new Vector<String[]>();
+		if (!taskName.equals(null)){
+			
+		}else{
+			
+		}
+		
+		return compatibleTasks;
+	}
+	
+	
 	/**
 	 * Gets the instance
 	 * 

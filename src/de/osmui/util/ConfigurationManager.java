@@ -41,6 +41,5 @@ public class ConfigurationManager {
 		MainFrame.getInstance().setLocation(mainFrameXLocation, mainFrameYLocation);
 		MainFrame.getInstance().setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-		
 	}
 }
