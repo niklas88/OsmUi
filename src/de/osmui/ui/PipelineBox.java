@@ -1,11 +1,10 @@
 package de.osmui.ui;
 
-import java.awt.BorderLayout;
-
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneLayout;
 
-public class PipelineBox extends JPanel {
+public class PipelineBox extends JScrollPane {
 
 	/**
 	 * 
@@ -14,8 +13,8 @@ public class PipelineBox extends JPanel {
 
 	public PipelineBox() {
 		JLabel pipelineBox = new JLabel("pipelineBox");
-        this.setLayout(new BorderLayout());
-		this.add(pipelineBox, BorderLayout.CENTER);
+        this.setLayout(new ScrollPaneLayout());
+		this.setViewportView(pipelineBox);
 	}
 
 }

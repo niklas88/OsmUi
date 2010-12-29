@@ -1,59 +1,38 @@
 package de.osmui.ui;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JList;
-import javax.swing.JPanel;
 import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 
-import de.osmui.i18n.I18N;
-
-public class Content extends JPanel {
+public class Content extends JSplitPane {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5856610254528356675L;
 
-	public Content() {
-		
-		JTabbedPane tabBox = new JTabbedPane(JTabbedPane.TOP,JTabbedPane.SCROLL_TAB_LAYOUT);
-        JPanel taskTab = new JPanel();
-		taskTab.add(new JList());
-        tabBox.add(I18N.getString("Content.tabBox"),taskTab); //$NON-NLS-1$
-		JPanel parameterTab = new JPanel();
-		parameterTab.add(new JTable());
-		tabBox.add(I18N.getString("Content.pipelineBox"),parameterTab); //$NON-NLS-1$
-		
+	private static Content instance;
 
-		
-		CopyBox copyBox = new CopyBox();
-
-		PipelineBox pipelineBox =new PipelineBox();
-		
-
-        // Creates the right split pane that contains the pipelineBox with the
-        // pipeline's graph representation and the copyBox on the lower side of this split.
-        JSplitPane right = new JSplitPane(JSplitPane.VERTICAL_SPLIT, pipelineBox, copyBox);
-        right.setDividerLocation(720);
-        right.setResizeWeight(1);
-        right.setDividerSize(6);
-        right.setBorder(null);
+	// Prevents the creation of the object with other methods
+	private Content() {
 		
 		// Creates the main split pane that contains the right split pane and
         // the tabBox component on the left side of this split.
-        JSplitPane content = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, tabBox, right);
-        content.setOneTouchExpandable(true);
-        content.setDividerLocation(200);
-        content.setDividerSize(6);
-        content.setBorder(null);
+		this.setOrientation(HORIZONTAL_SPLIT);
+		this.setLeftComponent(TabBox.getInstance());
+		this.setRightComponent(RightContent.getInstance());
+        this.setOneTouchExpandable(true);
+        this.setDividerSize(4);
+        this.setBorder(null);
                    
-
-        this.setLayout(new BorderLayout());
-		this.add(content, BorderLayout.CENTER);
 		
 	}
+	
 
+	// A access method on class level, which creates only once a instance a concrete object
+	// of Content in a session of OsmUi and returns it.
+	public static Content getInstance() {
+		if (Content.instance == null) {
+			Content.instance = new Content();
+		}
+		return Content.instance;
+	}
 }

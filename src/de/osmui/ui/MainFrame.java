@@ -22,7 +22,7 @@ public class MainFrame extends JFrame {
 	private MainFrame() {
 		Menu menu = new Menu();
 		this.setJMenuBar(menu);
-		Content content = new Content();
+		Content content = Content.getInstance();
 		setLayout(new BorderLayout());
 		add(content, BorderLayout.CENTER);
 		addWindowListener(new WindowAdapter() {
