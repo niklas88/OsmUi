@@ -4,6 +4,7 @@
 package de.osmui.util;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -210,16 +211,31 @@ public class TaskManager {
 	 * @param taskName
 	 * @return compatibleTasks
 	 */
-	public Vector<String> getCompatibleTasks(String taskName)
+	public ArrayList<String> getCompatibleTasks(String taskName)
 			throws TaskNameUnknownException {
-		Vector<String> compatibleTasks = new Vector<String>();
+		ArrayList<String> compatibleTasks = new ArrayList<String>();
 		Collection<TTask> taskNames = taskMap.values();
+		TTask compatibleTasksToSearchFor = taskMap.get(taskName);
 		for (TTask actualTask : taskNames) {
 
 			if (taskName != null) {
+				if (!compatibleTasksToSearchFor.getOutputPipe().isEmpty()) {
+					if (!actualTask.getInputPipe().isEmpty()) {
+						for ( TPipe actualOutputPipeToSearchFor :compatibleTasksToSearchFor
+								.getOutputPipe()) {
+							for (TPipe actualOutputPipe :actualTask.getInputPipe()) {
+								if (actualOutputPipeToSearchFor.getType().equals(actualOutputPipe.getType()))
 
-			} else if (actualTask.getInputPipe() == null) {
+									compatibleTasks.add(actualTask.getName());
+								}
+							}
+
+						}
+
+				}
+			} else if (actualTask.getInputPipe().isEmpty()) {
 				compatibleTasks.add(actualTask.getName());
+
 			}
 		}
 		return compatibleTasks;

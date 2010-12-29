@@ -1,5 +1,6 @@
 package de.osmui.ui.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -9,7 +10,7 @@ import de.osmui.util.TaskManager;
 
 public class TaskBoxTableModel extends AbstractTableModel{
 
-	List<String> data;
+	ArrayList<String> data;
 	@Override
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
@@ -29,11 +30,8 @@ public class TaskBoxTableModel extends AbstractTableModel{
 		return value;
 	}
 	
-	public void addTasks(String task) throws Exception {
-		data = TaskManager.getInstance().getCompatibleTasks(task); 
-		for (String actualString : data){
-			System.out.println("Test"+actualString);
-		}
+	public void showCompatibleTasks(String task) throws Exception {
+		data = TaskManager.getInstance().getCompatibleTasks(task);
 		fireTableStructureChanged();
 		}
 }

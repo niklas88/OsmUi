@@ -5,6 +5,7 @@ import java.util.prefs.Preferences;
 import javax.swing.JFrame;
 
 
+import de.osmui.ui.Content;
 import de.osmui.ui.MainFrame;
 
 public class ConfigurationManager {
@@ -14,6 +15,11 @@ public class ConfigurationManager {
 		int mainFrameHeight = MainFrame.getInstance().getSize().height;
 		int mainFrameXLocation = MainFrame.getInstance().getLocation().x;
 		int mainFrameYLocation = MainFrame.getInstance().getLocation().y;
+		
+		
+		//Content
+		//int taskScrollPaneHeight = Content.getInstance().
+		
 		
 		Preferences root = Preferences.userRoot();
 		Preferences userPrefs = root.node("OsmUi");
@@ -30,8 +36,8 @@ public class ConfigurationManager {
 		Preferences root = Preferences.userRoot();
 		Preferences userPrefs = root.node("OsmUi");
 		
-		int mainFrameWidth = userPrefs.getInt("FrameWidth", 800);
-		int mainFrameHeight = userPrefs.getInt("FrameHeight", 600);
+		int mainFrameWidth = userPrefs.getInt("MainFrameWidth", 800);
+		int mainFrameHeight = userPrefs.getInt("MainFrameHeight", 600);
 		
 		int mainFrameXLocation = userPrefs.getInt("MainFrameXLocation", 100);
 		int mainFrameYLocation = userPrefs.getInt("MainFrameYLocation", 100);
