@@ -26,7 +26,7 @@ public abstract class AbstractPipe implements Serializable{
 	 * @return true if named false else
 	 */
 	public boolean isNamed(){
-		return name==null;
+		return name != null;
 	}
 	
 	/**
@@ -83,10 +83,18 @@ public abstract class AbstractPipe implements Serializable{
 		// Had to put it here because foo instanceof VariablePipe wouldn't work with the Decorator pattern
 		return false;
 	}
-	
+	/**
+	 * Gets the referenced parameter if this is a VariablePipe else returns null,
+	 * this has to be in the AbstractPipe because the decorator wouldn't allow access otherwise
+	 * TODO find better solution
+	 * @return
+	 */
+	public IntParameter getReferencedParam(){
+		return null;
+	}
 	/**
 	 * This method is used to create new Pipes, if this pipe is variable, if it's not it just returns null
-	 * 
+	 *  this has to be in the AbstractPipe because the decorator wouldn't allow access otherwise
 	 * @return
 	 */
 	public AbstractPipe createPipe() {
