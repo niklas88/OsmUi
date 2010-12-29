@@ -38,7 +38,7 @@ public abstract class AbstractPort implements Serializable{
 	 * @return true if connected, false otherwise
 	 */
 	public boolean isConnected(){
-		return incoming == null;
+		return incoming != null;
 	}
 	/**
 	 * Gets whether this port is variable
@@ -49,6 +49,15 @@ public abstract class AbstractPort implements Serializable{
 		return false;
 	}
 
+	/**
+	 * Gets the referenced parameter that specifies the number of ports if this is a variable port
+	 * is in AbstractPort because of keeping it the same as AbstractPipe which needs
+	 * it here because of the Decorator pattern TODO find better solution
+	 * @return
+	 */
+	public IntParameter getReferencedParam(){
+		return null;
+	}
 	/**
 	 * If this pipe is variable returns a new Port and adds it to the parents port list, otherwise returns null
 	 * 
@@ -67,7 +76,7 @@ public abstract class AbstractPort implements Serializable{
 	 */
 	public boolean connect(AbstractPipe incoming){
 		//If not already connected and target of incoming correctly set then set incomming
-		incoming = (!isConnected() && incoming.getTarget().equals(this))? incoming: null;
+		this.incoming = (!isConnected() && incoming.getTarget().equals(this))? incoming: null;
 		return isConnected();
 	}
 	/**

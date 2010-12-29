@@ -140,27 +140,39 @@ public class TaskManager {
 
 			if (pipeDesc.getCount().equals("single")) {
 				newPort = new CommonPort(newTask, pipeDesc.getType());
+				portList.add(newPort);
 			} else {
-				newPort = new VariablePort(newTask,
-						(IntParameter) pMap.get(pipeDesc.getSpecifiedBy()),
-						pipeDesc.getType());
+				// Create as many VariablePorts as the default value  (which is set) of SpecifiedBy tells us
+				IntParameter specifiedBy = (IntParameter) pMap.get(pipeDesc.getSpecifiedBy());
+				for(int i=0; i< specifiedBy.getValueInteger(); ++i){
+					newPort = new VariablePort(newTask,
+						    specifiedBy,
+							pipeDesc.getType());
+					portList.add(newPort);
+				}
 			}
-			portList.add(newPort);
+			
 		}
 
 		List<AbstractPipe> pipeList = newTask.getOutputPipes();
 		AbstractPipe newPipe;
 		// Generate list of outputPipes from described outputPipes
-		for (TPipe pipeDesc : taskDescription.getInputPipe()) {
+		for (TPipe pipeDesc : taskDescription.getOutputPipe()) {
 			
 			if (pipeDesc.getCount().equals("single")) {
 				newPipe = new CommonPipe(newTask, pipeDesc.getType());
+				pipeList.add(newPipe);
 			} else {
-				newPipe = new VariablePipe(newTask,
-						(IntParameter) pMap.get(pipeDesc.getSpecifiedBy()),
-						pipeDesc.getType());
+				// Create as many VariablePipes as the default value  (which is set) of SpecifiedBy tells us
+				IntParameter specifiedBy = (IntParameter) pMap.get(pipeDesc.getSpecifiedBy());
+				for(int i=0; i< specifiedBy.getValueInteger(); ++i){
+					newPipe = new VariablePipe(newTask,
+							specifiedBy,
+							pipeDesc.getType());
+					pipeList.add(newPipe);
+				}
 			}
-			pipeList.add(newPipe);
+			
 		}
 		
 		return newTask;

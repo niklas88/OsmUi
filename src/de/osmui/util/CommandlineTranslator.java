@@ -15,6 +15,8 @@ import de.osmui.model.pipelinemodel.AbstractPipelineModel;
 import de.osmui.model.pipelinemodel.AbstractPipe;
 import de.osmui.model.pipelinemodel.AbstractPort;
 import de.osmui.model.pipelinemodel.AbstractTask;
+import de.osmui.model.pipelinemodel.IntParameter;
+import de.osmui.model.pipelinemodel.JGPipelineModel;
 import de.osmui.util.exceptions.ImportException;
 import de.osmui.util.exceptions.TaskNameUnknownException;
 
@@ -38,9 +40,11 @@ public class CommandlineTranslator {
 		for (AbstractPort port : currTask.getInputPorts()) {
 			if (!port.isConnected()) {
 				try {
-					model.connectTasks(pipeStack.pop(),port);
+					model.connectTasks(pipeStack.pop(), port);
 				} catch (TasksNotCompatibleException e) {
-					throw new ImportException("Tried to connect incompatible tasks at:" + currTask);
+					throw new ImportException(
+							"Tried to connect incompatible tasks at:"
+									+ currTask.getCommandlineForm());
 				} catch (TasksNotInModelException e) {
 					// Failure of program logic task should be in the model
 					e.printStackTrace();
@@ -71,6 +75,42 @@ public class CommandlineTranslator {
 		}
 	}
 
+	private void handleParam(AbstractTask currTask, AbstractParameter param,
+			String paramValue) {
+		param.setValue(paramValue);
+		// Check if the parameter specifies a variable
+		// pipe/port count and create pipes/ports
+		// accordingly
+		if (param instanceof IntParameter) {
+			IntParameter intParam = (IntParameter) param;
+			int defaultCount = Integer.parseInt(intParam.getDefaultValue());
+
+			for (AbstractPort port : currTask.getInputPorts()) {
+
+				if (port.isVariable() &&  port.getReferencedParam().equals(intParam)) {
+					for (int i = defaultCount; i < intParam.getValueInteger(); ++i) {
+						port.createPort();
+					}
+					// We are done
+					return;
+
+				}
+			}
+
+			for (AbstractPipe pipe : currTask.getOutputPipes()) {
+
+				if (pipe.isVariable() && pipe.getReferencedParam().equals(intParam)) {
+					for (int i = defaultCount; i < intParam.getValueInteger(); ++i) {
+						pipe.createPipe();
+					}
+					// We are done
+					return;
+
+				}
+			}
+		}
+	}
+
 	private void handleParamOrPipe(AbstractPipelineModel model,
 			AbstractTask currTask, Map<String, AbstractPipe> pipeMap,
 			String currToken) throws ImportException {
@@ -87,7 +127,7 @@ public class CommandlineTranslator {
 		if (paramName == null) {
 			// This is the value of the default parameter
 			param = currTask.getDefaultParameter();
-			param.setValue(paramValue);
+			handleParam(currTask, param, paramValue);
 		} else if (paramName.startsWith("inPipe.")) {
 			// We need to connect a named pipe with the correct port
 			// 7th position is the one after the .
@@ -115,7 +155,7 @@ public class CommandlineTranslator {
 		} else {
 			// This is a named parameter
 			param = currTask.getParameters().get(paramName);
-			param.setValue(paramValue);
+			handleParam(currTask, param, paramValue);
 		}
 	}
 
@@ -167,14 +207,15 @@ public class CommandlineTranslator {
 
 	// Little test method ;-)
 	public static void main(String[] args) {
+		JGPipelineModel model = new JGPipelineModel();
 		CommandlineTranslator trans = CommandlineTranslator.getInstance();
 		try {
 			trans.importLine(
-					null,
+					model,
 					"--rx full/planet-071128.osm.bz2 "
 							+ "--tee 2 "
 							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly \\"
-							+ "--wx baden-wuerttemberg.osm.bz2 \\"
+							+ "--wxc baden-wuerttemberg.osm.bz2 \\"
 							+ "--bp file=polygons/europe/germany/bayern.poly "
 							+ "--wx bayern.osm.bz2");
 		} catch (ImportException e) {
