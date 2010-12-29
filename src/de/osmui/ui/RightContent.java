@@ -13,8 +13,7 @@ public class RightContent extends JSplitPane{
 	
 	// Prevents the creation of the object with other methods
 	private RightContent() {
-        // Creates the right split pane that contains the pipelineBox with the
-        // pipeline's graph representation and the copyBox on the lower side of this split.
+
 		this.setOrientation(VERTICAL_SPLIT);
 		this.setLeftComponent(new PipelineBox());
 		this.setRightComponent(new CopyBox());
