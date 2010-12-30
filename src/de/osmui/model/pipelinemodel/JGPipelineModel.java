@@ -25,6 +25,10 @@ public class JGPipelineModel extends AbstractPipelineModel {
 		tasks=new ArrayList<JGTaskDecorator>();
 		graph=new mxGraph();
 	}
+	
+	public mxGraph getGraph(){
+		return this.graph;
+	}
 
 	/* (non-Javadoc)
 	 * @see de.osmui.model.pipelinemodel.AbstractModel#getSourceTasks()
