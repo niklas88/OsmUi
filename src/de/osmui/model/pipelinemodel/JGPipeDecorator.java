@@ -102,6 +102,11 @@ public class JGPipeDecorator extends AbstractPipe{
 	}
 	
 	@Override
+	public void setName(String s){
+		decoratedPipe.setName(s);
+	}
+	
+	@Override
 	public AbstractTask getSource(){
 		return decoratedPipe.getSource();
 	}
