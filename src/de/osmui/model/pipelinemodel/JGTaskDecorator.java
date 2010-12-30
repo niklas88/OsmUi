@@ -158,9 +158,9 @@ public class JGTaskDecorator extends AbstractTask {
 	 * We override equals so that this decorator can be associated with references to the undecorated object easily
 	 * @param the object to compare with
 	 */
-	@Override
+	//@Override
 	public boolean equals(Object o){
-		return decoratedTask.equals(o);
+		return o.hashCode()==decoratedTask.hashCode();
 	}
 	
 	/**

@@ -3,12 +3,15 @@
  */
 package de.osmui.model.pipelinemodel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
 
+import com.mxgraph.layout.mxGraphLayout;
+import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.view.mxGraph;
 /**
@@ -17,13 +20,20 @@ import com.mxgraph.view.mxGraph;
  * @author Niklas Schnelle
  *
  */
-public class JGPipelineModel extends AbstractPipelineModel {
+public class JGPipelineModel extends AbstractPipelineModel implements Serializable{
+
+	private static final long serialVersionUID = -4609328085880199933L;
+	
 	protected ArrayList<JGTaskDecorator> tasks;
-	protected mxGraph graph;
+	protected transient mxGraph graph;
 	
 	public JGPipelineModel(){
 		tasks=new ArrayList<JGTaskDecorator>();
 		graph=new mxGraph();
+	}
+	
+	public mxGraph getGraph(){
+		return this.graph;
 	}
 
 	/* (non-Javadoc)
@@ -68,7 +78,7 @@ public class JGPipelineModel extends AbstractPipelineModel {
 		graph.getModel().beginUpdate();
 		try
 		{
-			jgtask.setCell((mxCell) graph.insertVertex(parent, null, jgtask, 20, 20, 80,
+			jgtask.setCell((mxCell) graph.insertVertex(parent, null, jgtask, 10, 10, 100,
 					30));
 		}
 		finally
@@ -150,6 +160,39 @@ public class JGPipelineModel extends AbstractPipelineModel {
 		}
 		return jgpipe;
 	}
+	/*
+	 * (non-Javadoc)
+	 * @see de.osmui.model.pipelinemodel.AbstractPipelineModel#connectTasks(de.osmui.model.pipelinemodel.AbstractPipe, de.osmui.model.pipelinemodel.AbstractPort)
+	 */	
+	public AbstractPipe connectTasks(AbstractPipe output, AbstractPort input) throws TasksNotCompatibleException, TasksNotInModelException {
+		// Make the normal connection, the cast here is legal because otherwise TasksNotInModel would be thrown
+		JGPipeDecorator jgpipe = (JGPipeDecorator) super.connectTasks(output, input);	
+		// We need to get the corresponding tasks from our task list to make sure we get the decorated version
+		AbstractTask parent = output.getSource();
+		AbstractTask child = input.getParent();
+		JGTaskDecorator jgparent = null;
+		JGTaskDecorator jgchild = null;
+		for(JGTaskDecorator task : tasks){
+			if(task.equals(parent)){
+				jgparent = task;
+			} else if (task.equals(child)){
+				jgchild = task;
+			}
+		}
+		
+		
+		// Setup the jgraphx madness
+		Object graphparent = graph.getDefaultParent();
+
+		graph.getModel().beginUpdate();
+		try{			
+			jgpipe.setCell((mxCell) graph.insertEdge(graphparent, null, jgpipe, jgparent.getCell(), jgchild.getCell()));
+		}
+		finally{
+			graph.getModel().endUpdate();
+		}
+		return jgpipe;
+	}
 
 	/* (non-Javadoc)
 	 * @see de.osmui.model.pipelinemodel.AbstractModel#disconnectTasks(de.osmui.model.pipelinemodel.AbstractTask, de.osmui.model.pipelinemodel.AbstractTask)
@@ -171,6 +214,18 @@ public class JGPipelineModel extends AbstractPipelineModel {
 	public boolean isExecutable() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public void layout(){
+		Object graphparent = graph.getDefaultParent();
+		mxGraphLayout lay = new mxHierarchicalLayout(graph);
+		graph.getModel().beginUpdate();
+		try{			
+			lay.execute(graphparent);
+		}
+		finally{
+			graph.getModel().endUpdate();
+		}
 	}
 
 
