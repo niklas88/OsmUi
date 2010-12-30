@@ -132,16 +132,20 @@ public class CommandlineTranslator {
 			// We need to connect a named pipe with the correct port
 			// 7th position is the one after the .
 			pipeNum = Integer.parseInt(paramName.substring(7));
+			// Check if the pipeNum exists
+			if(pipeNum >= currTask.getInputPorts().size()){
+				throw new ImportException("Pipe index of inPipe does not exist: "+currToken);
+			}
 			pipe = pipeMap.remove(paramValue);
 			if (pipe == null) {
 				throw new ImportException("Can't connect to unknown pipe: "
 						+ paramValue);
 			}
-			try {
+			try {	
 				model.connectTasks(pipe, currTask.getInputPorts().get(pipeNum));
 			} catch (TasksNotCompatibleException e) {
 				throw new ImportException(
-						"Tried to connect incompatible tasks at: " + currTask);
+						"Tried to connect incompatible tasks at: " + currTask.getCommandlineForm());
 			} catch (TasksNotInModelException e) {
 				// Failure in program logic task should be added
 				e.printStackTrace();
@@ -151,6 +155,10 @@ public class CommandlineTranslator {
 			// We got a new named pipe
 			// 6th position is the one after the .
 			pipeNum = Integer.parseInt(paramName.substring(8));
+			// Check if the pipeNum exists
+			if(pipeNum >= currTask.getOutputPipes().size()){
+				throw new ImportException("Pipe index of outPipe does not exist: "+currToken);
+			}
 			currTask.getOutputPipes().get(pipeNum).setName(paramValue);
 		} else {
 			// This is a named parameter
@@ -213,9 +221,9 @@ public class CommandlineTranslator {
 			trans.importLine(
 					model,
 					"--rx full/planet-071128.osm.bz2 "
-							+ "--tee 2 "
+							+ "--tee 2 outPipe.1=fooPipe "
 							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly \\"
-							+ "--wxc baden-wuerttemberg.osm.bz2 \\"
+							+ "--wx baden-wuerttemberg.osm.bz2 inPipe.0=fooPipe \\"
 							+ "--bp file=polygons/europe/germany/bayern.poly "
 							+ "--wx bayern.osm.bz2");
 		} catch (ImportException e) {
