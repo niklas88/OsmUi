@@ -3,6 +3,8 @@
  */
 package de.osmui.model.pipelinemodel;
 
+import java.io.Serializable;
+
 import de.osmui.model.osm.TParameter;
 
 /**
@@ -11,7 +13,10 @@ import de.osmui.model.osm.TParameter;
  * @author Niklas Schnelle
  *
  */
-public class OtherParameter extends AbstractParameter {
+public class OtherParameter extends AbstractParameter implements Serializable {
+	
+	private static final long serialVersionUID = -2583615666697475187L;
+	
 	protected String value;
 
 	public OtherParameter(TParameter desc, String value){

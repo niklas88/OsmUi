@@ -203,6 +203,12 @@ public class CommandlineTranslator {
 			}
 
 		}
+		
+		
+		// Finish the last Task
+		if (currTask != null) {
+			finishTask(model, currTask, pipeStack, pipeMap);
+		}
 
 	}
 

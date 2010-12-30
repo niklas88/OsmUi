@@ -122,6 +122,9 @@ public abstract class AbstractPipe implements Serializable{
 		
 	}
 	
+	/**
+	 * Disconnects this pipeline from it's target if it was connected, does nothing otherwise
+	 */
 	public void disconnect(){
 		if(target != null && target.isConnected()){
 			// A little tricky as AbstractPorts disconnect also tries this disconnect method
@@ -134,7 +137,17 @@ public abstract class AbstractPipe implements Serializable{
 		}
 	}
 	
+	/**
+	 * Gets the type of this pipe e.g. "entity"
+	 * @return
+	 */
 	public abstract String getType();
+	
+	
+	@Override
+	public String toString(){
+		return (isNamed())?this.getName()+": " +this.getType(): this.getType();
+	}
 
 
 

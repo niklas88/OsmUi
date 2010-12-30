@@ -1,4 +1,4 @@
-einekpackage de.osmui.util;
+package de.osmui.util;
 
 
 import java.util.prefs.Preferences;
@@ -17,9 +17,9 @@ public class ConfigurationManager {
 		
 		
 		//Content
-		int contentDividerLocation = MainFrame.getContentDeviderLocation();
+		int contentDividerLocation = MainFrame.getInstance().getContentDeviderLocation();
 		//RightSplitPane
-		int rightContentDividerLocation = MainFrame.getRightContentDeviderLocation();
+		int rightContentDividerLocation = MainFrame.getInstance().getRightContentDeviderLocation();
 		
 		
 		Preferences root = Preferences.userRoot();
@@ -59,9 +59,9 @@ public class ConfigurationManager {
 		MainFrame.getInstance().setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
 		//Content
-		MainFrame.setContentDevider(contentDividerLocation);
+		MainFrame.getInstance().setContentDevider(contentDividerLocation);
 		//RightSplitPane
-		MainFrame.setRightContentDeviderLocation(rightContentDividerLocation);
+		MainFrame.getInstance().setRightContentDeviderLocation(rightContentDividerLocation);
 		
 	}
 }

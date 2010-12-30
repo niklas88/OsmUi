@@ -98,5 +98,10 @@ public abstract class AbstractTask implements Serializable{
 	 * @return list of inputPipes null if this is a drain
 	 */
 	public abstract List<AbstractPipe> getOutputPipes();
+	
+	@Override
+	public String toString(){
+		return getName();
+	}
 
 }

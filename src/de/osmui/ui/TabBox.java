@@ -18,12 +18,12 @@ public class TabBox extends JTabbedPane{
 	 */
 	private static final long serialVersionUID = -2984123985661193020L;
 	
-	public TabBox() {
+	public TabBox(TaskBoxTableModel tableModel) {
 
 		this.setTabPlacement(JTabbedPane.TOP);
 		this.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		
-		TaskBox taskBox = new TaskBox(MainFrame.getTaskBoxTableModel());
+		TaskBox taskBox = new TaskBox(tableModel);
 
 		JPanel taskTab = new JPanel();
 		taskTab.setLayout(new BorderLayout());
