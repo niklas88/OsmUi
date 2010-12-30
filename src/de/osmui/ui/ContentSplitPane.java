@@ -1,6 +1,5 @@
 package de.osmui.ui;
 
-import java.awt.ComponentOrientation;
 
 import javax.swing.JComponent;
 import javax.swing.JSplitPane;

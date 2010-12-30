@@ -12,6 +12,10 @@ import de.osmui.model.osm.TParameter;
  *
  */
 public class BooleanParameter extends AbstractParameter {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 454948888938504780L;
 	private boolean value;
 	
 	public BooleanParameter(TParameter desc, String value){

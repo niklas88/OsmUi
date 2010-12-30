@@ -12,6 +12,10 @@ import de.osmui.model.osm.TParameter;
  *
  */
 public class IntParameter extends AbstractParameter {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4423983777968509408L;
 	protected int value;
 
 	/**
