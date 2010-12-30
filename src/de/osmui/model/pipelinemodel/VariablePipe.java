@@ -19,7 +19,17 @@ public class VariablePipe extends CommonPipe {
 
 	public VariablePipe(AbstractTask owner, IntParameter param, String type) {
 		super(owner, type);
+		referencedParam = param;
 	}
+	
+	/**
+	 * Gets the referenced parameter
+	 * @return
+	 */
+	public IntParameter getReferencedParam(){
+		return referencedParam;
+	}
+	
 	/**
 	 * Gets that this is a variable pipe
 	 * 
@@ -44,4 +54,17 @@ public class VariablePipe extends CommonPipe {
 		return newPipe;
 	}
 
+	/**
+	 * We override disconnect so that it removes this variable instance as long as
+	 * there are more then the default value variable instances
+	 */
+	@Override
+	public void disconnect(){
+		super.disconnect();
+		// As long as the referencedParam is not down to it's default we remove this pipe
+		// as it's not longer needed
+		if(!referencedParam.isDefaultParam()){
+			getSource().getOutputPipes().remove(this);
+		}
+	}
 }

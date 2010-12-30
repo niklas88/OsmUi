@@ -11,7 +11,7 @@ import com.mxgraph.model.mxCell;
  * @author Niklas Schnelle
  *
  */
-public class JGPipeDecorator extends AbstractPipe {
+public class JGPipeDecorator extends AbstractPipe{
 	
 
 	private static final long serialVersionUID = -9172610493196783362L;
@@ -73,6 +73,10 @@ public class JGPipeDecorator extends AbstractPipe {
 	}
 	
 	@Override
+	public IntParameter getReferencedParam(){
+		return decoratedPipe.getReferencedParam();
+	}
+	@Override
 	public AbstractPipe createPipe(){
 		return decoratedPipe.createPipe();
 	}
@@ -95,6 +99,11 @@ public class JGPipeDecorator extends AbstractPipe {
 	@Override
 	public String getName(){
 		return decoratedPipe.getName();
+	}
+	
+	@Override
+	public void setName(String s){
+		decoratedPipe.setName(s);
 	}
 	
 	@Override

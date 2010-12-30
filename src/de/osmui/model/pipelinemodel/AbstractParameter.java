@@ -55,6 +55,14 @@ public abstract class AbstractParameter {
 	public boolean isDefaultValue() {
 		return description.getDefaultValue().equals(this.getValue());
 	}
+	
+	/**
+	 * Returns the default value for this Parameter
+	 * @return
+	 */
+	public String getDefaultValue(){
+		return description.getDefaultValue();
+	}
 
 	/**
 	 * Gets the Parameter as a command line argument e.g. 'file=foo.osm'
