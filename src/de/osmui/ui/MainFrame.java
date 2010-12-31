@@ -13,35 +13,36 @@ import de.osmui.util.CommandlineTranslator;
 import de.osmui.util.ConfigurationManager;
 import de.osmui.util.exceptions.ImportException;
 
-
 public class MainFrame extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4767348652713972190L;
-	
+
 	private static MainFrame instance;
-	
 
 	protected TaskBoxTableModel taskBoxTableModel;
 	// Holds the right split pane that contains the pipelineBox with the
-    // pipeline's graph representation and the copyBox on the lower side of this split.
+	// pipeline's graph representation and the copyBox on the lower side of this
+	// split.
 	protected ContentSplitPane rightContent;
 	// Holds the main split pane that contains the right split pane and
-    // the tabBox component on the left side of this split.
+	// the tabBox component on the left side of this split.
 	protected ContentSplitPane content;
 
 	protected JGPipelineModel pipeModel;
+
 	// Prevents the creation of the object with other methods
 	private MainFrame() {
 		pipeModel = new JGPipelineModel();
 		taskBoxTableModel = new TaskBoxTableModel();
-		rightContent = new ContentSplitPane(JSplitPane.VERTICAL_SPLIT, new PipelineBox(pipeModel.getGraph()), new CopyBox());
-		content = new ContentSplitPane(JSplitPane.HORIZONTAL_SPLIT,new TabBox(taskBoxTableModel),rightContent);
+		rightContent = new ContentSplitPane(JSplitPane.VERTICAL_SPLIT,
+				new PipelineBox(pipeModel.getGraph()), new CopyBox());
+		content = new ContentSplitPane(JSplitPane.HORIZONTAL_SPLIT, new TabBox(
+				taskBoxTableModel), rightContent);
 		Menu menu = new Menu();
 		this.setJMenuBar(menu);
-		
 
 		setLayout(new BorderLayout());
 		add(content, BorderLayout.CENTER);
@@ -51,7 +52,7 @@ public class MainFrame extends JFrame {
 			}
 
 		});
-		//TESTCODE
+		// TESTCODE
 		CommandlineTranslator trans = CommandlineTranslator.getInstance();
 		try {
 			trans.importLine(
@@ -76,35 +77,37 @@ public class MainFrame extends JFrame {
 		}
 
 	}
-	
-	
+
 	/**
 	 * @return the ContentDeviderLocation
 	 */
-	public int getContentDeviderLocation(){
+	public int getContentDeviderLocation() {
 		return content.getDividerLocation();
 	}
+
 	/**
-	 * @param ContentDividerLocation the ContentDividerLocation to set
+	 * @param ContentDividerLocation
+	 *            the ContentDividerLocation to set
 	 */
-	public void setContentDevider(int contentDividerLocation){
+	public void setContentDevider(int contentDividerLocation) {
 		content.setDividerLocation(contentDividerLocation);
 	}
+
 	/**
 	 * @return the RightContentDeviderLocation
 	 */
-	public int getRightContentDeviderLocation(){
+	public int getRightContentDeviderLocation() {
 		return rightContent.getDividerLocation();
 	}
-	
+
 	/**
-	 * @param rightContentDividerLocation the rightContentDividerLocation to set
+	 * @param rightContentDividerLocation
+	 *            the rightContentDividerLocation to set
 	 */
-	public void setRightContentDeviderLocation(int rightContentDividerLocation){
+	public void setRightContentDeviderLocation(int rightContentDividerLocation) {
 		rightContent.setDividerLocation(rightContentDividerLocation);
 	}
-	
-	
+
 	/**
 	 * @return the taskBoxTableModel
 	 */
@@ -112,7 +115,8 @@ public class MainFrame extends JFrame {
 		return taskBoxTableModel;
 	}
 
-	// A accessmethod on class level, which creates only once a instance a concrete object
+	// A accessmethod on class level, which creates only once a instance a
+	// concrete object
 	// in a session of OsmUi and returns it.
 	public static MainFrame getInstance() {
 		if (MainFrame.instance == null) {

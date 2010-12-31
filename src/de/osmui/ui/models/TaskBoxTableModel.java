@@ -1,8 +1,6 @@
 package de.osmui.ui.models;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -10,6 +8,11 @@ import de.osmui.util.TaskManager;
 
 public class TaskBoxTableModel extends AbstractTableModel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2453623808903546286L;
+	
 	ArrayList<String> data;
 	@Override
 	public int getColumnCount() {
