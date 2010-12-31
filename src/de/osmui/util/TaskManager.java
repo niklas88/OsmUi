@@ -14,6 +14,8 @@ import java.util.Vector;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
+import sun.misc.Resource;
+
 import de.osmui.model.osm.OsmosisTaskDescription;
 import de.osmui.model.osm.TParameter;
 import de.osmui.model.osm.TTask;
@@ -52,10 +54,13 @@ public class TaskManager {
 			jc = JAXBContext.newInstance("de.osmui.model.osm");
 
 			/* Read the xml file containing the different tasks */
-			File xmlTasksFile = new File("osmosis-tasks.xml"); //
+
+			// File xmlTasksFile = new File("osmosis-tasks.xml"); //
 			Unmarshaller u = jc.createUnmarshaller();
 			OsmosisTaskDescription taskDescriptions = (OsmosisTaskDescription) u
-					.unmarshal(xmlTasksFile);
+					.unmarshal(TaskManager.class
+							.getResourceAsStream("osmosis-tasks.xml"));
+			// .unmarshal(xmlTasksFile);
 
 			/* Fill the map of taskDescriptions and output some Debug info */
 			/*
@@ -154,37 +159,39 @@ public class TaskManager {
 				newPort = new CommonPort(newTask, pipeDesc.getType());
 				portList.add(newPort);
 			} else {
-				// Create as many VariablePorts as the default value  (which is set) of SpecifiedBy tells us
-				IntParameter specifiedBy = (IntParameter) pMap.get(pipeDesc.getSpecifiedBy());
-				for(int i=0; i< specifiedBy.getValueInteger(); ++i){
-					newPort = new VariablePort(newTask,
-						    specifiedBy,
+				// Create as many VariablePorts as the default value (which is
+				// set) of SpecifiedBy tells us
+				IntParameter specifiedBy = (IntParameter) pMap.get(pipeDesc
+						.getSpecifiedBy());
+				for (int i = 0; i < specifiedBy.getValueInteger(); ++i) {
+					newPort = new VariablePort(newTask, specifiedBy,
 							pipeDesc.getType());
 					portList.add(newPort);
 				}
 			}
-			
+
 		}
 
 		List<AbstractPipe> pipeList = newTask.getOutputPipes();
 		AbstractPipe newPipe;
 		// Generate list of outputPipes from described outputPipes
 		for (TPipe pipeDesc : taskDescription.getOutputPipe()) {
-			
+
 			if (pipeDesc.getCount().equals("single")) {
 				newPipe = new CommonPipe(newTask, pipeDesc.getType());
 				pipeList.add(newPipe);
 			} else {
-				// Create as many VariablePipes as the default value  (which is set) of SpecifiedBy tells us
-				IntParameter specifiedBy = (IntParameter) pMap.get(pipeDesc.getSpecifiedBy());
-				for(int i=0; i< specifiedBy.getValueInteger(); ++i){
-					newPipe = new VariablePipe(newTask,
-							specifiedBy,
+				// Create as many VariablePipes as the default value (which is
+				// set) of SpecifiedBy tells us
+				IntParameter specifiedBy = (IntParameter) pMap.get(pipeDesc
+						.getSpecifiedBy());
+				for (int i = 0; i < specifiedBy.getValueInteger(); ++i) {
+					newPipe = new VariablePipe(newTask, specifiedBy,
 							pipeDesc.getType());
 					pipeList.add(newPipe);
 				}
 			}
-			
+
 		}
 
 		return newTask;
@@ -233,16 +240,18 @@ public class TaskManager {
 			if (taskName != null) {
 				if (!compatibleTasksToSearchFor.getOutputPipe().isEmpty()) {
 					if (!actualTask.getInputPipe().isEmpty()) {
-						for ( TPipe actualOutputPipeToSearchFor :compatibleTasksToSearchFor
+						for (TPipe actualOutputPipeToSearchFor : compatibleTasksToSearchFor
 								.getOutputPipe()) {
-							for (TPipe actualOutputPipe :actualTask.getInputPipe()) {
-								if (actualOutputPipeToSearchFor.getType().equals(actualOutputPipe.getType()))
+							for (TPipe actualOutputPipe : actualTask
+									.getInputPipe()) {
+								if (actualOutputPipeToSearchFor.getType()
+										.equals(actualOutputPipe.getType()))
 
 									compatibleTasks.add(actualTask.getName());
-								}
 							}
-
 						}
+
+					}
 
 				}
 			} else if (actualTask.getInputPipe().isEmpty()) {

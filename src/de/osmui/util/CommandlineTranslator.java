@@ -30,7 +30,17 @@ import de.osmui.util.exceptions.TaskNameUnknownException;
  */
 public class CommandlineTranslator {
 	protected static CommandlineTranslator instance;
-
+	
+	/**
+	 * This method finishes a pipe, that is it connects its still unconnected ports
+	 * and adds its pipes to the stack, or if they are named map
+	 * 
+	 * @param model
+	 * @param currTask
+	 * @param pipeStack
+	 * @param pipeMap
+	 * @throws ImportException
+	 */
 	private void finishTask(AbstractPipelineModel model, AbstractTask currTask,
 			Stack<AbstractPipe> pipeStack, Map<String, AbstractPipe> pipeMap)
 			throws ImportException {
@@ -62,7 +72,14 @@ public class CommandlineTranslator {
 		System.out.println("Task done");
 
 	}
-
+	/**
+	 * This method creates a new task object from the given token
+	 * 
+	 * @param tm
+	 * @param currToken
+	 * @return
+	 * @throws ImportException
+	 */
 	private AbstractTask createTaskFromToken(TaskManager tm, String currToken)
 			throws ImportException {
 		// Create a new task object
@@ -75,6 +92,15 @@ public class CommandlineTranslator {
 		}
 	}
 
+	/**
+	 * This method handles parameters  for the current task,
+	 * especially useful here is that for variable pipes their specifying parameter will
+	 * be dealt with. That is new pipes will be created.
+	 * 
+	 * @param currTask
+	 * @param param
+	 * @param paramValue
+	 */
 	private void handleParam(AbstractTask currTask, AbstractParameter param,
 			String paramValue) {
 		param.setValue(paramValue);
@@ -93,7 +119,6 @@ public class CommandlineTranslator {
 					}
 					// We are done
 					return;
-
 				}
 			}
 
@@ -105,12 +130,19 @@ public class CommandlineTranslator {
 					}
 					// We are done
 					return;
-
 				}
 			}
 		}
 	}
-
+	/**
+	 * This method handles Tokens that are either a pipe or a parameter
+	 * 
+	 * @param model the model we are importing to
+	 * @param currTask the current task
+	 * @param pipeMap the map where named pipes are stored
+	 * @param currToken the current token
+	 * @throws ImportException
+	 */
 	private void handleParamOrPipe(AbstractPipelineModel model,
 			AbstractTask currTask, Map<String, AbstractPipe> pipeMap,
 			String currToken) throws ImportException {
@@ -166,7 +198,20 @@ public class CommandlineTranslator {
 			handleParam(currTask, param, paramValue);
 		}
 	}
-
+	/**
+	 * Imports an osmosis command line into the given model.
+	 * This is an example line:
+	 *  					"--rx full/planet-071128.osm.bz2 "
+	 *						+ "--tee 2 outPipe.1=fooPipe "
+	 *						+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly \\"
+	 *						+ "--wx baden-wuerttemberg.osm.bz2 inPipe.0=fooPipe \\"
+	 *						+ "--bp file=polygons/europe/germany/bayern.poly "
+	 *						+ "--wx bayern.osm.bz2""
+	 * 
+	 * @param model
+	 * @param line 
+	 * @throws ImportException
+	 */
 	public void importLine(AbstractPipelineModel model, String line)
 			throws ImportException {
 		StringTokenizer st = new StringTokenizer(line, " \t\n\r\f\\");
@@ -211,7 +256,11 @@ public class CommandlineTranslator {
 		}
 
 	}
-
+	/**
+	 * This returns an Instance of CommandlineTranslator, see Singelton pattern
+	 * 
+	 * @return
+	 */
 	public static CommandlineTranslator getInstance() {
 		if (instance == null) {
 			instance = new CommandlineTranslator();
