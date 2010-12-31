@@ -1,0 +1,15 @@
+Hier werden die Gründe für die nichtkorrektur mancher Befunde des Reviews aufgeführt
+Befund 2: Gehört zur Systembeschreibung und nicht zur Nichtfunktionale Anforderungen.
+Befund 3: Ist keine Nichtfunktionale Anforderung.
+Befund 19: Feststehender Begriff dessen Kenntnis vom Benutzer vorrausgesetzt werden kann.
+Befund 20: Da wir von Osmosis Grundkenntnissen ausgehen können, können wir auch von der Kenntnis der Zwischenablage ausgehen.
+Befund 22: Nicht notwendig wird aus Beschreibung klar. 
+Befund 24: Formulierung wurde geändert daher nicht zu definieren.
+Befund 26: Inputs muss nicht definiert werden da der Fachbegriff für Eingänge.
+Befund 41: Dies ist ein Standardverfahren um Verläufe in bezug auf den Normalablauf klar zu machen.
+Befund 43: Ein Plusbutton existiert ja auch nur bei offenen Outputs.
+Befund 45: Treffender kann man es nicht sagen.
+Befund 47: Bei uns sind sind dies 2 verschiedene Vorgänge und müssen deshalb unterschiedlich behandelt werden.
+Befund 49: Wer in einem Begrifflexikon schaut weil er einen Begriff nicht kennt sollte auch eine Antwort erhalten.
+Befund 56: Tasktab ist eigentlich Tab mit Namen Task und ist nicht gleich Taskpalette aber wir haben die Formulierung geändert. 
+Befund 57: Ist nicht überflüssig da selbstkreierte Wortkombinationen erklärt werden müssen.
