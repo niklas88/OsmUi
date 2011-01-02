@@ -3,18 +3,17 @@
  */
 package de.osmui.util;
 
-import java.io.File;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
+
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
-import sun.misc.Resource;
 
 import de.osmui.model.osm.OsmosisTaskDescription;
 import de.osmui.model.osm.TParameter;
