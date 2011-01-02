@@ -30,10 +30,10 @@ import de.osmui.util.exceptions.TaskNameUnknownException;
  */
 public class CommandlineTranslator {
 	protected static CommandlineTranslator instance;
-	
+
 	/**
-	 * This method finishes a pipe, that is it connects its still unconnected ports
-	 * and adds its pipes to the stack, or if they are named map
+	 * This method finishes a pipe, that is it connects its still unconnected
+	 * ports and adds its pipes to the stack, or if they are named map
 	 * 
 	 * @param model
 	 * @param currTask
@@ -72,6 +72,7 @@ public class CommandlineTranslator {
 		System.out.println("Task done");
 
 	}
+
 	/**
 	 * This method creates a new task object from the given token
 	 * 
@@ -93,9 +94,9 @@ public class CommandlineTranslator {
 	}
 
 	/**
-	 * This method handles parameters  for the current task,
-	 * especially useful here is that for variable pipes their specifying parameter will
-	 * be dealt with. That is new pipes will be created.
+	 * This method handles parameters for the current task, especially useful
+	 * here is that for variable pipes their specifying parameter will be dealt
+	 * with. That is new pipes will be created.
 	 * 
 	 * @param currTask
 	 * @param param
@@ -113,7 +114,8 @@ public class CommandlineTranslator {
 
 			for (AbstractPort port : currTask.getInputPorts()) {
 
-				if (port.isVariable() &&  port.getReferencedParam().equals(intParam)) {
+				if (port.isVariable()
+						&& port.getReferencedParam().equals(intParam)) {
 					for (int i = defaultCount; i < intParam.getValueInteger(); ++i) {
 						port.createPort();
 					}
@@ -124,7 +126,8 @@ public class CommandlineTranslator {
 
 			for (AbstractPipe pipe : currTask.getOutputPipes()) {
 
-				if (pipe.isVariable() && pipe.getReferencedParam().equals(intParam)) {
+				if (pipe.isVariable()
+						&& pipe.getReferencedParam().equals(intParam)) {
 					for (int i = defaultCount; i < intParam.getValueInteger(); ++i) {
 						pipe.createPipe();
 					}
@@ -134,13 +137,18 @@ public class CommandlineTranslator {
 			}
 		}
 	}
+
 	/**
 	 * This method handles Tokens that are either a pipe or a parameter
 	 * 
-	 * @param model the model we are importing to
-	 * @param currTask the current task
-	 * @param pipeMap the map where named pipes are stored
-	 * @param currToken the current token
+	 * @param model
+	 *            the model we are importing to
+	 * @param currTask
+	 *            the current task
+	 * @param pipeMap
+	 *            the map where named pipes are stored
+	 * @param currToken
+	 *            the current token
 	 * @throws ImportException
 	 */
 	private void handleParamOrPipe(AbstractPipelineModel model,
@@ -165,19 +173,21 @@ public class CommandlineTranslator {
 			// 7th position is the one after the .
 			pipeNum = Integer.parseInt(paramName.substring(7));
 			// Check if the pipeNum exists
-			if(pipeNum >= currTask.getInputPorts().size()){
-				throw new ImportException("Pipe index of inPipe does not exist: "+currToken);
+			if (pipeNum >= currTask.getInputPorts().size()) {
+				throw new ImportException(
+						"Pipe index of inPipe does not exist: " + currToken);
 			}
 			pipe = pipeMap.remove(paramValue);
 			if (pipe == null) {
 				throw new ImportException("Can't connect to unknown pipe: "
 						+ paramValue);
 			}
-			try {	
+			try {
 				model.connectTasks(pipe, currTask.getInputPorts().get(pipeNum));
 			} catch (TasksNotCompatibleException e) {
 				throw new ImportException(
-						"Tried to connect incompatible tasks at: " + currTask.getCommandlineForm());
+						"Tried to connect incompatible tasks at: "
+								+ currTask.getCommandlineForm());
 			} catch (TasksNotInModelException e) {
 				// Failure in program logic task should be added
 				e.printStackTrace();
@@ -188,28 +198,31 @@ public class CommandlineTranslator {
 			// 6th position is the one after the .
 			pipeNum = Integer.parseInt(paramName.substring(8));
 			// Check if the pipeNum exists
-			if(pipeNum >= currTask.getOutputPipes().size()){
-				throw new ImportException("Pipe index of outPipe does not exist: "+currToken);
+			if (pipeNum >= currTask.getOutputPipes().size()) {
+				throw new ImportException(
+						"Pipe index of outPipe does not exist: " + currToken);
 			}
 			currTask.getOutputPipes().get(pipeNum).setName(paramValue);
 		} else {
 			// This is a named parameter
 			param = currTask.getParameters().get(paramName);
+			if (param == null) {
+				throw new ImportException("Unknown parameter: " + paramName
+						+ " for Task" + currTask.getName());
+			}
 			handleParam(currTask, param, paramValue);
 		}
 	}
+
 	/**
-	 * Imports an osmosis command line into the given model.
-	 * This is an example line:
-	 *  					"--rx full/planet-071128.osm.bz2 "
-	 *						+ "--tee 2 outPipe.1=fooPipe "
-	 *						+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly \\"
-	 *						+ "--wx baden-wuerttemberg.osm.bz2 inPipe.0=fooPipe \\"
-	 *						+ "--bp file=polygons/europe/germany/bayern.poly "
-	 *						+ "--wx bayern.osm.bz2""
+	 * Imports an osmosis command line into the given model. This is an example
+	 * line: "--rx full/planet-071128.osm.bz2 " + "--tee 2 outPipe.1=fooPipe " +
+	 * "--bp file=polygons/europe/germany/baden-wuerttemberg.poly \\" +
+	 * "--wx baden-wuerttemberg.osm.bz2 inPipe.0=fooPipe \\" +
+	 * "--bp file=polygons/europe/germany/bayern.poly " + "--wx bayern.osm.bz2""
 	 * 
 	 * @param model
-	 * @param line 
+	 * @param line
 	 * @throws ImportException
 	 */
 	public void importLine(AbstractPipelineModel model, String line)
@@ -248,14 +261,14 @@ public class CommandlineTranslator {
 			}
 
 		}
-		
-		
+
 		// Finish the last Task
 		if (currTask != null) {
 			finishTask(model, currTask, pipeStack, pipeMap);
 		}
 
 	}
+
 	/**
 	 * This returns an Instance of CommandlineTranslator, see Singelton pattern
 	 * 
