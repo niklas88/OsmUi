@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
+import de.osmui.model.osm.TTask;
 import de.osmui.util.TaskManager;
 
 public class TaskBoxTableModel extends AbstractTableModel{
@@ -13,7 +14,7 @@ public class TaskBoxTableModel extends AbstractTableModel{
 	 */
 	private static final long serialVersionUID = -2453623808903546286L;
 	
-	ArrayList<String> data;
+	ArrayList<TTask> data;
 	@Override
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
@@ -29,7 +30,7 @@ public class TaskBoxTableModel extends AbstractTableModel{
 	@Override
 	public Object getValueAt(int row, int column) {
 		// TODO Auto-generated method stub
-		String value = data.get(row + 1);
+		TTask value = data.get(row + 1);
 		return value;
 	}
 	

@@ -115,7 +115,7 @@ public class MainFrame extends JFrame {
 		return taskBoxTableModel;
 	}
 
-	// A accessmethod on class level, which creates only once a instance a
+	// A access method on class level, which creates only once a instance a
 	// concrete object
 	// in a session of OsmUi and returns it.
 	public static MainFrame getInstance() {
