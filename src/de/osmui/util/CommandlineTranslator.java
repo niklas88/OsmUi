@@ -101,10 +101,17 @@ public class CommandlineTranslator {
 	 * @param currTask
 	 * @param param
 	 * @param paramValue
+	 * @throws ImportException
 	 */
 	private void handleParam(AbstractTask currTask, AbstractParameter param,
-			String paramValue) {
-		param.setValue(paramValue);
+			String paramValue) throws ImportException {
+		try{
+			param.setValue(paramValue);
+		}
+		catch(NumberFormatException e){
+			throw new ImportException("Parameter: "+param.getName()+" expected Number");
+		}
+	
 		// Check if the parameter specifies a variable
 		// pipe/port count and create pipes/ports
 		// accordingly
@@ -289,7 +296,7 @@ public class CommandlineTranslator {
 			trans.importLine(
 					model,
 					"--rx full/planet-071128.osm.bz2 "
-							+ "--tee 2 outPipe.1=fooPipe "
+							+ "--tee outPipe.1=fooPipe "
 							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly \\"
 							+ "--wx baden-wuerttemberg.osm.bz2 inPipe.0=fooPipe \\"
 							+ "--bp file=polygons/europe/germany/bayern.poly "
