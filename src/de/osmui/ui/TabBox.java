@@ -26,6 +26,7 @@ public class TabBox extends JTabbedPane{
 		this.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		
 		TaskBox taskBox = new TaskBox(tableModel);
+	
 		TaskBoxCellRenderer taskBoxCellRenderer = new TaskBoxCellRenderer();
 		taskBox.setDefaultRenderer(TTask.class, taskBoxCellRenderer);
 
