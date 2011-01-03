@@ -7,6 +7,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 
+import de.osmui.model.osm.TTask;
 import de.osmui.model.pipelinemodel.JGPipelineModel;
 import de.osmui.ui.models.TaskBoxTableModel;
 import de.osmui.util.CommandlineTranslator;
@@ -22,7 +23,11 @@ public class MainFrame extends JFrame {
 
 	private static MainFrame instance;
 
+
+
 	protected TaskBoxTableModel taskBoxTableModel;
+	
+	protected TaskBox taskBox;
 	// Holds the right split pane that contains the pipelineBox with the
 	// pipeline's graph representation and the copyBox on the lower side of this
 	// split.
@@ -31,16 +36,25 @@ public class MainFrame extends JFrame {
 	// the tabBox component on the left side of this split.
 	protected ContentSplitPane content;
 
+	protected PipelineBox pipeBox;
+	
 	protected JGPipelineModel pipeModel;
 
 	// Prevents the creation of the object with other methods
 	private MainFrame() {
 		pipeModel = new JGPipelineModel();
+		pipeBox = new PipelineBox(pipeModel.getGraph());
+		
 		taskBoxTableModel = new TaskBoxTableModel();
+		taskBox = new TaskBox(taskBoxTableModel);		
+		taskBox.setDefaultRenderer(TTask.class,  new TaskBoxCellRenderer());
+		pipeBox.registerTaskSelectedListener(taskBox);
+		
 		rightContent = new ContentSplitPane(JSplitPane.VERTICAL_SPLIT,
-				new PipelineBox(pipeModel.getGraph()), new CopyBox());
+				pipeBox, new CopyBox());
 		content = new ContentSplitPane(JSplitPane.HORIZONTAL_SPLIT, new TabBox(
-				taskBoxTableModel), rightContent);
+				taskBox), rightContent);
+		
 		Menu menu = new Menu();
 		this.setJMenuBar(menu);
 
@@ -58,11 +72,23 @@ public class MainFrame extends JFrame {
 			trans.importLine(
 					pipeModel,
 					"--rx full/planet-071128.osm.bz2 "
-							+ "--tee 2 \\"
+							+ "--tee 9 \\"
 							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
 							+ "--wx baden-wuerttemberg.osm.bz2  \\"
-							+ "--bp file=polygons/europe/germany/bayern.poly "
-							+ "--wx bayern.osm.bz2 ");
+							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
+							+ "--wx baden-wuerttemberg.osm.bz2  \\"
+							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
+							+ "--wx baden-wuerttemberg.osm.bz2  \\"
+							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
+							+ "--wx baden-wuerttemberg.osm.bz2  \\"
+							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
+							+ "--wx baden-wuerttemberg.osm.bz2  \\"
+							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
+							+ "--wx baden-wuerttemberg.osm.bz2  \\"
+							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
+							+ "--wx baden-wuerttemberg.osm.bz2  \\"
+							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
+							+ "--wx baden-wuerttemberg.osm.bz2  \\");
 
 		} catch (ImportException e) {
 			// TODO Auto-generated catch block
@@ -70,7 +96,7 @@ public class MainFrame extends JFrame {
 		}
 		pipeModel.layout();
 		try {
-			taskBoxTableModel.showCompatibleTasks("read-xml");
+			//taskBox.showCompatibleTasks("");
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -107,6 +133,22 @@ public class MainFrame extends JFrame {
 	public void setRightContentDeviderLocation(int rightContentDividerLocation) {
 		rightContent.setDividerLocation(rightContentDividerLocation);
 	}
+	
+	/**
+	 * Gets the Pipelinemodel used
+	 * @return
+	 */
+	public JGPipelineModel getPipeModel(){
+		return pipeModel;
+	}
+	
+	/**
+	 * @return the taskBox
+	 */
+	public TaskBox getTaskBox() {
+		return taskBox;
+	}
+
 
 	/**
 	 * @return the taskBoxTableModel

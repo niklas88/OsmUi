@@ -40,15 +40,14 @@ public class VariablePipe extends CommonPipe {
 	}
 	
 	/**
-	 * This method creates a pipe of the same type as this variable pipe and adds it to
-	 * it's source task
+	 * This method creates a pipe of the same type as this variable pipe 
+	 * 
 	 */
 	@Override
 	public AbstractPipe createPipe(){
 		
-		// Clone this pipe, add it to our source and update the right parameter
+		// Clone this pipe, and update the right parameter
 		AbstractPipe newPipe = new VariablePipe(getSource(), referencedParam, getType());
-		getSource().getOutputPipes().add(newPipe);
 		referencedParam.setValueInteger(referencedParam.getValueInteger()+1);
 	
 		return newPipe;

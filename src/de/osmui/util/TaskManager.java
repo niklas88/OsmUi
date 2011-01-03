@@ -229,14 +229,13 @@ public class TaskManager {
 	 * @param taskName
 	 * @return compatibleTasks
 	 */
-	public ArrayList<TTask> getCompatibleTasks(String taskName)
-			throws TaskNameUnknownException {
+	public ArrayList<TTask> getCompatibleTasks(String taskName) {
 		ArrayList<TTask> compatibleTasks = new ArrayList<TTask>();
 		Collection<TTask> taskNames = taskMap.values();
 		TTask compatibleTasksToSearchFor = taskMap.get(taskName);
 		for (TTask actualTask : taskNames) {
 
-			if (taskName != null) {
+			if (taskName != null && !taskName.equals("")) {
 				if (!compatibleTasksToSearchFor.getOutputPipe().isEmpty()) {
 					if (!actualTask.getInputPipe().isEmpty()) {
 						for (TPipe actualOutputPipeToSearchFor : compatibleTasksToSearchFor
@@ -255,7 +254,6 @@ public class TaskManager {
 				}
 			} else if (actualTask.getInputPipe().isEmpty()) {
 				compatibleTasks.add(actualTask);
-
 			}
 		}
 		return compatibleTasks;
