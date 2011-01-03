@@ -29,13 +29,21 @@ public class TaskBoxTableModel extends AbstractTableModel{
 
 	@Override
 	public Object getValueAt(int row, int column) {
-		// TODO Auto-generated method stub
 		TTask value = data.get(row + 1);
 		return value;
 	}
 	
+	@Override
+	public boolean isCellEditable(int row, int col) {
+		return false;
+	}
+	@Override
+    public Class<? extends Object> getColumnClass(int c) {
+        return getValueAt(0, c).getClass();
+    }
+	
 	public void showCompatibleTasks(String task) throws Exception {
 		data = TaskManager.getInstance().getCompatibleTasks(task);
 		fireTableStructureChanged();
-		}
+	}
 }

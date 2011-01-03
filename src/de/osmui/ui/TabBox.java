@@ -10,7 +10,6 @@ import javax.swing.JTable;
 
 import de.osmui.i18n.I18N;
 import de.osmui.model.osm.TTask;
-import de.osmui.ui.models.TaskBoxCellRenderer;
 import de.osmui.ui.models.TaskBoxTableModel;
 
 public class TabBox extends JTabbedPane{
@@ -26,9 +25,11 @@ public class TabBox extends JTabbedPane{
 		this.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		
 		TaskBox taskBox = new TaskBox(tableModel);
-		TaskBoxCellRenderer taskBoxCellRenderer = new TaskBoxCellRenderer();
-		taskBox.setDefaultRenderer(TTask.class, taskBoxCellRenderer);
 
+		
+		taskBox.setDefaultRenderer(TTask.class,  new TaskBoxCellRenderer());
+		
+		
 		JPanel taskTab = new JPanel();
 		taskTab.setLayout(new BorderLayout());
 
