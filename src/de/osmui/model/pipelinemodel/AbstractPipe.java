@@ -26,7 +26,7 @@ public abstract class AbstractPipe implements Serializable{
 	 * @return true if named false else
 	 */
 	public boolean isNamed(){
-		return name==null;
+		return name != null;
 	}
 	
 	/**
@@ -83,10 +83,18 @@ public abstract class AbstractPipe implements Serializable{
 		// Had to put it here because foo instanceof VariablePipe wouldn't work with the Decorator pattern
 		return false;
 	}
-	
+	/**
+	 * Gets the referenced parameter if this is a VariablePipe else returns null,
+	 * this has to be in the AbstractPipe because the decorator wouldn't allow access otherwise
+	 * TODO find better solution
+	 * @return
+	 */
+	public IntParameter getReferencedParam(){
+		return null;
+	}
 	/**
 	 * This method is used to create new Pipes, if this pipe is variable, if it's not it just returns null
-	 * 
+	 *  this has to be in the AbstractPipe because the decorator wouldn't allow access otherwise
 	 * @return
 	 */
 	public AbstractPipe createPipe() {
@@ -114,6 +122,9 @@ public abstract class AbstractPipe implements Serializable{
 		
 	}
 	
+	/**
+	 * Disconnects this pipeline from it's target if it was connected, does nothing otherwise
+	 */
 	public void disconnect(){
 		if(target != null && target.isConnected()){
 			// A little tricky as AbstractPorts disconnect also tries this disconnect method
@@ -126,7 +137,17 @@ public abstract class AbstractPipe implements Serializable{
 		}
 	}
 	
+	/**
+	 * Gets the type of this pipe e.g. "entity"
+	 * @return
+	 */
 	public abstract String getType();
+	
+	
+	@Override
+	public String toString(){
+		return (isNamed())?this.getName()+": " +this.getType(): this.getType();
+	}
 
 
 

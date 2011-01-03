@@ -16,6 +16,15 @@ public class VariablePort extends CommonPort {
 
 	public VariablePort(AbstractTask owner, IntParameter param, String type) {
 		super(owner, type);
+		referencedParam = param;
+	}
+	
+	/**
+	 * Gets the referenced parameter that specifies the number of ports
+	 * @return
+	 */
+	public IntParameter getReferencedParam(){
+		return referencedParam;
 	}
 	
 	/**
