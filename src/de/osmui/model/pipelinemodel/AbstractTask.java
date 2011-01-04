@@ -99,6 +99,29 @@ public abstract class AbstractTask implements Serializable{
 	 */
 	public abstract List<AbstractPipe> getOutputPipes();
 	
+	/**
+	 * Gets whether this task can be connected to or can spawn a connection	 * 
+	 * @return
+	 */
+	public boolean isConnectable(){
+		
+		// Check whether this task can spawn a connection that is be a source
+		for(AbstractPipe pipe: getOutputPipes()){
+			if(!pipe.isConnected() || pipe.isVariable()){
+				return true;
+			}
+		}
+		
+		// Check if this task can be connected to that is be a target
+		for(AbstractPort port: getInputPorts()){
+			if(!port.isConnected() || port.isVariable()){				
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	@Override
 	public String toString(){
 		return getName();

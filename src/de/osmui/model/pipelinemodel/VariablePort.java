@@ -38,15 +38,13 @@ public class VariablePort extends CommonPort {
 	}
 	
 	/**
-	 * This method creates a pipe of the same type as this variable pipe and adds it to
-	 * it's source task
+	 * This method creates a pipe of the same type as this variable port
 	 */
 	@Override
 	public AbstractPort createPort(){
 		
-		// Clone this pipe, add it to our source and update the right parameter
+		// Clone this pipe, and update the right parameter
 		AbstractPort newPort = new VariablePort(getParent(), referencedParam, getType());
-		getParent().getInputPorts().add(newPort);
 		referencedParam.setValueInteger(referencedParam.getValueInteger()+1);
 	
 		return newPort;

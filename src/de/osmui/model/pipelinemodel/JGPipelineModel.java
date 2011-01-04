@@ -28,8 +28,26 @@ public class JGPipelineModel extends AbstractPipelineModel implements Serializab
 	protected transient mxGraph graph;
 	
 	public JGPipelineModel(){
-		tasks=new ArrayList<JGTaskDecorator>();
-		graph=new mxGraph();
+		tasks =new ArrayList<JGTaskDecorator>();
+		graph = new mxGraph()
+		{
+			// Overrides method to disallow editting
+			@Override
+			public boolean isCellEditable(Object cell)
+			{
+				return false;
+			}
+			@Override
+			public boolean isCellConnectable(Object cell){
+				mxCell mxcell = (mxCell) cell;
+				if(mxcell.isVertex()){
+					AbstractTask task = (AbstractTask) mxcell.getValue();
+					return task.isConnectable();
+				} else {
+					return false;
+				}
+			}
+		};
 	}
 	
 	public mxGraph getGraph(){
@@ -79,7 +97,8 @@ public class JGPipelineModel extends AbstractPipelineModel implements Serializab
 		try
 		{
 			jgtask.setCell((mxCell) graph.insertVertex(parent, null, jgtask, 10, 10, 100,
-					30));
+					20));
+			jgtask.getCell().setConnectable(false);
 		}
 		finally
 		{
@@ -103,7 +122,15 @@ public class JGPipelineModel extends AbstractPipelineModel implements Serializab
 
 		//First add the child and then use our internal connect method to wire things up
 		addTask(child);
-		connectTasks(parent, child);
+		// We need to connect the now decorated task in the model
+		JGTaskDecorator jgchild = null;
+		for(JGTaskDecorator task : tasks){
+			if(task.equals(child)){
+				jgchild = task;
+				break;
+			}
+		}
+		connectTasks(parent, jgchild);
 		
 		notifyObservers(child);
 		
