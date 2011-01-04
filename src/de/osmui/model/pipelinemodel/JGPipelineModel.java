@@ -77,7 +77,9 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 								.getValue();
 						
 						try {
-							mxcell.setValue(rawConnectTasks(sourceTask, targetTask));
+							JGPipeDecorator jgpipe = (JGPipeDecorator) rawConnectTasks(sourceTask, targetTask);
+							mxcell.setValue(jgpipe);
+							jgpipe.setCell(mxcell);
 						} catch (TasksNotInModelException e) {
 							// shouldn't happen
 						} catch (TasksNotCompatibleException e) {
