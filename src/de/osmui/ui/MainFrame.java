@@ -58,7 +58,7 @@ public class MainFrame extends JFrame {
 			trans.importLine(
 					pipeModel,
 					"--rx full/planet-071128.osm.bz2 "
-							+ "--tee as  \\"
+							+ "--tee 2  \\"
 							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
 							+ "--wx baden-wuerttemberg.osm.bz2  \\"
 							+ "--bp file=polygons/europe/germany/bayern.poly "
