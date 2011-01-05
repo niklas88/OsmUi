@@ -37,8 +37,7 @@ public class PipelineBox extends mxGraphComponent {
 		this.setAutoScroll(true);
 		this.setAutoscrolls(true);
 		this.setFoldingEnabled(false);
-		this.setDoubleBuffered(false);
-		this.setTripleBuffered(true);
+		this.setDoubleBuffered(true);
 		this.setImportEnabled(false);
 		this.setExportEnabled(false);
 
