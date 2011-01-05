@@ -3,6 +3,7 @@
  */
 package de.osmui.util;
 
+import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -55,6 +56,8 @@ public class CommandlineTranslator {
 					throw new ImportException(
 							"Tried to connect incompatible tasks at:"
 									+ currTask.getCommandlineForm());
+				} catch(EmptyStackException e){
+					throw new ImportException("No unnamed pipes on the stack to connect");
 				} catch (TasksNotInModelException e) {
 					// Failure of program logic task should be in the model
 					e.printStackTrace();
@@ -105,26 +108,24 @@ public class CommandlineTranslator {
 	 */
 	private void handleParam(AbstractTask currTask, AbstractParameter param,
 			String paramValue) throws ImportException {
-		try{
-			param.setValue(paramValue);
-		}
-		catch(NumberFormatException e){
-			throw new ImportException("Parameter: "+param.getName()+" expected Number");
-		}
+
 	
 		// Check if the parameter specifies a variable
 		// pipe/port count and create pipes/ports
 		// accordingly
 		if (param instanceof IntParameter) {
 			IntParameter intParam = (IntParameter) param;
+			int wantedCount = Integer.parseInt(paramValue);
 			int defaultCount = Integer.parseInt(intParam.getDefaultValue());
 
 			for (AbstractPort port : currTask.getInputPorts()) {
 
 				if (port.isVariable()
 						&& port.getReferencedParam().equals(intParam)) {
-					for (int i = defaultCount; i < intParam.getValueInteger(); ++i) {
-						port.createPort();
+					AbstractPort newPort;
+					for (int i = defaultCount; i < wantedCount; ++i) {
+						newPort = port.createPort();
+						currTask.getInputPorts().add(newPort);
 					}
 					// We are done
 					return;
@@ -135,13 +136,22 @@ public class CommandlineTranslator {
 
 				if (pipe.isVariable()
 						&& pipe.getReferencedParam().equals(intParam)) {
-					for (int i = defaultCount; i < intParam.getValueInteger(); ++i) {
-						pipe.createPipe();
+					AbstractPipe newPipe;
+					for (int i = defaultCount; i < wantedCount; ++i) {
+						newPipe = pipe.createPipe();
+						currTask.getOutputPipes().add(newPipe);
 					}
 					// We are done
 					return;
 				}
 			}
+		}
+		
+		try{
+			param.setValue(paramValue);
+		}
+		catch(NumberFormatException e){
+			throw new ImportException("Parameter: "+param.getName()+" expected Number");
 		}
 	}
 

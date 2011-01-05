@@ -57,10 +57,22 @@ public class JGPipeDecorator extends AbstractPipe{
 	public AbstractPipe undecorate(){
 		return decoratedPipe;
 	}
+	
+	/**
+	 * We need to decorate the created pipe
+	 */
+	@Override
+	public AbstractPipe createPipe(){
+		return new JGPipeDecorator(decoratedPipe.createPipe());
+	}
 	/*
 	 * The following operations will be handed over to the decorated pipe
 	 */
 	
+	@Override
+	public boolean isConnected(){
+		return decoratedPipe.isConnected();
+	}
 
 	@Override
 	public String getType() {
@@ -76,10 +88,7 @@ public class JGPipeDecorator extends AbstractPipe{
 	public IntParameter getReferencedParam(){
 		return decoratedPipe.getReferencedParam();
 	}
-	@Override
-	public AbstractPipe createPipe(){
-		return decoratedPipe.createPipe();
-	}
+
 	
 	@Override
 	public boolean connect(AbstractPort target){

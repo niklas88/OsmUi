@@ -768,8 +768,8 @@
         Sorts all data in a change stream according to a specified ordering. This uses a file-based merge sort
         keeping memory usage to a minimum and allowing arbitrarily large data sets to be sorted.
       </description>
-      <inputPipe type="entity" count="single" index="0" />
-      <outputPipe type="entity" count="single" index="0" />
+      <inputPipe type="change" count="single" index="0" />
+      <outputPipe type="change" count="single" index="0" />
       <parameter name="type" type="enum" defaultValue="streamable" defaultParameter="true">
         <description>
           The ordering to apply to the data.

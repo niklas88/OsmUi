@@ -3,17 +3,14 @@
  */
 package de.osmui.util;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
-
 
 import de.osmui.model.osm.OsmosisTaskDescription;
 import de.osmui.model.osm.TParameter;
@@ -223,41 +220,41 @@ public class TaskManager {
 	}
 
 	/**
-	 * Searches the compatible Tasks of given name of a Task and returns there
-	 * Names.
+	 * Searches the task descriptions for compatible tasks and returns them
 	 * 
 	 * @param taskName
 	 * @return compatibleTasks
 	 */
-	public ArrayList<TTask> getCompatibleTasks(String taskName)
-			throws TaskNameUnknownException {
+	public ArrayList<TTask> getCompatibleTasks(String taskName) {
 		ArrayList<TTask> compatibleTasks = new ArrayList<TTask>();
-		Collection<TTask> taskNames = taskMap.values();
-		TTask compatibleTasksToSearchFor = taskMap.get(taskName);
-		for (TTask actualTask : taskNames) {
+		Collection<TTask> taskDescriptions = taskMap.values();
+		TTask taskDescSearched = taskMap.get(taskName);
 
-			if (taskName != null) {
-				if (!compatibleTasksToSearchFor.getOutputPipe().isEmpty()) {
-					if (!actualTask.getInputPipe().isEmpty()) {
-						for (TPipe actualOutputPipeToSearchFor : compatibleTasksToSearchFor
-								.getOutputPipe()) {
-							for (TPipe actualOutputPipe : actualTask
-									.getInputPipe()) {
-								if (actualOutputPipeToSearchFor.getType()
-										.equals(actualOutputPipe.getType()))
-
-									compatibleTasks.add(actualTask);
+		if (taskDescSearched != null
+				&& !taskDescSearched.getOutputPipe().isEmpty()) {
+			for (TTask taskDesc : taskDescriptions) {
+				if (!taskDesc.getInputPipe().isEmpty()) {
+					PipeLoop: for (TPipe outPipe : taskDescSearched.getOutputPipe()) {
+						for (TPipe inPipe : taskDesc.getInputPipe()) {
+							if (outPipe.getType().equals(inPipe.getType())) {
+								compatibleTasks.add(taskDesc);
+								// We are done with this taskDesc
+								break PipeLoop;
 							}
 						}
-
 					}
 
 				}
-			} else if (actualTask.getInputPipe().isEmpty()) {
-				compatibleTasks.add(actualTask);
 
 			}
+		} else {
+			for (TTask taskDesc : taskDescriptions) {
+				if (taskDesc.getInputPipe().isEmpty()) {
+					compatibleTasks.add(taskDesc);
+				}
+			}
 		}
+
 		return compatibleTasks;
 	}
 

@@ -59,7 +59,7 @@ public abstract class AbstractPort implements Serializable{
 		return null;
 	}
 	/**
-	 * If this pipe is variable returns a new Port and adds it to the parents port list, otherwise returns null
+	 * If this pipe is variable returns a new Port, otherwise returns null
 	 * 
 	 * @return null
 	 */
