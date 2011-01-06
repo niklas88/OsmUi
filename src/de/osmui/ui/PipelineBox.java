@@ -1,17 +1,24 @@
 package de.osmui.ui;
 
-import java.awt.event.MouseAdapter;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
+
+import javax.swing.AbstractAction;
+import javax.swing.KeyStroke;
 
 import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
 
+import de.osmui.model.pipelinemodel.AbstractTask;
+import de.osmui.model.pipelinemodel.JGTaskDecorator;
 import de.osmui.ui.events.TaskSelectedEvent;
 import de.osmui.ui.events.TaskSelectedEventListener;
 
-public class PipelineBox extends mxGraphComponent {
+public class PipelineBox extends mxGraphComponent implements Observer{
 
 	/**
 	 * 
@@ -32,6 +39,8 @@ public class PipelineBox extends mxGraphComponent {
 		this.graph.setCellsResizable(false);
 		this.graph.setEdgeLabelsMovable(false);
 		this.graph.setDropEnabled(false);
+		
+		
 		this.setAutoExtend(true);
 		this.setAntiAlias(true);
 		this.setAutoScroll(true);
@@ -40,20 +49,36 @@ public class PipelineBox extends mxGraphComponent {
 		this.setDoubleBuffered(true);
 		this.setImportEnabled(false);
 		this.setExportEnabled(false);
+		
+		
+		// Register Keyboard Actions
+		this.getInputMap(WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke("DELETE"), "deleteCell");
+		
+		this.getActionMap().put("deleteCell", new AbstractAction() {
+			
+			private static final long serialVersionUID = 1L;
 
-		this.getGraphControl().addMouseListener(new MouseAdapter() {
-
-			public void mouseReleased(MouseEvent e) {
-				mxCell cell = (mxCell) getCellAt(e.getX(), e.getY());
-
-				if (cell != null && cell.isVertex()) {
-					fireTaskSelected(new TaskSelectedEvent(cell.getValue()));
-				} else {
-					fireTaskSelected(null);
-				}
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				final mxGraph graph = getGraph();	
+				graph.removeCells();
+				
 			}
 		});
+		
 
+	}
+	
+	@Override
+	public void selectCellForEvent(Object cell, MouseEvent e){
+		super.selectCellForEvent(cell, e);
+		mxCell mxcell = (mxCell)  cell;
+
+		if (mxcell != null && mxcell.isVertex()) {
+			fireTaskSelected(new TaskSelectedEvent(mxcell.getValue()));
+		} else {
+			fireTaskSelected(null);
+		}
 	}
 
 	public void registerTaskSelectedListener(TaskSelectedEventListener l) {
@@ -68,6 +93,19 @@ public class PipelineBox extends mxGraphComponent {
 		for (TaskSelectedEventListener l : selectedListeners) {
 			l.TaskSelected(e);
 		}
+	}
+	
+	/** This is from the Observer interface we react to model changes here
+	 *  the model notifies it's observers with AbstractTask objects when they are added
+	 */	
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		
+		if(arg1 instanceof AbstractTask){
+			fireTaskSelected(new TaskSelectedEvent(arg1));
+			this.graph.setSelectionCell(((JGTaskDecorator) arg1).getCell());
+		}
+		
 	}
 
 }
