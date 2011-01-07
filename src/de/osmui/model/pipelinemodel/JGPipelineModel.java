@@ -226,15 +226,16 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 					"The task to remove is not in the model");
 		}
 
-		setChanged();
 		
 		JGTaskDecorator jgtask = (JGTaskDecorator) task;
-		// TODO: Find good way to notify
-		// setChanged();
-		// notifyObservers(null);
+		
 		Object[] cellArray = {jgtask.getCell()};
 		// Our subclass of mxGraph handles disconnecting via rawRemoveTask
-		return graph.removeCells(cellArray).length != 0;
+		boolean result = graph.removeCells(cellArray).length != 0;
+		
+		setChanged();
+		notifyObservers(jgtask);
+		return result;
 	}
 	
 	/**
@@ -286,6 +287,8 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		// see overwritten addCell
 		mxCell edge = (mxCell) graph.insertEdge(graphparent, null,null,
 				jgparent.getCell(), jgchild.getCell());
+		setChanged();
+		notifyObservers(edge.getValue());
 		return (AbstractPipe) edge.getValue();
 	}
 
@@ -341,6 +344,8 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		} finally {
 			graph.getModel().endUpdate();
 		}
+		setChanged();
+		notifyObservers(jgpipe);
 		return jgpipe;
 	}
 

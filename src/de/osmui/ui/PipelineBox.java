@@ -26,6 +26,7 @@ public class PipelineBox extends mxGraphComponent implements Observer{
 	private static final long serialVersionUID = -2865210986243818496L;
 
 	private final ArrayList<TaskSelectedEventListener> selectedListeners;
+	private AbstractTask selectedTask;
 
 	public PipelineBox(mxGraph graph) {
 		super(graph);
@@ -102,8 +103,13 @@ public class PipelineBox extends mxGraphComponent implements Observer{
 	public void update(Observable arg0, Object arg1) {
 		
 		if(arg1 instanceof AbstractTask){
-			fireTaskSelected(new TaskSelectedEvent(arg1));
-			this.graph.setSelectionCell(((JGTaskDecorator) arg1).getCell());
+			JGTaskDecorator task = (JGTaskDecorator) arg1;
+			if(task.getModel()!= null && !task.equals(selectedTask)){
+				this.graph.setSelectionCell(task.getCell());
+				fireTaskSelected(new TaskSelectedEvent(task));
+				selectedTask = task;
+			}
+			
 		}
 		
 	}
