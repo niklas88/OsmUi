@@ -160,7 +160,7 @@ public class JGTaskDecorator extends AbstractTask {
 	 */
 	//@Override
 	public boolean equals(Object o){
-		return o.hashCode()==decoratedTask.hashCode();
+		return (o != null)? o.hashCode()==decoratedTask.hashCode() : false;
 	}
 	
 	/**

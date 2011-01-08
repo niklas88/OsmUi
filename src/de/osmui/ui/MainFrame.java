@@ -44,6 +44,7 @@ public class MainFrame extends JFrame {
 	private MainFrame() {
 		pipeModel = new JGPipelineModel();
 		pipeBox = new PipelineBox(pipeModel.getGraph());
+		pipeModel.addObserver(pipeBox);
 		
 		taskBoxTableModel = new TaskBoxTableModel();
 		taskBox = new TaskBox(taskBoxTableModel);		

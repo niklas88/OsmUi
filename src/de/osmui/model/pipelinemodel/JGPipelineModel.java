@@ -84,13 +84,34 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 							// shouldn't happen
 						} catch (TasksNotCompatibleException e) {
 							// Too bad, that shouldn't happen BUG
-							System.err.println("BUG: Tried connection incomatible tasks");
+							System.err.println("BUG: Tried connecting incomatible tasks");
 						}
 
 					}
 				}
 				return ret;
 			}
+			
+			@Override
+			public Object[] removeCells(Object[] cells, boolean includeEdges) {
+				Object[] cellsRemoved =  super.removeCells(cells, includeEdges);
+				Object val;
+				AbstractPipe pipe;
+				for(Object cell: cellsRemoved){
+					val = ((mxCell) cell).getValue();
+					if(val instanceof AbstractPipe){
+						pipe = (AbstractPipe) val;
+						pipe.disconnect();
+					} else if (val instanceof AbstractTask){
+						try {
+							rawRemoveTask((AbstractTask) val);
+						} catch (TasksNotInModelException e) {
+							// Do nothing
+						}
+					}
+				}
+				return cellsRemoved;
+			};
 		};
 		lay = new mxHierarchicalLayout(graph, SwingConstants.NORTH);
 		lay.setLayoutFromSinks(false);
@@ -155,6 +176,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		} finally {
 			graph.getModel().endUpdate();
 		}
+		setChanged();
 		notifyObservers(jgtask);
 	}
 
@@ -184,8 +206,8 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 			}
 		}
 		connectTasks(parent, jgchild);
-
-		notifyObservers(child);
+		setChanged();
+		notifyObservers(jgchild);
 
 	}
 
@@ -204,18 +226,45 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 					"The task to remove is not in the model");
 		}
 
+		
+		JGTaskDecorator jgtask = (JGTaskDecorator) task;
+		
+		Object[] cellArray = {jgtask.getCell()};
+		// Our subclass of mxGraph handles disconnecting via rawRemoveTask
+		boolean result = graph.removeCells(cellArray).length != 0;
+		
+		setChanged();
+		notifyObservers(jgtask);
+		return result;
+	}
+	
+	/**
+	 * Helper method thar removes the Task from the model without affecting the under-
+	 * lying mxGraph
+	 * 
+	 * @param task
+	 * @return
+	 * @throws TasksNotInModelException
+	 */
+	private boolean rawRemoveTask(AbstractTask task) throws TasksNotInModelException{
+		if (task.getModel() != this) {
+			throw new TasksNotInModelException(
+					"The task to remove is not in the model");
+		}
 		JGTaskDecorator jgtask = (JGTaskDecorator) task;
 		// Disconnect all connected pipes
 		for (AbstractPipe out : jgtask.getOutputPipes()) {
 			if (out.isConnected()) {
-				disconnectTasks(jgtask, out.getTarget().getParent());
+				out.disconnect();
+			}
+		}
+		// Disconnect all connected ports
+		for (AbstractPort in : jgtask.getInputPorts()) {
+			if (in.isConnected()) {
+				in.disconnect();
 			}
 		}
 
-		Object[] cellArray = new Object[1];
-		cellArray[0] = jgtask.getCell();
-
-		graph.removeCells(cellArray);
 		task.setModel(null);
 		return tasks.remove(task);
 	}
@@ -230,26 +279,17 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 	@Override
 	public AbstractPipe connectTasks(AbstractTask parent, AbstractTask child)
 			throws TasksNotCompatibleException, TasksNotInModelException {
-
-		// Make the normal connection, the cast here is legal because otherwise
-		// TasksNotInModel would be thrown
-		JGPipeDecorator jgpipe = (JGPipeDecorator) super.connectTasks(parent,
-				child);
-		// The tasks are in the model therefore we can cast them
+		Object graphparent = graph.getDefaultParent();
 		JGTaskDecorator jgparent = (JGTaskDecorator) parent;
 		JGTaskDecorator jgchild = (JGTaskDecorator) child;
-
-		// Setup the jgraphx madness
-		Object graphparent = graph.getDefaultParent();
-
-		graph.getModel().beginUpdate();
-		try {
-			jgpipe.setCell((mxCell) graph.insertEdge(graphparent, null, jgpipe,
-					jgparent.getCell(), jgchild.getCell()));
-		} finally {
-			graph.getModel().endUpdate();
-		}
-		return jgpipe;
+		
+		// Thanks to our subclass of mxGraph this will make the model connection.
+		// see overwritten addCell
+		mxCell edge = (mxCell) graph.insertEdge(graphparent, null,null,
+				jgparent.getCell(), jgchild.getCell());
+		setChanged();
+		notifyObservers(edge.getValue());
+		return (AbstractPipe) edge.getValue();
 	}
 
 	/**
@@ -261,7 +301,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 	 * @throws TasksNotCompatibleException
 	 * @throws TasksNotInModelException
 	 */
-	public AbstractPipe rawConnectTasks(AbstractTask parent, AbstractTask child)
+	private AbstractPipe rawConnectTasks(AbstractTask parent, AbstractTask child)
 			throws TasksNotCompatibleException, TasksNotInModelException {
 		return super.connectTasks(parent, child);
 	}
@@ -304,6 +344,8 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		} finally {
 			graph.getModel().endUpdate();
 		}
+		setChanged();
+		notifyObservers(jgpipe);
 		return jgpipe;
 	}
 
@@ -318,8 +360,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 	public AbstractPipe disconnectTasks(AbstractTask parent, AbstractTask child)
 			throws TasksNotInModelException {
 		AbstractPipe removedPipe = super.disconnectTasks(parent, child);
-		Object[] cellArray = new Object[1];
-		cellArray[0] = ((JGPipeDecorator) removedPipe).getCell();
+		Object[] cellArray = {((JGPipeDecorator) removedPipe).getCell()};
 		graph.removeCells(cellArray);
 
 		return removedPipe;
