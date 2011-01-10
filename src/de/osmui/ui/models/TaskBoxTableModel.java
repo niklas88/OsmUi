@@ -3,6 +3,11 @@ package de.osmui.ui.models;
 
 import java.util.List;
 
+/**
+ * @author Peter Vollmer
+ * 
+ */
+
 import javax.swing.table.AbstractTableModel;
 
 import de.osmui.model.osm.TTask;

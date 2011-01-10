@@ -8,6 +8,11 @@ import de.osmui.ui.events.TaskSelectedEvent;
 import de.osmui.ui.events.TaskSelectedEventListener;
 import de.osmui.ui.models.ParameterBoxTableModel;
 
+/**
+ * @author Peter Vollmer
+ * 
+ */
+
 public class ParameterBox extends JTable implements TaskSelectedEventListener {
 
 	/**

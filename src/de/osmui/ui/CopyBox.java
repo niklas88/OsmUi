@@ -4,6 +4,11 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * @author Peter Vollmer
+ * 
+ */
+
 public class CopyBox extends JPanel{
 
 	/**

@@ -15,6 +15,11 @@ import de.osmui.util.CommandlineTranslator;
 import de.osmui.util.ConfigurationManager;
 import de.osmui.util.exceptions.ImportException;
 
+/**
+ * @author Peter Vollmer
+ * 
+ */
+
 public class MainFrame extends JFrame {
 
 	/**

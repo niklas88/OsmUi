@@ -7,6 +7,11 @@ import javax.swing.JFrame;
 
 import de.osmui.ui.MainFrame;
 
+/**
+ * @author Peter Vollmer
+ * 
+ */
+
 public class ConfigurationManager {
 	public static void saveConfiguration(){
 		//MainFrame
