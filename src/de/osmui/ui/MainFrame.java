@@ -7,14 +7,10 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 
-import de.osmui.io.IO;
-import de.osmui.io.PipeImEx;
 import de.osmui.model.pipelinemodel.JGPipelineModel;
 import de.osmui.ui.models.ParameterBoxTableModel;
 import de.osmui.ui.models.TaskBoxTableModel;
-import de.osmui.util.CommandlineTranslator;
 import de.osmui.util.ConfigurationManager;
-import de.osmui.util.exceptions.ImportException;
 
 /**
  * @author Peter Vollmer
@@ -51,9 +47,6 @@ public class MainFrame extends JFrame {
 	
 	protected JGPipelineModel pipeModel;
 	
-
-	protected PipeImEx pipeImEx; 
-
 	protected CopyBox copyBox;
 
 
@@ -91,6 +84,7 @@ public class MainFrame extends JFrame {
 			}
 
 		});
+		
 //		// TESTCODE
 //		CommandlineTranslator trans = CommandlineTranslator.getInstance();
 //		try {

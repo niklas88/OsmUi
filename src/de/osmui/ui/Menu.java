@@ -78,7 +78,7 @@ public class Menu extends JMenuBar {
 				System.out.println("importFile"); //$NON-NLS-1$
 				// TESTCODE
 				try {
-					MainFrame.getInstance().pipeImEx.importOutOfFile(MainFrame.getInstance().pipeModel, "/home/nino/Desktop/daten/syncordner/3_Semester/sopra/osmui/test.sh");
+					PipeImEx.getInstance().importOutOfFile(MainFrame.getInstance().pipeModel, "/home/nino/Desktop/daten/syncordner/3_Semester/sopra/osmui/test.sh");
 				} catch (ImportException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -95,7 +95,7 @@ public class Menu extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("importClipboard"); //$NON-NLS-1$
 				try {
-					MainFrame.getInstance().pipeImEx.importClipBoard(MainFrame.getInstance().pipeModel, Toolkit.getDefaultToolkit().getSystemClipboard());
+					PipeImEx.getInstance().importClipBoard(MainFrame.getInstance().pipeModel, Toolkit.getDefaultToolkit().getSystemClipboard());
 				} catch (HeadlessException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
