@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.osmui.ui;
+package de.osmui.ui.renderers;
 
 import java.awt.Component;
 

@@ -88,4 +88,5 @@ public abstract class AbstractParameter implements Serializable{
 	 * @param the String representing the new value
 	 */
 	public abstract void setValue(String s) throws IllegalArgumentException;
+	
 }

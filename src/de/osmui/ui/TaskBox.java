@@ -10,6 +10,7 @@ import de.osmui.model.pipelinemodel.AbstractTask;
 import de.osmui.ui.events.TaskSelectedEvent;
 import de.osmui.ui.events.TaskSelectedEventListener;
 import de.osmui.ui.models.TaskBoxTableModel;
+import de.osmui.ui.renderers.TaskBoxCellRenderer;
 import de.osmui.util.TaskManager;
 import de.osmui.util.exceptions.TaskNameUnknownException;
 
@@ -26,6 +27,8 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 
 	public TaskBox(TaskBoxTableModel taskBoxTableModel) {
 		this.setModel(taskBoxTableModel);
+		this.setDefaultRenderer(TTask.class,  new TaskBoxCellRenderer());
+		
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		model = taskBoxTableModel;
 		showCompatibleTasks(null);

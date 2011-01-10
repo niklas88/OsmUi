@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import de.osmui.i18n.I18N;
 import de.osmui.model.osm.TTask;
 
 public class TaskBoxTableModel extends AbstractTableModel {
@@ -45,6 +46,11 @@ public class TaskBoxTableModel extends AbstractTableModel {
 	@Override
 	public Class<? extends Object> getColumnClass(int c) {
 		return getValueAt(0, c).getClass();
+	}
+	
+	@Override
+	public String getColumnName(int col){
+		return I18N.getString("TaskBox.Name");
 	}
 
 }
