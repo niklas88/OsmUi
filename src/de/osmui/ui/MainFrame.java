@@ -7,6 +7,8 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 
+import de.osmui.io.IO;
+import de.osmui.io.PipeImEx;
 import de.osmui.model.pipelinemodel.JGPipelineModel;
 import de.osmui.ui.models.ParameterBoxTableModel;
 import de.osmui.ui.models.TaskBoxTableModel;
@@ -48,6 +50,8 @@ public class MainFrame extends JFrame {
 	protected PipelineBox pipeBox;
 	
 	protected JGPipelineModel pipeModel;
+	
+	protected PipeImEx pipeImEx; 
 
 	// Prevents the creation of the object with other methods
 	private MainFrame() {
@@ -81,15 +85,16 @@ public class MainFrame extends JFrame {
 			}
 
 		});
+		
+		pipeImEx= PipeImEx.getInstance();
+		
 		// TESTCODE
 		CommandlineTranslator trans = CommandlineTranslator.getInstance();
 		try {
 			trans.importLine(
 					pipeModel,
 					"--rx full/planet-071128.osm.bz2 "
-							+ "--tee 4 \\"
-							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
-							+ "--wx baden-wuerttemberg.osm.bz2  \\"
+							+ "--tee 3 \\"
 							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
 							+ "--wx baden-wuerttemberg.osm.bz2  \\"
 							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
