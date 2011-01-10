@@ -49,6 +49,7 @@ public class MainFrame extends JFrame {
 	
 	protected CopyBox copyBox;
 
+
 	// Prevents the creation of the object with other methods
 	private MainFrame() {
 		pipeModel = new JGPipelineModel();

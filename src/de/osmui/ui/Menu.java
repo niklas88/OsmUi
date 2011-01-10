@@ -1,5 +1,7 @@
 package de.osmui.ui;
 
+import java.awt.HeadlessException;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,7 +11,9 @@ import javax.swing.JMenuItem;
 
 
 import de.osmui.util.ConfigurationManager;
+import de.osmui.util.exceptions.ImportException;
 import de.osmui.i18n.I18N;
+import de.osmui.io.PipeImEx;
 
 /**
  * @author Peter Vollmer
@@ -72,6 +76,14 @@ public class Menu extends JMenuBar {
 		importFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("importFile"); //$NON-NLS-1$
+				// TESTCODE
+				try {
+					PipeImEx.getInstance().importOutOfFile(MainFrame.getInstance().pipeModel, "/home/nino/Desktop/daten/syncordner/3_Semester/sopra/osmui/test.sh");
+				} catch (ImportException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				MainFrame.getInstance().pipeModel.layout();
 			}
 		});
 		fileMenu.add(importFile);
@@ -82,6 +94,16 @@ public class Menu extends JMenuBar {
 		importClipBoard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("importClipboard"); //$NON-NLS-1$
+				try {
+					PipeImEx.getInstance().importClipBoard(MainFrame.getInstance().pipeModel, Toolkit.getDefaultToolkit().getSystemClipboard());
+				} catch (HeadlessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ImportException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				MainFrame.getInstance().pipeModel.layout();
 			}
 		});
 		fileMenu.add(importClipBoard);
