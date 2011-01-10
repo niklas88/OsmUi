@@ -97,7 +97,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 			public Object[] removeCells(Object[] cells, boolean includeEdges) {
 				Object[] cellsRemoved =  super.removeCells(cells, includeEdges);
 				Object val;
-				AbstractPipe pipe;
+				AbstractPipe pipe; 
 				for(Object cell: cellsRemoved){
 					val = ((mxCell) cell).getValue();
 					if(val instanceof AbstractPipe){
