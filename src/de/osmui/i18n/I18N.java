@@ -20,7 +20,7 @@ public class I18N {
 	 */
 	private static ResourceBundle bundle;
 
-	private I18N() {
+	I18N() {
 		// Load the resource bundle
 		bundle = ResourceBundle.getBundle(MESSAGES_BASE_NAME);
 	}

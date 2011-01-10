@@ -35,6 +35,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		tasks = new ArrayList<JGTaskDecorator>();
 		graph = new mxGraph() {
 			// Overrides method to disallow editting
+			
 			@Override
 			public boolean isCellEditable(Object cell) {
 				return false;
