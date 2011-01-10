@@ -103,7 +103,6 @@ public class PipelineBox extends mxGraphComponent implements Observer{
 	public void update(Observable arg0, Object arg1) {
 		
 		if(arg1 instanceof AbstractTask){
-			System.out.println("Notified");
 			JGTaskDecorator task = (JGTaskDecorator) arg1;
 			if(task.getModel()!= null && !task.equals(selectedTask)){
 				this.graph.setSelectionCell(task.getCell());

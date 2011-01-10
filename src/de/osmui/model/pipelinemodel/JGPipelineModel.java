@@ -233,8 +233,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		// Our subclass of mxGraph handles disconnecting via rawRemoveTask
 		boolean result = graph.removeCells(cellArray).length != 0;
 		
-		setChanged();
-		notifyObservers(jgtask);
+		
 		return result;
 	}
 	
@@ -266,7 +265,10 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		}
 
 		task.setModel(null);
-		return tasks.remove(task);
+		boolean result = tasks.remove(task);
+		setChanged();
+		notifyObservers(jgtask);
+		return result;
 	}
 
 	/*

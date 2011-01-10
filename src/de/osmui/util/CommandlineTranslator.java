@@ -299,11 +299,14 @@ public class CommandlineTranslator {
 		AbstractPipe upPipe;
 		AbstractTask currTask;
 		for(AbstractPort port : task.getInputPorts()){
-			upPipe = port.getIncoming();
-			currTask = upPipe.getSource();
-			if(!fin.contains(currTask)){
-				exportTask(unfin, fin, sb, currTask);
+			if(port.isConnected()){
+				upPipe = port.getIncoming();
+				currTask = upPipe.getSource();
+				if(!fin.contains(currTask)){
+					exportTask(unfin, fin, sb, currTask);
+				}
 			}
+			
 		}
 		// All dependencies are now cleared append task (without pipes)
 		sb.append(task.getCommandlineForm());

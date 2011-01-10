@@ -58,7 +58,8 @@ public abstract class AbstractParameter implements Serializable{
 	 * @return true if this parameter's value equals the default
 	 */
 	public boolean isDefaultValue() {
-		return description.getDefaultValue().equals(this.getValue());
+		String  defaultValue = description.getDefaultValue();
+		return (defaultValue != null)? defaultValue.equals(this.getValue()) : false;
 	}
 	
 	/**

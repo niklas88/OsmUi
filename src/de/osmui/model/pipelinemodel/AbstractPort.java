@@ -95,13 +95,11 @@ public abstract class AbstractPort implements Serializable{
 	 */
 	public void disconnect(){
 		//Disconnect the incoming pipe
-		if(incoming != null && incoming.isConnected()){
+		if(incoming != null){
 			//Little tricky but ensures disconnecting works on both sides
 			AbstractPipe tempIncoming = incoming;
 			incoming = null;
 			tempIncoming.disconnect();
-		} else {
-			incoming = null;
 		}
 	}
 	/**

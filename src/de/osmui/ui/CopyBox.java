@@ -1,13 +1,12 @@
 package de.osmui.ui;
 
-import java.awt.BorderLayout;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import de.osmui.model.pipelinemodel.AbstractPipelineModel;
+import de.osmui.model.pipelinemodel.AbstractTask;
 import de.osmui.util.CommandlineTranslator;
 
 
@@ -30,7 +29,7 @@ public class CopyBox extends JTextField implements Observer{
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		if(arg0 instanceof AbstractPipelineModel){
+		if(arg1 instanceof AbstractTask){
 			setText(trans.exportLine(model));
 		}
 	}

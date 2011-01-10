@@ -28,13 +28,20 @@ public class VariablePort extends CommonPort {
 	}
 	
 	/**
-	 * Gets whether this pipe is variable
+	 * Gets whether this pipe is variable, it's only variable if all ports are connected
 	 * 
 	 * @return true
 	 */
 	@Override
 	public boolean isVariable(){
-		return true;
+		boolean result = true;
+		for(AbstractPort port : getParent().getInputPorts()){
+			if(!port.isConnected()){
+				result = false;
+				break;
+			}
+		}
+		return result;
 	}
 	
 	/**
@@ -48,5 +55,21 @@ public class VariablePort extends CommonPort {
 		referencedParam.setValueInteger(referencedParam.getValueInteger()+1);
 	
 		return newPort;
+	}
+	
+	/**
+	 * We override disconnect so that it removes this variable instance as long as
+	 * there are more then the default value variable instances
+	 */
+	@Override
+	public void disconnect(){
+		super.disconnect();
+		// As long as the referencedParam is not down to it's default we remove this pipe
+		// as it's not longer needed
+		if(!referencedParam.isDefaultValue()){
+			getParent().getOutputPipes().remove(this);
+			
+			referencedParam.setValueInteger(referencedParam.getValueInteger()-1);
+		}
 	}
 }
