@@ -27,7 +27,7 @@ public class TabBox extends JTabbedPane{
 		this.setTabPlacement(JTabbedPane.TOP);
 		this.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		
-	
+
 		
 		JPanel taskTab = new JPanel();
 		taskTab.setLayout(new BorderLayout());

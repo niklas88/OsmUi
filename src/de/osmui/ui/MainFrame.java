@@ -9,6 +9,7 @@ import javax.swing.JSplitPane;
 
 import de.osmui.model.osm.TTask;
 import de.osmui.model.pipelinemodel.JGPipelineModel;
+import de.osmui.ui.models.ParameterBoxTableModel;
 import de.osmui.ui.models.TaskBoxTableModel;
 import de.osmui.util.CommandlineTranslator;
 import de.osmui.util.ConfigurationManager;
@@ -23,11 +24,15 @@ public class MainFrame extends JFrame {
 
 	private static MainFrame instance;
 
-
+	
 
 	protected TaskBoxTableModel taskBoxTableModel;
 	
 	protected TaskBox taskBox;
+	
+	protected ParameterBoxTableModel parameterBoxTableModel;
+	
+	protected ParameterBox parameterBox;
 	// Holds the right split pane that contains the pipelineBox with the
 	// pipeline's graph representation and the copyBox on the lower side of this
 	// split.
@@ -49,6 +54,10 @@ public class MainFrame extends JFrame {
 		taskBoxTableModel = new TaskBoxTableModel();
 		taskBox = new TaskBox(taskBoxTableModel);		
 		taskBox.setDefaultRenderer(TTask.class,  new TaskBoxCellRenderer());
+		
+		parameterBoxTableModel = new ParameterBoxTableModel();
+		parameterBox = new ParameterBox(parameterBoxTableModel);
+		
 		pipeBox.registerTaskSelectedListener(taskBox);
 		
 		rightContent = new ContentSplitPane(JSplitPane.VERTICAL_SPLIT,
