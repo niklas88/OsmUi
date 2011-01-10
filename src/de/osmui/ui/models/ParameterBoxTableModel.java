@@ -32,7 +32,7 @@ public class ParameterBoxTableModel extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return paramList.size();
+		return (paramList != null)? paramList.size():0;
 	}
 
 	@Override

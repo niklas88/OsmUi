@@ -51,7 +51,11 @@ public class MainFrame extends JFrame {
 	
 	protected JGPipelineModel pipeModel;
 	
+
 	protected PipeImEx pipeImEx; 
+
+	protected CopyBox copyBox;
+
 
 	// Prevents the creation of the object with other methods
 	private MainFrame() {
@@ -62,6 +66,8 @@ public class MainFrame extends JFrame {
 		taskBoxTableModel = new TaskBoxTableModel();
 		taskBox = new TaskBox(taskBoxTableModel);		
 
+		copyBox = new CopyBox(pipeModel);
+		pipeModel.addObserver(copyBox);
 		
 		parameterBoxTableModel = new ParameterBoxTableModel();
 		parameterBox = new ParameterBox(parameterBoxTableModel);
@@ -70,7 +76,7 @@ public class MainFrame extends JFrame {
 		pipeBox.registerTaskSelectedListener(parameterBox);
 
 		rightContent = new ContentSplitPane(JSplitPane.VERTICAL_SPLIT,
-				pipeBox, new CopyBox());
+				pipeBox, copyBox);
 		content = new ContentSplitPane(JSplitPane.HORIZONTAL_SPLIT, new TabBox(
 				taskBox, parameterBox), rightContent);
 		
@@ -85,33 +91,32 @@ public class MainFrame extends JFrame {
 			}
 
 		});
-		
-		pipeImEx= PipeImEx.getInstance();
-		
-		// TESTCODE
-		CommandlineTranslator trans = CommandlineTranslator.getInstance();
-		try {
-			trans.importLine(
-					pipeModel,
-					"--rx full/planet-071128.osm.bz2 "
-							+ "--tee 3 \\"
-							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
-							+ "--wx baden-wuerttemberg.osm.bz2  \\"
-							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
-							+ "--wx baden-wuerttemberg.osm.bz2  \\"
-							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\");
-
-		} catch (ImportException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		pipeModel.layout();
-		try {
-			//taskBox.showCompatibleTasks("");
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		// TESTCODE
+//		CommandlineTranslator trans = CommandlineTranslator.getInstance();
+//		try {
+//			trans.importLine(
+//					pipeModel,
+//					"--rx full/planet-071128.osm.bz2 "
+//							+ "--tee 4 \\"
+//							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
+//							+ "--wx baden-wuerttemberg.osm.bz2  \\"
+//							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
+//							+ "--wx baden-wuerttemberg.osm.bz2  \\"
+//							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
+//							+ "--wx baden-wuerttemberg.osm.bz2  \\"
+//							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\");
+//
+//		} catch (ImportException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		pipeModel.layout();
+//		try {
+//			//taskBox.showCompatibleTasks("");
+//		} catch (Exception e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 
 	}
 

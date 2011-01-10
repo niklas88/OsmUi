@@ -33,6 +33,15 @@ public abstract class AbstractPort implements Serializable{
 	}
 	
 	/**
+	 * Gets the incoming pipe or null if not connected
+	 * 
+	 * @return
+	 */
+	public AbstractPipe getIncoming(){
+		return incoming;
+	}
+	
+	/**
 	 * Gets whether this port has an incoming pipe
 	 * 
 	 * @return true if connected, false otherwise
@@ -86,13 +95,11 @@ public abstract class AbstractPort implements Serializable{
 	 */
 	public void disconnect(){
 		//Disconnect the incoming pipe
-		if(incoming != null && incoming.isConnected()){
+		if(incoming != null){
 			//Little tricky but ensures disconnecting works on both sides
 			AbstractPipe tempIncoming = incoming;
 			incoming = null;
 			tempIncoming.disconnect();
-		} else {
-			incoming = null;
 		}
 	}
 	/**

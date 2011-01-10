@@ -57,13 +57,6 @@ public class JGTaskDecorator extends AbstractTask {
 	 * that may exist. NOTE: The task might still contain decorated pipes
 	 */
 	public AbstractTask undecorate(){
-		//First undecorate all pipes
-		List<AbstractPipe> pipes = this.decoratedTask.getOutputPipes();
-		JGPipeDecorator jgpipe;
-		for(int i=0; i<pipes.size(); ++i){
-			jgpipe = (JGPipeDecorator) pipes.get(i);
-			pipes.set(i, jgpipe.undecorate());
-		}
 		return decoratedTask;
 	}
 	

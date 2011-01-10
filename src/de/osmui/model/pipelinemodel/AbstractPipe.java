@@ -126,15 +126,13 @@ public abstract class AbstractPipe implements Serializable{
 	 * Disconnects this pipeline from it's target if it was connected, does nothing otherwise
 	 */
 	public void disconnect(){
-		if(target != null && target.isConnected()){
+		if(target != null){
 			// A little tricky as AbstractPorts disconnect also tries this disconnect method
 			// this ensures disconnect on either end works
 			AbstractPort tempTarget = target;
 			target = null;
 			tempTarget.disconnect();
-		} else {
-			target = null;
-		}
+		} 
 	}
 	
 	/**

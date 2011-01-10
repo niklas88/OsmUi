@@ -31,12 +31,20 @@ public class VariablePipe extends CommonPipe {
 	}
 	
 	/**
-	 * Gets that this is a variable pipe
+	 * Gets that this is a variable pipe, we are only variable when all pipes are
+	 * already connected
 	 * 
 	 */
 	@Override
 	public boolean isVariable(){
-		return true;
+		boolean result = true;
+		for(AbstractPipe pipe : getSource().getOutputPipes()){
+			if(!pipe.isConnected()){
+				result = false;
+				break;
+			}
+		}
+		return result;
 	}
 	
 	/**
@@ -60,10 +68,13 @@ public class VariablePipe extends CommonPipe {
 	@Override
 	public void disconnect(){
 		super.disconnect();
+		
 		// As long as the referencedParam is not down to it's default we remove this pipe
 		// as it's not longer needed
-		if(!referencedParam.isDefaultParam()){
+		if(!referencedParam.isDefaultValue()){
+			System.out.println("RemovingReally");
 			getSource().getOutputPipes().remove(this);
+			referencedParam.setValueInteger(referencedParam.getValueInteger()-1);
 		}
 	}
 }

@@ -1,26 +1,37 @@
 package de.osmui.ui;
 
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
+import java.util.Observable;
+import java.util.Observer;
+
 import javax.swing.JTextField;
 
-/**
- * @author Peter Vollmer
- * 
- */
+import de.osmui.model.pipelinemodel.AbstractPipelineModel;
+import de.osmui.model.pipelinemodel.AbstractTask;
+import de.osmui.util.CommandlineTranslator;
 
-public class CopyBox extends JPanel{
+
+public class CopyBox extends JTextField implements Observer{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2196616949819474887L;
+	
+	private final CommandlineTranslator trans;
+	
+	private final AbstractPipelineModel model;
+	
+	public CopyBox(AbstractPipelineModel m) {
+		this.setEditable(false);
+		trans = CommandlineTranslator.getInstance();
+		model = m;
+	}
 
-	public CopyBox() {
-		JTextField copyBox = new JTextField("copybox");
-		copyBox.setEditable(false);
-        this.setLayout(new BorderLayout());
-		this.add(copyBox, BorderLayout.CENTER);
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		if(arg1 instanceof AbstractTask){
+			setText(trans.exportLine(model));
+		}
 	}
 
 }
