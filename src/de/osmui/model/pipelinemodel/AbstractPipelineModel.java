@@ -86,13 +86,26 @@ public abstract class AbstractPipelineModel extends Observable {
 			List<AbstractPort> ports = child.getInputPorts();
 			boolean outVariable = false;
 			boolean inVariable = false;
-			for (AbstractPipe out : pipes) {
-				// Only set to true if it is variable AND we need to know
-				outVariable = out.isConnected() && out.isVariable();
-				if(!out.isConnected() || outVariable){
+			// First check for unconnected pipes then we can also look for variable ones
+			for (AbstractPipe out : pipes) {				
+				if(!out.isConnected()){
 					for (AbstractPort in : ports) {
-						// Same as above if it's unconnected we don't care if it's variable
-						inVariable = in.isConnected() && in.isVariable();
+						if(!in.isConnected() && out.getType().equals(in.getType())){
+							if(out.connect(in)){
+								return out;
+							} else {
+								throw new TasksNotCompatibleException("connect failed");
+							}
+						}
+					}				
+				}
+			}
+			// If we got nothing yet check variable pipes
+			for (AbstractPipe out : pipes) {
+				outVariable = out.isVariable();
+				if(outVariable){
+					for (AbstractPort in : ports) {
+						inVariable = in.isVariable();
 						// test if types match
 						if(out.getType().equals(in.getType())){
 							if(outVariable){
@@ -105,6 +118,8 @@ public abstract class AbstractPipelineModel extends Observable {
 							}
 							if(out.connect(in)){
 								return out;
+							} else {
+								throw new TasksNotCompatibleException("connect failed");
 							}
 						}
 					}				

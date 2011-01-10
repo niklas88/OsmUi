@@ -83,7 +83,7 @@ public class Menu extends JMenuBar {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				MainFrame.getInstance().pipeModel.layout();
+				MainFrame.getInstance().pipeModel.layout(null);
 			}
 		});
 		fileMenu.add(importFile);
@@ -103,7 +103,7 @@ public class Menu extends JMenuBar {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				MainFrame.getInstance().pipeModel.layout();
+				MainFrame.getInstance().pipeModel.layout(null);
 			}
 		});
 		fileMenu.add(importClipBoard);

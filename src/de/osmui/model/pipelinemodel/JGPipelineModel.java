@@ -207,7 +207,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 			}
 		}
 		connectTasks(parent, jgchild);
-		layout(parent);
+		layout(null);
 		setChanged();
 		notifyObservers(jgchild);
 

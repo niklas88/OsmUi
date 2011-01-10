@@ -41,7 +41,8 @@ public class VariablePipe extends CommonPipe {
 	}
 	
 	/**
-	 * This method creates a pipe of the same type as this variable pipe 
+	 * This method creates a pipe of the same type as this variable pipe, if this
+	 * pipe doesn't have any free pipes anymore
 	 * 
 	 */
 	@Override
