@@ -40,7 +40,8 @@ public class I18N {
 		if (values.length > 0) {
 			return MessageFormat.format(msg, values);
 		}
-		return msg;
+		return  msg;
+	
 	}
 	
 }

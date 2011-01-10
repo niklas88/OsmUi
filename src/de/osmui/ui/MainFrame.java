@@ -7,7 +7,6 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 
-import de.osmui.model.osm.TTask;
 import de.osmui.model.pipelinemodel.JGPipelineModel;
 import de.osmui.ui.models.ParameterBoxTableModel;
 import de.osmui.ui.models.TaskBoxTableModel;
@@ -58,17 +57,18 @@ public class MainFrame extends JFrame {
 		
 		taskBoxTableModel = new TaskBoxTableModel();
 		taskBox = new TaskBox(taskBoxTableModel);		
-		taskBox.setDefaultRenderer(TTask.class,  new TaskBoxCellRenderer());
+
 		
 		parameterBoxTableModel = new ParameterBoxTableModel();
 		parameterBox = new ParameterBox(parameterBoxTableModel);
 		
 		pipeBox.registerTaskSelectedListener(taskBox);
-		
+		pipeBox.registerTaskSelectedListener(parameterBox);
+
 		rightContent = new ContentSplitPane(JSplitPane.VERTICAL_SPLIT,
 				pipeBox, new CopyBox());
 		content = new ContentSplitPane(JSplitPane.HORIZONTAL_SPLIT, new TabBox(
-				taskBox), rightContent);
+				taskBox, parameterBox), rightContent);
 		
 		Menu menu = new Menu();
 		this.setJMenuBar(menu);
