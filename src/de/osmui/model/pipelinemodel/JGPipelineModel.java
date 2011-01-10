@@ -243,7 +243,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 	 * Helper method thar removes the Task from the model without affecting the under-
 	 * lying mxGraph
 	 * 
-	 * @param task
+	 * @param taslk
 	 * @return
 	 * @throws TasksNotInModelException
 	 */
