@@ -33,6 +33,15 @@ public abstract class AbstractPort implements Serializable{
 	}
 	
 	/**
+	 * Gets the incoming pipe or null if not connected
+	 * 
+	 * @return
+	 */
+	public AbstractPipe getIncoming(){
+		return incoming;
+	}
+	
+	/**
 	 * Gets whether this port has an incoming pipe
 	 * 
 	 * @return true if connected, false otherwise

@@ -3,11 +3,17 @@
  */
 package de.osmui.util;
 
+import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
 import java.util.Stack;
 import java.util.StringTokenizer;
+
 
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
@@ -243,6 +249,7 @@ public class CommandlineTranslator {
 	 * @throws ImportException
 	 */
 	public void importLine(AbstractPipelineModel model, String line)
+
 			throws ImportException {
 		StringTokenizer st = new StringTokenizer(line, " \t\n\r\f\\");
 
@@ -286,6 +293,49 @@ public class CommandlineTranslator {
 
 	}
 
+	
+	private void exportTask(Stack<AbstractTask> unfin, Set<AbstractTask> fin,StringBuilder sb, AbstractTask task){
+		// Go upstream recursively to get our dependencies done
+		AbstractPipe upPipe;
+		AbstractTask currTask;
+		for(AbstractPort port : task.getInputPorts()){
+			upPipe = port.getIncoming();
+			currTask = upPipe.getSource();
+			if(!fin.contains(currTask)){
+				exportTask(unfin, fin, sb, currTask);
+			}
+		}
+		// All dependencies are now cleared append task (without pipes)
+		sb.append(task.getCommandlineForm());
+		//TODO: Pipes
+		//Push all connected Downstream tasks
+		AbstractPort downPort;
+		for(AbstractPipe pipe : task.getOutputPipes()){
+			if(pipe.isConnected()){
+				downPort = pipe.getTarget();
+				currTask = downPort.getParent();
+				unfin.push(currTask);
+			}
+		}
+		fin.add(task);
+	}
+	
+	public String exportLine(AbstractPipelineModel model){
+		Stack<AbstractTask> unfinished = new Stack<AbstractTask>();
+		HashSet<AbstractTask> finished = new HashSet<AbstractTask>();
+		StringBuilder builder = new StringBuilder();
+		// Add all source tasks to the unfinished stack
+		for(AbstractTask task : model.getSourceTasks()){
+			unfinished.push(task);
+		}
+		
+		while(!unfinished.isEmpty()){
+			exportTask(unfinished, finished, builder, unfinished.pop());
+		}
+		
+		return builder.toString();
+	}
+	
 	/**
 	 * This returns an Instance of CommandlineTranslator, see Singelton pattern
 	 * 
@@ -306,11 +356,16 @@ public class CommandlineTranslator {
 			trans.importLine(
 					model,
 					"--rx full/planet-071128.osm.bz2 "
-							+ "--tee outPipe.1=fooPipe "
-							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly \\"
-							+ "--wx baden-wuerttemberg.osm.bz2 inPipe.0=fooPipe \\"
-							+ "--bp file=polygons/europe/germany/bayern.poly "
-							+ "--wx bayern.osm.bz2");
+					+ "--tee 4 \\"
+					+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
+					+ "--wx baden-wuerttemberg.osm.bz2  \\"
+					+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
+					+ "--wx baden-wuerttemberg.osm.bz2  \\"
+					+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
+					+ "--wx baden-wuerttemberg.osm.bz2  \\"
+					+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\");
+			
+			System.out.println(trans.exportLine(model));
 		} catch (ImportException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

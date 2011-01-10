@@ -137,7 +137,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 				// We return the Task objects without their decorator here so
 				// that
 				// subclass functionality might be accessed
-				sourceTasks.add(task);
+				sourceTasks.add(task.undecorate());
 			} else {
 				break;
 			}

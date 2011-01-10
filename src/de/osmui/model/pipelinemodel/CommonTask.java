@@ -46,6 +46,7 @@ public class CommonTask extends AbstractTask {
 				sb.append(param.getCommandlineForm());
 			}
 		}
+		sb.append(" ");
 		return sb.toString();
 	}
 	/* (non-Javadoc)

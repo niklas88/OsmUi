@@ -43,6 +43,8 @@ public class MainFrame extends JFrame {
 	protected PipelineBox pipeBox;
 	
 	protected JGPipelineModel pipeModel;
+	
+	protected CopyBox copyBox;
 
 	// Prevents the creation of the object with other methods
 	private MainFrame() {
@@ -53,6 +55,8 @@ public class MainFrame extends JFrame {
 		taskBoxTableModel = new TaskBoxTableModel();
 		taskBox = new TaskBox(taskBoxTableModel);		
 
+		copyBox = new CopyBox(pipeModel);
+		pipeModel.addObserver(copyBox);
 		
 		parameterBoxTableModel = new ParameterBoxTableModel();
 		parameterBox = new ParameterBox(parameterBoxTableModel);
@@ -61,7 +65,7 @@ public class MainFrame extends JFrame {
 		pipeBox.registerTaskSelectedListener(parameterBox);
 
 		rightContent = new ContentSplitPane(JSplitPane.VERTICAL_SPLIT,
-				pipeBox, new CopyBox());
+				pipeBox, copyBox);
 		content = new ContentSplitPane(JSplitPane.HORIZONTAL_SPLIT, new TabBox(
 				taskBox, parameterBox), rightContent);
 		
