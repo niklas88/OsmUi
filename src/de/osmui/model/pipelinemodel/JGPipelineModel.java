@@ -206,6 +206,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 			}
 		}
 		connectTasks(parent, jgchild);
+		layout(parent);
 		setChanged();
 		notifyObservers(jgchild);
 
@@ -379,8 +380,9 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		return false;
 	}
 
-	public void layout() {
-		Object graphparent = graph.getDefaultParent();
+	public void layout(AbstractTask parent) {
+		JGTaskDecorator jgparent = (JGTaskDecorator) parent;
+		Object graphparent = (jgparent != null)?jgparent.getCell():graph.getDefaultParent();
 		graph.getModel().beginUpdate();
 		try {
 			lay.execute(graphparent);

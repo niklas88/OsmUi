@@ -37,14 +37,7 @@ public class VariablePipe extends CommonPipe {
 	 */
 	@Override
 	public boolean isVariable(){
-		boolean result = true;
-		for(AbstractPipe pipe : getSource().getOutputPipes()){
-			if(!pipe.isConnected()){
-				result = false;
-				break;
-			}
-		}
-		return result;
+		return true;
 	}
 	
 	/**
@@ -72,7 +65,6 @@ public class VariablePipe extends CommonPipe {
 		// As long as the referencedParam is not down to it's default we remove this pipe
 		// as it's not longer needed
 		if(!referencedParam.isDefaultValue()){
-			System.out.println("RemovingReally");
 			getSource().getOutputPipes().remove(this);
 			referencedParam.setValueInteger(referencedParam.getValueInteger()-1);
 		}

@@ -33,15 +33,8 @@ public class VariablePort extends CommonPort {
 	 * @return true
 	 */
 	@Override
-	public boolean isVariable(){
-		boolean result = true;
-		for(AbstractPort port : getParent().getInputPorts()){
-			if(!port.isConnected()){
-				result = false;
-				break;
-			}
-		}
-		return result;
+	public boolean isVariable(){		
+		return true;
 	}
 	
 	/**
