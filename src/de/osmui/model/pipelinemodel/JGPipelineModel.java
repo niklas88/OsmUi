@@ -35,6 +35,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		tasks = new ArrayList<JGTaskDecorator>();
 		graph = new mxGraph() {
 			// Overrides method to disallow editting
+			
 			@Override
 			public boolean isCellEditable(Object cell) {
 				return false;
@@ -96,7 +97,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 			public Object[] removeCells(Object[] cells, boolean includeEdges) {
 				Object[] cellsRemoved =  super.removeCells(cells, includeEdges);
 				Object val;
-				AbstractPipe pipe;
+				AbstractPipe pipe; 
 				for(Object cell: cellsRemoved){
 					val = ((mxCell) cell).getValue();
 					if(val instanceof AbstractPipe){
@@ -241,7 +242,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 	 * Helper method thar removes the Task from the model without affecting the under-
 	 * lying mxGraph
 	 * 
-	 * @param task
+	 * @param taslk
 	 * @return
 	 * @throws TasksNotInModelException
 	 */

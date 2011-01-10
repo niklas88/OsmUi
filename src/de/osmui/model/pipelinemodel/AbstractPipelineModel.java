@@ -120,7 +120,7 @@ public abstract class AbstractPipelineModel extends Observable {
 	 * Connects the given output pipe with the given input port, if both corresponding tasks are in this
 	 * model
 	 * 
-	 * @param output
+	 * @param outputAbstractPipe output, AbstractPort input
 	 * @param input
 	 * @return
 	 * @throws TasksNotCompatibleException
