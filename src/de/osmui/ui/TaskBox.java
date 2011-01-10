@@ -1,6 +1,7 @@
 package de.osmui.ui;
 
 import javax.swing.JTable;
+
 import javax.swing.ListSelectionModel;
 
 import de.osmui.model.exceptions.TasksNotCompatibleException;
@@ -13,6 +14,11 @@ import de.osmui.ui.models.TaskBoxTableModel;
 import de.osmui.ui.renderers.TaskBoxCellRenderer;
 import de.osmui.util.TaskManager;
 import de.osmui.util.exceptions.TaskNameUnknownException;
+
+/**
+ * @author Peter Vollmer
+ * 
+ */
 
 public class TaskBox extends JTable implements TaskSelectedEventListener {
 

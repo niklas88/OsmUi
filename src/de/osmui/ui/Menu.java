@@ -10,6 +10,12 @@ import javax.swing.JMenuItem;
 
 import de.osmui.util.ConfigurationManager;
 import de.osmui.i18n.I18N;
+
+/**
+ * @author Peter Vollmer
+ * 
+ */
+
 public class Menu extends JMenuBar {
 
 	/**

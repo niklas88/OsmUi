@@ -2,7 +2,13 @@ package de.osmui.ui;
 
 
 import javax.swing.JComponent;
+
 import javax.swing.JSplitPane;
+
+/**
+ * @author Peter Vollmer
+ * 
+ */
 
 public class ContentSplitPane extends JSplitPane {
 

@@ -12,6 +12,11 @@ import de.osmui.ui.models.ParameterBoxTableModel;
 import de.osmui.ui.models.TaskBoxTableModel;
 import de.osmui.util.ConfigurationManager;
 
+/**
+ * @author Peter Vollmer
+ * 
+ */
+
 public class MainFrame extends JFrame {
 
 	/**

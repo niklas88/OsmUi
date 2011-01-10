@@ -11,6 +11,11 @@ import de.osmui.ui.models.ParameterBoxTableModel;
 import de.osmui.ui.renderers.DefaultParamEditor;
 import de.osmui.ui.renderers.ParamValueRenderer;
 
+/**
+ * @author Peter Vollmer
+ * 
+ */
+
 public class ParameterBox extends JTable implements TaskSelectedEventListener {
 
 	

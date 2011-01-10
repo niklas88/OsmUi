@@ -5,12 +5,12 @@ import java.util.Observer;
 
 import javax.swing.JTextField;
 
-import de.osmui.model.pipelinemodel.AbstractPipelineModel;
-import de.osmui.model.pipelinemodel.AbstractTask;
-import de.osmui.util.CommandlineTranslator;
+/**
+ * @author Peter Vollmer
+ * 
+ */
 
-
-public class CopyBox extends JTextField implements Observer{
+public class CopyBox extends JPanel{
 
 	/**
 	 * 

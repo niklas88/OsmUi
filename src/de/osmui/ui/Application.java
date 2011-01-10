@@ -4,6 +4,11 @@ import javax.swing.SwingUtilities;
 
 import de.osmui.util.ConfigurationManager;
 
+/**
+ * @author Peter Vollmer
+ * 
+ */
+
 public class Application {
 	
 

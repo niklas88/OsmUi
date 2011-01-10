@@ -11,6 +11,10 @@ import javax.swing.JTabbedPane;
 
 import de.osmui.i18n.I18N;
 
+/**
+ * @author Peter Vollmer
+ * 
+ */
 
 public class TabBox extends JTabbedPane{
 
