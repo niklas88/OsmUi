@@ -84,33 +84,6 @@ public class MainFrame extends JFrame {
 			}
 
 		});
-		
-//		// TESTCODE
-//		CommandlineTranslator trans = CommandlineTranslator.getInstance();
-//		try {
-//			trans.importLine(
-//					pipeModel,
-//					"--rx full/planet-071128.osm.bz2 "
-//							+ "--tee 4 \\"
-//							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
-//							+ "--wx baden-wuerttemberg.osm.bz2  \\"
-//							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
-//							+ "--wx baden-wuerttemberg.osm.bz2  \\"
-//							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
-//							+ "--wx baden-wuerttemberg.osm.bz2  \\"
-//							+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\");
-//
-//		} catch (ImportException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		pipeModel.layout();
-//		try {
-//			//taskBox.showCompatibleTasks("");
-//		} catch (Exception e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
 
 	}
 

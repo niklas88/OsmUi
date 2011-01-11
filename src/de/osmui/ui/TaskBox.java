@@ -84,7 +84,6 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 		} else {
 			MainFrame.getInstance().getPipeModel().addTask(newTask);
 		}
-		MainFrame.getInstance().getPipeModel().layout();
 
 	}
 

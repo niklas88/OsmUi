@@ -14,6 +14,7 @@ import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
 
 import de.osmui.model.pipelinemodel.AbstractTask;
+import de.osmui.model.pipelinemodel.JGPipelineModel;
 import de.osmui.model.pipelinemodel.JGTaskDecorator;
 import de.osmui.ui.events.TaskSelectedEvent;
 import de.osmui.ui.events.TaskSelectedEventListener;
@@ -108,14 +109,13 @@ public class PipelineBox extends mxGraphComponent implements Observer{
 				this.graph.setSelectionCell(task.getCell());
 				fireTaskSelected(new TaskSelectedEvent(task));
 				selectedTask = task;
-			} else if (task.getModel() == null){
-				// task was removed
+			} else {
+				
 				this.graph.setSelectionCell(null);
 				fireTaskSelected(null);
 				selectedTask = null;
-			}
-			
-		}
+			} 			
+		} 
 		
 	}
 
