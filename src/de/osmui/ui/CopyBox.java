@@ -10,6 +10,9 @@ import de.osmui.model.pipelinemodel.AbstractPipelineModel;
 import de.osmui.model.pipelinemodel.AbstractTask;
 import de.osmui.util.CommandlineTranslator;
 
+/** 
+ * wird durch Systemtest abgedeckt
+ */
 
 public class CopyBox extends JScrollPane implements Observer{
 

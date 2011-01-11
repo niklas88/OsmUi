@@ -7,7 +7,11 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 import de.osmui.model.pipelinemodel.AbstractParameter;
 
-
+/**
+ * 
+ * wird nicht getestet, da nur getter und setter
+ *
+ */
 
 public class ParamValueRenderer extends DefaultTableCellRenderer {
 

@@ -11,7 +11,8 @@ import de.osmui.model.osm.TParameter;
  * This class is used to store all Parameters of types not covered by another specific class
  * 
  * @author Niklas Schnelle
- *
+ * 
+ *wird nicht getestet, da nur getter und setter
  */
 public class OtherParameter extends AbstractParameter implements Serializable {
 	

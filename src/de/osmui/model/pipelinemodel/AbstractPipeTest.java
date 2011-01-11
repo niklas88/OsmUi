@@ -4,7 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import de.osmui.i18n.I18N;
 
+/**
+* @see AbstractPipe
+*/
 public class AbstractPipeTest {
 	@Test public void connect(){
 		CommonTask task = new CommonTask("name");

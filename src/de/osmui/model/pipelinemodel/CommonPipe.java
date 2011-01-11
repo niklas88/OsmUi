@@ -8,7 +8,8 @@ package de.osmui.model.pipelinemodel;
  * extra classes for EntityPipes but this is easier
  * 
  * @author Niklas Schnelle
- *
+ * 
+ *wird nicht getestet, da nur getter und setter
  */
 public class CommonPipe extends AbstractPipe {
 

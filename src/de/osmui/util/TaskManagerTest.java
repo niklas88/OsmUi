@@ -6,12 +6,15 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import de.osmui.i18n.I18N;
 import de.osmui.model.osm.TTask;
 import de.osmui.model.pipelinemodel.AbstractTask;
 import de.osmui.model.pipelinemodel.CommonTask;
 import de.osmui.util.exceptions.TaskNameUnknownException;
 
-
+/**
+* @see TaskManager
+*/
 public class TaskManagerTest {
 	@Test public void createTask() throws TaskNameUnknownException{
 		AbstractTask task = new CommonTask("tee");

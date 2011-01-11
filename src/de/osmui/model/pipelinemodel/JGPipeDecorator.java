@@ -10,6 +10,7 @@ import com.mxgraph.model.mxCell;
  * 
  * @author Niklas Schnelle
  *
+ *wird nicht getestet, da nur getter und setter
  */
 public class JGPipeDecorator extends AbstractPipe{
 	

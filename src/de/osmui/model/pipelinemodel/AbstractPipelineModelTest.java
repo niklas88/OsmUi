@@ -6,10 +6,13 @@ import java.util.List;
 
 import org.junit.Test;
 
+import de.osmui.i18n.I18N;
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
 
-
+/**
+* @see AbstractPiplineModel
+*/
 public class AbstractPipelineModelTest {
 	@Test public void connectTaska() throws TasksNotCompatibleException, TasksNotInModelException{
 		AbstractTask parent = new CommonTask("tee");
@@ -34,7 +37,7 @@ public class AbstractPipelineModelTest {
 		model.addTask(deco);
 		pipe.source = dec;
 		pipe = model.connectTasks(dec, deco);
-		assertEquals(dec, pipe.source);
+		assertEquals(dec.name, pipe.source.name);
 	}
 	
 	@Test public void connectb() throws TasksNotCompatibleException, TasksNotInModelException{
@@ -64,7 +67,7 @@ public class AbstractPipelineModelTest {
 		model.addTask(dec);
 		model.addTask(deco);
 		model.connectTasks(dec, deco);
-		assertEquals(null, model.disconnectTasks(dec, deco));
+		assertEquals("name", model.disconnectTasks(dec, deco).source.name);
 	}
 	
 	@Test (expected=TasksNotInModelException.class) 

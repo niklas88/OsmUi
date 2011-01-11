@@ -4,7 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import de.osmui.i18n.I18N;
 
+/**
+* @see TPipe
+*/
 public class TPipeTest {
 	@Test public void setget(){
 		TPipe pipe = new TPipe();

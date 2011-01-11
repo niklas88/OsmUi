@@ -4,7 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import de.osmui.i18n.I18N;
 
+/**
+* @see TEnumValue
+*/
 public class TEnumValueTest {
 	@Test public void set(){
 		TEnumValue val = new TEnumValue();

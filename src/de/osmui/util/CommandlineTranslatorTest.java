@@ -7,12 +7,15 @@ import java.util.List;
 
 import org.junit.Test;
 
+import de.osmui.i18n.I18N;
 import de.osmui.model.pipelinemodel.AbstractTask;
 import de.osmui.model.pipelinemodel.CommonTask;
 import de.osmui.model.pipelinemodel.JGPipelineModel;
 import de.osmui.util.exceptions.ImportException;
 
-
+/**
+* @see CommandLineTranslator
+*/
 public class CommandlineTranslatorTest {
 	
 	@Test public void ImportLine(){

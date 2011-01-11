@@ -8,6 +8,7 @@ package de.osmui.model.pipelinemodel;
  * 
  * @author Niklas Schnelle
  *
+ *wird nicht getestet, da nur getter und setter
  */
 public class CommonPort extends AbstractPort {
 

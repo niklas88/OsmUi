@@ -4,7 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import de.osmui.i18n.I18N;
 
+/**
+* @see TTaskGroup
+*/
 public class TTaskGroupTest {
 	@Test public void setget(){
 		TTaskGroup group = new TTaskGroup();

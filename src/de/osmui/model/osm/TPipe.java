@@ -51,7 +51,7 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;/complexType>
  * </pre>
  * 
- * 
+ * @see TPipeTest
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "tPipe")

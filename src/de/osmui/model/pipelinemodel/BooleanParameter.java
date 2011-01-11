@@ -10,6 +10,7 @@ import de.osmui.model.osm.TParameter;
  * 
  * @author Niklas Schnelle
  *
+ *@see BooleanParameterTest
  */
 public class BooleanParameter extends AbstractParameter {
 	/**

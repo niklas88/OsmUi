@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;/complexType>
  * </pre>
  * 
- * 
+ * @see TEnumValueTest
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "tEnumValue")

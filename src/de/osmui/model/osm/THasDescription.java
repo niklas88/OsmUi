@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;/complexType>
  * </pre>
  * 
- * 
+ * wird nicht getestet, da nur getter und setter
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "tHasDescription", propOrder = {

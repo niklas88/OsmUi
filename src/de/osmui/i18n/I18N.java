@@ -3,6 +3,9 @@ package de.osmui.i18n;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
+/**
+* @see I18NTest
+*/
 public class I18N {
 	
 	/**

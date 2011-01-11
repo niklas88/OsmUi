@@ -19,6 +19,12 @@ import de.osmui.model.pipelinemodel.JGTaskDecorator;
 import de.osmui.ui.events.TaskSelectedEvent;
 import de.osmui.ui.events.TaskSelectedEventListener;
 
+/**
+ * 
+ *  wird durch Systemtest abgedeckt
+ *
+ */
+
 public class PipelineBox extends mxGraphComponent implements Observer{
 
 	/**

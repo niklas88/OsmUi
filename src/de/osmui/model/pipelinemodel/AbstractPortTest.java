@@ -4,7 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import de.osmui.i18n.I18N;
 
+/**
+* @see AbstractPort
+*/
 public class AbstractPortTest {
 	@Test public void connect(){
 		CommonTask task = new CommonTask("name");

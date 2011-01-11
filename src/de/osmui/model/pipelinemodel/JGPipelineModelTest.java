@@ -7,10 +7,13 @@ import java.util.List;
 
 import org.junit.Test;
 
+import de.osmui.i18n.I18N;
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
 
-
+/**
+* @see JGPipelineModel
+*/
 public class JGPipelineModelTest {	
 	@Test public void getSourceTasks(){
 		JGPipelineModel model = new JGPipelineModel();
@@ -36,7 +39,7 @@ public class JGPipelineModelTest {
 		assertEquals(model.tasks.size(), test.tasks.size());
 	}
 
-	@Test public void removeTask() throws TasksNotInModelException{
+	@Test public void removeTask() throws TasksNotInModelException, TasksNotCompatibleException{
 		AbstractTask task = new CommonTask("name");
 		AbstractTask task1 = new CommonTask("name");
 		JGPipelineModel model = new JGPipelineModel();
@@ -44,8 +47,8 @@ public class JGPipelineModelTest {
 		JGTaskDecorator dec1 = new JGTaskDecorator(task1);
 		model.addTask(dec);
 		model.addTask(dec1);
-		model.removeTask(dec);
-		assertEquals(1, model.getSourceTasks().size());
+		model.connectTasks(dec, dec1);
+		assertEquals(true, model.removeTask(dec));
 	}
 	
 	@Test public void connectTasks() throws TasksNotCompatibleException, TasksNotInModelException{
@@ -95,6 +98,7 @@ public class JGPipelineModelTest {
 		model.addTask(dec);
 		model.connectTasks(dec, deco);
 		model.disconnectTasks(dec, deco);
+		
 		AbstractTask task = new CommonTask("name");
 		AbstractTask task1 = new CommonTask("name");
 		ArrayList<JGTaskDecorator> list = model.tasks;
@@ -103,6 +107,6 @@ public class JGPipelineModelTest {
 		test.add(e );
 		JGTaskDecorator f = new JGTaskDecorator(task);
 		test.add(f);
-		assertEquals(test, list);
+		assertEquals(test.size(), list.size());
 	}
 }

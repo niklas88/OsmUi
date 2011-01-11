@@ -6,7 +6,11 @@ import javax.xml.bind.JAXBElement;
 
 import org.junit.Test;
 
+import de.osmui.i18n.I18N;
 
+/**
+* @see ObjectFactory
+*/
 public class ObjectFactoryTest {
 	@Test public void createParameter(){
 		TParameter value = null;
