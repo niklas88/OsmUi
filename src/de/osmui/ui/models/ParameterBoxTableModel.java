@@ -12,7 +12,7 @@ public class ParameterBoxTableModel extends AbstractTableModel {
 
 	/**
 	 * 
-	 *  wird durch Systemtest abgedeckt
+	 *  will be tested by system-tests
 	 */
 	private static final long serialVersionUID = 6247700341831278770L;
 

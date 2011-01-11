@@ -15,7 +15,7 @@ import de.osmui.model.osm.TTask;
 
 /**
  * 
- * wird nicht getestet, da nur getter und setter
+ * no tests, only getter and setter
  *
  */
 public class TaskBoxTableModel extends AbstractTableModel {

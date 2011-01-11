@@ -12,7 +12,7 @@ import de.osmui.model.osm.TParameter;
  * 
  * @author Niklas Schnelle
  * 
- *wird nicht getestet, da nur getter und setter
+ * no tests, only getter and setter
  */
 public class OtherParameter extends AbstractParameter implements Serializable {
 	

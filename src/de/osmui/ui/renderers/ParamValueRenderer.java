@@ -9,7 +9,7 @@ import de.osmui.model.pipelinemodel.AbstractParameter;
 
 /**
  * 
- * wird nicht getestet, da nur getter und setter
+ * no tests, only getter and setter
  *
  */
 

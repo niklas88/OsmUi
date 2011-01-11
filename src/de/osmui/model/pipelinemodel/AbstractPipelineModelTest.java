@@ -44,11 +44,13 @@ public class AbstractPipelineModelTest {
 	 */
 	@Test public void connectTaska2() throws TasksNotCompatibleException, TasksNotInModelException{
 		AbstractTask parent = new CommonTask("name");
+		AbstractPipe pipe = new CommonPipe (parent, "name");
 		JGTaskDecorator dec = new JGTaskDecorator(parent);
 		AbstractTask child = new CommonTask("name");
+		AbstractPort port = new CommonPort(child, "name");
+		port.parent = child;
 		JGTaskDecorator deco = new JGTaskDecorator(child);
 		JGPipelineModel model = new JGPipelineModel();
-		AbstractPipe pipe = new CommonPipe(parent, "type");
 		model.addTask(dec);
 		model.addTask(deco);
 		pipe.source = dec;
@@ -88,14 +90,18 @@ public class AbstractPipelineModelTest {
 	@Test public void disconnectTaskb1() throws TasksNotInModelException, TasksNotCompatibleException{
 		
 		CommonTask parent = new CommonTask("name");
+		AbstractPipe pipe = new CommonPipe (parent, "name");
+		pipe.source = parent;
 		CommonTask child = new CommonTask ("name");
+		AbstractPort port = new CommonPort(child, "name");
+		port.parent = child;
 		JGTaskDecorator dec = new JGTaskDecorator(parent);
 		JGTaskDecorator deco = new JGTaskDecorator(child);
 		JGPipelineModel model = new JGPipelineModel();
 		model.addTask(dec);
 		model.addTask(deco);
-		model.connectTasks(dec, deco);
-		assertEquals("name", model.disconnectTasks(dec, deco).source.name);
+		pipe.target = port;
+		assertEquals("name", model.disconnectTasks(dec, deco).name);
 	}
 	
 	/**

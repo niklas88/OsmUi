@@ -11,7 +11,7 @@ import com.mxgraph.util.mxEventSource.mxIEventListener;
  * 
  * @author Niklas Schnelle
  * 
- * wird durch Systemtest abgedeckt
+ * will be tested by system-tests
  */
 public class DebugListener implements mxIEventListener {
 

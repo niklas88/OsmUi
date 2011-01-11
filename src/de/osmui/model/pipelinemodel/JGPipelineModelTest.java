@@ -45,7 +45,11 @@ public class JGPipelineModelTest {
 
 	@Test public void removeTask() throws TasksNotInModelException, TasksNotCompatibleException{
 		AbstractTask task = new CommonTask("name");
+		AbstractPort port = new CommonPort(task, "name");
+		port.parent = task;
 		AbstractTask task1 = new CommonTask("name");
+		AbstractPipe pipe = new CommonPipe(task1, "name");
+		pipe.source = task1;
 		JGPipelineModel model = new JGPipelineModel();
 		JGTaskDecorator dec = new JGTaskDecorator(task);
 		JGTaskDecorator dec1 = new JGTaskDecorator(task1);
@@ -75,7 +79,7 @@ public class JGPipelineModelTest {
 		JGTaskDecorator f = new JGTaskDecorator(child);
 		list.add(e);
 		list.add(f);
-		assertEquals(list.size(), model.tasks.size());
+		assertEquals(3, model.tasks.size());
 	}
 	
 	/**
@@ -107,7 +111,11 @@ public class JGPipelineModelTest {
 	
 	@Test public void disconnectTasks() throws TasksNotCompatibleException, TasksNotInModelException{
 		AbstractTask parent = new CommonTask("name");
+		AbstractPipe pipe = new CommonPipe(parent, "name");
+		pipe.source = parent;
 		AbstractTask child = new CommonTask("name");
+		AbstractPort port = new CommonPort(child, "name");
+		port.parent = child;
 		JGTaskDecorator dec = new JGTaskDecorator(parent);
 		JGTaskDecorator deco = new JGTaskDecorator(child);
 		JGPipelineModel model = new JGPipelineModel();

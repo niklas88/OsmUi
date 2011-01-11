@@ -18,7 +18,7 @@ import de.osmui.util.exceptions.TaskNameUnknownException;
 /**
  * @author Peter Vollmer
  * 
- *  wird durch Systemtest abgedeckt
+ *  will be tested by system-tests
  */
 
 public class TaskBox extends JTable implements TaskSelectedEventListener {

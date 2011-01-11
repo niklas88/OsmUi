@@ -14,7 +14,7 @@ import de.osmui.ui.renderers.ParamValueRenderer;
 /**
  * @author Peter Vollmer
  * 
- *  wird durch Systemtest abgedeckt
+ *  will be tested by system-tests
  */
 
 public class ParameterBox extends JTable implements TaskSelectedEventListener {
