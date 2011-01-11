@@ -5,10 +5,11 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
+import javax.swing.JOptionPane;
 
 import de.osmui.util.ConfigurationManager;
 import de.osmui.util.exceptions.ImportException;
@@ -75,15 +76,18 @@ public class Menu extends JMenuBar {
 		JMenuItem importFile = new JMenuItem(I18N.getString("Menu.importFile")); //$NON-NLS-1$
 		importFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("importFile"); //$NON-NLS-1$
-				// TESTCODE
-				try {
-					PipeImEx.getInstance().importOutOfFile(MainFrame.getInstance().pipeModel, "/home/nino/Desktop/daten/syncordner/3_Semester/sopra/osmui/test.sh");
-				} catch (ImportException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				MainFrame.getInstance().pipeModel.layout(null);
+				
+			    JFileChooser chooser = new JFileChooser();
+			    int returnVal = chooser.showOpenDialog(null);
+			    if(returnVal == JFileChooser.APPROVE_OPTION) {
+			    	try {
+						PipeImEx.getInstance().importOutOfFile(MainFrame.getInstance().pipeModel,chooser.getSelectedFile().getAbsolutePath());
+					} catch (ImportException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage());
+					}
+					MainFrame.getInstance().pipeModel.layout(null);
+			    }
+
 			}
 		});
 		fileMenu.add(importFile);

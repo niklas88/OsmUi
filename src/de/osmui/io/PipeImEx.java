@@ -59,7 +59,9 @@ public class PipeImEx {
 						"Es wurde keine importierbare Pipeline gefunden! Bitte die Datei überprüfen oder eine andere Datei");
 			}
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 			throw new ImportException("File not Found");// I18N.getMessage("File_Not_Found"));
+			
 		} catch (IOException e) {
 			throw new ImportException(e.getLocalizedMessage());
 		} finally {
