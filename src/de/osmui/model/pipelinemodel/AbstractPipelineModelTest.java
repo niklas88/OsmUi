@@ -18,6 +18,12 @@ import de.osmui.model.exceptions.TasksNotInModelException;
  * 
 */
 public class AbstractPipelineModelTest {
+	/**
+	 * @see AbstractPipelineModel#connectTasks(AbstractTask, AbstractTask)
+	 * 
+	 * @throws TasksNotCompatibleException
+	 * @throws TasksNotInModelException
+	 */
 	@Test public void connectTaska() throws TasksNotCompatibleException, TasksNotInModelException{
 		AbstractTask parent = new CommonTask("tee");
 		AbstractTask child = new CommonTask("tee");
@@ -30,6 +36,12 @@ public class AbstractPipelineModelTest {
 		
 	}
 	
+	/**
+	 * @see AbstractPipelineModel#connectTasks(AbstractTask, AbstractTask)
+	 * 
+	 * @throws TasksNotCompatibleException
+	 * @throws TasksNotInModelException
+	 */
 	@Test public void connectTaska2() throws TasksNotCompatibleException, TasksNotInModelException{
 		AbstractTask parent = new CommonTask("name");
 		JGTaskDecorator dec = new JGTaskDecorator(parent);
@@ -44,6 +56,12 @@ public class AbstractPipelineModelTest {
 		assertEquals(dec.name, pipe.source.name);
 	}
 	
+	/**
+	 * @see AbstractPipelineModel#connectTasks(AbstractPipe, AbstractPort)
+	 * 
+	 * @throws TasksNotCompatibleException
+	 * @throws TasksNotInModelException
+	 */
 	@Test public void connectb() throws TasksNotCompatibleException, TasksNotInModelException{
 		AbstractTask task = new CommonTask("name");
 		JGTaskDecorator dec = new JGTaskDecorator(task);
@@ -61,6 +79,12 @@ public class AbstractPipelineModelTest {
 		
 	}
 	
+	/**
+	 * @see AbstractPipelineModel#connectTasks(AbstractPipe, AbstractPort)
+	 * 
+	 * @throws TasksNotCompatibleException
+	 * @throws TasksNotInModelException
+	 */
 	@Test public void disconnectTaskb1() throws TasksNotInModelException, TasksNotCompatibleException{
 		
 		CommonTask parent = new CommonTask("name");
@@ -74,6 +98,12 @@ public class AbstractPipelineModelTest {
 		assertEquals("name", model.disconnectTasks(dec, deco).source.name);
 	}
 	
+	/**
+	 * @see AbstractPipelineModel#connectTasks(AbstractPipe, AbstractPort)
+	 * 
+	 * @throws TasksNotCompatibleException
+	 * @throws TasksNotInModelException
+	 */
 	@Test (expected=TasksNotInModelException.class) 
 		public void disconnectTaskb2() throws TasksNotInModelException{
 		AbstractTask child = new CommonTask("name");

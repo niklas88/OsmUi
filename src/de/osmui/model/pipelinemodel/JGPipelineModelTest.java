@@ -29,7 +29,7 @@ public class JGPipelineModelTest {
 		assertEquals(sourceTasks.size(), test.size());
 	}
 	
-	@Test public void addTask1() throws TasksNotCompatibleException, TasksNotInModelException{
+	@Test public void addTask() throws TasksNotCompatibleException, TasksNotInModelException{
 		AbstractTask parent = new CommonTask("name");
 		AbstractTask child = new CommonTask("name");
 		JGPipelineModel model = new JGPipelineModel();
@@ -55,6 +55,12 @@ public class JGPipelineModelTest {
 		assertEquals(true, model.removeTask(dec));
 	}
 	
+	/**
+	 * @see JGPipelineModel#connectTasks(AbstractTask, AbstractTask)
+	 * 
+	 * @throws TasksNotCompatibleException
+	 * @throws TasksNotInModelException
+	 */
 	@Test public void connectTasks() throws TasksNotCompatibleException, TasksNotInModelException{
 		AbstractTask parent = new CommonTask("name");
 		AbstractTask child = new CommonTask("name");
@@ -62,6 +68,7 @@ public class JGPipelineModelTest {
 		JGTaskDecorator dec = new JGTaskDecorator(parent);
 		JGTaskDecorator deco = new JGTaskDecorator(child);
 		model.addTask(dec);
+		model.addTask(dec, deco);
 		model.addTask(dec, deco);
 		ArrayList<JGTaskDecorator> list = new ArrayList<JGTaskDecorator>();
 		JGTaskDecorator e = new JGTaskDecorator(parent);
@@ -71,6 +78,12 @@ public class JGPipelineModelTest {
 		assertEquals(list.size(), model.tasks.size());
 	}
 	
+	/**
+	 * @see JGPipelineModel#connectTasks(AbstractPipe, AbstractPort)
+	 * 
+	 * @throws TasksNotCompatibleException
+	 * @throws TasksNotInModelException
+	 */
 	@Test public void connectTasks1() throws TasksNotCompatibleException, TasksNotInModelException{
 		AbstractTask task = new CommonTask("name");
 		AbstractTask task1 = new CommonTask("name");
@@ -92,7 +105,7 @@ public class JGPipelineModelTest {
 		assertEquals(test, list);
 	}
 	
-	@Test public void disconnectTasks1() throws TasksNotCompatibleException, TasksNotInModelException{
+	@Test public void disconnectTasks() throws TasksNotCompatibleException, TasksNotInModelException{
 		AbstractTask parent = new CommonTask("name");
 		AbstractTask child = new CommonTask("name");
 		JGTaskDecorator dec = new JGTaskDecorator(parent);
