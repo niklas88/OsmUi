@@ -85,12 +85,13 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 						} catch (TasksNotInModelException e) {
 							// shouldn't happen
 						} catch (TasksNotCompatibleException e) {
-							// Too bad, that shouldn't happen BUG
-							System.err.println("BUG: Tried connecting incomatible tasks");
+							// Too bad,tried connection nonsense
+							Object[] cells = {mxcell};
+							return removeCells(cells);
 						}
 
 					}
-				}
+				} 
 				return ret;
 			}
 			
