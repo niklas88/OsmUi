@@ -114,11 +114,6 @@ public class PipelineBox extends mxGraphComponent implements Observer{
 				this.graph.setSelectionCell(task.getCell());
 				fireTaskSelected(new TaskSelectedEvent(task));
 				selectedTask = task;
-			} else {
-				
-				this.graph.setSelectionCell(null);
-				fireTaskSelected(null);
-				selectedTask = null;
 			} 			
 		} 
 		
