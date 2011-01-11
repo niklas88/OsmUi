@@ -13,11 +13,12 @@ import de.osmui.ui.renderers.ParamValueRenderer;
 
 /**
  * @author Peter Vollmer
- * 
+ *
  *         Provides ParameterBox to have an easy way to construct the parameter
  *         box of OsmUi
  * 
  *         wird durch Systemtest abgedeckt
+ *  will be tested by system-tests
  */
 
 public class ParameterBox extends JTable implements TaskSelectedEventListener {

@@ -12,8 +12,12 @@ import de.osmui.model.pipelinemodel.CommonTask;
 import de.osmui.util.exceptions.TaskNameUnknownException;
 
 /**
-* @see TaskManager
-*/
+ * 
+ * @author verena
+ * 
+ * @see TaskManager
+ * 
+ */
 public class TaskManagerTest {
 	@Test public void createTask() throws TaskNameUnknownException{
 		AbstractTask task = new CommonTask("tee");
@@ -22,6 +26,11 @@ public class TaskManagerTest {
 		assertEquals("Description==null",task.getName(), s.getName());
 	}
 	
+	/**
+	 * @see TaskManager#getTaskDescription(String)
+	 * 
+	 * @throws TaskNameUnknownException
+	 */
 	@Test public void getTaskDescription() throws TaskNameUnknownException{
 		TTask result = new TTask();
 		result.setName("tee");
@@ -30,6 +39,11 @@ public class TaskManagerTest {
 		assertEquals(result.getName(), test.getName());		
 	}
 	
+	/**
+	 * @see TaskManager#getTaskDescription(AbstractTask)
+	 * 
+	 * @throws TaskNameUnknownException
+	 */
 	@Test public void getTaskDescription2() throws TaskNameUnknownException{
 		AbstractTask task = new CommonTask("tee");
 		TaskManager manager = new TaskManager();

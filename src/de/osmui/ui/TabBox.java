@@ -14,7 +14,7 @@ import de.osmui.i18n.I18N;
 /**
  * @author Peter Vollmer
  * 
- *  wird durch Systemtest abgedeckt
+ *  will be tested by system-tests
  */
 
 public class TabBox extends JTabbedPane{

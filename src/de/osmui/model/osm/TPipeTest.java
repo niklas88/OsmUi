@@ -5,7 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
-* @see TPipe
+ * 
+ * @author verena
+ * 
+ * @see TPipe
+ * 
 */
 public class TPipeTest {
 	@Test public void setget(){

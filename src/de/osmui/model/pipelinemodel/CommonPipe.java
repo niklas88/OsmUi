@@ -9,7 +9,7 @@ package de.osmui.model.pipelinemodel;
  * 
  * @author Niklas Schnelle
  * 
- *wird nicht getestet, da nur getter und setter
+ * no tests, only getter and setter
  */
 public class CommonPipe extends AbstractPipe {
 

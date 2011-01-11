@@ -10,6 +10,7 @@ import de.osmui.model.pipelinemodel.AbstractPipelineModel;
 import de.osmui.model.pipelinemodel.AbstractTask;
 import de.osmui.util.CommandlineTranslator;
 
+
 /**
  * 
  * @author Niklas Schnelle, Peter Vollmer
@@ -17,7 +18,7 @@ import de.osmui.util.CommandlineTranslator;
  *         Provides CopyBox to have an easy way to construct a opportunity to
  *         show a Osmosis-command.
  * 
- *         wird durch Systemtest abgedeckt
+ * will be tested by system-tests
  */
 
 public class CopyBox extends JScrollPane implements Observer {

@@ -8,8 +8,12 @@ import java.util.List;
 import org.junit.Test;
 
 /**
-* @see TTask
-*/
+ * 
+ * @author verena
+ * 
+ * @see TTask
+ * 
+ */
 public class TTaskTest {
 	@Test public void getInputPip(){
 		TTask task = new TTask();

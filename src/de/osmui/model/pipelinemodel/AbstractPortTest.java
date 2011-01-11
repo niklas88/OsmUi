@@ -5,7 +5,11 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
-* @see AbstractPort
+ * 
+ * @author verena
+ * 
+ * @see AbstractPort
+ * 
 */
 public class AbstractPortTest {
 	@Test public void connect(){

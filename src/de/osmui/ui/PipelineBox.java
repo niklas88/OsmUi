@@ -20,7 +20,7 @@ import de.osmui.ui.events.TaskSelectedEventListener;
 
 /**
  * 
- *  wird durch Systemtest abgedeckt
+ *  will be tested by system-tests
  *
  */
 

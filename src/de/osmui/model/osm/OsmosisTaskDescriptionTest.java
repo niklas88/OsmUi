@@ -6,8 +6,12 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 /**
-* @see OsmosisTaskDescription
-*/
+ * 
+ * @author verena
+ * 
+ * @see OsmosisTaskDescription
+ * 
+ */
 public class OsmosisTaskDescriptionTest {
 	
 	@Test public void getTaskGroup(){
