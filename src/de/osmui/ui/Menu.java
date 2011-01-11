@@ -19,6 +19,8 @@ import de.osmui.io.PipeImEx;
 /**
  * @author Peter Vollmer
  * 
+ * Provides Menu to have an easy way to construct the whole Menu of Osmui.
+ * 
  *  wird durch Systemtest abgedeckt
  */
 
@@ -29,6 +31,9 @@ public class Menu extends JMenuBar {
 	 */
 	private static final long serialVersionUID = -6521196530844239528L;
 
+	/**
+	 * Constructs the menu with all its entries of Osmui.
+	 */
 	public Menu() {
 		/*
 		 * Menu "File"

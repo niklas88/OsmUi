@@ -2,11 +2,7 @@ package de.osmui.model.pipelinemodel;
 
 import static org.junit.Assert.*;
 
-import java.util.Collection;
-
 import org.junit.Test;
-
-import de.osmui.i18n.I18N;
 
 /**
 * @see CommonTask

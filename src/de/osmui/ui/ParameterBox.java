@@ -14,12 +14,14 @@ import de.osmui.ui.renderers.ParamValueRenderer;
 /**
  * @author Peter Vollmer
  * 
- *  wird durch Systemtest abgedeckt
+ *         Provides ParameterBox to have an easy way to construct the parameter
+ *         box of OsmUi
+ * 
+ *         wird durch Systemtest abgedeckt
  */
 
 public class ParameterBox extends JTable implements TaskSelectedEventListener {
 
-	
 	private static final long serialVersionUID = 2965036681048549811L;
 
 	private final ParameterBoxTableModel model;
@@ -28,11 +30,12 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 
 	public ParameterBox(ParameterBoxTableModel parameterBoxTableModel) {
 		model = parameterBoxTableModel;
-		this.setDefaultRenderer(AbstractParameter.class,  new ParamValueRenderer());
+		this.setDefaultRenderer(AbstractParameter.class,
+				new ParamValueRenderer());
 		this.setDefaultEditor(AbstractParameter.class, new DefaultParamEditor());
 		this.setModel(parameterBoxTableModel);
-		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);	
-		
+		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
 		showActualParameters(null);
 	}
 
@@ -42,7 +45,7 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 
 	@Override
 	public void TaskSelected(TaskSelectedEvent e) {
-		if(e != null){
+		if (e != null) {
 			selectedTask = (AbstractTask) e.getSource();
 			showActualParameters(selectedTask);
 		}

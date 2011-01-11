@@ -15,7 +15,10 @@ import de.osmui.util.ConfigurationManager;
 /**
  * @author Peter Vollmer
  * 
- *  wird durch Systemtest abgedeckt
+ *         Provides MainFrame to have a easy way to construct a MainFrame with
+ *         all UI Content
+ * 
+ *         wird durch Systemtest abgedeckt
  */
 
 public class MainFrame extends JFrame {
@@ -27,53 +30,50 @@ public class MainFrame extends JFrame {
 
 	private static MainFrame instance;
 
-	
-
 	protected TaskBoxTableModel taskBoxTableModel;
-	
+
 	protected TaskBox taskBox;
-	
+
 	protected ParameterBoxTableModel parameterBoxTableModel;
-	
+
 	protected ParameterBox parameterBox;
-	// Holds the right split pane that contains the pipelineBox with the
-	// pipeline's graph representation and the copyBox on the lower side of this
-	// split.
+
 	protected ContentSplitPane rightContent;
-	// Holds the main split pane that contains the right split pane and
-	// the tabBox component on the left side of this split.
+
 	protected ContentSplitPane content;
 
 	protected PipelineBox pipeBox;
-	
+
 	protected JGPipelineModel pipeModel;
-	
+
 	protected CopyBox copyBox;
 
-
-	// Prevents the creation of the object with other methods
+	/**
+	 * Constructs the mainframe
+	 */
 	private MainFrame() {
 		pipeModel = new JGPipelineModel();
 		pipeBox = new PipelineBox(pipeModel.getGraph());
 		pipeModel.addObserver(pipeBox);
-		
+
 		taskBoxTableModel = new TaskBoxTableModel();
-		taskBox = new TaskBox(taskBoxTableModel);		
+		taskBox = new TaskBox(taskBoxTableModel);
 
 		copyBox = new CopyBox(pipeModel);
 		pipeModel.addObserver(copyBox);
-		
+
 		parameterBoxTableModel = new ParameterBoxTableModel();
 		parameterBox = new ParameterBox(parameterBoxTableModel);
-		
+
 		pipeBox.registerTaskSelectedListener(taskBox);
 		pipeBox.registerTaskSelectedListener(parameterBox);
 
-		rightContent = new ContentSplitPane(JSplitPane.VERTICAL_SPLIT,
-				pipeBox, copyBox);
+		rightContent = new ContentSplitPane(JSplitPane.VERTICAL_SPLIT, pipeBox,
+				copyBox);
+
 		content = new ContentSplitPane(JSplitPane.HORIZONTAL_SPLIT, new TabBox(
 				taskBox, parameterBox), rightContent);
-		
+
 		Menu menu = new Menu();
 		this.setJMenuBar(menu);
 
@@ -117,22 +117,20 @@ public class MainFrame extends JFrame {
 	public void setRightContentDeviderLocation(int rightContentDividerLocation) {
 		rightContent.setDividerLocation(rightContentDividerLocation);
 	}
-	
+
 	/**
-	 * Gets the Pipelinemodel used
-	 * @return
+	 * @return the pipeModel.
 	 */
-	public JGPipelineModel getPipeModel(){
+	public JGPipelineModel getPipeModel() {
 		return pipeModel;
 	}
-	
+
 	/**
 	 * @return the taskBox
 	 */
 	public TaskBox getTaskBox() {
 		return taskBox;
 	}
-
 
 	/**
 	 * @return the taskBoxTableModel
@@ -144,6 +142,10 @@ public class MainFrame extends JFrame {
 	// A access method on class level, which creates only once a instance a
 	// concrete object
 	// in a session of OsmUi and returns it.
+	/**
+	 * @return a instance of MainFrame
+	 * 
+	 */
 	public static MainFrame getInstance() {
 		if (MainFrame.instance == null) {
 			MainFrame.instance = new MainFrame();

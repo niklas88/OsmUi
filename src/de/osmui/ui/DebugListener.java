@@ -7,16 +7,21 @@ import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 
 /**
- * This is a testclass to find all available event types because there is no documentation
+ * This is a testclass to find all available event types because there is no
+ * documentation
  * 
  * @author Niklas Schnelle
  * 
- * wird durch Systemtest abgedeckt
+ *         wird durch Systemtest abgedeckt
  */
 public class DebugListener implements mxIEventListener {
 
-	/* (non-Javadoc)
-	 * @see com.mxgraph.util.mxEventSource.mxIEventListener#invoke(java.lang.Object, com.mxgraph.util.mxEventObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.mxgraph.util.mxEventSource.mxIEventListener#invoke(java.lang.Object,
+	 * com.mxgraph.util.mxEventObject)
 	 */
 	@Override
 	public void invoke(Object sender, mxEventObject evt) {
