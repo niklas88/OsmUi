@@ -10,6 +10,7 @@ import java.io.Serializable;
  * 
  * @author Niklas Schnelle
  *
+ *@see AbstractPipeTest
  */
 public abstract class AbstractPipe implements Serializable{
 

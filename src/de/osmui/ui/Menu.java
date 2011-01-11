@@ -19,6 +19,7 @@ import de.osmui.io.PipeImEx;
 /**
  * @author Peter Vollmer
  * 
+ *  wird durch Systemtest abgedeckt
  */
 
 public class Menu extends JMenuBar {

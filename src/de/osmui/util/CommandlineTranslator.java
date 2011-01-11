@@ -34,6 +34,7 @@ import de.osmui.util.exceptions.TaskNameUnknownException;
  * 
  * @author Niklas Schnelle
  * 
+ * @see CommandLineTraslatorTest
  */
 public class CommandlineTranslator {
 	protected static CommandlineTranslator instance;

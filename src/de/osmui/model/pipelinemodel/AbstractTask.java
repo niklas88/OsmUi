@@ -15,6 +15,7 @@ import java.util.Map;
  * 
  * @author Niklas Schnelle
  *
+ *@see AbstractTaskTest
  */
 public abstract class AbstractTask implements Serializable{
 

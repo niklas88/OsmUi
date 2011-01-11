@@ -10,7 +10,8 @@ import com.mxgraph.util.mxEventSource.mxIEventListener;
  * This is a testclass to find all available event types because there is no documentation
  * 
  * @author Niklas Schnelle
- *
+ * 
+ * wird durch Systemtest abgedeckt
  */
 public class DebugListener implements mxIEventListener {
 

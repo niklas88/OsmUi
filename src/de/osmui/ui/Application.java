@@ -9,6 +9,8 @@ import de.osmui.util.ConfigurationManager;
  *
  * Application main class that is used to initialize OsmUi
  * and to start up the UI.
+ * 
+ * wird durch Systemtest abgedeckt
  */
 
 public class Application {

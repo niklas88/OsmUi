@@ -11,10 +11,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
+import de.osmui.i18n.I18N;
 import de.osmui.model.pipelinemodel.AbstractPipelineModel;
 import de.osmui.util.CommandlineTranslator;
 import de.osmui.util.exceptions.ImportException;
 
+/**
+* wird im Systemtest abgedeckt
+*/
 public class PipeImEx {
 
 	private static PipeImEx instance;

@@ -13,6 +13,7 @@ import de.osmui.model.osm.TParameter;
  * 
  * @author Niklas Schnelle
  *
+ *wird nicht getestet, da nur getter und setter
  */
 public abstract class AbstractParameter implements Serializable{
 

@@ -20,6 +20,7 @@ import de.osmui.model.pipelinemodel.AbstractParameter;
 /**
  * @author niklas
  * 
+ * wird nicht getestet, da nur getter und setter
  */
 public class DefaultParamEditor  extends AbstractCellEditor
 			implements TableCellEditor, ActionListener{

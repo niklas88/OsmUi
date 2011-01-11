@@ -13,6 +13,11 @@ import javax.swing.table.AbstractTableModel;
 import de.osmui.i18n.I18N;
 import de.osmui.model.osm.TTask;
 
+/**
+ * 
+ * wird nicht getestet, da nur getter und setter
+ *
+ */
 public class TaskBoxTableModel extends AbstractTableModel {
 
 	/**

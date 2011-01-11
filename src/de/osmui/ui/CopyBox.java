@@ -15,6 +15,8 @@ import de.osmui.util.CommandlineTranslator;
  * @author Niklas Schnelle, Peter Vollmer
  *
  * Provides CopyBox to have a opportunity to show a Osmosis-command
+/** 
+ * wird durch Systemtest abgedeckt
  */
 
 public class CopyBox extends JScrollPane implements Observer{

@@ -28,6 +28,7 @@ import de.osmui.util.exceptions.TaskNameUnknownException;
  * 
  * @author Niklas Schnelle
  * 
+ * @see TaskManagerTest
  */
 public class TaskManager {
 	static protected TaskManager instance;

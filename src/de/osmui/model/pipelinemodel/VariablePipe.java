@@ -10,6 +10,7 @@ package de.osmui.model.pipelinemodel;
  * 
  * @author Niklas Schnelle
  *
+ *@see VariablePipeTest
  */
 public class VariablePipe extends CommonPipe {
 

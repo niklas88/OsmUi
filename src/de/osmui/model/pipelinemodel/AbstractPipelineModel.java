@@ -14,6 +14,7 @@ import de.osmui.model.exceptions.TasksNotInModelException;
  * 
  * @author Niklas Schnelle
  * 
+ * @see AbstractPipelineModelTest
  */
 public abstract class AbstractPipelineModel extends Observable {
 

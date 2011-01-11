@@ -8,6 +8,7 @@ import javax.swing.JSplitPane;
 /**
  * @author Peter Vollmer
  * 
+ * wird durch Systemtest abgedeckt
  */
 
 public class ContentSplitPane extends JSplitPane {

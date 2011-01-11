@@ -21,6 +21,7 @@ import com.mxgraph.view.mxGraph;
  * 
  * @author Niklas Schnelle
  * 
+ * @see JGPipelineModelTest
  */
 public class JGPipelineModel extends AbstractPipelineModel implements
 		Serializable {
