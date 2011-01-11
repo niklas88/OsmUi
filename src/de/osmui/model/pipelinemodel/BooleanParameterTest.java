@@ -8,7 +8,11 @@ import de.osmui.i18n.I18N;
 import de.osmui.model.osm.TParameter;
 
 /**
-* @see BooleanParameter
+ * 
+ * @author verena
+ * 
+ * @see BooleanParameter
+ * 
 */
 public class BooleanParameterTest {
 	@Test public void setgetValue(){

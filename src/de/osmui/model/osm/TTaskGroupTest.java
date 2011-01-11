@@ -7,7 +7,11 @@ import org.junit.Test;
 import de.osmui.i18n.I18N;
 
 /**
-* @see TTaskGroup
+ * 
+ * @author verena
+ * 
+ * @see TTaskGroup
+ * 
 */
 public class TTaskGroupTest {
 	@Test public void setget(){

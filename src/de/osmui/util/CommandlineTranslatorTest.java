@@ -14,7 +14,11 @@ import de.osmui.model.pipelinemodel.JGPipelineModel;
 import de.osmui.util.exceptions.ImportException;
 
 /**
-* @see CommandLineTranslator
+ * 
+ * @author verena
+ * 
+ * @see CommandLineTranslator
+ * 
 */
 public class CommandlineTranslatorTest {
 	

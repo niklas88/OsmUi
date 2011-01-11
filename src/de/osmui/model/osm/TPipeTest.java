@@ -7,7 +7,11 @@ import org.junit.Test;
 import de.osmui.i18n.I18N;
 
 /**
-* @see TPipe
+ * 
+ * @author verena
+ * 
+ * @see TPipe
+ * 
 */
 public class TPipeTest {
 	@Test public void setget(){

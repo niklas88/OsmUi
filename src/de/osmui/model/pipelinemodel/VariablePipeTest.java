@@ -8,7 +8,11 @@ import de.osmui.i18n.I18N;
 import de.osmui.model.osm.TParameter;
 
 /**
-* @see VariablePipe
+ * 
+ * @author verena
+ * 
+ * @see VariablePipe
+ * 
 */
 public class VariablePipeTest {
 	@Test public void createPipe(){

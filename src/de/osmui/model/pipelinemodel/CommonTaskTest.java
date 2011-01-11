@@ -9,7 +9,11 @@ import org.junit.Test;
 import de.osmui.i18n.I18N;
 
 /**
-* @see CommonTask
+ * 
+ * @author verena
+ * 
+ * @see CommonTask
+ * 
 */
 public class CommonTaskTest {
 	@Test public void getCommandLineForm(){

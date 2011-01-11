@@ -7,8 +7,11 @@ import javax.swing.JMenu;
 import org.junit.Test;
 
 /**
-* @see I18N
-*/
+ * @author verena
+ * 
+ * @see I18N
+ * 
+ */
 public class I18NTest {
 	@Test public void get (){
 		I18N inter = new I18N();

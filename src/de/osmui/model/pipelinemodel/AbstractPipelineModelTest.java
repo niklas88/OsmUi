@@ -11,7 +11,11 @@ import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
 
 /**
-* @see AbstractPiplineModel
+ * 
+ * @author verena
+ * 
+ * @see AbstractPiplineModel
+ * 
 */
 public class AbstractPipelineModelTest {
 	@Test public void connectTaska() throws TasksNotCompatibleException, TasksNotInModelException{

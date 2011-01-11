@@ -12,7 +12,11 @@ import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
 
 /**
-* @see JGPipelineModel
+ * 
+ * @author verena
+ * 
+ * @see JGPipelineModel
+ * 
 */
 public class JGPipelineModelTest {	
 	@Test public void getSourceTasks(){

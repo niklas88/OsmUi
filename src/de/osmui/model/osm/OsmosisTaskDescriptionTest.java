@@ -10,8 +10,12 @@ import org.junit.Test;
 import de.osmui.i18n.I18N;
 
 /**
-* @see OsmosisTaskDescription
-*/
+ * 
+ * @author verena
+ * 
+ * @see OsmosisTaskDescription
+ * 
+ */
 public class OsmosisTaskDescriptionTest {
 	
 	@Test public void getTaskGroup(){

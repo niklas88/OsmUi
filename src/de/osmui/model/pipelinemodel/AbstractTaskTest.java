@@ -7,7 +7,11 @@ import org.junit.Test;
 import de.osmui.i18n.I18N;
 
 /**
-* @see AbstractPort
+ * 
+ * @author verena
+ * 
+ * @see AbstractPort
+ * 
 */
 public class AbstractTaskTest {
 	@Test public void isConnectable(){

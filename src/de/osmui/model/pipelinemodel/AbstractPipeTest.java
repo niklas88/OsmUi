@@ -7,7 +7,11 @@ import org.junit.Test;
 import de.osmui.i18n.I18N;
 
 /**
-* @see AbstractPipe
+ * 
+ * @author verena
+ * 
+ * @see AbstractPipe
+ * 
 */
 public class AbstractPipeTest {
 	@Test public void connect(){

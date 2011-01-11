@@ -10,7 +10,11 @@ import org.junit.Test;
 import de.osmui.i18n.I18N;
 
 /**
-* @see TParameter
+ * 
+ * @author verena
+ * 
+ * @see TParameter
+ * 
 */
 public class TParameterTest {
 	@Test public void getEnumVal(){

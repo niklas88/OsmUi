@@ -10,8 +10,12 @@ import org.junit.Test;
 import de.osmui.i18n.I18N;
 
 /**
-* @see TTask
-*/
+ * 
+ * @author verena
+ * 
+ * @see TTask
+ * 
+ */
 public class TTaskTest {
 	@Test public void getInputPip(){
 		TTask task = new TTask();

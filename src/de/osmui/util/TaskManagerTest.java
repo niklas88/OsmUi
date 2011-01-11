@@ -13,8 +13,12 @@ import de.osmui.model.pipelinemodel.CommonTask;
 import de.osmui.util.exceptions.TaskNameUnknownException;
 
 /**
-* @see TaskManager
-*/
+ * 
+ * @author verena
+ * 
+ * @see TaskManager
+ * 
+ */
 public class TaskManagerTest {
 	@Test public void createTask() throws TaskNameUnknownException{
 		AbstractTask task = new CommonTask("tee");

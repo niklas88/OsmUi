@@ -9,7 +9,11 @@ import org.junit.Test;
 import de.osmui.i18n.I18N;
 
 /**
-* @see ObjectFactory
+ * 
+ * @author verena
+ * 
+ * @see ObjectFactory
+ * 
 */
 public class ObjectFactoryTest {
 	@Test public void createParameter(){

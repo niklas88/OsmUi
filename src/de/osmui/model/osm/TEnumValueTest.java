@@ -7,7 +7,11 @@ import org.junit.Test;
 import de.osmui.i18n.I18N;
 
 /**
-* @see TEnumValue
+ * 
+ * @author verena
+ * 
+ * @see TEnumValue
+ * 
 */
 public class TEnumValueTest {
 	@Test public void set(){

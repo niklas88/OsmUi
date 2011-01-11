@@ -8,7 +8,11 @@ import de.osmui.i18n.I18N;
 import de.osmui.model.osm.TParameter;
 
 /**
-* @see VariablePort
+ * 
+ * @author verena
+ * 
+ * @see VariablePort
+ * 
 */
 public class VariablePortTest {
 	@Test public void createPort(){
