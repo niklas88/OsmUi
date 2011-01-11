@@ -6,8 +6,6 @@ import javax.xml.bind.JAXBElement;
 
 import org.junit.Test;
 
-import de.osmui.i18n.I18N;
-
 /**
 * @see ObjectFactory
 */

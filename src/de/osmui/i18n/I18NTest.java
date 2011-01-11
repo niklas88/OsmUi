@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import javax.swing.JMenu;
 
-import org.junit.Test;
-
 /**
 * @see I18N
 */

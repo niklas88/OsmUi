@@ -7,14 +7,11 @@ import java.util.List;
 
 import org.junit.Test;
 
-import de.osmui.i18n.I18N;
-
 /**
 * @see TParameter
 */
 public class TParameterTest {
 	@Test public void getEnumVal(){
-		List<TEnumValue> list = null;
 		List<TEnumValue> arr = new ArrayList<TEnumValue>();
 		TParameter param = new TParameter();
 		assertEquals("getEnumValue",param.getEnumValue(),arr);

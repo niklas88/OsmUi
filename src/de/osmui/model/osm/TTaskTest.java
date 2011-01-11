@@ -7,8 +7,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import de.osmui.i18n.I18N;
-
 /**
 * @see TTask
 */

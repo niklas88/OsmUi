@@ -14,7 +14,6 @@ import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
 
 import de.osmui.model.pipelinemodel.AbstractTask;
-import de.osmui.model.pipelinemodel.JGPipelineModel;
 import de.osmui.model.pipelinemodel.JGTaskDecorator;
 import de.osmui.ui.events.TaskSelectedEvent;
 import de.osmui.ui.events.TaskSelectedEventListener;

@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import de.osmui.i18n.I18N;
 import de.osmui.model.osm.TParameter;
 
 /**

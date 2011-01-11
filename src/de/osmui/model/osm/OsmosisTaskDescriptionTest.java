@@ -3,11 +3,7 @@ package de.osmui.model.osm;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
-
-import de.osmui.i18n.I18N;
 
 /**
 * @see OsmosisTaskDescription

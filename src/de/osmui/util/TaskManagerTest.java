@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import de.osmui.i18n.I18N;
 import de.osmui.model.osm.TTask;
 import de.osmui.model.pipelinemodel.AbstractTask;
 import de.osmui.model.pipelinemodel.CommonTask;
@@ -39,7 +38,6 @@ public class TaskManagerTest {
 	}
 	
 	@Test public void getCompatibleTasks(){
-		ArrayList<TTask> list = new ArrayList<TTask>();
 		TaskManager manager = new TaskManager();
 		String s = "tee";
 		assertEquals(23, manager.getCompatibleTasks(s).size());
