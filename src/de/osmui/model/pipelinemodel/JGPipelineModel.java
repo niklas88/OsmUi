@@ -337,8 +337,8 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 			pipeMap.put(
 					Long.valueOf(pipe.getID()),
 					(mxCell) graph.insertEdge(graphparent, null, pipe,
-							pipeMap.get(Long.valueOf(parent.getID())),
-							pipeMap.get(Long.valueOf(child.getID()))));
+							getCellForTask(parent),
+							getCellForTask(child)));
 		} finally {
 			graph.getModel().endUpdate();
 		}
@@ -358,7 +358,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 	public AbstractPipe disconnectTasks(AbstractTask parent, AbstractTask child)
 			throws TasksNotInModelException {
 		AbstractPipe removedPipe = super.disconnectTasks(parent, child);
-		Object[] cellArray = { pipeMap.get(Long.valueOf(removedPipe.getID())) };
+		Object[] cellArray = { getCellForPipe(removedPipe) };
 		graph.removeCells(cellArray);
 
 		return removedPipe;
