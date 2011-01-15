@@ -115,6 +115,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 					if (val instanceof AbstractPipe) {
 						pipe = (AbstractPipe) val;
 						pipe.disconnect();
+
 					} else if (val instanceof AbstractTask) {
 						try {
 							rawRemoveTask((AbstractTask) val);
@@ -334,11 +335,11 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 
 		graph.getModel().beginUpdate();
 		try {
-			pipeMap.put(
-					Long.valueOf(pipe.getID()),
+			
+			pipeMap.put(Long.valueOf(pipe.getID()), 
 					(mxCell) graph.insertEdge(graphparent, null, pipe,
-							pipeMap.get(Long.valueOf(parent.getID())),
-							pipeMap.get(Long.valueOf(child.getID()))));
+					getCellForTask(parent),
+					getCellForTask(child)));
 		} finally {
 			graph.getModel().endUpdate();
 		}

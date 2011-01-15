@@ -9,8 +9,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
-import java.util.StringTokenizer;
-
+import java.util.Scanner;
 
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
@@ -249,7 +248,9 @@ public class CommandlineTranslator {
 	public void importLine(AbstractPipelineModel model, String line)
 
 			throws ImportException {
-		StringTokenizer st = new StringTokenizer(line, " \t\n\r\f\\");
+		Scanner st = new Scanner(line);
+		st.useDelimiter(" \t\n\r\f\\");
+		
 
 		// Stack for unnamed pipes
 		Stack<AbstractPipe> pipeStack = new Stack<AbstractPipe>();
@@ -260,8 +261,8 @@ public class CommandlineTranslator {
 		TaskManager tm = TaskManager.getInstance();
 		String currToken;
 
-		while (st.hasMoreTokens()) {
-			currToken = st.nextToken();
+		while (st.hasNext()) {
+			currToken = st.next();
 			// System.out.println(currToken);
 			if (currToken.startsWith("--")) {
 				// Ok we got a new task:
@@ -292,46 +293,64 @@ public class CommandlineTranslator {
 	}
 
 	
+	
 	private void exportTask(Stack<AbstractTask> unfin, Set<AbstractTask> fin,StringBuilder sb, AbstractTask task){
-		// Go upstream recursively to get our dependencies done
-		AbstractPipe upPipe;
+		// When we are done we need the downstream tasks on the stack
 		AbstractTask currTask;
+		AbstractPort downPort;		
+		// Push all connected unfinished Downstream tasks and 
+		for(AbstractPipe pipe : task.getOutputPipes()){
+			if(pipe.isConnected()){
+				downPort = pipe.getTarget();
+				currTask = downPort.getParent();
+				if(!fin.contains(currTask) && !unfin.contains(currTask)){
+					unfin.push(currTask);
+				}
+			}
+		}
+		
+		
+		// Push any unfinished dependencies
+		AbstractPipe upPipe;
+		boolean unmetDependecy = false;
 		for(AbstractPort port : task.getInputPorts()){
 			if(port.isConnected()){
 				upPipe = port.getIncoming();
 				currTask = upPipe.getSource();
 				if(!fin.contains(currTask)){
-					exportTask(unfin, fin, sb, currTask);
+					unfin.push(currTask);
+					unmetDependecy = true;
 				}
 			}
 			
 		}
+		if(unmetDependecy){
+			return;
+		}
 		// All dependencies are now cleared append task (without pipes)
 		sb.append(task.getCommandlineForm());
-		//TODO: Pipes
-		//Push all connected Downstream tasks
-		AbstractPort downPort;
-		for(AbstractPipe pipe : task.getOutputPipes()){
-			if(pipe.isConnected()){
-				downPort = pipe.getTarget();
-				currTask = downPort.getParent();
-				unfin.push(currTask);
-			}
-		}
+
+		// This task is now finished
 		fin.add(task);
+		
 	}
 	
 	public String exportLine(AbstractPipelineModel model){
+		
 		Stack<AbstractTask> unfinished = new Stack<AbstractTask>();
 		HashSet<AbstractTask> finished = new HashSet<AbstractTask>();
 		StringBuilder builder = new StringBuilder();
 		// Add all source tasks to the unfinished stack
 		for(AbstractTask task : model.getSourceTasks()){
-			unfinished.push(task);
+			unfinished.add(task);
 		}
 		
 		while(!unfinished.isEmpty()){
-			exportTask(unfinished, finished, builder, unfinished.pop());
+			AbstractTask currTask = unfinished.pop();
+			if(!finished.contains(currTask)){
+				// This call will finish the task and offer whats encountered on the way
+				exportTask(unfinished, finished, builder, currTask);
+			}
 		}
 		
 		return builder.toString();

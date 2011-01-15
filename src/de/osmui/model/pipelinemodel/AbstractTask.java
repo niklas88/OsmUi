@@ -93,9 +93,7 @@ public abstract class AbstractTask implements Serializable, Identifiable {
 	}
 	
 	/**
-	 * Gets the string representation of this task as used by osmosis' command line, however
-	 * the pipe connections are not included here use CommandlineTranslator
-	 * @return 
+	 * Gets the string representation of this task as used by osmosis
 	 */
 	public abstract String getCommandlineForm();
 	
