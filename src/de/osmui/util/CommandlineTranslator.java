@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
@@ -248,9 +249,9 @@ public class CommandlineTranslator {
 	public void importLine(AbstractPipelineModel model, String line)
 
 			throws ImportException {
+		//StringTokenizer st = new StringTokenizer(line, " \n\r\f\t");
 		Scanner st = new Scanner(line);
-		st.useDelimiter(" \t\n\r\f\\");
-		
+		st.useDelimiter("[ \\t\\r\\n\\f\\\\]+");
 
 		// Stack for unnamed pipes
 		Stack<AbstractPipe> pipeStack = new Stack<AbstractPipe>();
@@ -293,8 +294,19 @@ public class CommandlineTranslator {
 	}
 
 	
-	
-	private void exportTask(Stack<AbstractTask> unfin, Set<AbstractTask> fin,StringBuilder sb, AbstractTask task){
+	/**
+	 * This private function is used to deal with a unfinished task:
+	 * - It adds all still unfinished Downstream tasks that aren't yet in unfinished to it
+	 * - It tries whether all dependencies are met, if not pushing them
+	 * - When called again (after being added by a now finished upstream task) it marks this
+	 * task as finished and writes it to the StringBuilder
+	 * - This algorithm ensures that tasks will (if possible) be put right before their downstream neighbor
+	 * @param unfin
+	 * @param fin
+	 * @param sb
+	 * @param task
+	 */
+	private void exportTask(Stack<AbstractTask> unfin, Set<AbstractTask> fin, StringBuilder sb, AbstractTask task){
 		// When we are done we need the downstream tasks on the stack
 		AbstractTask currTask;
 		AbstractPort downPort;		
@@ -334,7 +346,12 @@ public class CommandlineTranslator {
 		fin.add(task);
 		
 	}
-	
+	/**
+	 * This method exports a model into a osmosis call e.g.
+	 * 
+	 * @param model
+	 * @return the line e.g. "--foo opt outPipe.0=AUTO1to1 --bar opt=val inPipe.0=AUTO1to1"
+	 */
 	public String exportLine(AbstractPipelineModel model){
 		
 		Stack<AbstractTask> unfinished = new Stack<AbstractTask>();
@@ -348,7 +365,8 @@ public class CommandlineTranslator {
 		while(!unfinished.isEmpty()){
 			AbstractTask currTask = unfinished.pop();
 			if(!finished.contains(currTask)){
-				// This call will finish the task and offer whats encountered on the way
+				// This call tries to finish the task, if it still needs dependencies
+				// it will push those to resolve them first
 				exportTask(unfinished, finished, builder, currTask);
 			}
 		}
@@ -376,7 +394,7 @@ public class CommandlineTranslator {
 			trans.importLine(
 					model,
 					"--rx full/planet-071128.osm.bz2 "
-					+ "--tee 4 \\"
+					+ "--tee  4  \n\\\t"
 					+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
 					+ "--wx baden-wuerttemberg.osm.bz2  \\"
 					+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
