@@ -359,7 +359,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 	public AbstractPipe disconnectTasks(AbstractTask parent, AbstractTask child)
 			throws TasksNotInModelException {
 		AbstractPipe removedPipe = super.disconnectTasks(parent, child);
-		Object[] cellArray = { pipeMap.get(Long.valueOf(removedPipe.getID())) };
+		Object[] cellArray = { getCellForPipe(removedPipe) };
 		graph.removeCells(cellArray);
 
 		return removedPipe;
