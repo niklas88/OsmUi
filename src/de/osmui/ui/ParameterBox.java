@@ -2,14 +2,19 @@ package de.osmui.ui;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
 
 import de.osmui.model.pipelinemodel.AbstractParameter;
 import de.osmui.model.pipelinemodel.AbstractTask;
+import de.osmui.model.pipelinemodel.BooleanParameter;
 import de.osmui.ui.events.TaskSelectedEvent;
 import de.osmui.ui.events.TaskSelectedEventListener;
 import de.osmui.ui.models.ParameterBoxTableModel;
+import de.osmui.ui.renderers.BooleanParamEditor;
+import de.osmui.ui.renderers.BooleanParamRenderer;
 import de.osmui.ui.renderers.DefaultParamEditor;
-import de.osmui.ui.renderers.ParamValueRenderer;
+import de.osmui.ui.renderers.DefaultParamRenderer;
 
 /**
  * @author Peter Vollmer
@@ -31,9 +36,13 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 
 	public ParameterBox(ParameterBoxTableModel parameterBoxTableModel) {
 		model = parameterBoxTableModel;
-		this.setDefaultRenderer(AbstractParameter.class,
-				new ParamValueRenderer());
+		
+		
+		this.setDefaultRenderer(AbstractParameter.class, new DefaultParamRenderer());
+		this.setDefaultRenderer(BooleanParameter.class, new BooleanParamRenderer(getDefaultRenderer(Boolean.class)));
 		this.setDefaultEditor(AbstractParameter.class, new DefaultParamEditor());
+		this.setDefaultEditor(BooleanParameter.class, new BooleanParamEditor());
+		
 		this.setModel(parameterBoxTableModel);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -50,6 +59,24 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 			selectedTask = (AbstractTask) e.getSource();
 			showActualParameters(selectedTask);
 		}
+	}
+	
+	@Override
+	 public TableCellRenderer getCellRenderer(int row, int column) {
+		  Object value = getValueAt(row,column);
+		  if (value !=null) {
+		    return getDefaultRenderer(value.getClass());
+		  }
+		  return super.getCellRenderer(row,column);
+	 }
+	
+	@Override
+	public TableCellEditor getCellEditor(int row, int column){
+		Object value = getValueAt(row,column);
+		  if (value !=null) {
+		    return getDefaultEditor(value.getClass());
+		  }
+		  return super.getCellEditor(row,column);
 	}
 
 }

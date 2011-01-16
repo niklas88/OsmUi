@@ -26,7 +26,6 @@ public abstract class AbstractParameter implements Serializable{
 	public AbstractParameter(TParameter desc, String value){
 		this.description = desc;
 		this.name = desc.getName();
-		setValue(value);
 	}
 	
 	/**

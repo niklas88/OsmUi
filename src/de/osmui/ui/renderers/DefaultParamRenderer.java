@@ -13,7 +13,7 @@ import de.osmui.model.pipelinemodel.AbstractParameter;
  *
  */
 
-public class ParamValueRenderer extends DefaultTableCellRenderer {
+public class DefaultParamRenderer extends DefaultTableCellRenderer {
 
 	private static final long serialVersionUID = 4215729606603179888L;
 

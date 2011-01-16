@@ -3,27 +3,34 @@
  */
 package de.osmui.model.pipelinemodel;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import de.osmui.model.osm.TEnumValue;
 import de.osmui.model.osm.TParameter;
 
 /**
- * Represents a paramater that is an Integer
- * 
  * @author Niklas Schnelle
  *
- * no tests, only getter and setter
  */
-public class IntParameter extends AbstractParameter {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4423983777968509408L;
-	protected int value;
+public class EnumParameter extends AbstractParameter {
 
 	/**
 	 * 
 	 */
-	public IntParameter(TParameter desc, String value) {
+	private static final long serialVersionUID = -4056315894183855778L;
+	
+	// The currently set value of this parameter
+	protected String value;
+	protected List<TEnumValue> enumeration;
+
+	/**
+	 * @param desc
+	 * @param value
+	 */
+	public EnumParameter(TParameter desc, String value) {
 		super(desc, value);
+		enumeration = desc.getEnumValue();
 		setValue(value);
 	}
 
@@ -35,39 +42,28 @@ public class IntParameter extends AbstractParameter {
 		return this.getName()+"="+this.getValue();
 	}
 
+	/**
+	 * Returns a list of all possible values for this parameter
+	 * @param tryFriendly
+	 * @return
+	 */
+	public List<TEnumValue> getEnumerationValues(boolean tryFriendly){
+		return enumeration;
+	}
 	/* (non-Javadoc)
 	 * @see de.osmui.model.pipelinemodel.AbstractParameter#getValue()
 	 */
 	@Override
 	public String getValue() {
-		return Integer.toString(value);
-	}
-	
-	/**
-	 * Gets the value as native integer
-	 * 
-	 * @return integer representation of the value
-	 */
-	public int getValueInteger(){
 		return value;
 	}
 
-	/**
-	 * Sets the value as native integer
-	 * 
-	 * @param value representation of the value
-	 */
-	public void setValueInteger(int value){
-		this.value = value;
-	}
-	
 	/* (non-Javadoc)
 	 * @see de.osmui.model.pipelinemodel.AbstractParameter#setValue(java.lang.String)
 	 */
 	@Override
 	public void setValue(String s) throws IllegalArgumentException {
-		this.value = Integer.parseInt(s);
-
+		value = s;
 	}
 
 }

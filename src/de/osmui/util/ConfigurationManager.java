@@ -55,9 +55,6 @@ public class ConfigurationManager {
 		for (String currentEntry : configEntries.keySet()){
 			userPrefs.put(currentEntry, configEntries.get(currentEntry));
 		}
-
-
-		
 	}
 
 	public void loadConfiguration() {

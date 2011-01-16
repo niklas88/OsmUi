@@ -60,7 +60,7 @@ public class MainFrame extends JFrame {
 		configurationManager = ConfigurationManager.getInstance();
 		configurationManager.loadConfiguration();
 		this.setSize(configurationManager.getEntry("MainFrameWidth", 800),
-				configurationManager.getEntry("MainFrameHight", 600));
+				configurationManager.getEntry("MainFrameHeight", 600));
 		this.setLocation(
 				configurationManager.getEntry("MainFrameXLocation", 100),
 				configurationManager.getEntry("MainFrameYLocation", 100));
