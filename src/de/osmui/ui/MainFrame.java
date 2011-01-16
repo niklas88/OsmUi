@@ -81,7 +81,7 @@ public class MainFrame extends JFrame {
 		add(content, BorderLayout.CENTER);
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				ConfigurationManager.saveConfiguration();
+				ConfigurationManager.getInstance().saveConfiguration();
 			}
 
 		});

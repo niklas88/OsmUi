@@ -142,7 +142,7 @@ public class Menu extends JMenuBar {
 		JMenuItem close = new JMenuItem(I18N.getString("Menu.exit")); //$NON-NLS-1$
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ConfigurationManager.saveConfiguration();
+				ConfigurationManager.getInstance().saveConfiguration();
 			}
 		});
 		fileMenu.add(close);

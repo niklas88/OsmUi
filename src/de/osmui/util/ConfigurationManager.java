@@ -13,7 +13,16 @@ import de.osmui.ui.MainFrame;
  */
 
 public class ConfigurationManager {
-	public static void saveConfiguration(){
+	
+	private static ConfigurationManager instance;
+	
+	protected Preferences userPrefs = Preferences.userRoot().node("OsmUi");
+	
+	private ConfigurationManager(){
+		
+	}
+	
+	public void saveConfiguration(){
 		//MainFrame
 		int mainFrameWidth = MainFrame.getInstance().getSize().width;
 		int mainFrameHeight = MainFrame.getInstance().getSize().height;
@@ -27,8 +36,6 @@ public class ConfigurationManager {
 		int rightContentDividerLocation = MainFrame.getInstance().getRightContentDeviderLocation();
 		
 		
-		Preferences root = Preferences.userRoot();
-		Preferences userPrefs = root.node("OsmUi");
 		userPrefs.putInt("MainFrameWidth", mainFrameWidth);
 		userPrefs.putInt("MainFrameHeight", mainFrameHeight);
 		userPrefs.putInt("MainFrameXLocation", mainFrameXLocation);
@@ -40,7 +47,7 @@ public class ConfigurationManager {
 		
 		System.exit(0);
 	}
-	public static void loadConfiguration() {
+	public  void loadConfiguration() {
 
 		
 		Preferences root = Preferences.userRoot();
@@ -68,5 +75,15 @@ public class ConfigurationManager {
 		//RightSplitPane
 		MainFrame.getInstance().setRightContentDeviderLocation(rightContentDividerLocation);
 		
+	}
+	/**
+	 * @return a instance of MainFrame
+	 * 
+	 */
+	public static ConfigurationManager getInstance() {
+		if (ConfigurationManager.instance == null) {
+			ConfigurationManager.instance = new ConfigurationManager();
+		}
+		return ConfigurationManager.instance;
 	}
 }

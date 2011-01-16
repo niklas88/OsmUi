@@ -26,7 +26,7 @@ public class Application {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				MainFrame osmUi = MainFrame.getInstance();
-				ConfigurationManager.loadConfiguration();
+				ConfigurationManager.getInstance().loadConfiguration();
 				osmUi.setVisible(true);
 			}
 
