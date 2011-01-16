@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
-import javax.swing.JFrame;
-
-import de.osmui.ui.MainFrame;
 
 /**
  * @author Peter Vollmer

@@ -15,7 +15,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-import de.osmui.util.ConfigurationManager;
 import de.osmui.util.exceptions.ImportException;
 import de.osmui.i18n.I18N;
 import de.osmui.io.PipeImEx;
@@ -188,7 +187,11 @@ public class Menu extends JMenuBar {
 		JMenuItem preferences = new JMenuItem(I18N.getString("Menu.preferences")); //$NON-NLS-1$
 		preferences.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("preferences"); //$NON-NLS-1$
+			
+				
+					ConfigurationFrame configurationFrame = new ConfigurationFrame(); //$NON-NLS-1$
+					configurationFrame.setSize(600, 300);
+					configurationFrame.setVisible(true);
 			}
 		});
 		editMenu.add(preferences);
