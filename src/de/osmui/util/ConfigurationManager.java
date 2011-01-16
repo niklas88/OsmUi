@@ -1,9 +1,10 @@
 package de.osmui.util;
 
-
+import java.util.HashMap;
+import java.util.Map;
+import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 import javax.swing.JFrame;
-
 
 import de.osmui.ui.MainFrame;
 
@@ -13,60 +14,73 @@ import de.osmui.ui.MainFrame;
  */
 
 public class ConfigurationManager {
-	public static void saveConfiguration(){
-		//MainFrame
-		int mainFrameWidth = MainFrame.getInstance().getSize().width;
-		int mainFrameHeight = MainFrame.getInstance().getSize().height;
-		int mainFrameXLocation = MainFrame.getInstance().getLocation().x;
-		int mainFrameYLocation = MainFrame.getInstance().getLocation().y;
-		
-		
-		//Content
-		int contentDividerLocation = MainFrame.getInstance().getContentDeviderLocation();
-		//RightSplitPane
-		int rightContentDividerLocation = MainFrame.getInstance().getRightContentDeviderLocation();
-		
-		
-		Preferences root = Preferences.userRoot();
-		Preferences userPrefs = root.node("OsmUi");
-		userPrefs.putInt("MainFrameWidth", mainFrameWidth);
-		userPrefs.putInt("MainFrameHeight", mainFrameHeight);
-		userPrefs.putInt("MainFrameXLocation", mainFrameXLocation);
-		userPrefs.putInt("MainFrameYLocation", mainFrameYLocation);
-		//Content
-		userPrefs.putInt("ContentDividerLocation", contentDividerLocation);
-		//RightSplitPane
-		userPrefs.putInt("RightContentDividerLocation", rightContentDividerLocation);
-		
-		System.exit(0);
+
+	private static ConfigurationManager instance;
+
+	private Preferences userPrefs;
+
+	private Map<String, String> configEntries;
+
+	private ConfigurationManager() {
+
+		configEntries = new HashMap<String, String>();
+
 	}
-	public static void loadConfiguration() {
+
+	public int getEntry(String key,int standardValue){
+		if (configEntries.get(key) == null){ 
+			return standardValue;
+		}
+		return Integer.parseInt(configEntries.get(key));
+		
+	}
+	
+	public String getEntry (String key, String standardValue){
+		if (configEntries.get(key) == null){ 
+			return standardValue;
+		}
+		return configEntries.get(key);
+	}
+	
+	public void setEntry (String key, int value){
+		configEntries.put(key, Integer.toString(value));
+	}
+	
+	public void setEntry (String key, String value){
+		configEntries.put(key, value);
+	}
+
+	public void saveConfiguration() {
+		userPrefs = Preferences.userRoot().node("OsmUi");
+		for (String currentEntry : configEntries.keySet()){
+			userPrefs.put(currentEntry, configEntries.get(currentEntry));
+		}
+
 
 		
-		Preferences root = Preferences.userRoot();
-		Preferences userPrefs = root.node("OsmUi");
-		
-		int mainFrameWidth = userPrefs.getInt("MainFrameWidth", 800);
-		int mainFrameHeight = userPrefs.getInt("MainFrameHeight", 600);
-		
-		int mainFrameXLocation = userPrefs.getInt("MainFrameXLocation", 100);
-		int mainFrameYLocation = userPrefs.getInt("MainFrameYLocation", 100);
-		
-		
-		//Content
-		int contentDividerLocation = userPrefs.getInt("ContentDividerLocation", 220);
-		//RightSplitPane
-		int rightContentDividerLocation = userPrefs.getInt("RightContentDividerLocation", 620);
-		
-		MainFrame.getInstance().pack();
-		MainFrame.getInstance().setSize(mainFrameWidth, mainFrameHeight);
-		MainFrame.getInstance().setLocation(mainFrameXLocation, mainFrameYLocation);
-		MainFrame.getInstance().setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		
-		//Content
-		MainFrame.getInstance().setContentDevider(contentDividerLocation);
-		//RightSplitPane
-		MainFrame.getInstance().setRightContentDeviderLocation(rightContentDividerLocation);
-		
+	}
+
+	public void loadConfiguration() {
+		userPrefs = Preferences.userRoot().node("OsmUi");
+		try {
+			for (String currentKey : userPrefs.keys()) {
+				configEntries.put(currentKey, userPrefs.get(currentKey, currentKey));
+			}
+		} catch (BackingStoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * @return a instance of MainFrame
+	 * 
+	 */
+	public static ConfigurationManager getInstance() {
+		if (ConfigurationManager.instance == null) {
+			ConfigurationManager.instance = new ConfigurationManager();
+		}
+		return ConfigurationManager.instance;
 	}
 }
