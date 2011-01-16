@@ -8,7 +8,11 @@ import java.util.List;
 import org.junit.Test;
 
 /**
-* @see TParameter
+ * 
+ * @author verena
+ * 
+ * @see TParameter
+ * 
 */
 public class TParameterTest {
 	@Test public void getEnumVal(){

@@ -13,7 +13,7 @@ import de.osmui.model.osm.TTask;
 /**
  * @author Niklas Schnelle
  * 
- * wird nicht getestet, da nur getter und setter
+ * no tests, only getter and setter
  */
 public class TaskBoxCellRenderer extends DefaultTableCellRenderer {
 

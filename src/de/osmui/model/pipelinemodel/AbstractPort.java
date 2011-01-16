@@ -12,9 +12,13 @@ import java.io.Serializable;
  *
  *@see AbstractPortTest
  */
-public abstract class AbstractPort implements Serializable{
+public abstract class AbstractPort implements Serializable, Identifiable {
 
 	private static final long serialVersionUID = 4926805105607543325L;
+	
+	protected static long idSeed = 0;
+	
+	protected long myId = 0;
 	
 	protected AbstractPipe incoming;
 	protected AbstractTask parent;
@@ -24,6 +28,17 @@ public abstract class AbstractPort implements Serializable{
 		this.parent = parent;
 	}
 	
+	/**
+	 * Implement getID from Identifiable
+	 */
+	public long getID(){
+		if(myId == 0){
+			return myId = ++idSeed;
+		} else {
+			return myId;
+		}
+	}
+
 	/**
 	 * Gets the task object this port belongs to
 	 * 

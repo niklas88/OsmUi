@@ -12,14 +12,28 @@ import java.io.Serializable;
  *
  *@see AbstractPipeTest
  */
-public abstract class AbstractPipe implements Serializable{
+public abstract class AbstractPipe implements Serializable, Identifiable {
 
 	private static final long serialVersionUID = 7962518716366164284L;
-
+	
+	protected static long idSeed = 0;
+	
 	protected String name;
 	protected AbstractTask source;
 	//The target must be null if not connected
 	protected AbstractPort target = null;
+	protected long myId = 0;
+	
+	/**
+	 * Implement getID from Identifiable
+	 */
+	public long getID(){
+		if(myId == 0){
+			return myId = ++idSeed;
+		} else {
+			return myId;
+		}
+	}
 	
 	/**
 	 * Returns whether this pipe has a user defined name or a name should be auto generated on export

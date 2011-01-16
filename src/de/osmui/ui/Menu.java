@@ -4,8 +4,12 @@ import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
+import javax.help.HelpSet;
+import javax.help.JHelp;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -18,10 +22,11 @@ import de.osmui.io.PipeImEx;
 
 /**
  * @author Peter Vollmer
- * 
+ *
  * Provides Menu to have an easy way to construct the whole Menu of Osmui.
  * 
  *  wird durch Systemtest abgedeckt
+ *  will be tested by system-tests
  */
 
 public class Menu extends JMenuBar {
@@ -201,6 +206,22 @@ public class Menu extends JMenuBar {
 		JMenuItem help = new JMenuItem(I18N.getString("Menu.help")); //$NON-NLS-1$
 		help.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JHelp helpViewer = null;
+				try {
+				      ClassLoader cl = Menu.class.getClassLoader();
+				      URL url = HelpSet.findHelpSet(cl, "jhelpset.hs");
+				      helpViewer = new JHelp(new HelpSet(cl, url));
+				      helpViewer.setCurrentID("Simple.Introduction");
+				} catch (Exception f) {
+				      System.err.println("API Help Set not found");
+				}
+				        
+				JFrame frame = new JFrame();
+				frame.setTitle(I18N.getString("Menu.help"));
+				frame.setSize(800,600);
+				frame.getContentPane().add(helpViewer);
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.setVisible(true);
 				System.out.println("help"); //$NON-NLS-1$
 			}
 		});

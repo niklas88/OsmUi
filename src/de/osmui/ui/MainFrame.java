@@ -18,7 +18,7 @@ import de.osmui.util.ConfigurationManager;
  *         Provides MainFrame to have a easy way to construct a MainFrame with
  *         all UI Content
  * 
- *         wird durch Systemtest abgedeckt
+ *  will be tested by system-tests
  */
 
 public class MainFrame extends JFrame {

@@ -5,7 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
-* @see TEnumValue
+ * 
+ * @author verena
+ * 
+ * @see TEnumValue
+ * 
 */
 public class TEnumValueTest {
 	@Test public void set(){

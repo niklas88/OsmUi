@@ -16,7 +16,7 @@ import de.osmui.util.CommandlineTranslator;
 import de.osmui.util.exceptions.ImportException;
 
 /**
-* wird im Systemtest abgedeckt
+* will be tested in the systemtest
 */
 public class PipeImEx {
 

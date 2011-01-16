@@ -5,7 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
-* @see AbstractPipe
+ * 
+ * @author verena
+ * 
+ * @see AbstractPipe
+ * 
 */
 public class AbstractPipeTest {
 	@Test public void connect(){

@@ -17,13 +17,18 @@ import java.util.Map;
  *
  *@see AbstractTaskTest
  */
-public abstract class AbstractTask implements Serializable{
+public abstract class AbstractTask implements Serializable, Identifiable {
 
 	private static final long serialVersionUID = 5857409627267578769L;
+	
+	protected static long idSeed = 0;
 
+	protected long myId = 0;
+	
 	protected String name;
 	protected AbstractPipelineModel model;
 	protected AbstractParameter defaultParameter;
+	
 	
 	/**
 	 * Gets the model to which this task belongs, null if the task has not yet been added
@@ -34,6 +39,18 @@ public abstract class AbstractTask implements Serializable{
 	public AbstractPipelineModel getModel(){
 		return model;
 	}
+	
+	/**
+	 * Implement getID from Identifiable
+	 */
+	public long getID(){
+		if(myId == 0){
+			return myId = ++idSeed;
+		} else {
+			return myId;
+		}
+	}
+
 	
 	/**
 	 * Sets the model to which this task belongs
@@ -76,9 +93,7 @@ public abstract class AbstractTask implements Serializable{
 	}
 	
 	/**
-	 * Gets the string representation of this task as used by osmosis' command line, however
-	 * the pipe connections are not included here use CommandlineTranslator
-	 * @return 
+	 * Gets the string representation of this task as used by osmosis
 	 */
 	public abstract String getCommandlineForm();
 	

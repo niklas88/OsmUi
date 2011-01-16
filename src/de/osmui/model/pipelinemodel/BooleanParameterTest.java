@@ -7,7 +7,11 @@ import org.junit.Test;
 import de.osmui.model.osm.TParameter;
 
 /**
-* @see BooleanParameter
+ * 
+ * @author verena
+ * 
+ * @see BooleanParameter
+ * 
 */
 public class BooleanParameterTest {
 	@Test public void setgetValue(){

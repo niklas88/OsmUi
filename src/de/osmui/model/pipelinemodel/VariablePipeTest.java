@@ -7,7 +7,11 @@ import org.junit.Test;
 import de.osmui.model.osm.TParameter;
 
 /**
-* @see VariablePipe
+ * 
+ * @author verena
+ * 
+ * @see VariablePipe
+ * 
 */
 public class VariablePipeTest {
 	@Test public void createPipe(){

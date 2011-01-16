@@ -5,7 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
-* @see TTaskGroup
+ * 
+ * @author verena
+ * 
+ * @see TTaskGroup
+ * 
 */
 public class TTaskGroupTest {
 	@Test public void setget(){

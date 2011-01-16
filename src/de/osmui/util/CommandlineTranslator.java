@@ -9,8 +9,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
+import java.util.Scanner;
 import java.util.StringTokenizer;
-
 
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
@@ -249,7 +249,9 @@ public class CommandlineTranslator {
 	public void importLine(AbstractPipelineModel model, String line)
 
 			throws ImportException {
-		StringTokenizer st = new StringTokenizer(line, " \t\n\r\f\\");
+		//StringTokenizer st = new StringTokenizer(line, " \n\r\f\t");
+		Scanner st = new Scanner(line);
+		st.useDelimiter("[ \\t\\r\\n\\f\\\\]+");
 
 		// Stack for unnamed pipes
 		Stack<AbstractPipe> pipeStack = new Stack<AbstractPipe>();
@@ -260,8 +262,8 @@ public class CommandlineTranslator {
 		TaskManager tm = TaskManager.getInstance();
 		String currToken;
 
-		while (st.hasMoreTokens()) {
-			currToken = st.nextToken();
+		while (st.hasNext()) {
+			currToken = st.next();
 			// System.out.println(currToken);
 			if (currToken.startsWith("--")) {
 				// Ok we got a new task:
@@ -292,46 +294,81 @@ public class CommandlineTranslator {
 	}
 
 	
-	private void exportTask(Stack<AbstractTask> unfin, Set<AbstractTask> fin,StringBuilder sb, AbstractTask task){
-		// Go upstream recursively to get our dependencies done
-		AbstractPipe upPipe;
+	/**
+	 * This private function is used to deal with a unfinished task:
+	 * - It adds all still unfinished Downstream tasks that aren't yet in unfinished to it
+	 * - It tries whether all dependencies are met, if not pushing them
+	 * - When called again (after being added by a now finished upstream task) it marks this
+	 * task as finished and writes it to the StringBuilder
+	 * - This algorithm ensures that tasks will (if possible) be put right before their downstream neighbor
+	 * @param unfin
+	 * @param fin
+	 * @param sb
+	 * @param task
+	 */
+	private void exportTask(Stack<AbstractTask> unfin, Set<AbstractTask> fin, StringBuilder sb, AbstractTask task){
+		// When we are done we need the downstream tasks on the stack
 		AbstractTask currTask;
+		AbstractPort downPort;		
+		// Push all connected unfinished Downstream tasks and 
+		for(AbstractPipe pipe : task.getOutputPipes()){
+			if(pipe.isConnected()){
+				downPort = pipe.getTarget();
+				currTask = downPort.getParent();
+				if(!fin.contains(currTask) && !unfin.contains(currTask)){
+					unfin.push(currTask);
+				}
+			}
+		}
+		
+		
+		// Push any unfinished dependencies
+		AbstractPipe upPipe;
+		boolean unmetDependecy = false;
 		for(AbstractPort port : task.getInputPorts()){
 			if(port.isConnected()){
 				upPipe = port.getIncoming();
 				currTask = upPipe.getSource();
 				if(!fin.contains(currTask)){
-					exportTask(unfin, fin, sb, currTask);
+					unfin.push(currTask);
+					unmetDependecy = true;
 				}
 			}
 			
 		}
+		if(unmetDependecy){
+			return;
+		}
 		// All dependencies are now cleared append task (without pipes)
 		sb.append(task.getCommandlineForm());
-		//TODO: Pipes
-		//Push all connected Downstream tasks
-		AbstractPort downPort;
-		for(AbstractPipe pipe : task.getOutputPipes()){
-			if(pipe.isConnected()){
-				downPort = pipe.getTarget();
-				currTask = downPort.getParent();
-				unfin.push(currTask);
-			}
-		}
+
+		// This task is now finished
 		fin.add(task);
+		
 	}
-	
+	/**
+	 * This method exports a model into a osmosis call e.g.
+	 * 
+	 * @param model
+	 * @return the line e.g. "--foo opt outPipe.0=AUTO1to1 --bar opt=val inPipe.0=AUTO1to1"
+	 */
 	public String exportLine(AbstractPipelineModel model){
+		
 		Stack<AbstractTask> unfinished = new Stack<AbstractTask>();
 		HashSet<AbstractTask> finished = new HashSet<AbstractTask>();
 		StringBuilder builder = new StringBuilder();
 		// Add all source tasks to the unfinished stack
 		for(AbstractTask task : model.getSourceTasks()){
-			unfinished.push(task);
+			unfinished.add(task);
 		}
 		
 		while(!unfinished.isEmpty()){
-			exportTask(unfinished, finished, builder, unfinished.pop());
+			AbstractTask currTask = unfinished.pop();
+			if(!finished.contains(currTask)){
+				// This call tries to finish the task, if it still needs dependencies
+				// it will push those to resolve them first
+				exportTask(unfinished, finished, builder, currTask);
+			}
 		}
 		
 		return builder.toString();
@@ -357,7 +394,7 @@ public class CommandlineTranslator {
 			trans.importLine(
 					model,
 					"--rx full/planet-071128.osm.bz2 "
-					+ "--tee 4 \\"
+					+ "--tee  4  \n\\\t"
 					+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
 					+ "--wx baden-wuerttemberg.osm.bz2  \\"
 					+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"

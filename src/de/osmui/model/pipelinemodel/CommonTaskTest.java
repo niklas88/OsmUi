@@ -5,7 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
-* @see CommonTask
+ * 
+ * @author verena
+ * 
+ * @see CommonTask
+ * 
 */
 public class CommonTaskTest {
 	@Test public void getCommandLineForm(){

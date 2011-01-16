@@ -48,6 +48,53 @@ public class CommonTask extends AbstractTask {
 			}
 		}
 		sb.append(" ");
+		
+		// Incoming pipes first
+		AbstractPipe incoming;
+		int num = 0;
+		for(AbstractPort port : this.getInputPorts()){
+			if(port.isConnected()){
+				incoming = port.getIncoming();
+				sb.append("inPipe.");
+				sb.append(num);
+				sb.append("=");
+				if(incoming.isNamed()){
+					sb.append(incoming.getName());
+				} else {
+					sb.append("AUTO");
+					sb.append(incoming.getID());
+					sb.append("to");
+					sb.append(port.getID());
+				}
+				sb.append(" ");
+			}
+			num++;
+		}
+		
+		
+		// Write the outgoing pipes
+		AbstractPort downPort;
+		num = 0;
+		for(AbstractPipe pipe : this.getOutputPipes()){
+			if(pipe.isConnected()){
+				downPort = pipe.getTarget();
+				
+				// Write the pipe
+				sb.append("outPipe.");
+				sb.append(num);
+				sb.append("=");
+				if(pipe.isNamed()){
+					sb.append(pipe.getName());
+				} else {
+					sb.append("AUTO");
+					sb.append(pipe.getID());
+					sb.append("to");
+					sb.append(downPort.getID());
+				}
+				sb.append(" ");
+			}
+			num++;
+		}
 		return sb.toString();
 	}
 	/* (non-Javadoc)
@@ -73,8 +120,5 @@ public class CommonTask extends AbstractTask {
 	public List<AbstractPipe> getOutputPipes() {
 		return outputPipes;
 	}
-
-
-
 
 }

@@ -7,7 +7,11 @@ import javax.xml.bind.JAXBElement;
 import org.junit.Test;
 
 /**
-* @see ObjectFactory
+ * 
+ * @author verena
+ * 
+ * @see ObjectFactory
+ * 
 */
 public class ObjectFactoryTest {
 	@Test public void createParameter(){
