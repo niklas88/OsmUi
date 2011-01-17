@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
+import java.util.Locale;
 
 import javax.help.HelpSet;
 import javax.help.JHelp;
@@ -14,6 +15,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+
+import org.omg.PortableInterceptor.USER_EXCEPTION;
 
 import de.osmui.util.ConfigurationManager;
 import de.osmui.util.exceptions.ImportException;
@@ -211,13 +214,20 @@ public class Menu extends JMenuBar {
 				JHelp helpViewer = null;
 				try {
 				      ClassLoader cl = Menu.class.getClassLoader();
-				      URL url = HelpSet.findHelpSet(cl, "jhelpset.hs");
-				      helpViewer = new JHelp(new HelpSet(cl, url));
-				      helpViewer.setCurrentID("Simple.Introduction");
+				      Locale locale = Locale.getDefault();
+				      if (locale.getLanguage() == "de"){
+				    	  URL url = HelpSet.findHelpSet(cl, "jhelpset.hs");
+					      helpViewer = new JHelp(new HelpSet(cl, url));
+					      helpViewer.setCurrentID("Simple.Introduction");
+				      }
+				      else{
+				    	  URL url = HelpSet.findHelpSet(cl, "en.hs");
+					      helpViewer = new JHelp(new HelpSet(cl, url));
+					      helpViewer.setCurrentID("Simple.Introduction");
+				      }
 				} catch (Exception f) {
 				      System.err.println("API Help Set not found");
-				}
-				        
+				}  
 				JFrame frame = new JFrame();
 				frame.setTitle(I18N.getString("Menu.help"));
 				frame.setSize(800,600);

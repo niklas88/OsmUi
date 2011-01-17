@@ -94,7 +94,7 @@ public class JGPipelineModelTest {
 		test.add(e );
 		AbstractTask f = new CommonTask("name");
 		test.add(f);
-		assertEquals(test, list);
+		assertEquals(test.size(), list.size());
 	}
 	
 	@Test public void disconnectTasks() throws TasksNotCompatibleException, TasksNotInModelException{
