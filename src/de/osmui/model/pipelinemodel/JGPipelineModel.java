@@ -97,7 +97,8 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 						} catch (TasksNotCompatibleException e) {
 							// Too bad,tried connection nonsense
 							Object[] cells = { mxcell };
-							return removeCells(cells);
+							removeCells(cells);
+							return null;
 						}
 
 					}
@@ -293,6 +294,9 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		mxCell edge = (mxCell) graph.insertEdge(graphparent, null, null,
 				getCellForTask(parent),
 				getCellForTask(child));
+		if(edge == null){
+			throw new TasksNotCompatibleException("Tasks not compatible");
+		}
 		setChanged();
 		notifyObservers(edge.getValue());
 		return (AbstractPipe) edge.getValue();
