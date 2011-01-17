@@ -67,6 +67,7 @@ public class PipelineBox extends mxGraphComponent implements Observer {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				final mxGraph graph = getGraph();
+				// Removes the selected Cells
 				graph.removeCells();
 
 			}

@@ -18,7 +18,7 @@ import de.osmui.util.ConfigurationManager;
  *         Provides MainFrame to have a easy way to construct a MainFrame with
  *         all UI Content
  * 
- *  will be tested by system-tests
+ *         will be tested by system-tests
  */
 
 public class MainFrame extends JFrame {
@@ -29,6 +29,8 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = -4767348652713972190L;
 
 	private static MainFrame instance;
+
+	protected ConfigurationManager configurationManager;
 
 	protected TaskBoxTableModel taskBoxTableModel;
 
@@ -52,6 +54,16 @@ public class MainFrame extends JFrame {
 	 * Constructs the mainframe
 	 */
 	private MainFrame() {
+		
+
+		
+		configurationManager = ConfigurationManager.getInstance();
+		configurationManager.loadConfiguration();
+		this.setSize(configurationManager.getEntry("MainFrameWidth", 800),
+				configurationManager.getEntry("MainFrameHeight", 600));
+		this.setLocation(
+				configurationManager.getEntry("MainFrameXLocation", 100),
+				configurationManager.getEntry("MainFrameYLocation", 100));
 		pipeModel = new JGPipelineModel();
 		pipeBox = new PipelineBox(pipeModel.getGraph());
 		pipeModel.addObserver(pipeBox);
@@ -70,9 +82,13 @@ public class MainFrame extends JFrame {
 
 		rightContent = new ContentSplitPane(JSplitPane.VERTICAL_SPLIT, pipeBox,
 				copyBox);
+		rightContent.setDividerLocation(configurationManager.getEntry(
+				"RightContentDividerLocation", 620));
 
 		content = new ContentSplitPane(JSplitPane.HORIZONTAL_SPLIT, new TabBox(
 				taskBox, parameterBox), rightContent);
+		content.setDividerLocation(configurationManager.getEntry(
+				"ContentDividerLocation", 220));
 
 		Menu menu = new Menu();
 		this.setJMenuBar(menu);
@@ -81,41 +97,23 @@ public class MainFrame extends JFrame {
 		add(content, BorderLayout.CENTER);
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				ConfigurationManager.saveConfiguration();
+				
+				writePrefs();				
+				configurationManager.saveConfiguration();
+				System.exit(0);
 			}
 
 		});
 
 	}
-
-	/**
-	 * @return the ContentDeviderLocation
-	 */
-	public int getContentDeviderLocation() {
-		return content.getDividerLocation();
-	}
-
-	/**
-	 * @param ContentDividerLocation
-	 *            the ContentDividerLocation to set
-	 */
-	public void setContentDevider(int contentDividerLocation) {
-		content.setDividerLocation(contentDividerLocation);
-	}
-
-	/**
-	 * @return the RightContentDeviderLocation
-	 */
-	public int getRightContentDeviderLocation() {
-		return rightContent.getDividerLocation();
-	}
-
-	/**
-	 * @param rightContentDividerLocation
-	 *            the rightContentDividerLocation to set
-	 */
-	public void setRightContentDeviderLocation(int rightContentDividerLocation) {
-		rightContent.setDividerLocation(rightContentDividerLocation);
+	
+	public void writePrefs(){
+		configurationManager.setEntry("MainFrameWidth", this.getSize().width);
+		configurationManager.setEntry("MainFrameHeight", this.getSize().height);
+		configurationManager.setEntry("MainFrameXLocation", this.getLocation().x);
+		configurationManager.setEntry("MainFrameYLocation", this.getLocation().y);
+		configurationManager.setEntry("ContentDividerLocation", content.getDividerLocation());
+		configurationManager.setEntry("RightContentDividerLocation", rightContent.getDividerLocation());
 	}
 
 	/**

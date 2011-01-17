@@ -30,8 +30,8 @@ public class JGPipelineModelTest {
 	}
 	
 	@Test public void addTask() throws TasksNotCompatibleException, TasksNotInModelException{
-		AbstractTask parent = new CommonTask("name");
-		AbstractTask child = new CommonTask("name");
+		CommonTask parent = new CommonTask("name");
+		CommonTask child = new CommonTask("name");
 		JGPipelineModel model = new JGPipelineModel();
 		model.addTask(parent);
 		model.addTask(parent, child);
