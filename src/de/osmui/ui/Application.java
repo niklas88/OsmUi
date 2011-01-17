@@ -1,5 +1,7 @@
 package de.osmui.ui;
 
+import java.util.Locale;
+
 import javax.swing.SwingUtilities;
 
 import de.osmui.util.ConfigurationManager;
