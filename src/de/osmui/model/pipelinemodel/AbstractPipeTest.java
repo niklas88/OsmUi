@@ -19,7 +19,10 @@ public class AbstractPipeTest {
 		assertEquals("target==null", false, pipe.connect(target));
 		
 		target.type = "name";
-		assertEquals("target/=null", true, pipe.connect(target));
+		assertEquals("target/=null and connected", true, pipe.connect(target));
+		
+		target.disconnect();
+		assertEquals("target/=null and not connected", false, pipe.connect(target));
 	}
 	
 	@Test public void disconnect(){
@@ -42,7 +45,18 @@ public class AbstractPipeTest {
 		CommonPipe pipe = new CommonPipe(task, "name");
 		String text = pipe.toString();
 		assertEquals("toString",text,"name");
+	}
+	
+	@Test public void getset(){
+		CommonTask task = new CommonTask("name");
+		CommonPipe pipe = new CommonPipe(task, "name");
+		pipe.myId = 10;
+		assertEquals(10, pipe.getID());
 		
+		assertEquals(false, pipe.isVariable());
 		
+		assertEquals(null, pipe.getReferencedParam());
+		
+		assertEquals(null, pipe.createPipe());
 	}
 }
