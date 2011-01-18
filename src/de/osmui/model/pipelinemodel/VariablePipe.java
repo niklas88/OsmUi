@@ -32,21 +32,10 @@ public class VariablePipe extends CommonPipe {
 	}
 	
 	/**
-	 * Gets that this is a variable pipe, we are only variable when all pipes are
-	 * already connected
-	 * 
-	 */
-	@Override
-	public boolean isVariable(){
-		return true;
-	}
-	
-	/**
 	 * This method creates a pipe of the same type as this variable pipe, if this
 	 * pipe doesn't have any free pipes anymore
 	 * 
 	 */
-	@Override
 	public AbstractPipe createPipe(){
 		
 		// Clone this pipe, and update the right parameter

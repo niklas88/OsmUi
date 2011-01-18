@@ -3,7 +3,7 @@
  */
 package de.osmui.model.pipelinemodel;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import de.osmui.model.osm.TEnumValue;

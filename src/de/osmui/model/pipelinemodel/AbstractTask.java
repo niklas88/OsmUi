@@ -36,7 +36,7 @@ public abstract class AbstractTask implements Serializable, Identifiable {
 	 * 
 	 * @return model this task belongs to
 	 */
-	public AbstractPipelineModel getModel(){
+	AbstractPipelineModel getModel(){
 		return model;
 	}
 	
@@ -57,7 +57,7 @@ public abstract class AbstractTask implements Serializable, Identifiable {
 	 * 
 	 * @param model
 	 */
-	public void setModel(AbstractPipelineModel model){
+	void setModel(AbstractPipelineModel model){
 		this.model = model;
 	}
 	
@@ -73,7 +73,7 @@ public abstract class AbstractTask implements Serializable, Identifiable {
 	/**
 	 * @param the new name
 	 */
-	public void setName(String s){
+	void setName(String s){
 		this.name=s;
 	}
 	/**
@@ -123,14 +123,14 @@ public abstract class AbstractTask implements Serializable, Identifiable {
 		
 		// Check whether this task can spawn a connection that is be a source
 		for(AbstractPipe pipe: getOutputPipes()){
-			if(!pipe.isConnected() || pipe.isVariable()){
+			if(!pipe.isConnected() || pipe instanceof VariablePipe){
 				return true;
 			}
 		}
 		
 		// Check if this task can be connected to that is be a target
 		for(AbstractPort port: getInputPorts()){
-			if(!port.isConnected() || port.isVariable()){				
+			if(!port.isConnected() || port instanceof VariablePort){				
 				return true;
 			}
 		}

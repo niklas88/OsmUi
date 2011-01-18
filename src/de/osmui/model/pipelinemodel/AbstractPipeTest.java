@@ -53,10 +53,5 @@ public class AbstractPipeTest {
 		pipe.myId = 10;
 		assertEquals(10, pipe.getID());
 		
-		assertEquals(false, pipe.isVariable());
-		
-		assertEquals(null, pipe.getReferencedParam());
-		
-		assertEquals(null, pipe.createPipe());
 	}
 }

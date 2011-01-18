@@ -21,6 +21,8 @@ import de.osmui.model.pipelinemodel.AbstractPort;
 import de.osmui.model.pipelinemodel.AbstractTask;
 import de.osmui.model.pipelinemodel.IntParameter;
 import de.osmui.model.pipelinemodel.JGPipelineModel;
+import de.osmui.model.pipelinemodel.VariablePipe;
+import de.osmui.model.pipelinemodel.VariablePort;
 import de.osmui.util.exceptions.ImportException;
 import de.osmui.util.exceptions.TaskNameUnknownException;
 
@@ -124,11 +126,11 @@ public class CommandlineTranslator {
 
 			for (AbstractPort port : currTask.getInputPorts()) {
 
-				if (port.isVariable()
-						&& port.getReferencedParam().equals(intParam)) {
+				if (port instanceof VariablePort
+						&& ((VariablePort)port).getReferencedParam().equals(intParam)) {
 					AbstractPort newPort;
 					for (int i = defaultCount; i < wantedCount; ++i) {
-						newPort = port.createPort();
+						newPort = ((VariablePort) port).createPort();
 						currTask.getInputPorts().add(newPort);
 					}
 					// We are done
@@ -138,11 +140,11 @@ public class CommandlineTranslator {
 
 			for (AbstractPipe pipe : currTask.getOutputPipes()) {
 
-				if (pipe.isVariable()
-						&& pipe.getReferencedParam().equals(intParam)) {
+				if (pipe instanceof VariablePipe
+						&& ((VariablePipe) pipe).getReferencedParam().equals(intParam)) {
 					AbstractPipe newPipe;
 					for (int i = defaultCount; i < wantedCount; ++i) {
-						newPipe = pipe.createPipe();
+						newPipe = ((VariablePipe) pipe).createPipe();
 						currTask.getOutputPipes().add(newPipe);
 					}
 					// We are done

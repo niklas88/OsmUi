@@ -65,32 +65,7 @@ public abstract class AbstractPort implements Serializable, Identifiable {
 	public boolean isConnected(){
 		return incoming != null;
 	}
-	/**
-	 * Gets whether this port is variable
-	 * 
-	 * @return false
-	 */
-	public boolean isVariable() {
-		return false;
-	}
 
-	/**
-	 * Gets the referenced parameter that specifies the number of ports if this is a variable port
-	 * is in AbstractPort because of keeping it the same as AbstractPipe which needs
-	 * it here because of the Decorator pattern TODO find better solution
-	 * @return
-	 */
-	public IntParameter getReferencedParam(){
-		return null;
-	}
-	/**
-	 * If this pipe is variable returns a new Port, otherwise returns null
-	 * 
-	 * @return null
-	 */
-	public AbstractPort createPort() {
-		return null;
-	}
 	
 	/**
 	 * If the given pipe has this port as target set connected otherwise leave unconnected.

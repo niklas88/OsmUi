@@ -111,7 +111,7 @@ public class PipelineBox extends mxGraphComponent implements Observer {
 
 		if (arg1 instanceof AbstractTask) {
 			AbstractTask task = (AbstractTask) arg1;
-			if (task.getModel() != null && !task.equals(selectedTask)) {
+			if (!task.equals(selectedTask)) {
 				this.graph.setSelectionCell(((JGPipelineModel) arg0)
 						.getCellForTask(task));
 				fireTaskSelected(new TaskSelectedEvent(task));
