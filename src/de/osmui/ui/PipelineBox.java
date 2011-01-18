@@ -106,8 +106,8 @@ public class PipelineBox extends mxGraphComponent implements Observer {
 	}
 
 	public void fireTaskSelected(TaskSelectedEvent e) {
-		for (TaskSelectedEventListener l : selectedListeners) {
-			l.TaskSelected(e);
+		for (TaskSelectedEventListener listener : selectedListeners) {
+			listener.TaskSelected(e);
 		}
 	}
 
