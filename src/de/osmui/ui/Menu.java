@@ -191,11 +191,7 @@ public class Menu extends JMenuBar {
 		JMenuItem preferences = new JMenuItem(I18N.getString("Menu.preferences")); //$NON-NLS-1$
 		preferences.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
-				
-					ConfigurationFrame configurationFrame = new ConfigurationFrame(); //$NON-NLS-1$
-					configurationFrame.setSize(600, 300);
-					configurationFrame.setVisible(true);
+					MainFrame.getInstance().configurationFrame.setVisible(true);
 			}
 		});
 		editMenu.add(preferences);
