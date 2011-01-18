@@ -22,7 +22,7 @@ public class AbstractPipeTest {
 		assertEquals("target/=null and connected", true, pipe.connect(target));
 		
 		target.disconnect();
-		assertEquals("target/=null and not connected", false, pipe.connect(target));
+		assertEquals("target/=null and not connected", true, pipe.connect(target));
 	}
 	
 	@Test public void disconnect(){

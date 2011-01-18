@@ -91,7 +91,7 @@ public abstract class AbstractPipelineModel extends Observable {
 			for (AbstractPipe out : pipes) {				
 				if(!out.isConnected()){
 					for (AbstractPort in : ports) {
-						if(!in.isConnected() && out.getType().equals(in.getType())){
+						if(!(in.isConnected()) && out.getType().equals(in.getType())){
 							if(out.connect(in)){
 								return out;
 							} else {

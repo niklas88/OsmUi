@@ -31,28 +31,44 @@ public class JGPipelineModelTest {
 	
 	@Test public void addTask() throws TasksNotCompatibleException, TasksNotInModelException{
 		CommonTask parent = new CommonTask("name");
+		CommonPipe pipe = new CommonPipe(parent, "type");
+		parent.getOutputPipes().add(pipe);
+		
 		CommonTask child = new CommonTask("name");
+		CommonPort port = new CommonPort(child, "type");
+		child.getInputPorts().add(port);
+		
+		CommonTask parent1 = new CommonTask("name");
+		CommonPipe pipe1 = new CommonPipe(parent, "type");
+		parent1.getOutputPipes().add(pipe1);
+		
+		CommonTask child1 = new CommonTask("name");
+		CommonPort port1 = new CommonPort(child1, "type");
+		child1.getInputPorts().add(port1);
+		
 		JGPipelineModel model = new JGPipelineModel();
 		model.addTask(parent);
 		model.addTask(parent, child);
+		
 		JGPipelineModel test = new JGPipelineModel();
-		test.addTask(parent);
-		test.addTask(parent, child);
+		test.addTask(parent1);
+		test.addTask(parent1, child1);
 		assertEquals(model.tasks.size(), test.tasks.size());
 	}
 
 	@Test public void removeTask() throws TasksNotInModelException, TasksNotCompatibleException{
-		AbstractTask task = new CommonTask("name");
-		AbstractPort port = new CommonPort(task, "name");
-		port.parent = task;
-		AbstractTask task1 = new CommonTask("name");
-		AbstractPipe pipe = new CommonPipe(task1, "name");
-		pipe.source = task1;
+		CommonTask parent = new CommonTask("name");
+		CommonPipe pipe = new CommonPipe(parent, "type");
+		parent.getOutputPipes().add(pipe);
+		
+		CommonTask child = new CommonTask("name");
+		CommonPort port = new CommonPort(child, "type");
+		child.getInputPorts().add(port);
+		
 		JGPipelineModel model = new JGPipelineModel();
-		model.addTask(task1);
-		model.addTask(task);
-		model.connectTasks(task, task1);
-		assertEquals(true, model.removeTask(task));
+		model.addTask(parent);
+		model.addTask(parent, child);
+		assertEquals(true, model.removeTask(parent));
 	}
 	
 	/**
@@ -62,15 +78,21 @@ public class JGPipelineModelTest {
 	 * @throws TasksNotInModelException
 	 */
 	@Test public void connectTasks() throws TasksNotCompatibleException, TasksNotInModelException{
-		AbstractTask parent = new CommonTask("name");
-		AbstractTask child = new CommonTask("name");
+		CommonTask parent = new CommonTask("name");
+		CommonPipe pipe = new CommonPipe(parent, "type");
+		parent.getOutputPipes().add(pipe);
+		
+		CommonTask child = new CommonTask("name");
+		CommonPort port = new CommonPort(child, "type");
+		child.getInputPorts().add(port);
+		
 		JGPipelineModel model = new JGPipelineModel();
 		model.addTask(parent);
 		model.addTask(parent, child);
 		ArrayList<AbstractTask> list = new ArrayList<AbstractTask>();
 		list.add(parent);
 		list.add(child);
-		assertEquals(3, model.tasks.size());
+		assertEquals(2, model.tasks.size());
 	}
 	
 	/**
@@ -98,16 +120,17 @@ public class JGPipelineModelTest {
 	}
 	
 	@Test public void disconnectTasks() throws TasksNotCompatibleException, TasksNotInModelException{
-		AbstractTask parent = new CommonTask("name");
-		AbstractPipe pipe = new CommonPipe(parent, "name");
-		pipe.source = parent;
-		AbstractTask child = new CommonTask("name");
-		AbstractPort port = new CommonPort(child, "name");
-		port.parent = child;
+		CommonTask parent = new CommonTask("name");
+		CommonPipe pipe = new CommonPipe(parent, "type");
+		parent.getOutputPipes().add(pipe);
+		
+		CommonTask child = new CommonTask("name");
+		CommonPort port = new CommonPort(child, "type");
+		child.getInputPorts().add(port);
+		
 		JGPipelineModel model = new JGPipelineModel();
 		model.addTask(parent);
-		model.addTask(child);
-		model.connectTasks(parent, child);
+		model.addTask(parent, child);
 		model.disconnectTasks(parent, child);
 		
 		ArrayList<AbstractTask> list = model.tasks;
