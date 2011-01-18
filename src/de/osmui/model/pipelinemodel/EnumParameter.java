@@ -50,6 +50,7 @@ public class EnumParameter extends AbstractParameter {
 	public List<TEnumValue> getEnumerationValues(boolean tryFriendly){
 		return enumeration;
 	}
+	
 	/* (non-Javadoc)
 	 * @see de.osmui.model.pipelinemodel.AbstractParameter#getValue()
 	 */

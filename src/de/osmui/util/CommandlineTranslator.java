@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
@@ -37,6 +36,9 @@ import de.osmui.util.exceptions.TaskNameUnknownException;
  */
 public class CommandlineTranslator {
 	protected static CommandlineTranslator instance;
+	
+	/** Private constructor for Singelton pattern **/
+	private CommandlineTranslator(){}
 
 	/**
 	 * This method finishes a pipe, that is it connects its still unconnected

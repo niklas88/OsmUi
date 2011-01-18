@@ -36,7 +36,7 @@ public abstract class AbstractTask implements Serializable, Identifiable {
 	 * 
 	 * @return model this task belongs to
 	 */
-	AbstractPipelineModel getModel(){
+	public AbstractPipelineModel getModel(){
 		return model;
 	}
 	
