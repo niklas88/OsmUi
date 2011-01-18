@@ -2,6 +2,8 @@ package de.osmui.model.osm;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 /**
@@ -17,7 +19,6 @@ public class TTaskGroupTest {
 		group.setDescription("value");
 		group.setFriendlyName("value");
 		group.setId("value");
-		
 		String desc = group.getDescription();
 		String frname = group.getFriendlyName();
 		String id = group.getId();
@@ -25,5 +26,7 @@ public class TTaskGroupTest {
 		assertEquals("value", desc);
 		assertEquals("value", frname);
 		assertEquals("value", id);
+		 ArrayList<TTask> list = new ArrayList<TTask>();
+		assertEquals(list.size(), group.getTask().size());
 	}
 }

@@ -21,6 +21,7 @@ public class BooleanParameter extends AbstractParameter {
 	
 	public BooleanParameter(TParameter desc, String value){
 		super(desc, value);
+		setValue(value);
 	}
 
 	/* (non-Javadoc)

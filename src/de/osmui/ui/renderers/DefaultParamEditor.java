@@ -31,7 +31,7 @@ public class DefaultParamEditor  extends AbstractCellEditor
 
 	private JTextField textField;
 	
-	private AbstractParameter currParam;
+	AbstractParameter currParam;
 	
 	public DefaultParamEditor() {
 		textField = new JTextField();
@@ -49,8 +49,16 @@ public class DefaultParamEditor  extends AbstractCellEditor
 
 	@Override
 	public Object getCellEditorValue() {
+		String formerValue = currParam.getValue();
+		try {
+			currParam.setValue(textField.getText());
+		} catch (IllegalArgumentException e){
+			JOptionPane.showMessageDialog(null,I18N.getString("ParamBox.ValWrong"));
+			currParam.setValue(formerValue);
+		}
 		return  currParam;
 	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

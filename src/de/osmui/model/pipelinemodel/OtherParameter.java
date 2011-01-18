@@ -22,6 +22,7 @@ public class OtherParameter extends AbstractParameter implements Serializable {
 
 	public OtherParameter(TParameter desc, String value){
 		super(desc, value);
+		setValue(value);
 	}
 	
 	/* (non-Javadoc)

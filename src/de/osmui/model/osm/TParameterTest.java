@@ -39,6 +39,8 @@ public class TParameterTest {
 		param.setFriendlyName("name");
 		param.setName("name");
 		param.setType("type");
+		param.setRequired(true);
+		param.setDefaultParameter(true);
 		
 		String enc = param.getBooleanEncoding();
 		String defval = param.getDefaultValue();
@@ -46,6 +48,8 @@ public class TParameterTest {
 		String frname = param.getFriendlyName();
 		String name = param.getName();
 		String type = param.getType();
+		Boolean requ = param.required;
+		Boolean def = param.defaultParameter;
 		
 		assertEquals("value", enc);
 		assertEquals("value", defval);
@@ -53,5 +57,7 @@ public class TParameterTest {
 		assertEquals("name", frname);
 		assertEquals("name", name);
 		assertEquals("type", type);
+		assertEquals(true, requ);
+		assertEquals(true, def);
 	}
 }
