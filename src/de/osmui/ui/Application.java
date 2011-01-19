@@ -1,12 +1,9 @@
 package de.osmui.ui;
 
-import java.util.Locale;
+
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-
-import de.osmui.util.ConfigurationManager;
-
 /**
  * @author Peter Vollmer
  * 

@@ -46,10 +46,4 @@ public class CommandlineTranslatorTest {
 		}
 	}
 	
-	@Test public void getInstance(){
-		CommandlineTranslator trans = null;
-		CommandlineTranslator test = new CommandlineTranslator();
-		trans.getInstance();
-		assertEquals(trans.getInstance(), test.getInstance());
-	}
 }

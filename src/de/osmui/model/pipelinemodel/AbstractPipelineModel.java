@@ -91,7 +91,7 @@ public abstract class AbstractPipelineModel extends Observable {
 			for (AbstractPipe out : pipes) {				
 				if(!out.isConnected()){
 					for (AbstractPort in : ports) {
-						if(!in.isConnected() && out.getType().equals(in.getType())){
+						if(!(in.isConnected()) && out.getType().equals(in.getType())){
 							if(out.connect(in)){
 								return out;
 							} else {
@@ -103,19 +103,19 @@ public abstract class AbstractPipelineModel extends Observable {
 			}
 			// If we got nothing yet check variable pipes
 			for (AbstractPipe out : pipes) {
-				outVariable = out.isVariable();
+				outVariable = out instanceof VariablePipe;
 				if(outVariable){
 					for (AbstractPort in : ports) {
-						inVariable = in.isVariable();
+						inVariable = in instanceof VariablePort;
 						// test if types match
 						if(out.getType().equals(in.getType())){
 							if(outVariable){
 								// Lets create a new pipe and reuse out
-								out = out.createPipe();
+								out = ((VariablePipe) out).createPipe();
 							}
 							if(inVariable){
 								// Lets create a new port and reuse in
-								in = in.createPort();
+								in = ((VariablePort) in).createPort();
 							}
 							if(out.connect(in)){
 								return out;

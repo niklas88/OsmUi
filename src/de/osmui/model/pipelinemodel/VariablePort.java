@@ -28,20 +28,10 @@ public class VariablePort extends CommonPort {
 		return referencedParam;
 	}
 	
-	/**
-	 * Gets whether this pipe is variable, it's only variable if all ports are connected
-	 * 
-	 * @return true
-	 */
-	@Override
-	public boolean isVariable(){		
-		return true;
-	}
 	
 	/**
 	 * This method creates a pipe of the same type as this variable port
 	 */
-	@Override
 	public AbstractPort createPort(){
 		
 		// Clone this pipe, and update the right parameter

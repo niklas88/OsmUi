@@ -3,7 +3,7 @@
  */
 package de.osmui.model.pipelinemodel;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import de.osmui.model.osm.TEnumValue;
@@ -47,9 +47,10 @@ public class EnumParameter extends AbstractParameter {
 	 * @param tryFriendly
 	 * @return
 	 */
-	public List<TEnumValue> getEnumerationValues(boolean tryFriendly){
+	public List<TEnumValue> getEnumerationValues(){
 		return enumeration;
 	}
+	
 	/* (non-Javadoc)
 	 * @see de.osmui.model.pipelinemodel.AbstractParameter#getValue()
 	 */
@@ -63,7 +64,13 @@ public class EnumParameter extends AbstractParameter {
 	 */
 	@Override
 	public void setValue(String s) throws IllegalArgumentException {
-		value = s;
+		// Test whether the requested value is in the Enumeration
+		for(TEnumValue val : enumeration){
+			if(val.getValue().equals(s)){
+				value = s;
+				return;
+			}
+		}		
 	}
 
 }

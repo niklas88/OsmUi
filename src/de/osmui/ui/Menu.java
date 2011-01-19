@@ -16,9 +16,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-import org.omg.PortableInterceptor.USER_EXCEPTION;
-
-import de.osmui.util.ConfigurationManager;
 import de.osmui.util.exceptions.ImportException;
 import de.osmui.i18n.I18N;
 import de.osmui.io.PipeImEx;

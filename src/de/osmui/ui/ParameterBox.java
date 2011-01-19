@@ -8,6 +8,7 @@ import javax.swing.table.TableCellRenderer;
 import de.osmui.model.pipelinemodel.AbstractParameter;
 import de.osmui.model.pipelinemodel.AbstractTask;
 import de.osmui.model.pipelinemodel.BooleanParameter;
+import de.osmui.model.pipelinemodel.EnumParameter;
 import de.osmui.ui.events.TaskSelectedEvent;
 import de.osmui.ui.events.TaskSelectedEventListener;
 import de.osmui.ui.models.ParameterBoxTableModel;
@@ -15,6 +16,7 @@ import de.osmui.ui.renderers.BooleanParamEditor;
 import de.osmui.ui.renderers.BooleanParamRenderer;
 import de.osmui.ui.renderers.DefaultParamEditor;
 import de.osmui.ui.renderers.DefaultParamRenderer;
+import de.osmui.ui.renderers.EnumParamEditor;
 
 /**
  * @author Peter Vollmer
@@ -37,11 +39,17 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 	public ParameterBox(ParameterBoxTableModel parameterBoxTableModel) {
 		model = parameterBoxTableModel;
 		
+		DefaultParamRenderer defaultParamRenderer = new DefaultParamRenderer();
 		
-		this.setDefaultRenderer(AbstractParameter.class, new DefaultParamRenderer());
-		this.setDefaultRenderer(BooleanParameter.class, new BooleanParamRenderer(getDefaultRenderer(Boolean.class)));
+		this.setDefaultRenderer(AbstractParameter.class, defaultParamRenderer);
 		this.setDefaultEditor(AbstractParameter.class, new DefaultParamEditor());
+		
+		this.setDefaultRenderer(BooleanParameter.class, new BooleanParamRenderer(getDefaultRenderer(Boolean.class)));
 		this.setDefaultEditor(BooleanParameter.class, new BooleanParamEditor());
+		
+		this.setDefaultRenderer(EnumParameter.class,defaultParamRenderer);
+		this.setDefaultEditor(EnumParameter.class, new EnumParamEditor());
+		
 		
 		this.setModel(parameterBoxTableModel);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

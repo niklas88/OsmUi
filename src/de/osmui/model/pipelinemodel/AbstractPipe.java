@@ -89,32 +89,7 @@ public abstract class AbstractPipe implements Serializable, Identifiable {
 		return target;
 	}
 	
-	/**
-	 * Gets whether this pipe is variable, so that new pipes can be created from it,
-	 * 
-	 * @return
-	 */
-	public boolean isVariable(){
-		// Had to put it here because foo instanceof VariablePipe wouldn't work with the Decorator pattern
-		return false;
-	}
-	/**
-	 * Gets the referenced parameter if this is a VariablePipe else returns null,
-	 * this has to be in the AbstractPipe because the decorator wouldn't allow access otherwise
-	 * TODO find better solution
-	 * @return
-	 */
-	public IntParameter getReferencedParam(){
-		return null;
-	}
-	/**
-	 * This method is used to create new Pipes, if this pipe is variable, if it's not it just returns null
-	 *  this has to be in the AbstractPipe because the decorator wouldn't allow access otherwise
-	 * @return
-	 */
-	public AbstractPipe createPipe() {
-		return null;
-	}
+
 	
 	/**
 	 * If possible (i.e. types match) connects this pipe with the given target port, returns true if successful, false otherwise.
@@ -122,7 +97,7 @@ public abstract class AbstractPipe implements Serializable, Identifiable {
 	 * @param target
 	 * @return true if connect was successful, false otherwise
 	 */
-	public boolean connect(AbstractPort target){
+	boolean connect(AbstractPort target){
 		if(target != null && this.getType().equals(target.getType())){
 			this.target = target;
 			if(target.connect(this)){
@@ -140,7 +115,7 @@ public abstract class AbstractPipe implements Serializable, Identifiable {
 	/**
 	 * Disconnects this pipeline from it's target if it was connected, does nothing otherwise
 	 */
-	public void disconnect(){
+	void disconnect(){
 		if(target != null){
 			// A little tricky as AbstractPorts disconnect also tries this disconnect method
 			// this ensures disconnect on either end works

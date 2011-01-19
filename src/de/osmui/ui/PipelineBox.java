@@ -8,6 +8,7 @@ import java.util.Observer;
 
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 
 import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.mxGraphComponent;
@@ -68,7 +69,16 @@ public class PipelineBox extends mxGraphComponent implements Observer {
 			public void actionPerformed(ActionEvent e) {
 				final mxGraph graph = getGraph();
 				// Removes the selected Cells
-				graph.removeCells();
+				// Had a concurrent modification exception here doesn't
+				// seem to run in the Event thread by default so make it run there
+				SwingUtilities.invokeLater(new Runnable(){
+
+					@Override
+					public void run() {
+						graph.removeCells();						
+					}
+					
+				});
 
 			}
 		});
@@ -96,8 +106,8 @@ public class PipelineBox extends mxGraphComponent implements Observer {
 	}
 
 	public void fireTaskSelected(TaskSelectedEvent e) {
-		for (TaskSelectedEventListener l : selectedListeners) {
-			l.TaskSelected(e);
+		for (TaskSelectedEventListener listener : selectedListeners) {
+			listener.TaskSelected(e);
 		}
 	}
 
@@ -111,11 +121,16 @@ public class PipelineBox extends mxGraphComponent implements Observer {
 
 		if (arg1 instanceof AbstractTask) {
 			AbstractTask task = (AbstractTask) arg1;
+			// If the model is null the task was removed
 			if (task.getModel() != null && !task.equals(selectedTask)) {
 				this.graph.setSelectionCell(((JGPipelineModel) arg0)
 						.getCellForTask(task));
 				fireTaskSelected(new TaskSelectedEvent(task));
 				selectedTask = task;
+			} else if (task.getModel() == null){
+				selectedTask = null;
+				// Sadly sources for event's can't be null let the event be null
+				fireTaskSelected(null);
 			}
 		}
 
