@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <osmosisTaskDescription xmlns="http://uni-stuttgart.de/iev/osmosisTaskDescription"
                         formatVersion="1.0.0"
                         osmosisVersion="0.37">  
@@ -20,7 +20,7 @@
           If set to yes, the dates in the osm xml file will be parsed, otherwise all dates will be set to a
           single time approximately equal to application startup. Setting this to no is only useful if
           the input file doesn't contain timestamps. It used to improve performance but date parsing
-          now incurs low overhead.inst
+          now incurs low overhead.
         </description>
       </parameter>
       <parameter name="compressionMethod" type="enum" defaultValue="none">
@@ -734,6 +734,21 @@
         <description>Comma-separated list of desired key.value combinations.</description>
       </parameter>
     </task>
+    
+    <task name="tag-filter" shortName="tf">
+      <description>
+        Filters entities based on their type and optionally based on their tags. 
+        Can accept or reject entities that match the filter specification.
+      </description>
+      <inputPipe type="entity" count="single" index="0" />
+      <outputPipe type="entity" count="single" index="0" />
+      <parameter name="keyValueList" type="string">
+        <description>
+          A two-field dash-separated string which specifies accept/reject behavior and the entity type on 
+          which this filter operates.
+        </description>
+      </parameter>
+    </task>
 
     <task name="used-node" shortName="un">
       <description>
@@ -1201,7 +1216,6 @@
           The api password.
         </description>
       </parameter>
-      <parameter name="bbox" type="bbox" required="true" />
     </task>
   </taskGroup>
 
@@ -1234,6 +1248,9 @@
   </taskGroup>
 
   <taskGroup id="report" friendlyName="Reporting Tasks">
+    <description>
+     These tasks provide summaries of data processed by the pipeline.
+    </description>
     <task name="report-entity" shortName="re">
       <description>
         Produces a summary report of each entity type and the users that last modified them.
@@ -1246,9 +1263,6 @@
       </parameter>
     </task>
     <task name="report-integrity" shortName="ri">
-      <description>
-        These tasks provide summaries of data processed by the pipeline.
-      </description>
       <description>
         Produces a list of the referential integrity issues in the data source.
       </description>
