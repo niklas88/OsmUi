@@ -5,10 +5,13 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
+import java.util.Enumeration;
 import java.util.Locale;
 
 import javax.help.HelpSet;
 import javax.help.JHelp;
+import javax.help.JHelpIndexNavigator;
+import javax.help.JHelpNavigator;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;

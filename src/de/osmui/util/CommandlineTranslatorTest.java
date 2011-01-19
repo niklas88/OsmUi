@@ -22,10 +22,9 @@ import de.osmui.util.exceptions.ImportException;
 public class CommandlineTranslatorTest {
 	
 	@Test public void ImportLine(){
-		CommandlineTranslator testen = new CommandlineTranslator();
-		testen.main(null);
 		JGPipelineModel model = new JGPipelineModel();
 		CommandlineTranslator trans = CommandlineTranslator.getInstance();
+		trans.main(null);
 		try {
 			trans.importLine(
 					model,
