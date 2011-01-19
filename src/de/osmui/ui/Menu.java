@@ -1,5 +1,9 @@
 package de.osmui.ui;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -12,12 +16,17 @@ import javax.help.HelpSet;
 import javax.help.JHelp;
 import javax.help.JHelpIndexNavigator;
 import javax.help.JHelpNavigator;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import de.osmui.util.exceptions.ImportException;
 import de.osmui.i18n.I18N;
@@ -234,7 +243,6 @@ public class Menu extends JMenuBar {
 				frame.getContentPane().add(helpViewer);
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.setVisible(true);
-				System.out.println("help"); //$NON-NLS-1$
 			}
 		});
 		helpMenu.add(help);
@@ -248,7 +256,19 @@ public class Menu extends JMenuBar {
 		JMenuItem about = new JMenuItem(I18N.getString("Menu.about")); //$NON-NLS-1$
 		about.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("about"); //$NON-NLS-1$
+				JDialog frame = new JDialog();
+				frame.setLayout(new BorderLayout());
+				frame.setTitle(I18N.getString("Menu.about"));
+				
+				Icon icon = new ImageIcon(getClass().getResource("Logo_Osmui1.png"));
+				JLabel bild = new JLabel(icon);
+				frame.add(bild, BorderLayout.NORTH);
+				
+				JLabel test = new JLabel(I18N.getString("Menu.about_text"));
+				frame.add(test, BorderLayout.CENTER);
+				frame.setVisible(true);
+				frame.pack();
+
 			}
 		});
 		helpMenu.add(about);
