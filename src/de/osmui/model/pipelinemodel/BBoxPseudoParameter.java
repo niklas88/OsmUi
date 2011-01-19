@@ -16,7 +16,7 @@ import de.osmui.model.osm.TParameter;
  * @author Niklas Schnelle
  *
  */
-public class BBoxPseudoParam extends AbstractParameter {
+public class BBoxPseudoParameter extends AbstractParameter {
 
 	/**
 	 * 
@@ -64,7 +64,7 @@ public class BBoxPseudoParam extends AbstractParameter {
 	 * @param parent the parent task for this pseudo parameter
 	 * @param withXY true if ths is a bbox with x0,x2,..,zoom false if only top,left,right..
 	 */
-	public BBoxPseudoParam(TParameter desc, String value, AbstractTask parent, boolean withXY) {
+	public BBoxPseudoParameter(TParameter desc, String value, AbstractTask parent, boolean withXY) {
 		super(desc, value);
 		Map<String, AbstractParameter> pMap = parent.getParameters();
 		TParameter tParam = new TParameter();

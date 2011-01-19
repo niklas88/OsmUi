@@ -43,7 +43,7 @@ public class ParameterBoxTableModel extends AbstractTableModel {
 
 	@Override
 	public boolean isCellEditable(int row, int col) {
-		return true;//(col == 1)? true : false;
+		return (col == 1)? true : false;
 	}
 
 	@Override
