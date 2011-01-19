@@ -1,0 +1,93 @@
+/**
+ * 
+ */
+package de.osmui.ui.renderers;
+
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.AbstractCellEditor;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JList;
+import javax.swing.JTable;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import javax.swing.table.TableCellEditor;
+
+import de.osmui.model.osm.TEnumValue;
+import de.osmui.model.pipelinemodel.EnumParameter;
+
+/**
+ * @author Niklas Schnelle
+ * 
+ */
+public class EnumParamEditor extends AbstractCellEditor implements
+		TableCellEditor, ActionListener {
+
+	private static class EnumComboBoxRenderer extends BasicComboBoxRenderer {
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * javax.swing.plaf.basic.BasicComboBoxRenderer#getListCellRendererComponent
+		 * (javax.swing.JList, java.lang.Object, int, boolean, boolean)
+		 */
+		@Override
+		public Component getListCellRendererComponent(JList list, Object value,
+				int index, boolean isSelected, boolean cellHasFocus) {
+			TEnumValue enumValue = (TEnumValue) value;
+			if (isSelected) {
+				setBackground(list.getSelectionBackground());
+				setForeground(list.getSelectionForeground());
+				list.setToolTipText(enumValue.getDescription());
+			} else {
+				setBackground(list.getBackground());
+				setForeground(list.getForeground());
+			}
+			
+			setText(enumValue.getValue());
+			return this;
+		}
+	}
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -578571469779942429L;
+
+	private JComboBox comboBox;
+	private DefaultComboBoxModel model;
+	private EnumParameter param;
+
+	public EnumParamEditor() {
+		model = new DefaultComboBoxModel();
+		comboBox = new JComboBox(model);
+		comboBox.setRenderer(new EnumComboBoxRenderer());
+		param = null;
+	}
+
+	@Override
+	public Object getCellEditorValue() {
+		String value = ((TEnumValue)model.getSelectedItem()).getValue();
+		param.setValue(value);
+		return param;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// Do nothing
+	}
+
+	@Override
+	public Component getTableCellEditorComponent(JTable table, Object value,
+			boolean isSelected, int row, int column) {
+		param = (EnumParameter) value;
+		model.removeAllElements();
+		for (TEnumValue val : param.getEnumerationValues()) {
+			model.addElement(val);
+		}
+		return comboBox;
+	}
+
+}

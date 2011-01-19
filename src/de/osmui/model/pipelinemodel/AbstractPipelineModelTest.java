@@ -69,6 +69,7 @@ public class AbstractPipelineModelTest {
 	 * @throws TasksNotCompatibleException
 	 * @throws TasksNotInModelException
 	 */
+	@SuppressWarnings("unused")
 	@Test public void connectb() throws TasksNotCompatibleException, TasksNotInModelException{
 		AbstractTask task = new CommonTask("name");
 		AbstractTask child = new CommonTask("name");
@@ -89,6 +90,7 @@ public class AbstractPipelineModelTest {
 	 * @throws TasksNotCompatibleException
 	 * @throws TasksNotInModelException
 	 */
+	@SuppressWarnings("unused")
 	@Test public void disconnectTaskb1() throws TasksNotInModelException, TasksNotCompatibleException{
 		
 		CommonTask parent = new CommonTask("name");

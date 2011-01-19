@@ -137,6 +137,9 @@ public class TaskManager {
 			} else if (paramDesc.getType().equals("boolean")) {
 				newParameter = new BooleanParameter(paramDesc,
 						paramDesc.getDefaultValue());
+			} else if (paramDesc.getType().equals("enum")) {
+				newParameter = new EnumParameter(paramDesc,
+						paramDesc.getDefaultValue());
 			} else {
 				newParameter = new OtherParameter(paramDesc,
 						paramDesc.getDefaultValue());
@@ -235,7 +238,8 @@ public class TaskManager {
 				&& !taskDescSearched.getOutputPipe().isEmpty()) {
 			for (TTask taskDesc : taskDescriptions) {
 				if (!taskDesc.getInputPipe().isEmpty()) {
-					PipeLoop: for (TPipe outPipe : taskDescSearched.getOutputPipe()) {
+					PipeLoop: for (TPipe outPipe : taskDescSearched
+							.getOutputPipe()) {
 						for (TPipe inPipe : taskDesc.getInputPipe()) {
 							if (outPipe.getType().equals(inPipe.getType())) {
 								compatibleTasks.add(taskDesc);

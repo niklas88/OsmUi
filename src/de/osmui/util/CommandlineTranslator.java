@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
@@ -21,6 +20,8 @@ import de.osmui.model.pipelinemodel.AbstractPort;
 import de.osmui.model.pipelinemodel.AbstractTask;
 import de.osmui.model.pipelinemodel.IntParameter;
 import de.osmui.model.pipelinemodel.JGPipelineModel;
+import de.osmui.model.pipelinemodel.VariablePipe;
+import de.osmui.model.pipelinemodel.VariablePort;
 import de.osmui.util.exceptions.ImportException;
 import de.osmui.util.exceptions.TaskNameUnknownException;
 
@@ -35,6 +36,9 @@ import de.osmui.util.exceptions.TaskNameUnknownException;
  */
 public class CommandlineTranslator {
 	protected static CommandlineTranslator instance;
+	
+	/** Private constructor for Singelton pattern **/
+	private CommandlineTranslator(){}
 
 	/**
 	 * This method finishes a pipe, that is it connects its still unconnected
@@ -124,11 +128,11 @@ public class CommandlineTranslator {
 
 			for (AbstractPort port : currTask.getInputPorts()) {
 
-				if (port.isVariable()
-						&& port.getReferencedParam().equals(intParam)) {
+				if (port instanceof VariablePort
+						&& ((VariablePort)port).getReferencedParam().equals(intParam)) {
 					AbstractPort newPort;
 					for (int i = defaultCount; i < wantedCount; ++i) {
-						newPort = port.createPort();
+						newPort = ((VariablePort) port).createPort();
 						currTask.getInputPorts().add(newPort);
 					}
 					// We are done
@@ -138,11 +142,11 @@ public class CommandlineTranslator {
 
 			for (AbstractPipe pipe : currTask.getOutputPipes()) {
 
-				if (pipe.isVariable()
-						&& pipe.getReferencedParam().equals(intParam)) {
+				if (pipe instanceof VariablePipe
+						&& ((VariablePipe) pipe).getReferencedParam().equals(intParam)) {
 					AbstractPipe newPipe;
 					for (int i = defaultCount; i < wantedCount; ++i) {
-						newPipe = pipe.createPipe();
+						newPipe = ((VariablePipe) pipe).createPipe();
 						currTask.getOutputPipes().add(newPipe);
 					}
 					// We are done
