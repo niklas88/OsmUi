@@ -1,15 +1,19 @@
 package de.osmui.ui;
 
+import java.util.Comparator;
+
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableRowSorter;
 
 import de.osmui.model.pipelinemodel.AbstractParameter;
 import de.osmui.model.pipelinemodel.AbstractTask;
 import de.osmui.model.pipelinemodel.BBoxPseudoParameter;
 import de.osmui.model.pipelinemodel.BooleanParameter;
 import de.osmui.model.pipelinemodel.EnumParameter;
+import de.osmui.model.pipelinemodel.IntParameter;
 import de.osmui.ui.events.TaskSelectedEvent;
 import de.osmui.ui.events.TaskSelectedEventListener;
 import de.osmui.ui.models.ParameterBoxTableModel;
@@ -37,10 +41,25 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 	private final ParameterBoxTableModel model;
 
 	private AbstractTask selectedTask = null;
+	
+	private TableRowSorter<ParameterBoxTableModel> sorter;
 
 	public ParameterBox(ParameterBoxTableModel parameterBoxTableModel) {
 		model = parameterBoxTableModel;
-		
+		sorter = new TableRowSorter<ParameterBoxTableModel>(model);
+		sorter.setComparator(1, new Comparator<AbstractParameter>(){
+
+			@Override
+			public int compare(AbstractParameter arg0, AbstractParameter arg1) {
+				System.out.println("Compare");
+				int result = 0;
+				if(arg0 instanceof BBoxPseudoParameter || arg1 instanceof BBoxPseudoParameter){
+					
+					return -1;
+				}
+				return result;
+			}});
+		this.setRowSorter(sorter);
 		DefaultParamRenderer defaultParamRenderer = new DefaultParamRenderer();
 		
 		this.setDefaultRenderer(AbstractParameter.class, defaultParamRenderer);
@@ -57,12 +76,14 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 		
 		this.setModel(parameterBoxTableModel);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 
 		showActualParameters(null);
 	}
 
 	public void showActualParameters(AbstractTask task) {
 		model.setTask(task);
+		sorter.sort();
 	}
 
 	@Override
