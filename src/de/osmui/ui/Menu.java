@@ -132,7 +132,6 @@ public class Menu extends JMenuBar {
 				I18N.getString("Menu.importClipBoard")); //$NON-NLS-1$
 		importClipBoard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("importClipboard"); //$NON-NLS-1$
 				try {
 					PipeImEx.getInstance().importClipBoard(
 							MainFrame.getInstance().pipeModel,
@@ -156,11 +155,11 @@ public class Menu extends JMenuBar {
 
 				if (!MainFrame.getInstance().pipeModel.isExecutable()) {
 
-					if (JOptionPane.showConfirmDialog(
-							MainFrame.getInstance(),
-							"Die konstruierte Pipeline ist nicht ausführbar wollen sie, sie trotzdem exportieren?",
-							"Nicht ausführbar", JOptionPane.WARNING_MESSAGE,
-							JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
+					if (JOptionPane.showConfirmDialog(MainFrame.getInstance(),
+							I18N.getString("Menu.exportWarnQuestion"),
+							I18N.getString("Menu.exportWarnQuestionTitle"),
+							JOptionPane.WARNING_MESSAGE,
+							JOptionPane.YES_NO_OPTION) == JOptionPane.CANCEL_OPTION) {
 						return;
 					}
 				}
@@ -176,12 +175,11 @@ public class Menu extends JMenuBar {
 				int returnVal = chooser.showSaveDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					try {
-						
-						PipeImEx.getInstance()
-								.export(MainFrame.getInstance().pipeModel,
-										chooser.getSelectedFile()
-												.getAbsolutePath(),
-										chooser.getFileFilter().getDescription());
+
+						PipeImEx.getInstance().export(
+								MainFrame.getInstance().pipeModel,
+								chooser.getSelectedFile().getAbsolutePath(),
+								chooser.getFileFilter().getDescription());
 					} catch (ExportException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
@@ -220,7 +218,7 @@ public class Menu extends JMenuBar {
 		/*
 		 * Redo
 		 */
-		JMenuItem redo = new JMenuItem(I18N.getString("Menu.undo")); //$NON-NLS-1$
+		JMenuItem redo = new JMenuItem(I18N.getString("Menu.redo")); //$NON-NLS-1$
 		redo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("redo"); //$NON-NLS-1$
@@ -230,10 +228,10 @@ public class Menu extends JMenuBar {
 		/*
 		 * Undo
 		 */
-		JMenuItem undo = new JMenuItem(I18N.getString("Menu.redo")); //$NON-NLS-1$
+		JMenuItem undo = new JMenuItem(I18N.getString("Menu.undo")); //$NON-NLS-1$
 		undo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(""); //$NON-NLS-1$
+				System.out.println("undo"); //$NON-NLS-1$
 			}
 		});
 		editMenu.add(undo);
@@ -283,7 +281,8 @@ public class Menu extends JMenuBar {
 						helpViewer.setCurrentID("Simple.Introduction");
 					}
 				} catch (Exception f) {
-					System.err.println("API Help Set not found");
+					return;
+					//System.err.println("API Help Set not found");
 				}
 				JFrame frame = new JFrame();
 				frame.setTitle(I18N.getString("Menu.help"));
@@ -291,7 +290,6 @@ public class Menu extends JMenuBar {
 				frame.getContentPane().add(helpViewer);
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.setVisible(true);
-				System.out.println("help"); //$NON-NLS-1$
 			}
 		});
 		helpMenu.add(help);

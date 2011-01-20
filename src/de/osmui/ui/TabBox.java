@@ -41,7 +41,7 @@ public class TabBox extends JTabbedPane{
         
         taskTab.add(taskScrollPane,BorderLayout.CENTER);
         
-        JButton addButton = new JButton("hinzufügen");
+        JButton addButton = new JButton(I18N.getString("TabBox.add"));
         addButton.addActionListener(new ActionListener() {
 			
 			@Override

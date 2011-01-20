@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.Scanner;
 
+import de.osmui.i18n.I18N;
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
 import de.osmui.model.pipelinemodel.AbstractParameter;
@@ -36,9 +37,10 @@ import de.osmui.util.exceptions.TaskNameUnknownException;
  */
 public class CommandlineTranslator {
 	protected static CommandlineTranslator instance;
-	
+
 	/** Private constructor for Singelton pattern **/
-	private CommandlineTranslator(){}
+	private CommandlineTranslator() {
+	}
 
 	/**
 	 * This method finishes a pipe, that is it connects its still unconnected
@@ -62,10 +64,11 @@ public class CommandlineTranslator {
 					model.connectTasks(pipeStack.pop(), port);
 				} catch (TasksNotCompatibleException e) {
 					throw new ImportException(
-							"Tried to connect incompatible tasks at:"
+							I18N.getString("CommandlineTranslator.triedConnectIncompatibleTasks")
 									+ currTask.getCommandlineForm());
-				} catch(EmptyStackException e){
-					throw new ImportException("No unnamed pipes on the stack to connect");
+				} catch (EmptyStackException e) {
+					throw new ImportException(
+							I18N.getString("CommandlineTranslator.noUnamedPipes"));
 				} catch (TasksNotInModelException e) {
 					// Failure of program logic task should be in the model
 					e.printStackTrace();
@@ -99,8 +102,8 @@ public class CommandlineTranslator {
 		try {
 			return tm.createTask(taskName);
 		} catch (TaskNameUnknownException e) {
-			throw new ImportException("Taskname " + taskName
-					+ "doesn't match anything");
+			throw new ImportException(I18N.getString(
+					"CommandlineTranslator.taskDoesNotMatchAnything", taskName));
 		}
 	}
 
@@ -117,7 +120,6 @@ public class CommandlineTranslator {
 	private void handleParam(AbstractTask currTask, AbstractParameter param,
 			String paramValue) throws ImportException {
 
-	
 		// Check if the parameter specifies a variable
 		// pipe/port count and create pipes/ports
 		// accordingly
@@ -129,7 +131,8 @@ public class CommandlineTranslator {
 			for (AbstractPort port : currTask.getInputPorts()) {
 
 				if (port instanceof VariablePort
-						&& ((VariablePort)port).getReferencedParam().equals(intParam)) {
+						&& ((VariablePort) port).getReferencedParam().equals(
+								intParam)) {
 					AbstractPort newPort;
 					for (int i = defaultCount; i < wantedCount; ++i) {
 						newPort = ((VariablePort) port).createPort();
@@ -143,7 +146,8 @@ public class CommandlineTranslator {
 			for (AbstractPipe pipe : currTask.getOutputPipes()) {
 
 				if (pipe instanceof VariablePipe
-						&& ((VariablePipe) pipe).getReferencedParam().equals(intParam)) {
+						&& ((VariablePipe) pipe).getReferencedParam().equals(
+								intParam)) {
 					AbstractPipe newPipe;
 					for (int i = defaultCount; i < wantedCount; ++i) {
 						newPipe = ((VariablePipe) pipe).createPipe();
@@ -154,12 +158,12 @@ public class CommandlineTranslator {
 				}
 			}
 		}
-		
-		try{
+
+		try {
 			param.setValue(paramValue);
-		}
-		catch(NumberFormatException e){
-			throw new ImportException("Parameter: "+param.getName()+" expected Number");
+		} catch (NumberFormatException e) {
+			throw new ImportException(I18N.getString(
+					"CommandlineTranslator.paramExpecNum", param.getName()));
 		}
 	}
 
@@ -200,19 +204,16 @@ public class CommandlineTranslator {
 			// Check if the pipeNum exists
 			if (pipeNum >= currTask.getInputPorts().size()) {
 				throw new ImportException(
-						"Pipe index of inPipe does not exist: " + currToken);
+						I18N.getString("CommandlineTranslatorPipe.indexInPipeNotExist",currToken));
 			}
 			pipe = pipeMap.remove(paramValue);
 			if (pipe == null) {
-				throw new ImportException("Can't connect to unknown pipe: "
-						+ paramValue);
+				throw new ImportException(I18N.getString("CommandlineTranslator.unknownPipe",paramValue));
 			}
 			try {
 				model.connectTasks(pipe, currTask.getInputPorts().get(pipeNum));
 			} catch (TasksNotCompatibleException e) {
-				throw new ImportException(
-						"Tried to connect incompatible tasks at: "
-								+ currTask.getCommandlineForm());
+				throw new ImportException(I18N.getString("CommandlineTranslatorTried.incompatibleTask",currTask.getCommandlineForm()));
 			} catch (TasksNotInModelException e) {
 				// Failure in program logic task should be added
 				e.printStackTrace();
@@ -224,16 +225,14 @@ public class CommandlineTranslator {
 			pipeNum = Integer.parseInt(paramName.substring(8));
 			// Check if the pipeNum exists
 			if (pipeNum >= currTask.getOutputPipes().size()) {
-				throw new ImportException(
-						"Pipe index of outPipe does not exist: " + currToken);
+				throw new ImportException(I18N.getString("CommandlineTranslator.indexOutPipeNotExist",currToken));
 			}
 			currTask.getOutputPipes().get(pipeNum).setName(paramValue);
 		} else {
 			// This is a named parameter
 			param = currTask.getParameters().get(paramName);
 			if (param == null) {
-				throw new ImportException("Unknown parameter: " + paramName
-						+ " for Task" + currTask.getName());
+				throw new ImportException(I18N.getString("CommandlineTranslator.unknownParameter",paramName,currTask.getName()));
 			}
 			handleParam(currTask, param, paramValue);
 		}
@@ -252,8 +251,8 @@ public class CommandlineTranslator {
 	 */
 	public void importLine(AbstractPipelineModel model, String line)
 
-			throws ImportException {
-		//StringTokenizer st = new StringTokenizer(line, " \n\r\f\t");
+	throws ImportException {
+		// StringTokenizer st = new StringTokenizer(line, " \n\r\f\t");
 		Scanner st = new Scanner(line);
 		st.useDelimiter("[ \\t\\r\\n\\f\\\\]+");
 
@@ -283,7 +282,7 @@ public class CommandlineTranslator {
 				// Not a task must be parameter or pipe, the currTask must be
 				// non null or else something's wrong
 				if (currTask == null) {
-					throw new ImportException("Parameters before first task");
+					throw new ImportException(I18N.getString("CommandlineTranslator.noParamBeforeFirstTask"));
 				}
 				handleParamOrPipe(model, currTask, pipeMap, currToken);
 			}
@@ -297,50 +296,51 @@ public class CommandlineTranslator {
 
 	}
 
-	
 	/**
-	 * This private function is used to deal with a unfinished task:
-	 * - It adds all still unfinished Downstream tasks that aren't yet in unfinished to it
-	 * - It tries whether all dependencies are met, if not pushing them
-	 * - When called again (after being added by a now finished upstream task) it marks this
-	 * task as finished and writes it to the StringBuilder
-	 * - This algorithm ensures that tasks will (if possible) be put right before their downstream neighbor
+	 * This private function is used to deal with a unfinished task: - It adds
+	 * all still unfinished Downstream tasks that aren't yet in unfinished to it
+	 * - It tries whether all dependencies are met, if not pushing them - When
+	 * called again (after being added by a now finished upstream task) it marks
+	 * this task as finished and writes it to the StringBuilder - This algorithm
+	 * ensures that tasks will (if possible) be put right before their
+	 * downstream neighbor
+	 * 
 	 * @param unfin
 	 * @param fin
 	 * @param sb
 	 * @param task
 	 */
-	private void exportTask(Stack<AbstractTask> unfin, Set<AbstractTask> fin, StringBuilder sb, AbstractTask task){
+	private void exportTask(Stack<AbstractTask> unfin, Set<AbstractTask> fin,
+			StringBuilder sb, AbstractTask task) {
 		// When we are done we need the downstream tasks on the stack
 		AbstractTask currTask;
-		AbstractPort downPort;		
-		// Push all connected unfinished Downstream tasks and 
-		for(AbstractPipe pipe : task.getOutputPipes()){
-			if(pipe.isConnected()){
+		AbstractPort downPort;
+		// Push all connected unfinished Downstream tasks and
+		for (AbstractPipe pipe : task.getOutputPipes()) {
+			if (pipe.isConnected()) {
 				downPort = pipe.getTarget();
 				currTask = downPort.getParent();
-				if(!fin.contains(currTask) && !unfin.contains(currTask)){
+				if (!fin.contains(currTask) && !unfin.contains(currTask)) {
 					unfin.push(currTask);
 				}
 			}
 		}
-		
-		
+
 		// Push any unfinished dependencies
 		AbstractPipe upPipe;
 		boolean unmetDependecy = false;
-		for(AbstractPort port : task.getInputPorts()){
-			if(port.isConnected()){
+		for (AbstractPort port : task.getInputPorts()) {
+			if (port.isConnected()) {
 				upPipe = port.getIncoming();
 				currTask = upPipe.getSource();
-				if(!fin.contains(currTask)){
+				if (!fin.contains(currTask)) {
 					unfin.push(currTask);
 					unmetDependecy = true;
 				}
 			}
-			
+
 		}
-		if(unmetDependecy){
+		if (unmetDependecy) {
 			return;
 		}
 		// All dependencies are now cleared append task (without pipes)
@@ -348,36 +348,39 @@ public class CommandlineTranslator {
 
 		// This task is now finished
 		fin.add(task);
-		
+
 	}
+
 	/**
 	 * This method exports a model into a osmosis call e.g.
 	 * 
 	 * @param model
-	 * @return the line e.g. "--foo opt outPipe.0=AUTO1to1 --bar opt=val inPipe.0=AUTO1to1"
+	 * @return the line e.g.
+	 *         "--foo opt outPipe.0=AUTO1to1 --bar opt=val inPipe.0=AUTO1to1"
 	 */
-	public String exportLine(AbstractPipelineModel model){
-		
+	public String exportLine(AbstractPipelineModel model) {
+
 		Stack<AbstractTask> unfinished = new Stack<AbstractTask>();
 		HashSet<AbstractTask> finished = new HashSet<AbstractTask>();
 		StringBuilder builder = new StringBuilder();
 		// Add all source tasks to the unfinished stack
-		for(AbstractTask task : model.getSourceTasks()){
+		for (AbstractTask task : model.getSourceTasks()) {
 			unfinished.add(task);
 		}
-		
-		while(!unfinished.isEmpty()){
+
+		while (!unfinished.isEmpty()) {
 			AbstractTask currTask = unfinished.pop();
-			if(!finished.contains(currTask)){
-				// This call tries to finish the task, if it still needs dependencies
+			if (!finished.contains(currTask)) {
+				// This call tries to finish the task, if it still needs
+				// dependencies
 				// it will push those to resolve them first
 				exportTask(unfinished, finished, builder, currTask);
 			}
 		}
-		
+
 		return builder.toString();
 	}
-	
+
 	/**
 	 * This returns an Instance of CommandlineTranslator, see Singelton pattern
 	 * 
@@ -390,27 +393,4 @@ public class CommandlineTranslator {
 		return instance;
 	}
 
-	// Little test method ;-)
-	public static void main(String[] args) {
-		JGPipelineModel model = new JGPipelineModel();
-		CommandlineTranslator trans = CommandlineTranslator.getInstance();
-		try {
-			trans.importLine(
-					model,
-					"--rx full/planet-071128.osm.bz2 "
-					+ "--tee  4  \n\\\t"
-					+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
-					+ "--wx baden-wuerttemberg.osm.bz2  \\"
-					+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
-					+ "--wx baden-wuerttemberg.osm.bz2  \\"
-					+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\"
-					+ "--wx baden-wuerttemberg.osm.bz2  \\"
-					+ "--bp file=polygons/europe/germany/baden-wuerttemberg.poly  \\");
-			
-			System.out.println(trans.exportLine(model));
-		} catch (ImportException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }
