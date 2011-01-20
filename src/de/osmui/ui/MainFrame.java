@@ -53,8 +53,7 @@ public class MainFrame extends JFrame {
 	/**
 	 * Constructs the mainframe
 	 */
-	private MainFrame() {
-		
+	private MainFrame() {	
 
 		this.setTitle("OsmUi");
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -76,7 +75,7 @@ public class MainFrame extends JFrame {
 		pipeModel.addObserver(copyBox);
 
 		parameterBoxTableModel = new ParameterBoxTableModel();
-		parameterBox = new ParameterBox(parameterBoxTableModel);
+		parameterBox = new ParameterBox(parameterBoxTableModel, copyBox);
 
 		pipeBox.registerTaskSelectedListener(taskBox);
 		pipeBox.registerTaskSelectedListener(parameterBox);
@@ -145,6 +144,22 @@ public class MainFrame extends JFrame {
 		return configurationManager;
 	}
 	
+	public ParameterBox getParameterBox() {
+		return parameterBox;
+	}
+
+	public PipelineBox getPipeBox() {
+		return pipeBox;
+	}
+
+	public CopyBox getCopyBox() {
+		return copyBox;
+	}
+
+	public void setPipeModel(JGPipelineModel pipeModel) {
+		this.pipeModel = pipeModel;
+	}
+
 	// A access method on class level, which creates only once a instance a
 	// concrete object
 	// in a session of OsmUi and returns it.

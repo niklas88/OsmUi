@@ -1,7 +1,5 @@
 package de.osmui.ui;
 
-import java.util.Comparator;
-
 import javax.swing.JTable;
 
 import javax.swing.ListSelectionModel;

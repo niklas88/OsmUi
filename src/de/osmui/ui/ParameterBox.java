@@ -1,19 +1,16 @@
 package de.osmui.ui;
 
-import java.util.Comparator;
-
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableRowSorter;
 
 import de.osmui.model.pipelinemodel.AbstractParameter;
 import de.osmui.model.pipelinemodel.AbstractTask;
 import de.osmui.model.pipelinemodel.BBoxPseudoParameter;
 import de.osmui.model.pipelinemodel.BooleanParameter;
 import de.osmui.model.pipelinemodel.EnumParameter;
-import de.osmui.model.pipelinemodel.IntParameter;
 import de.osmui.ui.events.TaskSelectedEvent;
 import de.osmui.ui.events.TaskSelectedEventListener;
 import de.osmui.ui.models.ParameterBoxTableModel;
@@ -41,8 +38,11 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 	private final ParameterBoxTableModel model;
 
 	private AbstractTask selectedTask = null;
+	
+	private CopyBox copyBox;
 
-	public ParameterBox(ParameterBoxTableModel parameterBoxTableModel) {
+	public ParameterBox(ParameterBoxTableModel parameterBoxTableModel, CopyBox cb) {
+		copyBox = cb;
 		model = parameterBoxTableModel;
 		this.setAutoCreateRowSorter(true);
 		DefaultParamRenderer defaultParamRenderer = new DefaultParamRenderer();
@@ -95,6 +95,15 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 	    return getDefaultEditor(value.getClass());
 	  }
 	  return super.getCellEditor(row,column);
+	}
+	
+	@Override
+	public void	tableChanged(TableModelEvent e) {
+		super.tableChanged(e);
+		//  Update the copy box
+		if(copyBox != null){
+			copyBox.update();
+		}
 	}
 
 }

@@ -61,4 +61,10 @@ public class ParameterBoxTableModel extends AbstractTableModel {
 		return (c > 0 && paramList != null && !paramList.isEmpty()) ? AbstractTask.class
 				: String.class;
 	}
+	
+	@Override
+	public void setValueAt(Object value, int rowIndex, int columnIndex) {
+		super.setValueAt(value, rowIndex, columnIndex);
+		fireTableDataChanged();
+	}
 }
