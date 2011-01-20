@@ -36,7 +36,7 @@ import de.osmui.util.TaskManager;
 import de.osmui.util.exceptions.TaskNameUnknownException;
 
 /**
- * @author Peter Vollmer
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  *         will be tested by system-tests
  */

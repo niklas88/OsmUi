@@ -23,9 +23,10 @@ import javax.swing.JComponent;
 import javax.swing.JSplitPane;
 
 /**
- * @author Peter Vollmer
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  * will be tested by system-tests
+ * 
  */
 
 public class ContentSplitPane extends JSplitPane {

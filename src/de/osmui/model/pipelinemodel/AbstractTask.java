@@ -24,15 +24,14 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-
-
 /**
  * This is the Task class, it's object represent a single task in a pipeline with it's associated parameters
  * and pipes. It also allows navigating the pipeline graph, normally beginning at the source tasks;
  * 
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
- *@see AbstractTaskTest
+ * @see AbstractTaskTest
+ * 
  */
 public abstract class AbstractTask implements Serializable, Identifiable {
 

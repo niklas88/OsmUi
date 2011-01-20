@@ -24,8 +24,7 @@ import java.math.BigInteger;
 import org.junit.Test;
 
 /**
- * 
- * @author verena
+ * @author verenaNiklas Schnelle, Peter Vollmer, Verena käfer
  * 
  * @see TPipe
  * 

@@ -25,8 +25,7 @@ import java.util.List;
 import org.junit.Test;
 
 /**
- * 
- * @author verena
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  * @see TParameter
  * 

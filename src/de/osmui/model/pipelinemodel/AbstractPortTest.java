@@ -22,8 +22,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
- * 
- * @author verena
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  * @see AbstractPort
  * 

@@ -38,9 +38,10 @@ import com.mxgraph.view.mxGraph;
 /**
  * This class implements a pipeline model using an mxGraph as a backing store
  * 
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  * @see JGPipelineModelTest
+ * 
  */
 public class JGPipelineModel extends AbstractPipelineModel implements
 		Serializable {

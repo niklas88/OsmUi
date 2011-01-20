@@ -25,9 +25,10 @@ package de.osmui.model.pipelinemodel;
  * and sets up the connection with the clone, it also needs to adjust the task parameter indicating
  * it's variability number
  * 
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
- *@see VariablePipeTest
+ * @see VariablePipeTest
+ * 
  */
 public class VariablePipe extends CommonPipe {
 

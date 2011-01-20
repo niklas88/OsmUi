@@ -24,8 +24,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 /**
- * 
- * @author verena
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  * @see TTaskGroup
  * 

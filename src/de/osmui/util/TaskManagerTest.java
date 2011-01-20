@@ -28,8 +28,7 @@ import de.osmui.model.pipelinemodel.CommonTask;
 import de.osmui.util.exceptions.TaskNameUnknownException;
 
 /**
- * 
- * @author verena
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  * @see TaskManager
  * 

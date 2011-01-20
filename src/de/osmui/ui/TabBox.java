@@ -29,7 +29,7 @@ import javax.swing.JTabbedPane;
 import de.osmui.i18n.I18N;
 
 /**
- * @author Peter Vollmer
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  *  will be tested by system-tests
  */

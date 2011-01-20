@@ -30,8 +30,7 @@ import de.osmui.model.pipelinemodel.JGPipelineModel;
 import de.osmui.util.exceptions.ImportException;
 
 /**
- * 
- * @author verena
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  * @see CommandLineTranslator
  * 

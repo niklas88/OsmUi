@@ -30,12 +30,13 @@ import de.osmui.ui.models.TaskBoxTableModel;
 import de.osmui.util.ConfigurationManager;
 
 /**
- * @author Peter Vollmer
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
- *         Provides MainFrame to have a easy way to construct a MainFrame with
- *         all UI Content
+ * Provides MainFrame to have a easy way to construct a MainFrame with
+ * all UI Content
  * 
- *         will be tested by system-tests
+ * will be tested by system-tests
+ * 
  */
 
 public class MainFrame extends JFrame {

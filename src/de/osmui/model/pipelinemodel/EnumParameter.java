@@ -28,7 +28,7 @@ import de.osmui.model.osm.TParameter;
 import de.osmui.i18n.*;
 
 /**
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
  */
 public class EnumParameter extends AbstractParameter {

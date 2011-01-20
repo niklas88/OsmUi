@@ -36,7 +36,7 @@ import de.osmui.model.osm.TEnumValue;
 import de.osmui.model.pipelinemodel.EnumParameter;
 
 /**
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  */
 public class EnumParamEditor extends AbstractCellEditor implements

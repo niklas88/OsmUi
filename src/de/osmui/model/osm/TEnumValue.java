@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  *         Describes an enumeration value available for use in a parameter with the "enum" data type.
  *       

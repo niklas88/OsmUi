@@ -33,8 +33,8 @@ import javax.swing.table.TableCellEditor;
 import de.osmui.model.pipelinemodel.BooleanParameter;
 
 /**
- * @author Niklas Schnelle
- * 
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ *
  */
 public class BooleanParamEditor extends AbstractCellEditor implements
 		TableCellEditor, ActionListener {

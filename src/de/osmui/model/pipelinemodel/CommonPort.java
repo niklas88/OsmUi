@@ -23,9 +23,10 @@ package de.osmui.model.pipelinemodel;
 /**
  * This class implements the ports see AbstractPort for details
  * 
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
  * no tests, only getter and setter
+ * 
  */
 public class CommonPort extends AbstractPort {
 

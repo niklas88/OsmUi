@@ -39,8 +39,10 @@ import de.osmui.util.CommandlineTranslator;
 import de.osmui.util.exceptions.ImportException;
 
 /**
+ *@author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * 
  * will be tested in the systemtest
- */
+*/
 public class PipeImEx {
 
 	private static PipeImEx instance;

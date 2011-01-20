@@ -54,12 +54,12 @@ import de.osmui.io.PipeImExShFilter;
 import de.osmui.io.exceptions.ExportException;
 
 /**
- * @author Peter Vollmer
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ *
+ * Provides Menu to have an easy way to construct the whole Menu of Osmui.
+ *
+ * will be tested by system-tests
  * 
- *         Provides Menu to have an easy way to construct the whole Menu of
- *         Osmui.
- * 
- *         wird durch Systemtest abgedeckt will be tested by system-tests
  */
 
 public class Menu extends JMenuBar {
