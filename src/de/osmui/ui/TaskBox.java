@@ -1,8 +1,13 @@
 package de.osmui.ui;
 
+import java.util.Comparator;
+
 import javax.swing.JTable;
 
 import javax.swing.ListSelectionModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import javax.swing.table.TableStringConverter;
 
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
@@ -29,19 +34,30 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 	private static final long serialVersionUID = -4259689270781114248L;
 
 	private final TaskBoxTableModel model;
+	private TableStringConverter stringConverter;
 
 	private AbstractTask selectedTask = null;
 
 	public TaskBox(TaskBoxTableModel taskBoxTableModel) {
 		this.setModel(taskBoxTableModel);
+		
 		this.setDefaultRenderer(TTask.class, new TaskBoxCellRenderer());
-		this.setAutoCreateRowSorter(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		model = taskBoxTableModel;
+		stringConverter = new TableStringConverter(){
+			@Override
+			public String toString(TableModel arg0, int arg1, int arg2) {
+				TTask task = (TTask) arg0.getValueAt(arg1, arg2);
+				return task.getName();
+			}};
+			TableRowSorter<TaskBoxTableModel> sorter = new TableRowSorter<TaskBoxTableModel>(model);
+			sorter.setStringConverter(stringConverter);
+			this.setRowSorter(sorter);
 		showCompatibleTasks(null);
 
 	}
 
+	
 	public void showCompatibleTasks(AbstractTask task) {
 		if (task != null && task.isConnectable()) {
 			model.setTasks(TaskManager.getInstance().getCompatibleTasks(
@@ -50,6 +66,7 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 			model.setTasks(TaskManager.getInstance().getCompatibleTasks(""));
 		}
 		this.getRowSorter().toggleSortOrder(0);
+		
 	}
 
 	@Override
