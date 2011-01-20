@@ -50,8 +50,6 @@ public class MainFrame extends JFrame {
 
 	protected CopyBox copyBox;
 	
-	protected ConfigurationFrame configurationFrame;
-
 	/**
 	 * Constructs the mainframe
 	 */
@@ -92,8 +90,6 @@ public class MainFrame extends JFrame {
 		content.setDividerLocation(configurationManager.getEntry(
 				"ContentDividerLocation", 220));
 		
-		configurationFrame = new ConfigurationFrame(); //$NON-NLS-1$
-		configurationFrame.setSize(400, 300);
 		Menu menu = new Menu();
 		this.setJMenuBar(menu);
 
@@ -141,6 +137,13 @@ public class MainFrame extends JFrame {
 		return taskBoxTableModel;
 	}
 
+	/**
+	 * @return the taskBoxTableModel
+	 */
+	public ConfigurationManager getConfigurationManager() {
+		return configurationManager;
+	}
+	
 	// A access method on class level, which creates only once a instance a
 	// concrete object
 	// in a session of OsmUi and returns it.

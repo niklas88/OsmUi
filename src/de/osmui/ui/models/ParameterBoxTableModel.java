@@ -48,8 +48,8 @@ public class ParameterBoxTableModel extends AbstractTableModel {
 
 	@Override
 	public String getColumnName(int col){
-		return (col == 0)?I18N.getString("ParamBox.Name"):
-			I18N.getString("ParamBox.Value");
+		return (col == 0)?I18N.getString("ParameterBoxTableModel.name"):
+			I18N.getString("ParameterBoxTableModel.value");
 	}
 	
 	@Override
