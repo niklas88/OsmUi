@@ -21,7 +21,9 @@ import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 /**
-* @see I18NTest
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * 
+ * @see I18NTest
 */
 public class I18N {
 	

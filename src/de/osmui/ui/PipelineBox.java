@@ -37,6 +37,7 @@ import de.osmui.ui.events.TaskSelectedEvent;
 import de.osmui.ui.events.TaskSelectedEventListener;
 
 /**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  * will be tested by system-tests
  * 

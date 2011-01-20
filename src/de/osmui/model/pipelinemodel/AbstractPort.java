@@ -25,9 +25,10 @@ import java.io.Serializable;
 /**
  * This is the abstract base class for all port classes, ports are what pipes connect to. That is they are the inputs to a task
  * 
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
- *@see AbstractPortTest
+ * @see AbstractPortTest
+ * 
  */
 public abstract class AbstractPort implements Serializable, Identifiable {
 

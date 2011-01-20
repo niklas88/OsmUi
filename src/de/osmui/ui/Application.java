@@ -13,20 +13,20 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package de.osmui.ui;
-
-
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+
 /**
- * @author Peter Vollmer
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
- *         Application main class that is used to initialize OsmUi and to start
- *         up the UI.
+ * Application main class that is used to initialize OsmUi and to start
+ * up the UI.
  * 
- *         will be tested by system-tests
+ * will be tested by system-tests
+ * 
  */
 
 public class Application {

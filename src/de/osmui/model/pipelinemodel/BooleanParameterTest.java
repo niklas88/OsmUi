@@ -24,8 +24,7 @@ import org.junit.Test;
 import de.osmui.model.osm.TParameter;
 
 /**
- * 
- * @author verena
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  * @see BooleanParameter
  * 

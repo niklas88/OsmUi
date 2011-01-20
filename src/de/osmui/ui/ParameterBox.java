@@ -36,13 +36,13 @@ import de.osmui.ui.renderers.DefaultParamRenderer;
 import de.osmui.ui.renderers.EnumParamEditor;
 
 /**
- * @author Peter Vollmer
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
- *         Provides ParameterBox to have an easy way to construct the parameter
- *         box of OsmUi
+ * Provides ParameterBox to have an easy way to construct the parameter
+ * box of OsmUi
  * 
- *         wird durch Systemtest abgedeckt
- *  will be tested by system-tests
+ * will be tested by system-tests
+ * 
  */
 
 public class ParameterBox extends JTable implements TaskSelectedEventListener {

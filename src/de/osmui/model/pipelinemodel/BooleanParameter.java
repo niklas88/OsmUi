@@ -25,9 +25,10 @@ import de.osmui.model.osm.TParameter;
 /**
  * This class is used to represent parameters with boolean values
  * 
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
  *@see BooleanParameterTest
+ *
  */
 public class BooleanParameter extends AbstractParameter {
 	/**

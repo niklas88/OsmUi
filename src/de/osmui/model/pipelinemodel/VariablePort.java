@@ -21,9 +21,10 @@
 package de.osmui.model.pipelinemodel;
 
 /**
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
  *@see VariablePortTest
+ *
  */
 public class VariablePort extends CommonPort {
 	

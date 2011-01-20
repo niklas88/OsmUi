@@ -50,12 +50,12 @@ import de.osmui.i18n.I18N;
 import de.osmui.io.PipeImEx;
 
 /**
- * @author Peter Vollmer
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
  * Provides Menu to have an easy way to construct the whole Menu of Osmui.
+ *
+ * will be tested by system-tests
  * 
- *  wird durch Systemtest abgedeckt
- *  will be tested by system-tests
  */
 
 public class Menu extends JMenuBar {

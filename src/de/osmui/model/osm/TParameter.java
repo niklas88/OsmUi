@@ -34,6 +34,8 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * 
  * Describes a task parameter.
  * 
  * <p>Java class for tParameter complex type.

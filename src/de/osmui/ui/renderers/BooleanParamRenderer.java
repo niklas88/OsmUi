@@ -30,7 +30,7 @@ import javax.swing.table.TableCellRenderer;
 import de.osmui.model.pipelinemodel.BooleanParameter;
 
 /**
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
  */
 public class BooleanParamRenderer implements TableCellRenderer {

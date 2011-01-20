@@ -34,6 +34,8 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * 
  * Describes a group of tasks.
  * 
  * <p>Java class for tTaskGroup complex type.

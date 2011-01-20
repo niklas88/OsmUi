@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 import javax.swing.JMenu;
 
 /**
- * @author verena
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  * @see I18N
  * 

@@ -23,7 +23,7 @@ package de.osmui.ui.events;
 /**
  * This interface specifies the methods needed to register for TaskSelectedEvents
  * 
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
  */
 public interface TaskSelectedEventListener {

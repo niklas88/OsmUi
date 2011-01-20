@@ -34,6 +34,8 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * 
  * Describes an input or output pipe of a task.
  * 
  * <p>Java class for tPipe complex type.

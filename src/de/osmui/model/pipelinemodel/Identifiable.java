@@ -25,7 +25,7 @@ package de.osmui.model.pipelinemodel;
  * a method to distinguish any one object of a class from any other.
  * That is during the course of execution
  * 
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
  */
 public interface Identifiable {

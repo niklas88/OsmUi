@@ -47,7 +47,7 @@ import de.osmui.util.exceptions.TaskNameUnknownException;
  * AbstractPipelineModel and exporting an Osmosis command line from a given
  * AbstractPipelineModel. It is implemented using the Singelton pattern.
  * 
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  * @see CommandLineTraslatorTest
  */

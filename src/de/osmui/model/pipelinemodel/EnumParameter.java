@@ -27,7 +27,7 @@ import de.osmui.model.osm.TEnumValue;
 import de.osmui.model.osm.TParameter;
 
 /**
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
  */
 public class EnumParameter extends AbstractParameter {

@@ -28,9 +28,10 @@ import de.osmui.model.osm.TParameter;
  * This is the abstract parameter class all parameter classes inherit from and that should be used
  * when handling non specific parameters
  * 
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
  *no tests, only getter and setter
+ *
  */
 public abstract class AbstractParameter implements Serializable{
 

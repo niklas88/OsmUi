@@ -22,8 +22,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * 
- * @author verena
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  * @see TEnumValue
  * 

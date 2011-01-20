@@ -35,6 +35,8 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * 
  * Describes a single Osmosis task.
  * 
  * <p>Java class for tTask complex type.

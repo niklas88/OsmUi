@@ -35,7 +35,8 @@ import de.osmui.i18n.I18N;
 import de.osmui.model.pipelinemodel.AbstractParameter;
 
 /**
- * @author niklas
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * 
  * no tests, only getter and setter
  */
 public class DefaultParamEditor  extends AbstractCellEditor

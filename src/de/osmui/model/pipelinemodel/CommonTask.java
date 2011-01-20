@@ -29,9 +29,10 @@ import java.util.Map;
 /**
  * This is a general implementation of an AbstractTask
  * 
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
  *@see CommonTaskTest
+ *
  */
 public class CommonTask extends AbstractTask {
 

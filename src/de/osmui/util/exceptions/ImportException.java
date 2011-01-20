@@ -21,7 +21,7 @@
 package de.osmui.util.exceptions;
 
 /**
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
  */
 public class ImportException extends Exception {

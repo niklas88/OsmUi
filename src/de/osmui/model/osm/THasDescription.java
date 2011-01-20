@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  *         A base type for every element that has a description.
  *       

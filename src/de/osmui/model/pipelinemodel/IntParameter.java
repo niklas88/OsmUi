@@ -25,9 +25,10 @@ import de.osmui.model.osm.TParameter;
 /**
  * Represents a paramater that is an Integer
  * 
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
  * no tests, only getter and setter
+ * 
  */
 public class IntParameter extends AbstractParameter {
 	/**
