@@ -33,6 +33,7 @@ import javax.swing.table.TableCellEditor;
 import de.osmui.i18n.I18N;
 
 import de.osmui.model.pipelinemodel.AbstractParameter;
+import de.osmui.model.pipelinemodel.IntParameter;
 
 /**
  * @author niklas
@@ -59,6 +60,12 @@ public class DefaultParamEditor  extends AbstractCellEditor
 	public Component getTableCellEditorComponent(JTable table, Object value,
 			boolean isSelected, int row, int column) {
 		currParam = (AbstractParameter) value;
+		// Referenced parameters must not be directly editable
+		if(currParam instanceof IntParameter && ((IntParameter)currParam).isReferenced()){
+			textField.setEnabled(false);
+		} else {
+			textField.setEnabled(true);
+		}
 		textField.setText(currParam.getValue());
 		return textField;
 

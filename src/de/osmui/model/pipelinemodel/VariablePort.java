@@ -35,6 +35,7 @@ public class VariablePort extends CommonPort {
 	public VariablePort(AbstractTask owner, IntParameter param, String type) {
 		super(owner, type);
 		referencedParam = param;
+		referencedParam.reference();
 	}
 	
 	/**
