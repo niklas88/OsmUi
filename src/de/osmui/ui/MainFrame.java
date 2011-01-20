@@ -49,14 +49,14 @@ public class MainFrame extends JFrame {
 	protected JGPipelineModel pipeModel;
 
 	protected CopyBox copyBox;
-
+	
 	/**
 	 * Constructs the mainframe
 	 */
 	private MainFrame() {
 		
 
-		
+		this.setTitle("OsmUi");
 		configurationManager = ConfigurationManager.getInstance();
 		configurationManager.loadConfiguration();
 		this.setSize(configurationManager.getEntry("MainFrameWidth", 800),
@@ -89,7 +89,7 @@ public class MainFrame extends JFrame {
 				taskBox, parameterBox), rightContent);
 		content.setDividerLocation(configurationManager.getEntry(
 				"ContentDividerLocation", 220));
-
+		
 		Menu menu = new Menu();
 		this.setJMenuBar(menu);
 
@@ -137,6 +137,13 @@ public class MainFrame extends JFrame {
 		return taskBoxTableModel;
 	}
 
+	/**
+	 * @return the taskBoxTableModel
+	 */
+	public ConfigurationManager getConfigurationManager() {
+		return configurationManager;
+	}
+	
 	// A access method on class level, which creates only once a instance a
 	// concrete object
 	// in a session of OsmUi and returns it.

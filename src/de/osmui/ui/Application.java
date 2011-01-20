@@ -1,9 +1,8 @@
 package de.osmui.ui;
 
-
-
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+
 /**
  * @author Peter Vollmer
  * 

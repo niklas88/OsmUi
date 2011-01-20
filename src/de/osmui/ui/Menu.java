@@ -4,29 +4,36 @@ import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.net.URL;
 import java.util.Locale;
 
 import javax.help.HelpSet;
 import javax.help.JHelp;
+import javax.help.MainWindow;
+import javax.security.auth.login.Configuration;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-
+import javax.swing.filechooser.FileFilter;
+import de.osmui.util.ConfigurationManager;
 import de.osmui.util.exceptions.ImportException;
 import de.osmui.i18n.I18N;
 import de.osmui.io.PipeImEx;
+import de.osmui.io.PipeImExBatFilter;
+import de.osmui.io.PipeImExShFilter;
+import de.osmui.io.exceptions.ExportException;
 
 /**
  * @author Peter Vollmer
- *
- * Provides Menu to have an easy way to construct the whole Menu of Osmui.
  * 
- *  wird durch Systemtest abgedeckt
- *  will be tested by system-tests
+ *         Provides Menu to have an easy way to construct the whole Menu of
+ *         Osmui.
+ * 
+ *         wird durch Systemtest abgedeckt will be tested by system-tests
  */
 
 public class Menu extends JMenuBar {
@@ -35,6 +42,20 @@ public class Menu extends JMenuBar {
 	 * 
 	 */
 	private static final long serialVersionUID = -6521196530844239528L;
+
+	PipeImExShFilter pipeImExShFilter = new PipeImExShFilter();
+	PipeImExBatFilter pipeImExBatFilter = new PipeImExBatFilter();
+
+	public String getExtension(File file) {
+		String ext = null;
+		String s = file.getName();
+		int i = s.lastIndexOf('.');
+
+		if (i > 0 && i < s.length() - 1) {
+			ext = s.substring(i + 1).toLowerCase();
+		}
+		return ext;
+	}
 
 	/**
 	 * Constructs the menu with all its entries of Osmui.
@@ -87,17 +108,19 @@ public class Menu extends JMenuBar {
 		JMenuItem importFile = new JMenuItem(I18N.getString("Menu.importFile")); //$NON-NLS-1$
 		importFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-			    JFileChooser chooser = new JFileChooser();
-			    int returnVal = chooser.showOpenDialog(null);
-			    if(returnVal == JFileChooser.APPROVE_OPTION) {
-			    	try {
-						PipeImEx.getInstance().importOutOfFile(MainFrame.getInstance().pipeModel,chooser.getSelectedFile().getAbsolutePath());
+
+				JFileChooser chooser = new JFileChooser();
+				int returnVal = chooser.showOpenDialog(null);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					try {
+						PipeImEx.getInstance().importOutOfFile(
+								MainFrame.getInstance().pipeModel,
+								chooser.getSelectedFile().getAbsolutePath());
 					} catch (ImportException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					MainFrame.getInstance().pipeModel.layout(null);
-			    }
+				}
 
 			}
 		});
@@ -105,12 +128,15 @@ public class Menu extends JMenuBar {
 		/*
 		 * ImportClipBoard
 		 */
-		JMenuItem importClipBoard = new JMenuItem(I18N.getString("Menu.importClipBoard")); //$NON-NLS-1$
+		JMenuItem importClipBoard = new JMenuItem(
+				I18N.getString("Menu.importClipBoard")); //$NON-NLS-1$
 		importClipBoard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("importClipboard"); //$NON-NLS-1$
 				try {
-					PipeImEx.getInstance().importClipBoard(MainFrame.getInstance().pipeModel, Toolkit.getDefaultToolkit().getSystemClipboard());
+					PipeImEx.getInstance().importClipBoard(
+							MainFrame.getInstance().pipeModel,
+							Toolkit.getDefaultToolkit().getSystemClipboard());
 				} catch (HeadlessException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -128,7 +154,40 @@ public class Menu extends JMenuBar {
 		JMenuItem export = new JMenuItem(I18N.getString("Menu.export")); //$NON-NLS-1$
 		export.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("export"); //$NON-NLS-1$
+
+				if (!MainFrame.getInstance().pipeModel.isExecutable()) {
+
+					if (JOptionPane.showConfirmDialog(
+							MainFrame.getInstance(),
+							"Die konstruierte Pipeline ist nicht ausführbar wollen sie, sie trotzdem exportieren?",
+							"Nicht ausführbar", JOptionPane.WARNING_MESSAGE,
+							JOptionPane.YES_NO_OPTION) == 1) {
+						return;
+					}
+					JFileChooser chooser = new JFileChooser();
+					chooser.addChoosableFileFilter(pipeImExShFilter);
+					chooser.addChoosableFileFilter(pipeImExBatFilter);
+					if (System.getProperty("os.name").indexOf("Windows") != -1) {
+						chooser.setFileFilter(pipeImExBatFilter);
+					} else {
+						chooser.setFileFilter(pipeImExShFilter);
+					}
+					chooser.setAcceptAllFileFilterUsed(false);
+					int returnVal = chooser.showSaveDialog(null);
+					if (returnVal == JFileChooser.APPROVE_OPTION) {
+						try {
+							PipeImEx.getInstance()
+									.export(MainFrame.getInstance().pipeModel,
+											chooser.getSelectedFile()
+													.getAbsolutePath(),
+											getExtension(chooser
+													.getSelectedFile()));
+						} catch (ExportException e1) {
+							JOptionPane.showMessageDialog(null, e1.getMessage());
+						}
+						MainFrame.getInstance().pipeModel.layout(null);
+					}
+				}
 			}
 		});
 		fileMenu.add(export);
@@ -143,12 +202,13 @@ public class Menu extends JMenuBar {
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainFrame.getInstance().writePrefs();
-				MainFrame.getInstance().configurationManager.saveConfiguration();
+				MainFrame.getInstance().configurationManager
+						.saveConfiguration();
 				System.exit(0);
 			}
 		});
 		fileMenu.add(close);
-		
+
 		this.add(fileMenu);
 		/*
 		 * Menu "Edit"
@@ -157,7 +217,7 @@ public class Menu extends JMenuBar {
 		/*
 		 * Menu items of the menu "Edit"
 		 */
-		
+
 		/*
 		 * Redo
 		 */
@@ -185,14 +245,16 @@ public class Menu extends JMenuBar {
 		/*
 		 * Options
 		 */
-		JMenuItem preferences = new JMenuItem(I18N.getString("Menu.preferences")); //$NON-NLS-1$
+		JMenuItem preferences = new JMenuItem(
+				I18N.getString("Menu.preferences")); //$NON-NLS-1$
 		preferences.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("preferences"); //$NON-NLS-1$
+				ConfigurationDialog configurationDialog = new ConfigurationDialog();
+				configurationDialog.setVisible(true);
 			}
 		});
 		editMenu.add(preferences);
-		
+
 		this.add(editMenu);
 		/*
 		 * Menu "Help"
@@ -201,7 +263,7 @@ public class Menu extends JMenuBar {
 		/*
 		 * Menu items of the menu "Help"
 		 */
-		
+
 		/*
 		 * Help
 		 */
@@ -210,24 +272,23 @@ public class Menu extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				JHelp helpViewer = null;
 				try {
-				      ClassLoader cl = Menu.class.getClassLoader();
-				      Locale locale = Locale.getDefault();
-				      if (locale.getLanguage() == "de"){
-				    	  URL url = HelpSet.findHelpSet(cl, "jhelpset.hs");
-					      helpViewer = new JHelp(new HelpSet(cl, url));
-					      helpViewer.setCurrentID("Simple.Introduction");
-				      }
-				      else{
-				    	  URL url = HelpSet.findHelpSet(cl, "en.hs");
-					      helpViewer = new JHelp(new HelpSet(cl, url));
-					      helpViewer.setCurrentID("Simple.Introduction");
-				      }
+					ClassLoader cl = Menu.class.getClassLoader();
+					Locale locale = Locale.getDefault();
+					if (locale.getLanguage() == "de") {
+						URL url = HelpSet.findHelpSet(cl, "jhelpset.hs");
+						helpViewer = new JHelp(new HelpSet(cl, url));
+						helpViewer.setCurrentID("Simple.Introduction");
+					} else {
+						URL url = HelpSet.findHelpSet(cl, "en.hs");
+						helpViewer = new JHelp(new HelpSet(cl, url));
+						helpViewer.setCurrentID("Simple.Introduction");
+					}
 				} catch (Exception f) {
-				      System.err.println("API Help Set not found");
-				}  
+					System.err.println("API Help Set not found");
+				}
 				JFrame frame = new JFrame();
 				frame.setTitle(I18N.getString("Menu.help"));
-				frame.setSize(800,600);
+				frame.setSize(800, 600);
 				frame.getContentPane().add(helpViewer);
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.setVisible(true);
@@ -249,8 +310,7 @@ public class Menu extends JMenuBar {
 			}
 		});
 		helpMenu.add(about);
-		
+
 		this.add(helpMenu);
 	}
-
 }

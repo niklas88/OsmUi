@@ -5,19 +5,25 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 
+import de.osmui.i18n.I18N;
+import de.osmui.io.exceptions.ExportException;
 import de.osmui.model.pipelinemodel.AbstractPipelineModel;
+import de.osmui.ui.MainFrame;
 import de.osmui.util.CommandlineTranslator;
 import de.osmui.util.exceptions.ImportException;
 
 /**
-* will be tested in the systemtest
-*/
+ * will be tested in the systemtest
+ */
 public class PipeImEx {
 
 	private static PipeImEx instance;
@@ -62,9 +68,8 @@ public class PipeImEx {
 						"Es wurde keine importierbare Pipeline gefunden! Bitte die Datei überprüfen oder eine andere Datei");
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			throw new ImportException("File not Found");// I18N.getMessage("File_Not_Found"));
-			
+			throw new ImportException(I18N.getString("PipeImEx.fileNotFound"));
+
 		} catch (IOException e) {
 			throw new ImportException(e.getLocalizedMessage());
 		} finally {
@@ -120,11 +125,98 @@ public class PipeImEx {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ImportException(e.getLocalizedMessage());
 		}
 
 	}
+
+	/**
+	 * @param pipelineModel
+	 * @param fileName
+	 * @throws ImportException
+	 */
+	public void export(AbstractPipelineModel pipelineModel, String fileName,
+			String extension) throws ExportException {
+		System.out.println(extension);
+		BufferedWriter writer = null;
+		try {
+			writer = new BufferedWriter(new OutputStreamWriter(
+					new FileOutputStream(fileName), Charset.forName("UTF-8")));
+			StringBuilder commandToExport = new StringBuilder();
+			CommandlineTranslator trans = CommandlineTranslator.getInstance();
+			if (extension == "bat") {
+				commandToExport
+						.append(MainFrame
+								.getInstance()
+								.getConfigurationManager()
+								.getEntry(
+										"OsmosisPath",
+										I18N.getString("ConfigurationDialog.osmosisStandardPath")));
+				commandToExport.append(trans.exportLine(pipelineModel));
+				writer.write(commandToExport.toString());
+
+			} else if (extension == "sh") {
+				writer.write("#!/bin/bash");
+				writer.newLine();
+				writer.write("#"
+						+ "Hier kommen noch schöne internationale Kommentare hin");
+				writer.newLine();
+				commandToExport
+						.append(MainFrame
+								.getInstance()
+								.getConfigurationManager()
+								.getEntry(
+										"OsmosisPath",
+										I18N.getString("ConfigurationDialog.osmosisStandardPath")));
+				commandToExport.append("\\\n");
+				commandToExport.append(trans.exportLine(pipelineModel));
+				writer.write(commandToExport.toString());
+			}
+		} catch (FileNotFoundException e) {
+			throw new ExportException(I18N.getString("PipeImEx.fileNotFound"));
+		} catch (IOException e) {
+			throw new ExportException(e.getLocalizedMessage());
+		}finally {
+			try {
+				if (writer != null) {
+					writer.close();
+				}
+			} catch (IOException e) {
+				throw new ExportException(e.getLocalizedMessage());
+			}
+		}
+
+	}
+
+	/*	*//**
+	 * Stores the to-do entries in the file with the given name.
+	 * 
+	 * @param fileName
+	 *            of the file to write the to-do entries to.
+	 * @param entries
+	 *            to save to a file.
+	 * @throws ApplicationException
+	 *             if storing fails
+	 */
+	/*
+	 * protected static void store(String fileName, Vector<TodoEntry> entries)
+	 * throws ApplicationException { BufferedWriter writer = null; try { if
+	 * (entries.size() != 0) { writer = new BufferedWriter(new
+	 * OutputStreamWriter(new FileOutputStream(fileName),
+	 * Charset.forName("UTF-8"))); StringBuilder strBldr = new StringBuilder();
+	 * for (TodoEntry entry : entries) { strBldr.delete(0, strBldr.length());
+	 * strBldr.append(Locale.getDefault().getLanguage()); strBldr.append('\t');
+	 * strBldr.append(entry.getDueDate()); strBldr.append('\t');
+	 * strBldr.append(entry.getDescription()); strBldr.append('\t');
+	 * strBldr.append(entry.getSeverity()); writer.write(strBldr.toString());
+	 * writer.newLine(); } } else { throw new ApplicationException(I18N
+	 * .getMessage("No_Entries_To_Save")); } } catch (IOException e) { throw new
+	 * ApplicationException(e.getLocalizedMessage());
+	 * 
+	 * } finally { try { if (writer != null) { writer.close(); } } catch
+	 * (IOException e) { throw new
+	 * ApplicationException(e.getLocalizedMessage()); } } }
+	 */
 
 	// A access method on class level, which creates only once a instance a
 	// concrete object

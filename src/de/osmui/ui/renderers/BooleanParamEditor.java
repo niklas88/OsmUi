@@ -17,24 +17,24 @@ import de.osmui.model.pipelinemodel.BooleanParameter;
 
 /**
  * @author Niklas Schnelle
- *
+ * 
  */
-public class BooleanParamEditor extends AbstractCellEditor
-	implements TableCellEditor, ActionListener {
+public class BooleanParamEditor extends AbstractCellEditor implements
+		TableCellEditor, ActionListener {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7941388098517684947L;
-	
+
 	private JCheckBox checkBox;
-	
+
 	private BooleanParameter param;
-	
-	public BooleanParamEditor(){
+
+	public BooleanParamEditor() {
 		checkBox = new JCheckBox();
 		checkBox.setHorizontalAlignment(SwingConstants.CENTER);
-		param=null;
+		param = null;
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class BooleanParamEditor extends AbstractCellEditor
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		param.setValueBoolean(checkBox.isSelected());		
+		param.setValueBoolean(checkBox.isSelected());
 	}
 
 	@Override
@@ -56,6 +56,4 @@ public class BooleanParamEditor extends AbstractCellEditor
 		return checkBox;
 	}
 
-
 }
-

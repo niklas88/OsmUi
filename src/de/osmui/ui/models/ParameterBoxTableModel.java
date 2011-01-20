@@ -12,7 +12,7 @@ public class ParameterBoxTableModel extends AbstractTableModel {
 
 	/**
 	 * 
-	 * will be tested by system-tests
+	 *  will be tested by system-tests
 	 */
 	private static final long serialVersionUID = 6247700341831278770L;
 
@@ -51,9 +51,9 @@ public class ParameterBoxTableModel extends AbstractTableModel {
 	}
 
 	@Override
-	public String getColumnName(int col) {
-		return (col == 0) ? I18N.getString("ParamBox.Name") : I18N
-				.getString("ParamBox.Value");
+	public String getColumnName(int col){
+		return (col == 0)?I18N.getString("ParameterBoxTableModel.name"):
+			I18N.getString("ParameterBoxTableModel.value");
 	}
 
 	@Override
