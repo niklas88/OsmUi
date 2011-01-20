@@ -1,17 +1,23 @@
 package de.osmui.ui;
 
+import java.util.Comparator;
+
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableRowSorter;
 
 import de.osmui.model.pipelinemodel.AbstractParameter;
 import de.osmui.model.pipelinemodel.AbstractTask;
+import de.osmui.model.pipelinemodel.BBoxPseudoParameter;
 import de.osmui.model.pipelinemodel.BooleanParameter;
 import de.osmui.model.pipelinemodel.EnumParameter;
+import de.osmui.model.pipelinemodel.IntParameter;
 import de.osmui.ui.events.TaskSelectedEvent;
 import de.osmui.ui.events.TaskSelectedEventListener;
 import de.osmui.ui.models.ParameterBoxTableModel;
+import de.osmui.ui.renderers.BBoxCellEditor;
 import de.osmui.ui.renderers.BooleanParamEditor;
 import de.osmui.ui.renderers.BooleanParamRenderer;
 import de.osmui.ui.renderers.DefaultParamEditor;
@@ -38,7 +44,6 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 
 	public ParameterBox(ParameterBoxTableModel parameterBoxTableModel) {
 		model = parameterBoxTableModel;
-		
 		DefaultParamRenderer defaultParamRenderer = new DefaultParamRenderer();
 		
 		this.setDefaultRenderer(AbstractParameter.class, defaultParamRenderer);
@@ -50,9 +55,12 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 		this.setDefaultRenderer(EnumParameter.class,defaultParamRenderer);
 		this.setDefaultEditor(EnumParameter.class, new EnumParamEditor());
 		
+		this.setDefaultRenderer(BBoxPseudoParameter.class, new BBoxCellEditor());
+		this.setDefaultEditor(BBoxPseudoParameter.class, new BBoxCellEditor());
 		
 		this.setModel(parameterBoxTableModel);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 
 		showActualParameters(null);
 	}
@@ -80,11 +88,11 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 	
 	@Override
 	public TableCellEditor getCellEditor(int row, int column){
-		Object value = getValueAt(row,column);
-		  if (value !=null) {
-		    return getDefaultEditor(value.getClass());
-		  }
-		  return super.getCellEditor(row,column);
+	  Object value = getValueAt(row,column);
+	  if (value !=null) {
+	    return getDefaultEditor(value.getClass());
+	  }
+	  return super.getCellEditor(row,column);
 	}
 
 }

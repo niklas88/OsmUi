@@ -12,7 +12,7 @@ public class ParameterBoxTableModel extends AbstractTableModel {
 
 	/**
 	 * 
-	 *  will be tested by system-tests
+	 * will be tested by system-tests
 	 */
 	private static final long serialVersionUID = 6247700341831278770L;
 
@@ -33,27 +33,32 @@ public class ParameterBoxTableModel extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return (paramList != null)? paramList.size():0;
+		return (paramList != null) ? paramList.size() : 0;
 	}
 
 	@Override
 	public Object getValueAt(int row, int column) {
-		return (column == 0) ? paramList.get(row).getName() : paramList.get(row);
+		if (row < 0 || row > getRowCount()) {
+			return null;
+		}
+		return (column == 0) ? paramList.get(row).getName() : paramList
+				.get(row);
 	}
 
 	@Override
 	public boolean isCellEditable(int row, int col) {
-		return true;//(col == 1)? true : false;
+		return (col == 1) ? true : false;
 	}
 
 	@Override
-	public String getColumnName(int col){
-		return (col == 0)?I18N.getString("ParamBox.Name"):
-			I18N.getString("ParamBox.Value");
+	public String getColumnName(int col) {
+		return (col == 0) ? I18N.getString("ParamBox.Name") : I18N
+				.getString("ParamBox.Value");
 	}
-	
+
 	@Override
 	public Class<? extends Object> getColumnClass(int c) {
-		return (c > 0) ? getValueAt(0, c).getClass() : String.class;
+		return (c > 0 && paramList != null && !paramList.isEmpty()) ? AbstractTask.class
+				: String.class;
 	}
 }

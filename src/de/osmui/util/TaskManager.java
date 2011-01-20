@@ -140,6 +140,14 @@ public class TaskManager {
 			} else if (paramDesc.getType().equals("enum")) {
 				newParameter = new EnumParameter(paramDesc,
 						paramDesc.getDefaultValue());
+			} else if (paramDesc.getType().equals("bbox")) {
+				if(newTask.getName().equals("dataset-bounding-box")){
+					// Needs a short form BoundingBox
+					newParameter = new BBoxPseudoParameter(paramDesc, "", newTask, false);
+				} else {
+					// Needs a long form BoundingBox
+					newParameter = new BBoxPseudoParameter(paramDesc, "", newTask, true);
+				}
 			} else {
 				newParameter = new OtherParameter(paramDesc,
 						paramDesc.getDefaultValue());
