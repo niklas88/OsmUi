@@ -41,25 +41,9 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 	private final ParameterBoxTableModel model;
 
 	private AbstractTask selectedTask = null;
-	
-	private TableRowSorter<ParameterBoxTableModel> sorter;
 
 	public ParameterBox(ParameterBoxTableModel parameterBoxTableModel) {
 		model = parameterBoxTableModel;
-		sorter = new TableRowSorter<ParameterBoxTableModel>(model);
-		sorter.setComparator(1, new Comparator<AbstractParameter>(){
-
-			@Override
-			public int compare(AbstractParameter arg0, AbstractParameter arg1) {
-				System.out.println("Compare");
-				int result = 0;
-				if(arg0 instanceof BBoxPseudoParameter || arg1 instanceof BBoxPseudoParameter){
-					
-					return -1;
-				}
-				return result;
-			}});
-		this.setRowSorter(sorter);
 		DefaultParamRenderer defaultParamRenderer = new DefaultParamRenderer();
 		
 		this.setDefaultRenderer(AbstractParameter.class, defaultParamRenderer);
@@ -83,7 +67,6 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 
 	public void showActualParameters(AbstractTask task) {
 		model.setTask(task);
-		sorter.sort();
 	}
 
 	@Override

@@ -35,7 +35,7 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 	public TaskBox(TaskBoxTableModel taskBoxTableModel) {
 		this.setModel(taskBoxTableModel);
 		this.setDefaultRenderer(TTask.class,  new TaskBoxCellRenderer());
-		
+		this.setAutoCreateRowSorter(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		model = taskBoxTableModel;
 		showCompatibleTasks(null);
@@ -48,6 +48,7 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 		} else {
 			model.setTasks(TaskManager.getInstance().getCompatibleTasks(""));
 		}
+		this.getRowSorter().toggleSortOrder(0);
 	}
 
 	@Override
