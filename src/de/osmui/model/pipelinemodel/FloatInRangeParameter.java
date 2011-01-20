@@ -3,6 +3,7 @@
  */
 package de.osmui.model.pipelinemodel;
 
+import de.osmui.i18n.I18N;
 import de.osmui.model.osm.TParameter;
 
 /**
@@ -66,7 +67,7 @@ public class FloatInRangeParameter extends AbstractParameter {
 	public void setValue(String s) throws IllegalArgumentException {
 		double val = Double.valueOf(s);
 		if(val < lowerBound || val > upperBound){
-			throw new IllegalArgumentException("Value not in range ("+lowerBound+","+upperBound+")");
+			throw new IllegalArgumentException(I18N.getString("FloatInRangeParameter.valueNotInRange",lowerBound,upperBound));
 		}
 		value = val;
 	}

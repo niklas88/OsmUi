@@ -17,6 +17,7 @@
 
 package de.osmui.ui;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import javax.swing.ListSelectionModel;
@@ -112,7 +113,7 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 				MainFrame.getInstance().getPipeModel()
 						.addTask(selectedTask, newTask);
 			} catch (TasksNotCompatibleException e) {
-				System.err.println(e);
+				JOptionPane.showMessageDialog(null, e.getMessage());
 			} catch (TasksNotInModelException e) {
 				// Shouldn't happen
 				e.printStackTrace();
