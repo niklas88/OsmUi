@@ -1,3 +1,20 @@
+/*OsmUi is a user interface for Osmosis
+    Copyright (C) 2011  Verena Käfer, Peter Vollmer, Niklas Schnelle
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or 
+    any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 /**
  * 
  */
@@ -31,7 +48,7 @@ import de.osmui.util.exceptions.TaskNameUnknownException;
  * AbstractPipelineModel and exporting an Osmosis command line from a given
  * AbstractPipelineModel. It is implemented using the Singelton pattern.
  * 
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  * @see CommandLineTraslatorTest
  */
@@ -81,6 +98,9 @@ public class CommandlineTranslator {
 				pipeStack.push(pipe);
 			} else {
 				pipeMap.put(pipe.getName(), pipe);
+				// If the pipe name starts with "AUTO" we don't need this auto 
+				// generated name anymore
+				pipe.setName(null);
 			}
 		}
 		System.out.println("Task done");

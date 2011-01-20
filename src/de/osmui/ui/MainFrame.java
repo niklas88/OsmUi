@@ -1,3 +1,20 @@
+/*OsmUi is a user interface for Osmosis
+    Copyright (C) 2011  Verena Käfer, Peter Vollmer, Niklas Schnelle
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or 
+    any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 package de.osmui.ui;
 
 import java.awt.BorderLayout;
@@ -13,12 +30,13 @@ import de.osmui.ui.models.TaskBoxTableModel;
 import de.osmui.util.ConfigurationManager;
 
 /**
- * @author Peter Vollmer
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
- *         Provides MainFrame to have a easy way to construct a MainFrame with
- *         all UI Content
+ * Provides MainFrame to have a easy way to construct a MainFrame with
+ * all UI Content
  * 
- *         will be tested by system-tests
+ * will be tested by system-tests
+ * 
  */
 
 public class MainFrame extends JFrame {
@@ -53,8 +71,7 @@ public class MainFrame extends JFrame {
 	/**
 	 * Constructs the mainframe
 	 */
-	private MainFrame() {
-		
+	private MainFrame() {	
 
 		this.setTitle("OsmUi");
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -76,7 +93,7 @@ public class MainFrame extends JFrame {
 		pipeModel.addObserver(copyBox);
 
 		parameterBoxTableModel = new ParameterBoxTableModel();
-		parameterBox = new ParameterBox(parameterBoxTableModel);
+		parameterBox = new ParameterBox(parameterBoxTableModel, copyBox);
 
 		pipeBox.registerTaskSelectedListener(taskBox);
 		pipeBox.registerTaskSelectedListener(parameterBox);
@@ -145,6 +162,22 @@ public class MainFrame extends JFrame {
 		return configurationManager;
 	}
 	
+	public ParameterBox getParameterBox() {
+		return parameterBox;
+	}
+
+	public PipelineBox getPipeBox() {
+		return pipeBox;
+	}
+
+	public CopyBox getCopyBox() {
+		return copyBox;
+	}
+
+	public void setPipeModel(JGPipelineModel pipeModel) {
+		this.pipeModel = pipeModel;
+	}
+
 	// A access method on class level, which creates only once a instance a
 	// concrete object
 	// in a session of OsmUi and returns it.

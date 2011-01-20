@@ -1,19 +1,45 @@
+/*OsmUi is a user interface for Osmosis
+    Copyright (C) 2011  Verena Käfer, Peter Vollmer, Niklas Schnelle
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or 
+    any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 package de.osmui.ui;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.net.URL;
+import java.util.Enumeration;
 import java.util.Locale;
 
 import javax.help.HelpSet;
 import javax.help.JHelp;
-import javax.help.MainWindow;
-import javax.security.auth.login.Configuration;
+import javax.help.JHelpIndexNavigator;
+import javax.help.JHelpNavigator;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -28,12 +54,12 @@ import de.osmui.io.PipeImExShFilter;
 import de.osmui.io.exceptions.ExportException;
 
 /**
- * @author Peter Vollmer
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ *
+ * Provides Menu to have an easy way to construct the whole Menu of Osmui.
+ *
+ * will be tested by system-tests
  * 
- *         Provides Menu to have an easy way to construct the whole Menu of
- *         Osmui.
- * 
- *         wird durch Systemtest abgedeckt will be tested by system-tests
  */
 
 public class Menu extends JMenuBar {
@@ -303,7 +329,19 @@ public class Menu extends JMenuBar {
 		JMenuItem about = new JMenuItem(I18N.getString("Menu.about")); //$NON-NLS-1$
 		about.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("about"); //$NON-NLS-1$
+				JDialog frame = new JDialog();
+				frame.setLayout(new BorderLayout());
+				frame.setTitle(I18N.getString("Menu.about"));
+				
+				Icon icon = new ImageIcon(getClass().getResource("Logo_Osmui1.png"));
+				JLabel bild = new JLabel(icon);
+				frame.add(bild, BorderLayout.NORTH);
+				
+				JLabel test = new JLabel(I18N.getString("Menu.about_text"));
+				frame.add(test, BorderLayout.CENTER);
+				frame.setVisible(true);
+				frame.pack();
+
 			}
 		});
 		helpMenu.add(about);

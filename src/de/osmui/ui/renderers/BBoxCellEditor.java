@@ -1,6 +1,19 @@
-/**
- * 
- */
+/*OsmUi is a user interface for Osmosis
+    Copyright (C) 2011  Verena Käfer, Peter Vollmer, Niklas Schnelle
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or 
+    any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 package de.osmui.ui.renderers;
 
 import java.awt.Component;
@@ -15,6 +28,9 @@ import javax.swing.table.TableCellRenderer;
 
 import de.osmui.i18n.I18N;
 import de.osmui.model.pipelinemodel.BBoxPseudoParameter;
+import de.unistuttgart.iev.osm.bboxchooser.BBoxChooserDialog;
+import de.unistuttgart.iev.osm.bboxchooser.Bounds;
+import de.unistuttgart.iev.osm.bboxchooser.DialogResponse;
 
 /**
  * @author Niklas Schnelle
@@ -43,8 +59,14 @@ TableCellEditor, TableCellRenderer,ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO
-		System.out.println("Clicked BBoxEdit for "+param);
+		BBoxChooserDialog dialog = new BBoxChooserDialog();
+		dialog.setVisible(true);
+		if (dialog.getResponse() == DialogResponse.OK) {
+			Bounds boundingBox = dialog.getBoundingBox();
+			if (boundingBox != null && param != null) {
+				param.setBoundingBox(boundingBox);
+			}
+		}
 	}
 
 	@Override

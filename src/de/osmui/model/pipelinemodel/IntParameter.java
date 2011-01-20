@@ -1,3 +1,20 @@
+/*OsmUi is a user interface for Osmosis
+    Copyright (C) 2011  Verena Käfer, Peter Vollmer, Niklas Schnelle
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or 
+    any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 /**
  * 
  */
@@ -8,22 +25,28 @@ import de.osmui.model.osm.TParameter;
 /**
  * Represents a paramater that is an Integer
  * 
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
  * no tests, only getter and setter
+ * 
  */
 public class IntParameter extends AbstractParameter {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4423983777968509408L;
-	protected int value;
+	private int value;
+	private boolean referenced; 
 
 	/**
 	 * 
 	 */
 	public IntParameter(TParameter desc, String value) {
 		super(desc, value);
+		if(value == null){
+			// This happens when there is no default value
+			setValue("0");
+		}
 		setValue(value);
 	}
 
@@ -41,6 +64,21 @@ public class IntParameter extends AbstractParameter {
 	@Override
 	public String getValue() {
 		return Integer.toString(value);
+	}
+	
+	/**
+	 * Tells this parameter that it is being referenced, this can't be unset
+	 */
+	public void reference(){
+		referenced = true;
+	}
+	/**
+	 * Gets whether this parameter is referenced by a variable pipe and
+	 * therefor must not be changed in the ParameterBox
+	 * @return
+	 */
+	public boolean isReferenced(){
+		return referenced;
 	}
 	
 	/**
@@ -67,7 +105,6 @@ public class IntParameter extends AbstractParameter {
 	@Override
 	public void setValue(String s) throws IllegalArgumentException {
 		this.value = Integer.parseInt(s);
-
 	}
 
 }

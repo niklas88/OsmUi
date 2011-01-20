@@ -1,3 +1,20 @@
+/*OsmUi is a user interface for Osmosis
+    Copyright (C) 2011  Verena Käfer, Peter Vollmer, Niklas Schnelle
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or 
+    any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 /**
  * 
  */
@@ -13,9 +30,10 @@ import de.osmui.model.exceptions.TasksNotInModelException;
 /**
  * This is the abstract base class for all pipeline models
  * 
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  * @see AbstractPipelineModelTest
+ * 
  */
 public abstract class AbstractPipelineModel extends Observable {
 
@@ -112,10 +130,12 @@ public abstract class AbstractPipelineModel extends Observable {
 							if(outVariable){
 								// Lets create a new pipe and reuse out
 								out = ((VariablePipe) out).createPipe();
+								out.getSource().getOutputPipes().add(out);
 							}
 							if(inVariable){
 								// Lets create a new port and reuse in
 								in = ((VariablePort) in).createPort();
+								in.getParent().getInputPorts().add(in);
 							}
 							if(out.connect(in)){
 								return out;

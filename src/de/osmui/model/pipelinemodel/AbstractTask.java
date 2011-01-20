@@ -1,3 +1,20 @@
+/*OsmUi is a user interface for Osmosis
+    Copyright (C) 2011  Verena Käfer, Peter Vollmer, Niklas Schnelle
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or 
+    any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 /**
  * 
  */
@@ -7,15 +24,14 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-
-
 /**
  * This is the Task class, it's object represent a single task in a pipeline with it's associated parameters
  * and pipes. It also allows navigating the pipeline graph, normally beginning at the source tasks;
  * 
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
- *@see AbstractTaskTest
+ * @see AbstractTaskTest
+ * 
  */
 public abstract class AbstractTask implements Serializable, Identifiable {
 

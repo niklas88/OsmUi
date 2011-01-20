@@ -1,9 +1,29 @@
+/*OsmUi is a user interface for Osmosis
+    Copyright (C) 2011  Verena Käfer, Peter Vollmer, Niklas Schnelle
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or 
+    any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 package de.osmui.ui;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import javax.swing.ListSelectionModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import javax.swing.table.TableStringConverter;
 
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
@@ -17,7 +37,7 @@ import de.osmui.util.TaskManager;
 import de.osmui.util.exceptions.TaskNameUnknownException;
 
 /**
- * @author Peter Vollmer
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  *         will be tested by system-tests
  */
@@ -30,19 +50,30 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 	private static final long serialVersionUID = -4259689270781114248L;
 
 	private final TaskBoxTableModel model;
+	private TableStringConverter stringConverter;
 
 	private AbstractTask selectedTask = null;
 
 	public TaskBox(TaskBoxTableModel taskBoxTableModel) {
 		this.setModel(taskBoxTableModel);
+		
 		this.setDefaultRenderer(TTask.class, new TaskBoxCellRenderer());
-		this.setAutoCreateRowSorter(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		model = taskBoxTableModel;
+		stringConverter = new TableStringConverter(){
+			@Override
+			public String toString(TableModel arg0, int arg1, int arg2) {
+				TTask task = (TTask) arg0.getValueAt(arg1, arg2);
+				return task.getName();
+			}};
+			TableRowSorter<TaskBoxTableModel> sorter = new TableRowSorter<TaskBoxTableModel>(model);
+			sorter.setStringConverter(stringConverter);
+			this.setRowSorter(sorter);
 		showCompatibleTasks(null);
 
 	}
 
+	
 	public void showCompatibleTasks(AbstractTask task) {
 		if (task != null && task.isConnectable()) {
 			model.setTasks(TaskManager.getInstance().getCompatibleTasks(
@@ -51,6 +82,7 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 			model.setTasks(TaskManager.getInstance().getCompatibleTasks(""));
 		}
 		this.getRowSorter().toggleSortOrder(0);
+		
 	}
 
 	@Override

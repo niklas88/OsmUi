@@ -1,3 +1,20 @@
+/*OsmUi is a user interface for Osmosis
+    Copyright (C) 2011  Verena Käfer, Peter Vollmer, Niklas Schnelle
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or 
+    any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 /**
  * 
  */
@@ -26,7 +43,7 @@ import de.osmui.util.exceptions.TaskNameUnknownException;
  * descriptions. It implements the Singelton pattern, as well as being a Factory
  * for tasks
  * 
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  * @see TaskManagerTest
  */
@@ -129,13 +146,13 @@ public class TaskManager {
 		AbstractParameter newParameter;
 		// Generate the parameters of the task object
 		for (TParameter paramDesc : taskDescription.getParameter()) {
-
+			String defaultValue = paramDesc.getDefaultValue();
 			if (paramDesc.getType().equals("int")) {
 				newParameter = new IntParameter(paramDesc,
-						paramDesc.getDefaultValue());
+						(defaultValue != null)?defaultValue:"0");
 			} else if (paramDesc.getType().equals("boolean")) {
 				newParameter = new BooleanParameter(paramDesc,
-						paramDesc.getDefaultValue());
+						(defaultValue != null)?defaultValue: "false");
 			} else if (paramDesc.getType().equals("enum")) {
 				newParameter = new EnumParameter(paramDesc,
 						paramDesc.getDefaultValue());
@@ -149,7 +166,7 @@ public class TaskManager {
 				}
 			} else {
 				newParameter = new OtherParameter(paramDesc,
-						paramDesc.getDefaultValue());
+						(defaultValue != null)?defaultValue:"");
 			}
 			if (newParameter.isDefaultParam()) {
 				newTask.setDefaultParameter(newParameter);

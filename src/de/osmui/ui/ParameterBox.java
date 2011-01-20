@@ -1,19 +1,33 @@
-package de.osmui.ui;
+/*OsmUi is a user interface for Osmosis
+    Copyright (C) 2011  Verena Käfer, Peter Vollmer, Niklas Schnelle
 
-import java.util.Comparator;
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or 
+    any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+package de.osmui.ui;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableRowSorter;
 
 import de.osmui.model.pipelinemodel.AbstractParameter;
 import de.osmui.model.pipelinemodel.AbstractTask;
 import de.osmui.model.pipelinemodel.BBoxPseudoParameter;
 import de.osmui.model.pipelinemodel.BooleanParameter;
 import de.osmui.model.pipelinemodel.EnumParameter;
-import de.osmui.model.pipelinemodel.IntParameter;
 import de.osmui.ui.events.TaskSelectedEvent;
 import de.osmui.ui.events.TaskSelectedEventListener;
 import de.osmui.ui.models.ParameterBoxTableModel;
@@ -25,13 +39,13 @@ import de.osmui.ui.renderers.DefaultParamRenderer;
 import de.osmui.ui.renderers.EnumParamEditor;
 
 /**
- * @author Peter Vollmer
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
- *         Provides ParameterBox to have an easy way to construct the parameter
- *         box of OsmUi
+ * Provides ParameterBox to have an easy way to construct the parameter
+ * box of OsmUi
  * 
- *         wird durch Systemtest abgedeckt
- *  will be tested by system-tests
+ * will be tested by system-tests
+ * 
  */
 
 public class ParameterBox extends JTable implements TaskSelectedEventListener {
@@ -41,8 +55,11 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 	private final ParameterBoxTableModel model;
 
 	private AbstractTask selectedTask = null;
+	
+	private CopyBox copyBox;
 
-	public ParameterBox(ParameterBoxTableModel parameterBoxTableModel) {
+	public ParameterBox(ParameterBoxTableModel parameterBoxTableModel, CopyBox cb) {
+		copyBox = cb;
 		model = parameterBoxTableModel;
 		this.setAutoCreateRowSorter(true);
 		DefaultParamRenderer defaultParamRenderer = new DefaultParamRenderer();
@@ -95,6 +112,15 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 	    return getDefaultEditor(value.getClass());
 	  }
 	  return super.getCellEditor(row,column);
+	}
+	
+	@Override
+	public void	tableChanged(TableModelEvent e) {
+		super.tableChanged(e);
+		//  Update the copy box
+		if(copyBox != null){
+			copyBox.update();
+		}
 	}
 
 }
