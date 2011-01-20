@@ -129,10 +129,12 @@ public abstract class AbstractPipelineModel extends Observable {
 							if(outVariable){
 								// Lets create a new pipe and reuse out
 								out = ((VariablePipe) out).createPipe();
+								out.getSource().getOutputPipes().add(out);
 							}
 							if(inVariable){
 								// Lets create a new port and reuse in
 								in = ((VariablePort) in).createPort();
+								in.getParent().getInputPorts().add(in);
 							}
 							if(out.connect(in)){
 								return out;
