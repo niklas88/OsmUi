@@ -8,10 +8,6 @@ import java.util.ResourceBundle;
 */
 public class I18N {
 	
-	/**
-	 * Singleton attribute to access an instance of this.
-	 */
-	public static final I18N instance = new I18N();
 	
 	/**
 	 * The base name of the file containing the translations.
@@ -23,7 +19,7 @@ public class I18N {
 	 */
 	private static ResourceBundle bundle;
 
-	I18N() {
+	static {
 		// Load the resource bundle
 		bundle = ResourceBundle.getBundle(MESSAGES_BASE_NAME);
 	}

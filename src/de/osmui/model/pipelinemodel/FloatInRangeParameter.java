@@ -70,5 +70,14 @@ public class FloatInRangeParameter extends AbstractParameter {
 		}
 		value = val;
 	}
+	
+	
+	public void setValue(double val){
+		if(val < lowerBound || val > upperBound){
+			//TODO
+			throw new IllegalArgumentException("Value not in range ("+lowerBound+","+upperBound+")");
+		}
+		value = val;
+	}
 
 }

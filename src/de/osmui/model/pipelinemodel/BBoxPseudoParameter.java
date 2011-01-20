@@ -6,6 +6,7 @@ package de.osmui.model.pipelinemodel;
 import java.util.Map;
 
 import de.osmui.model.osm.TParameter;
+import de.unistuttgart.iev.osm.bboxchooser.Bounds;
 
 /**
  * This class defines a pseudo parameter for the bounding box, it can't be used for normal
@@ -160,6 +161,17 @@ public class BBoxPseudoParameter extends AbstractParameter {
 	 */
 	@Override
 	public void setValue(String s) throws IllegalArgumentException {}
+	
+	/**
+	 * Sets the managed values to the given BoundingBox
+	 * @param bbox
+	 */
+	public void setBoundingBox(Bounds bbox){
+		left.setValue(bbox.getMin().lon());
+		bottom.setValue(bbox.getMin().lat());
+		right.setValue(bbox.getMax().lon());
+		top.setValue(bbox.getMax().lat());
+	};
 
 	
 }

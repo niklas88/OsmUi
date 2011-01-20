@@ -8,6 +8,7 @@ import java.util.List;
 
 import de.osmui.model.osm.TEnumValue;
 import de.osmui.model.osm.TParameter;
+import de.osmui.i18n.*;
 
 /**
  * @author Niklas Schnelle
@@ -58,19 +59,34 @@ public class EnumParameter extends AbstractParameter {
 	public String getValue() {
 		return value;
 	}
+	
+	@Override
+	public String getDefaultValue(){
+		String ret = super.getDefaultValue();
+		if(ret==null){
+			return enumeration.get(0).getValue();
+		}
+		return ret;
+	}
 
 	/* (non-Javadoc)
 	 * @see de.osmui.model.pipelinemodel.AbstractParameter#setValue(java.lang.String)
 	 */
 	@Override
 	public void setValue(String s) throws IllegalArgumentException {
+		// Check whether s is null and set to a sensible value
+		if(s == null){
+			value = enumeration.get(0).getValue();
+			return;
+		}
 		// Test whether the requested value is in the Enumeration
 		for(TEnumValue val : enumeration){
 			if(val.getValue().equals(s)){
 				value = s;
 				return;
 			}
-		}		
+		}
+		throw new IllegalArgumentException(I18N.getString("EnumParameter.ValueNotInEnumeration",s));
 	}
 
 }

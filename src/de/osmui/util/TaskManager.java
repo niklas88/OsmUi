@@ -130,13 +130,13 @@ public class TaskManager {
 		AbstractParameter newParameter;
 		// Generate the parameters of the task object
 		for (TParameter paramDesc : taskDescription.getParameter()) {
-
+			String defaultValue = paramDesc.getDefaultValue();
 			if (paramDesc.getType().equals("int")) {
 				newParameter = new IntParameter(paramDesc,
-						paramDesc.getDefaultValue());
+						(defaultValue != null)?defaultValue:"0");
 			} else if (paramDesc.getType().equals("boolean")) {
 				newParameter = new BooleanParameter(paramDesc,
-						paramDesc.getDefaultValue());
+						(defaultValue != null)?defaultValue: "false");
 			} else if (paramDesc.getType().equals("enum")) {
 				newParameter = new EnumParameter(paramDesc,
 						paramDesc.getDefaultValue());
@@ -150,7 +150,7 @@ public class TaskManager {
 				}
 			} else {
 				newParameter = new OtherParameter(paramDesc,
-						paramDesc.getDefaultValue());
+						(defaultValue != null)?defaultValue:"");
 			}
 			if (newParameter.isDefaultParam()) {
 				newTask.setDefaultParameter(newParameter);
