@@ -36,7 +36,7 @@ import de.osmui.model.pipelinemodel.AbstractParameter;
 import de.osmui.model.pipelinemodel.IntParameter;
 
 /**
- * @author niklas
+ * @author Niklas Schnelle
  * no tests, only getter and setter
  */
 public class DefaultParamEditor  extends AbstractCellEditor

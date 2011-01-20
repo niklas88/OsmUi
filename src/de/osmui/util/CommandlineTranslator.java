@@ -95,6 +95,9 @@ public class CommandlineTranslator {
 				pipeStack.push(pipe);
 			} else {
 				pipeMap.put(pipe.getName(), pipe);
+				// If the pipe name starts with "AUTO" we don't need this auto 
+				// generated name anymore
+				pipe.setName(null);
 			}
 		}
 		System.out.println("Task done");
