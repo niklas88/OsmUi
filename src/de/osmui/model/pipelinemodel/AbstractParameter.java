@@ -73,11 +73,18 @@ public abstract class AbstractParameter implements Serializable{
 	
 	/**
 	 * Returns whether this parameter's value differs from the default, allows leaving it away otherwise
-	 * @return true if this parameter's value equals the default
+	 * @return true if this parameter's value equals the default.
 	 */
 	public boolean isDefaultValue() {
-		String  defaultValue = description.getDefaultValue();
-		return (defaultValue != null)? defaultValue.equals(this.getValue()) : false;
+		return getDefaultValue().equals(this.getValue());
+	}
+	
+	/**
+	 * Returns whether the parameter is required by the task
+	 * @return
+	 */
+	public boolean isRequired() {
+		return description.isRequired();
 	}
 	
 	/**
@@ -85,7 +92,8 @@ public abstract class AbstractParameter implements Serializable{
 	 * @return
 	 */
 	public String getDefaultValue(){
-		return description.getDefaultValue();
+		String defaultValue = description.getDefaultValue();
+		return (defaultValue != null)? defaultValue: "";
 	}
 
 	/**

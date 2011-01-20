@@ -38,8 +38,7 @@ public class BooleanParamRenderer implements TableCellRenderer {
 	protected TableCellRenderer delegate;
 	
 	public BooleanParamRenderer(TableCellRenderer defaultRenderer){
-		delegate = defaultRenderer;
-		
+		delegate = defaultRenderer;		
 	}
 	/* (non-Javadoc)
 	 * @see javax.swing.table.TableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)

@@ -42,6 +42,10 @@ public class IntParameter extends AbstractParameter {
 	 */
 	public IntParameter(TParameter desc, String value) {
 		super(desc, value);
+		if(value == null){
+			// This happens when there is no default value
+			setValue("0");
+		}
 		setValue(value);
 	}
 
@@ -85,7 +89,6 @@ public class IntParameter extends AbstractParameter {
 	@Override
 	public void setValue(String s) throws IllegalArgumentException {
 		this.value = Integer.parseInt(s);
-
 	}
 
 }

@@ -67,14 +67,14 @@ public class MainFrame extends JFrame {
 	protected JGPipelineModel pipeModel;
 
 	protected CopyBox copyBox;
-
+	
 	/**
 	 * Constructs the mainframe
 	 */
-	private MainFrame() {
-		
+	private MainFrame() {	
 
-		
+		this.setTitle("OsmUi");
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		configurationManager = ConfigurationManager.getInstance();
 		configurationManager.loadConfiguration();
 		this.setSize(configurationManager.getEntry("MainFrameWidth", 800),
@@ -93,7 +93,7 @@ public class MainFrame extends JFrame {
 		pipeModel.addObserver(copyBox);
 
 		parameterBoxTableModel = new ParameterBoxTableModel();
-		parameterBox = new ParameterBox(parameterBoxTableModel);
+		parameterBox = new ParameterBox(parameterBoxTableModel, copyBox);
 
 		pipeBox.registerTaskSelectedListener(taskBox);
 		pipeBox.registerTaskSelectedListener(parameterBox);
@@ -107,7 +107,7 @@ public class MainFrame extends JFrame {
 				taskBox, parameterBox), rightContent);
 		content.setDividerLocation(configurationManager.getEntry(
 				"ContentDividerLocation", 220));
-
+		
 		Menu menu = new Menu();
 		this.setJMenuBar(menu);
 
@@ -153,6 +153,29 @@ public class MainFrame extends JFrame {
 	 */
 	public TaskBoxTableModel getTaskBoxTableModel() {
 		return taskBoxTableModel;
+	}
+
+	/**
+	 * @return the taskBoxTableModel
+	 */
+	public ConfigurationManager getConfigurationManager() {
+		return configurationManager;
+	}
+	
+	public ParameterBox getParameterBox() {
+		return parameterBox;
+	}
+
+	public PipelineBox getPipeBox() {
+		return pipeBox;
+	}
+
+	public CopyBox getCopyBox() {
+		return copyBox;
+	}
+
+	public void setPipeModel(JGPipelineModel pipeModel) {
+		this.pipeModel = pipeModel;
 	}
 
 	// A access method on class level, which creates only once a instance a

@@ -78,7 +78,7 @@ public class TaskBoxTableModel extends AbstractTableModel {
 	
 	@Override
 	public String getColumnName(int col){
-		return I18N.getString("TaskBox.Name");
+		return I18N.getString("TaskBoxTableModel.name");
 	}
 
 }

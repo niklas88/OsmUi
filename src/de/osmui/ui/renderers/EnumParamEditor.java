@@ -43,6 +43,11 @@ public class EnumParamEditor extends AbstractCellEditor implements
 		TableCellEditor, ActionListener {
 
 	private static class EnumComboBoxRenderer extends BasicComboBoxRenderer {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 2368155220295494506L;
+
 		/*
 		 * (non-Javadoc)
 		 * 

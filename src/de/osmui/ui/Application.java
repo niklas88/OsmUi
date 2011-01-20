@@ -41,7 +41,6 @@ public class Application {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				MainFrame osmUi = MainFrame.getInstance();
-				osmUi.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 				osmUi.setVisible(true);
 			}
 

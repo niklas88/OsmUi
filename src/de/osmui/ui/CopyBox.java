@@ -78,5 +78,11 @@ public class CopyBox extends JScrollPane implements Observer {
 			copyBoxTextField.setText(trans.exportLine(model));
 		}
 	}
+	/**
+	 * Updates the copy box
+	 */
+	public void update(){
+		copyBoxTextField.setText(trans.exportLine(model));
+	}
 
 }

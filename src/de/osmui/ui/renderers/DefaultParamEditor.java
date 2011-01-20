@@ -71,8 +71,9 @@ public class DefaultParamEditor  extends AbstractCellEditor
 		try {
 			currParam.setValue(textField.getText());
 		} catch (IllegalArgumentException e){
-			JOptionPane.showMessageDialog(null,I18N.getString("ParamBox.ValWrong"));
+			JOptionPane.showMessageDialog(null,I18N.getString("DefaultParamEditor.valWrong"));
 			currParam.setValue(formerValue);
+			textField.setText(formerValue);
 		}
 		return  currParam;
 	}
@@ -85,8 +86,9 @@ public class DefaultParamEditor  extends AbstractCellEditor
 			currParam.setValue(textField.getText());
 			fireEditingStopped();
 		} catch (IllegalArgumentException e){
-			JOptionPane.showMessageDialog(null,I18N.getString("ParamBox.ValWrong"));
+			JOptionPane.showMessageDialog(null,I18N.getString("DefaultParamEditor.valWrong"));
 			currParam.setValue(formerValue);
+			textField.setText(formerValue);
 		}
 	}
 }
