@@ -141,8 +141,7 @@ public class Menu extends JMenuBar {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (ImportException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, e1.getMessage());
 				}
 				MainFrame.getInstance().pipeModel.layout(null);
 			}
@@ -161,32 +160,32 @@ public class Menu extends JMenuBar {
 							MainFrame.getInstance(),
 							"Die konstruierte Pipeline ist nicht ausführbar wollen sie, sie trotzdem exportieren?",
 							"Nicht ausführbar", JOptionPane.WARNING_MESSAGE,
-							JOptionPane.YES_NO_OPTION) == 1) {
+							JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
 						return;
 					}
-					JFileChooser chooser = new JFileChooser();
-					chooser.addChoosableFileFilter(pipeImExShFilter);
-					chooser.addChoosableFileFilter(pipeImExBatFilter);
-					if (System.getProperty("os.name").indexOf("Windows") != -1) {
-						chooser.setFileFilter(pipeImExBatFilter);
-					} else {
-						chooser.setFileFilter(pipeImExShFilter);
+				}
+				JFileChooser chooser = new JFileChooser();
+				chooser.addChoosableFileFilter(pipeImExShFilter);
+				chooser.addChoosableFileFilter(pipeImExBatFilter);
+				if (System.getProperty("os.name").contains("Windows")) {
+					chooser.setFileFilter(pipeImExBatFilter);
+				} else {
+					chooser.setFileFilter(pipeImExShFilter);
+				}
+				chooser.setAcceptAllFileFilterUsed(false);
+				int returnVal = chooser.showSaveDialog(null);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					try {
+						
+						PipeImEx.getInstance()
+								.export(MainFrame.getInstance().pipeModel,
+										chooser.getSelectedFile()
+												.getAbsolutePath(),
+										chooser.getFileFilter().getDescription());
+					} catch (ExportException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
-					chooser.setAcceptAllFileFilterUsed(false);
-					int returnVal = chooser.showSaveDialog(null);
-					if (returnVal == JFileChooser.APPROVE_OPTION) {
-						try {
-							PipeImEx.getInstance()
-									.export(MainFrame.getInstance().pipeModel,
-											chooser.getSelectedFile()
-													.getAbsolutePath(),
-											getExtension(chooser
-													.getSelectedFile()));
-						} catch (ExportException e1) {
-							JOptionPane.showMessageDialog(null, e1.getMessage());
-						}
-						MainFrame.getInstance().pipeModel.layout(null);
-					}
+					MainFrame.getInstance().pipeModel.layout(null);
 				}
 			}
 		});

@@ -18,7 +18,7 @@ import de.osmui.util.exceptions.TaskNameUnknownException;
 /**
  * @author Peter Vollmer
  * 
- *  will be tested by system-tests
+ *         will be tested by system-tests
  */
 
 public class TaskBox extends JTable implements TaskSelectedEventListener {
@@ -34,7 +34,7 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 
 	public TaskBox(TaskBoxTableModel taskBoxTableModel) {
 		this.setModel(taskBoxTableModel);
-		this.setDefaultRenderer(TTask.class,  new TaskBoxCellRenderer());
+		this.setDefaultRenderer(TTask.class, new TaskBoxCellRenderer());
 		this.setAutoCreateRowSorter(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		model = taskBoxTableModel;
@@ -43,8 +43,9 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 	}
 
 	public void showCompatibleTasks(AbstractTask task) {
-		if(task != null && task.isConnectable()){
-			model.setTasks(TaskManager.getInstance().getCompatibleTasks(task.getName()));
+		if (task != null && task.isConnectable()) {
+			model.setTasks(TaskManager.getInstance().getCompatibleTasks(
+					task.getName()));
 		} else {
 			model.setTasks(TaskManager.getInstance().getCompatibleTasks(""));
 		}
@@ -52,7 +53,7 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 	}
 
 	@Override
-	public void TaskSelected(TaskSelectedEvent e) {	
+	public void TaskSelected(TaskSelectedEvent e) {
 
 		if (e != null) {
 			selectedTask = (AbstractTask) e.getSource();
@@ -65,7 +66,8 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 	}
 
 	public void addSelectedToModel() {
-		TTask taskDesc = (TTask) model.getValueAt(this.getSelectedRow(), 0);
+		TTask taskDesc = (TTask) model.getValueAt(
+				this.convertRowIndexToModel(this.getSelectedRow()), 0);
 		AbstractTask newTask;
 		try {
 			newTask = TaskManager.getInstance().createTask(taskDesc.getName());

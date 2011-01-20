@@ -36,7 +36,7 @@ public class PipeImExShFilter extends FileFilter{
 
 	    //The description of this filter
 	    public String getDescription() {
-	        return ".sh (Unix)";
+	        return ".sh";
 	    }
 
 }

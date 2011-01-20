@@ -57,6 +57,7 @@ public class MainFrame extends JFrame {
 		
 
 		this.setTitle("OsmUi");
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		configurationManager = ConfigurationManager.getInstance();
 		configurationManager.loadConfiguration();
 		this.setSize(configurationManager.getEntry("MainFrameWidth", 800),

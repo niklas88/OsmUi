@@ -141,10 +141,10 @@ public class PipeImEx {
 		BufferedWriter writer = null;
 		try {
 			writer = new BufferedWriter(new OutputStreamWriter(
-					new FileOutputStream(fileName), Charset.forName("UTF-8")));
+					new FileOutputStream(fileName+extension), Charset.forName("UTF-8")));
 			StringBuilder commandToExport = new StringBuilder();
 			CommandlineTranslator trans = CommandlineTranslator.getInstance();
-			if (extension == "bat") {
+			if (extension == ".bat") {
 				commandToExport
 						.append(MainFrame
 								.getInstance()
@@ -152,15 +152,14 @@ public class PipeImEx {
 								.getEntry(
 										"OsmosisPath",
 										I18N.getString("ConfigurationDialog.osmosisStandardPath")));
+				commandToExport.append(" ");
 				commandToExport.append(trans.exportLine(pipelineModel));
 				writer.write(commandToExport.toString());
 
-			} else if (extension == "sh") {
-				writer.write("#!/bin/bash");
-				writer.newLine();
-				writer.write("#"
-						+ "Hier kommen noch schöne internationale Kommentare hin");
-				writer.newLine();
+			} else {
+				writer.write("#!/bin/sh\n");
+				writer.write("# "+
+						"Hier kommen noch schöne internationale Kommentare hin\n");
 				commandToExport
 						.append(MainFrame
 								.getInstance()
@@ -168,7 +167,7 @@ public class PipeImEx {
 								.getEntry(
 										"OsmosisPath",
 										I18N.getString("ConfigurationDialog.osmosisStandardPath")));
-				commandToExport.append("\\\n");
+				commandToExport.append(" ");
 				commandToExport.append(trans.exportLine(pipelineModel));
 				writer.write(commandToExport.toString());
 			}

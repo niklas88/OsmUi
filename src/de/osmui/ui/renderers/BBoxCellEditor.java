@@ -31,7 +31,7 @@ TableCellEditor, TableCellRenderer,ActionListener {
 	protected BBoxPseudoParameter param;
 	
 	public BBoxCellEditor(){
-		button = new JButton(I18N.getString("ParamBox.BBoxEdit"));
+		button = new JButton(I18N.getString("BBoxPseudoParamEditor.BBoxEdit"));
 		button.addActionListener(this);
 		param = null;
 	}

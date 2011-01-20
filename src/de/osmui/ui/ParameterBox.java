@@ -44,6 +44,7 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 
 	public ParameterBox(ParameterBoxTableModel parameterBoxTableModel) {
 		model = parameterBoxTableModel;
+		this.setAutoCreateRowSorter(true);
 		DefaultParamRenderer defaultParamRenderer = new DefaultParamRenderer();
 		
 		this.setDefaultRenderer(AbstractParameter.class, defaultParamRenderer);
@@ -74,6 +75,7 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 		if (e != null) {
 			selectedTask = (AbstractTask) e.getSource();
 			showActualParameters(selectedTask);
+			this.getRowSorter().toggleSortOrder(1);
 		}
 	}
 	
