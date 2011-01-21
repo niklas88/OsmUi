@@ -29,7 +29,6 @@ import javax.swing.JMenu;
  */
 public class I18NTest {
 	@Test public void get (){
-		I18N inter = new I18N();
 		Object values = null;
 		JMenu fileMenu = new JMenu(inter.getString("Menu.file"));
 		assertEquals("getString: ", fileMenu.getActionCommand(), "Datei");

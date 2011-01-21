@@ -18,22 +18,17 @@
 package de.osmui.ui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.FlowLayout;
+
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.net.URL;
-import java.util.Enumeration;
 import java.util.Locale;
 
 import javax.help.HelpSet;
 import javax.help.JHelp;
-import javax.help.JHelpIndexNavigator;
-import javax.help.JHelpNavigator;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -44,8 +39,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
-import de.osmui.util.ConfigurationManager;
 import de.osmui.util.exceptions.ImportException;
 import de.osmui.i18n.I18N;
 import de.osmui.io.PipeImEx;
@@ -158,7 +151,6 @@ public class Menu extends JMenuBar {
 				I18N.getString("Menu.importClipBoard")); //$NON-NLS-1$
 		importClipBoard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("importClipboard"); //$NON-NLS-1$
 				try {
 					PipeImEx.getInstance().importClipBoard(
 							MainFrame.getInstance().pipeModel,
@@ -182,11 +174,11 @@ public class Menu extends JMenuBar {
 
 				if (!MainFrame.getInstance().pipeModel.isExecutable()) {
 
-					if (JOptionPane.showConfirmDialog(
-							MainFrame.getInstance(),
-							"Die konstruierte Pipeline ist nicht ausführbar wollen sie, sie trotzdem exportieren?",
-							"Nicht ausführbar", JOptionPane.WARNING_MESSAGE,
-							JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
+					if (JOptionPane.showConfirmDialog(MainFrame.getInstance(),
+							I18N.getString("Menu.exportWarnQuestion"),
+							I18N.getString("Menu.exportWarnQuestionTitle"),
+							JOptionPane.WARNING_MESSAGE,
+							JOptionPane.YES_NO_OPTION) == JOptionPane.CANCEL_OPTION) {
 						return;
 					}
 				}
@@ -202,12 +194,11 @@ public class Menu extends JMenuBar {
 				int returnVal = chooser.showSaveDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					try {
-						
-						PipeImEx.getInstance()
-								.export(MainFrame.getInstance().pipeModel,
-										chooser.getSelectedFile()
-												.getAbsolutePath(),
-										chooser.getFileFilter().getDescription());
+
+						PipeImEx.getInstance().export(
+								MainFrame.getInstance().pipeModel,
+								chooser.getSelectedFile().getAbsolutePath(),
+								chooser.getFileFilter().getDescription());
 					} catch (ExportException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
@@ -246,7 +237,7 @@ public class Menu extends JMenuBar {
 		/*
 		 * Redo
 		 */
-		JMenuItem redo = new JMenuItem(I18N.getString("Menu.undo")); //$NON-NLS-1$
+		JMenuItem redo = new JMenuItem(I18N.getString("Menu.redo")); //$NON-NLS-1$
 		redo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("redo"); //$NON-NLS-1$
@@ -256,10 +247,10 @@ public class Menu extends JMenuBar {
 		/*
 		 * Undo
 		 */
-		JMenuItem undo = new JMenuItem(I18N.getString("Menu.redo")); //$NON-NLS-1$
+		JMenuItem undo = new JMenuItem(I18N.getString("Menu.undo")); //$NON-NLS-1$
 		undo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(""); //$NON-NLS-1$
+				System.out.println("undo"); //$NON-NLS-1$
 			}
 		});
 		editMenu.add(undo);
@@ -309,7 +300,7 @@ public class Menu extends JMenuBar {
 						helpViewer.setCurrentID("Simple.Introduction");
 					}
 				} catch (Exception f) {
-					System.err.println("API Help Set not found");
+					//System.err.println("API Help Set not found");
 				}
 				JFrame frame = new JFrame();
 				frame.setTitle(I18N.getString("Menu.help"));

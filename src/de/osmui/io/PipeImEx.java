@@ -49,7 +49,6 @@ public class PipeImEx {
 
 	// Prevents the creation of the object with other methods
 	private PipeImEx() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -84,7 +83,7 @@ public class PipeImEx {
 				trans.importLine(pipelineModel, toParse.toString());
 			} else {
 				throw new ImportException(
-						"Es wurde keine importierbare Pipeline gefunden! Bitte die Datei überprüfen oder eine andere Datei");
+						I18N.getString("PipeImEx.noImportablePipeFoundFile"));
 			}
 		} catch (FileNotFoundException e) {
 			throw new ImportException(I18N.getString("PipeImEx.fileNotFound"));
@@ -138,10 +137,9 @@ public class PipeImEx {
 				trans.importLine(pipelineModel, toParse.toString());
 			} else {
 				throw new ImportException(
-						"Es wurde keine importierbare Pipeline im ClipBoard gefunden!");
+						I18N.getString("PipeImEx.noImportablePipeFoundClipboard"));
 			}
 		} catch (UnsupportedFlavorException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			throw new ImportException(e.getLocalizedMessage());
@@ -152,7 +150,8 @@ public class PipeImEx {
 	/**
 	 * @param pipelineModel
 	 * @param fileName
-	 * @throws ImportException
+	 * @param extension
+	 * @throws ExportException
 	 */
 	public void export(AbstractPipelineModel pipelineModel, String fileName,
 			String extension) throws ExportException {
@@ -172,7 +171,7 @@ public class PipeImEx {
 										"OsmosisPath",
 										I18N.getString("ConfigurationDialog.osmosisStandardPath")));
 				commandToExport.append(" ");
-				commandToExport.append(trans.exportLine(pipelineModel));
+				commandToExport.append(trans.exportLine(pipelineModel,"^\n"));
 				writer.write(commandToExport.toString());
 
 			} else {
@@ -187,7 +186,7 @@ public class PipeImEx {
 										"OsmosisPath",
 										I18N.getString("ConfigurationDialog.osmosisStandardPath")));
 				commandToExport.append(" ");
-				commandToExport.append(trans.exportLine(pipelineModel));
+				commandToExport.append(trans.exportLine(pipelineModel, "\\\n"));
 				writer.write(commandToExport.toString());
 			}
 		} catch (FileNotFoundException e) {
@@ -206,35 +205,6 @@ public class PipeImEx {
 
 	}
 
-	/*	*//**
-	 * Stores the to-do entries in the file with the given name.
-	 * 
-	 * @param fileName
-	 *            of the file to write the to-do entries to.
-	 * @param entries
-	 *            to save to a file.
-	 * @throws ApplicationException
-	 *             if storing fails
-	 */
-	/*
-	 * protected static void store(String fileName, Vector<TodoEntry> entries)
-	 * throws ApplicationException { BufferedWriter writer = null; try { if
-	 * (entries.size() != 0) { writer = new BufferedWriter(new
-	 * OutputStreamWriter(new FileOutputStream(fileName),
-	 * Charset.forName("UTF-8"))); StringBuilder strBldr = new StringBuilder();
-	 * for (TodoEntry entry : entries) { strBldr.delete(0, strBldr.length());
-	 * strBldr.append(Locale.getDefault().getLanguage()); strBldr.append('\t');
-	 * strBldr.append(entry.getDueDate()); strBldr.append('\t');
-	 * strBldr.append(entry.getDescription()); strBldr.append('\t');
-	 * strBldr.append(entry.getSeverity()); writer.write(strBldr.toString());
-	 * writer.newLine(); } } else { throw new ApplicationException(I18N
-	 * .getMessage("No_Entries_To_Save")); } } catch (IOException e) { throw new
-	 * ApplicationException(e.getLocalizedMessage());
-	 * 
-	 * } finally { try { if (writer != null) { writer.close(); } } catch
-	 * (IOException e) { throw new
-	 * ApplicationException(e.getLocalizedMessage()); } } }
-	 */
 
 	// A access method on class level, which creates only once a instance a
 	// concrete object

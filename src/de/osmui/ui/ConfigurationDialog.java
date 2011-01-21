@@ -60,7 +60,7 @@ public class ConfigurationDialog extends JDialog {
 		add(center, BorderLayout.CENTER);
 
 		JPanel bottom = new JPanel();
-		JButton ok = new JButton("OK");
+		JButton ok = new JButton(I18N.getString("ConfigurationDialog.ok"));
 		ok.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -69,7 +69,7 @@ public class ConfigurationDialog extends JDialog {
 				dialog.dispose();
 			}
 		});
-		JButton cancel = new JButton("Cancel");
+		JButton cancel = new JButton(I18N.getString("ConfigurationDialog.cancel"));
 		cancel.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {

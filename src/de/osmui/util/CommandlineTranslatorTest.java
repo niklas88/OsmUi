@@ -40,7 +40,7 @@ public class CommandlineTranslatorTest {
 	@Test public void ImportLine(){
 		JGPipelineModel model = new JGPipelineModel();
 		CommandlineTranslator trans = CommandlineTranslator.getInstance();
-		trans.main(null);
+		//trans.main(null);
 		try {
 			trans.importLine(
 					model,

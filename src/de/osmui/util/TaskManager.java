@@ -88,7 +88,6 @@ public class TaskManager {
 					if (task.getShortName() != null) {
 						shortNameTable.put(task.getShortName(), task.getName());
 					}
-					// System.out.println("---- " + task + " ----");
 					System.out.println(task.getShortName() + " <=> "
 							+ task.getName());
 				}

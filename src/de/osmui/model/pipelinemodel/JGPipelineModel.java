@@ -28,6 +28,7 @@ import java.util.Map;
 
 import javax.swing.SwingConstants;
 
+import de.osmui.i18n.I18N;
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
 
@@ -224,7 +225,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 			throws TasksNotCompatibleException, TasksNotInModelException {
 
 		if (parent.getModel() != this) {
-			throw new TasksNotInModelException("parent not in model");
+			throw new TasksNotInModelException(I18N.getString("JGPiplineModel.parentNotInModel"));
 		}
 
 		// First add the child and then use our internal connect method to wire
@@ -249,8 +250,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 	public boolean removeTask(AbstractTask task)
 			throws TasksNotInModelException {
 		if (task.getModel() != this) {
-			throw new TasksNotInModelException(
-					"The task to remove is not in the model");
+			throw new TasksNotInModelException(I18N.getString("JGPipelineModel.taskToRmNotInModel"));
 		}
 
 		Object[] cellArray = { getCellForTask(task) };
@@ -271,8 +271,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 	private boolean rawRemoveTask(AbstractTask task)
 			throws TasksNotInModelException {
 		if (task.getModel() != this) {
-			throw new TasksNotInModelException(
-					"The task to remove is not in the model");
+			throw new TasksNotInModelException(I18N.getString("JGPipelineModel.taskToRmNotInModel"));
 		}
 		// Disconnect all connected pipes
 		for (AbstractPipe out : task.getOutputPipes()) {
@@ -313,7 +312,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 				getCellForTask(parent),
 				getCellForTask(child));
 		if(edge == null){
-			throw new TasksNotCompatibleException("Tasks not compatible");
+			throw new TasksNotCompatibleException(I18N.getString("JGPipelineModel.TasksNotComp"));
 		}
 		setChanged();
 		notifyObservers(edge.getValue());

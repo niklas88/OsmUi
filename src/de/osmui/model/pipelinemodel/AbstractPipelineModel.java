@@ -23,6 +23,7 @@ package de.osmui.model.pipelinemodel;
 import java.util.List;
 import java.util.Observable;
 
+import de.osmui.i18n.I18N;
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
 
@@ -94,10 +95,9 @@ public abstract class AbstractPipelineModel extends Observable {
 	public AbstractPipe connectTasks(AbstractTask parent, AbstractTask child)
 			throws TasksNotCompatibleException, TasksNotInModelException {
 		if (parent == null || child == null) {
-			throw new TasksNotCompatibleException("parent or child is null");
+			throw new TasksNotCompatibleException(I18N.getString("AbstractPipelineModel.parentChildNull"));
 		} else if (parent.getModel() != this || child.getModel() != this) {
-			throw new TasksNotInModelException(
-					"Either parent or child is not in the model");
+			throw new TasksNotInModelException(I18N.getString("AbstractPipelineModel.parentChildNotInModel"));
 		} else {
 			// Test outputPipes of the parent for compatibility with ports on
 			// the child
@@ -113,7 +113,7 @@ public abstract class AbstractPipelineModel extends Observable {
 							if(out.connect(in)){
 								return out;
 							} else {
-								throw new TasksNotCompatibleException("connect failed");
+								throw new TasksNotCompatibleException(I18N.getString("AbstractPipelineModel.connectFaild"));
 							}
 						}
 					}				
@@ -140,7 +140,7 @@ public abstract class AbstractPipelineModel extends Observable {
 							if(out.connect(in)){
 								return out;
 							} else {
-								throw new TasksNotCompatibleException("connect failed");
+								throw new TasksNotCompatibleException(I18N.getString("AbstractPipelineModel.connectFaild"));
 							}
 						}
 					}				
@@ -148,8 +148,7 @@ public abstract class AbstractPipelineModel extends Observable {
 			}
 			// We haven't returned in the loop so no compatible pipe/port was
 			// found throw
-			throw new TasksNotCompatibleException(
-					"The given tasks weren't compatible");
+			throw new TasksNotCompatibleException(I18N.getString("AbstractPipelineModel.givenTasksNotComp"));
 		}
 	}
 	/**
@@ -170,9 +169,9 @@ public abstract class AbstractPipelineModel extends Observable {
 			AbstractTask child = input.getParent();
 			AbstractTask parent = output.getSource();
 			if(child.getModel() != this || parent.getModel() != this){
-				throw new TasksNotInModelException("Either parent or child isn't in the model");
+				throw new TasksNotInModelException(I18N.getString("AbstractPipelineModel.parentChildNotInModel"));
 			} else if (output.isConnected() || input.isConnected() || !output.connect(input)){
-				throw new TasksNotCompatibleException("Parent and child weren't compatible on this pipe/port");
+				throw new TasksNotCompatibleException(I18N.getString("AbstractPipelineModel.parentChildNotCompatiblePort"));
 			}
 			
 			return output;
@@ -193,8 +192,7 @@ public abstract class AbstractPipelineModel extends Observable {
 			// Can't connect with null return null
 			return null;
 		} else if (parent.getModel() != this || child.getModel() != this) {
-			throw new TasksNotInModelException(
-					"Either parent or child is not in the model");
+			throw new TasksNotInModelException(I18N.getString("AbstractPipelineModel.parentChildNotInModel"));
 		} else {
 			// First we need to find the connection between the two and then
 			// remove it

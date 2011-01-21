@@ -44,7 +44,6 @@ public class TaskBoxCellRenderer extends DefaultTableCellRenderer {
 		super.getTableCellRendererComponent(table, obj, isSelected, hasFocus, row, column);
 		
 		TTask task = (TTask) obj;
-		//this.setText((task.getFriendlyName()!= null)?task.getFriendlyName():task.getName());
 		this.setText(task.getName());
 		this.setToolTipText(task.getDescription());
 		
