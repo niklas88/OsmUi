@@ -65,17 +65,6 @@ public class Menu extends JMenuBar {
 	PipeImExShFilter pipeImExShFilter = new PipeImExShFilter();
 	PipeImExBatFilter pipeImExBatFilter = new PipeImExBatFilter();
 
-	public String getExtension(File file) {
-		String ext = null;
-		String s = file.getName();
-		int i = s.lastIndexOf('.');
-
-		if (i > 0 && i < s.length() - 1) {
-			ext = s.substring(i + 1).toLowerCase();
-		}
-		return ext;
-	}
-
 	/**
 	 * Constructs the menu with all its entries of Osmui.
 	 */
@@ -281,6 +270,26 @@ public class Menu extends JMenuBar {
 		editMenu.add(preferences);
 
 		this.add(editMenu);
+		/*
+		 * Menu "Layout"
+		 */
+		JMenu layoutMenu = new JMenu(I18N.getString("Menu.Layout"));
+		/*
+		 * Menu items of the menu "Layout"
+		 */
+		
+		/*
+		 * automatic Layout
+		 */
+		JMenuItem layoutAutomatic = new JMenuItem(I18N.getString("Menu.layoutAutomatic")); //$NON-NLS-1$
+		layoutAutomatic.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainFrame.getInstance().pipeModel.layout(null);
+			}
+		});
+		layoutMenu.add(layoutAutomatic);
+		
+		this.add(layoutMenu);
 		/*
 		 * Menu "Help"
 		 */
