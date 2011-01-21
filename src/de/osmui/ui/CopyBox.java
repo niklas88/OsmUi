@@ -75,14 +75,14 @@ public class CopyBox extends JScrollPane implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (arg1 instanceof AbstractTask) {
-			copyBoxTextField.setText(trans.exportLine(model));
+			copyBoxTextField.setText(trans.exportLine(model, ""));
 		}
 	}
 	/**
 	 * Updates the copy box
 	 */
 	public void update(){
-		copyBoxTextField.setText(trans.exportLine(model));
+		copyBoxTextField.setText(trans.exportLine(model, ""));
 	}
 
 }

@@ -69,6 +69,6 @@ public class TaskManagerTest {
 	@Test public void getCompatibleTasks(){
 		TaskManager manager = new TaskManager();
 		String s = "tee";
-		assertEquals(23, manager.getCompatibleTasks(s).size());
+		assertEquals(24, manager.getCompatibleTasks(s).size());
 	}
 }
