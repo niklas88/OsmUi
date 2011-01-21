@@ -30,9 +30,10 @@ import javax.swing.JMenu;
 public class I18NTest {
 	@Test public void get (){
 		Object values = null;
-		JMenu fileMenu = new JMenu(inter.getString("Menu.file"));
+		JMenu fileMenu = new JMenu(I18N.getString("Menu.file"));
 		assertEquals("getString: ", fileMenu.getActionCommand(), "Datei");
-		fileMenu = new JMenu(inter.getString("Menu.file", values));
+		
+		fileMenu = new JMenu(I18N.getString("Menu.file", values));
 		assertEquals("getString: ", fileMenu.getActionCommand(), "Datei");
 		};
 }
