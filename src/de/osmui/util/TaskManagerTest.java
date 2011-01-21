@@ -36,7 +36,7 @@ import de.osmui.util.exceptions.TaskNameUnknownException;
 public class TaskManagerTest {
 	@Test public void createTask() throws TaskNameUnknownException{
 		AbstractTask task = new CommonTask("tee");
-		TaskManager manager = new TaskManager();
+		TaskManager manager = TaskManager.getInstance();
 		AbstractTask s = manager.createTask("tee");
 		assertEquals("Description==null",task.getName(), s.getName());
 	}
@@ -49,7 +49,7 @@ public class TaskManagerTest {
 	@Test public void getTaskDescription() throws TaskNameUnknownException{
 		TTask result = new TTask();
 		result.setName("tee");
-		TaskManager manager = new TaskManager();
+		TaskManager manager = TaskManager.getInstance();
 		TTask test = manager.getTaskDescription("tee");
 		assertEquals(result.getName(), test.getName());		
 	}
@@ -61,14 +61,14 @@ public class TaskManagerTest {
 	 */
 	@Test public void getTaskDescription2() throws TaskNameUnknownException{
 		AbstractTask task = new CommonTask("tee");
-		TaskManager manager = new TaskManager();
+		TaskManager manager = TaskManager.getInstance();
 		TTask test = manager.getTaskDescription(task);
 		assertEquals("tee", test.getName());
 	}
 	
 	@Test public void getCompatibleTasks(){
-		TaskManager manager = new TaskManager();
+		TaskManager manager = TaskManager.getInstance();
 		String s = "tee";
-		assertEquals(23, manager.getCompatibleTasks(s).size());
+		assertEquals(24, manager.getCompatibleTasks(s).size());
 	}
 }
