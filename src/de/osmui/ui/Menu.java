@@ -18,22 +18,16 @@
 package de.osmui.ui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.net.URL;
-import java.util.Enumeration;
 import java.util.Locale;
 
 import javax.help.HelpSet;
 import javax.help.JHelp;
-import javax.help.JHelpIndexNavigator;
-import javax.help.JHelpNavigator;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -44,8 +38,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
-import de.osmui.util.ConfigurationManager;
 import de.osmui.util.exceptions.ImportException;
 import de.osmui.i18n.I18N;
 import de.osmui.io.PipeImEx;
@@ -307,7 +299,6 @@ public class Menu extends JMenuBar {
 						helpViewer.setCurrentID("Simple.Introduction");
 					}
 				} catch (Exception f) {
-					return;
 					//System.err.println("API Help Set not found");
 				}
 				JFrame frame = new JFrame();
@@ -333,7 +324,7 @@ public class Menu extends JMenuBar {
 				frame.setLayout(new BorderLayout());
 				frame.setTitle(I18N.getString("Menu.about"));
 				
-				Icon icon = new ImageIcon(getClass().getResource("Logo_Osmui1.png"));
+				Icon icon = new ImageIcon(getClass().getResource("Logo_Osmui.png"));
 				JLabel bild = new JLabel(icon);
 				frame.add(bild, BorderLayout.NORTH);
 				
