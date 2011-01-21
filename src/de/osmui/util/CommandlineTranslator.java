@@ -37,7 +37,6 @@ import de.osmui.model.pipelinemodel.AbstractPipe;
 import de.osmui.model.pipelinemodel.AbstractPort;
 import de.osmui.model.pipelinemodel.AbstractTask;
 import de.osmui.model.pipelinemodel.IntParameter;
-import de.osmui.model.pipelinemodel.JGPipelineModel;
 import de.osmui.model.pipelinemodel.VariablePipe;
 import de.osmui.model.pipelinemodel.VariablePort;
 import de.osmui.util.exceptions.ImportException;
@@ -317,7 +316,7 @@ public class CommandlineTranslator {
 	}
 
 	/**
-	 * This private function is used to deal with a unfinished task: - It adds
+	 * This private function is used to deal with an unfinished task: - It adds
 	 * all still unfinished Downstream tasks that aren't yet in unfinished to it
 	 * - It tries whether all dependencies are met, if not pushing them - When
 	 * called again (after being added by a now finished upstream task) it marks
@@ -329,9 +328,10 @@ public class CommandlineTranslator {
 	 * @param fin
 	 * @param sb
 	 * @param task
+	 * @param lineSep the line separator e.g. "\\\n" for .sh use "" for single line
 	 */
 	private void exportTask(Stack<AbstractTask> unfin, Set<AbstractTask> fin,
-			StringBuilder sb, AbstractTask task) {
+			StringBuilder sb, AbstractTask task, String lineSep) {
 		// When we are done we need the downstream tasks on the stack
 		AbstractTask currTask;
 		AbstractPort downPort;
@@ -365,6 +365,7 @@ public class CommandlineTranslator {
 		}
 		// All dependencies are now cleared append task (without pipes)
 		sb.append(task.getCommandlineForm());
+		sb.append(lineSep);
 
 		// This task is now finished
 		fin.add(task);
@@ -378,7 +379,7 @@ public class CommandlineTranslator {
 	 * @return the line e.g.
 	 *         "--foo opt outPipe.0=AUTO1to1 --bar opt=val inPipe.0=AUTO1to1"
 	 */
-	public String exportLine(AbstractPipelineModel model) {
+	public String exportLine(AbstractPipelineModel model, String lineSep) {
 
 		Stack<AbstractTask> unfinished = new Stack<AbstractTask>();
 		HashSet<AbstractTask> finished = new HashSet<AbstractTask>();
@@ -394,7 +395,7 @@ public class CommandlineTranslator {
 				// This call tries to finish the task, if it still needs
 				// dependencies
 				// it will push those to resolve them first
-				exportTask(unfinished, finished, builder, currTask);
+				exportTask(unfinished, finished, builder, currTask, lineSep);
 			}
 		}
 

@@ -49,7 +49,6 @@ public class PipeImEx {
 
 	// Prevents the creation of the object with other methods
 	private PipeImEx() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -141,7 +140,6 @@ public class PipeImEx {
 						I18N.getString("PipeImEx.noImportablePipeFoundClipboard"));
 			}
 		} catch (UnsupportedFlavorException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			throw new ImportException(e.getLocalizedMessage());
@@ -173,7 +171,7 @@ public class PipeImEx {
 										"OsmosisPath",
 										I18N.getString("ConfigurationDialog.osmosisStandardPath")));
 				commandToExport.append(" ");
-				commandToExport.append(trans.exportLine(pipelineModel));
+				commandToExport.append(trans.exportLine(pipelineModel,"^\n"));
 				writer.write(commandToExport.toString());
 
 			} else {
@@ -188,7 +186,7 @@ public class PipeImEx {
 										"OsmosisPath",
 										I18N.getString("ConfigurationDialog.osmosisStandardPath")));
 				commandToExport.append(" ");
-				commandToExport.append(trans.exportLine(pipelineModel));
+				commandToExport.append(trans.exportLine(pipelineModel, "\\\n"));
 				writer.write(commandToExport.toString());
 			}
 		} catch (FileNotFoundException e) {
