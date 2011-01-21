@@ -225,7 +225,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 			throws TasksNotCompatibleException, TasksNotInModelException {
 
 		if (parent.getModel() != this) {
-			throw new TasksNotInModelException(I18N.getString("JGPiplineModel.parentNotInModel"));
+			throw new TasksNotInModelException(I18N.getString("JGPipelineModel.parentNotInModel"));
 		}
 
 		// First add the child and then use our internal connect method to wire

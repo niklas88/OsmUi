@@ -13,7 +13,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package de.osmui.ui;
 
@@ -47,10 +47,11 @@ import de.osmui.io.exceptions.ExportException;
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
- *
- * Provides Menu to have an easy way to construct the whole Menu of Osmui.
- *
- * will be tested by system-tests
+ * 
+ *         Provides Menu to have an easy way to construct the whole Menu of
+ *         Osmui.
+ * 
+ *         will be tested by system-tests
  * 
  */
 
@@ -192,8 +193,18 @@ public class Menu extends JMenuBar {
 				chooser.setAcceptAllFileFilterUsed(false);
 				int returnVal = chooser.showSaveDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					try {
+					if (chooser.getSelectedFile().exists()) {
+						if (JOptionPane.showConfirmDialog(MainFrame
+								.getInstance(), I18N
+								.getString("Menu.overwriteWarnQuestion"), I18N
+								.getString("Menu.overwriteWarnQuestionTitle"),
+								JOptionPane.YES_NO_OPTION,
+								JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
+							return;
+						}
 
+					}
+					try {
 						PipeImEx.getInstance().export(
 								MainFrame.getInstance().pipeModel,
 								chooser.getSelectedFile().getAbsolutePath(),
@@ -201,7 +212,6 @@ public class Menu extends JMenuBar {
 					} catch (ExportException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
-					MainFrame.getInstance().pipeModel.layout(null);
 				}
 			}
 		});
@@ -299,7 +309,7 @@ public class Menu extends JMenuBar {
 						helpViewer.setCurrentID("Simple.Introduction");
 					}
 				} catch (Exception f) {
-					//System.err.println("API Help Set not found");
+					// System.err.println("API Help Set not found");
 				}
 				JFrame frame = new JFrame();
 				frame.setTitle(I18N.getString("Menu.help"));
@@ -323,11 +333,12 @@ public class Menu extends JMenuBar {
 				JDialog frame = new JDialog();
 				frame.setLayout(new BorderLayout());
 				frame.setTitle(I18N.getString("Menu.about"));
-				
-				Icon icon = new ImageIcon(getClass().getResource("Logo_Osmui.png"));
+
+				Icon icon = new ImageIcon(getClass().getResource(
+						"Logo_Osmui.png"));
 				JLabel bild = new JLabel(icon);
 				frame.add(bild, BorderLayout.NORTH);
-				
+
 				JLabel test = new JLabel(I18N.getString("Menu.about_text"));
 				frame.add(test, BorderLayout.CENTER);
 				frame.setVisible(true);
