@@ -13,7 +13,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package de.osmui.ui;
 
@@ -31,48 +31,51 @@ import de.osmui.i18n.I18N;
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
- *  will be tested by system-tests
+ *         will be tested by system-tests
  */
 
-public class TabBox extends JTabbedPane{
+public class TabBox extends JTabbedPane {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2984123985661193020L;
-	
+
 	private final TaskBox taskBox;
 	private final ParameterBox paramBox;
-	
+
 	public TabBox(TaskBox tb, ParameterBox pb) {
 		this.taskBox = tb;
 		this.paramBox = pb;
 		this.setTabPlacement(JTabbedPane.TOP);
 		this.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		
+
 		JPanel taskTab = new JPanel();
 		taskTab.setLayout(new BorderLayout());
 
-        JScrollPane taskScrollPane = new JScrollPane(taskBox);
-        JScrollPane paramScrollPane = new JScrollPane(paramBox);
-        
-        taskTab.add(taskScrollPane,BorderLayout.CENTER);
-        
-        JButton addButton = new JButton(I18N.getString("TabBox.add"));
-        addButton.addActionListener(new ActionListener() {
-			
+		JScrollPane taskScrollPane = new JScrollPane(taskBox);
+		JScrollPane paramScrollPane = new JScrollPane(paramBox);
+
+		taskTab.add(taskScrollPane, BorderLayout.CENTER);
+
+		JButton addButton = new JButton(I18N.getString("TabBox.add"));
+		addButton.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				taskBox.addSelectedToModel();
-				
+				if (taskBox.getSelectedRow() == -1) {
+
+				}else{
+					taskBox.addSelectedToModel();
+					MainFrame.getInstance().saved=false;
+				}
+
 			}
 		});
-        taskTab.add(addButton,BorderLayout.SOUTH);
-        
-        this.add(I18N.getString("Content.tabBox"),taskTab); 
-		
-       
-		this.add(I18N.getString("Content.pipelineBox"),paramScrollPane); 	
+		taskTab.add(addButton, BorderLayout.SOUTH);
+
+		this.add(I18N.getString("Content.tabBox"), taskTab);
+
+		this.add(I18N.getString("Content.pipelineBox"), paramScrollPane);
 	}
-	
 }

@@ -14,7 +14,6 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 package de.osmui.io;
 
 import java.awt.datatransfer.Clipboard;
@@ -156,9 +155,7 @@ public class PipeImEx {
 	public void export(AbstractPipelineModel pipelineModel, String filename,
 			String extension) throws ExportException {
 				
-		if (filename.endsWith(extension)) {
-			filename= filename.substring(0, filename.lastIndexOf('.'));			
-		}else{
+		if (!filename.endsWith(extension)) {
 			filename = filename +extension;
 		}
 		

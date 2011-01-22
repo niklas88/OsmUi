@@ -70,6 +70,8 @@ public class MainFrame extends JFrame {
 	
 	protected Boolean saved;
 	
+	protected String savePath;
+	
 	/**
 	 * Constructs the mainframe
 	 */
@@ -114,6 +116,7 @@ public class MainFrame extends JFrame {
 		this.setJMenuBar(menu);
 		
 		saved = true;
+		savePath = "";
 		
 		setLayout(new BorderLayout());
 		add(content, BorderLayout.CENTER);
@@ -188,7 +191,7 @@ public class MainFrame extends JFrame {
 	}
 
 	/**
-	 * @return the pipeModel
+	 * @param pipeModel to set as pipeModel
 	 */
 	public void setPipeModel(JGPipelineModel pipeModel) {
 		this.pipeModel = pipeModel;
@@ -201,8 +204,25 @@ public class MainFrame extends JFrame {
 		return saved;
 	}
 
+	/**
+	 * @param saved to set saved to
+	 */
 	public void setSaved(Boolean saved) {
 		this.saved = saved;
+	}
+
+	/**
+	 * @return the savePath of the Pipe null if pipeline was never saved.
+	 */
+	public String getSavePath() {
+		return savePath;
+	}
+
+	/**
+	 * @param savePath the savePath has to set.
+	 */
+	public void setSavePath(String savePath) {
+		this.savePath = savePath;
 	}
 
 	// A access method on class level, which creates only once a instance a

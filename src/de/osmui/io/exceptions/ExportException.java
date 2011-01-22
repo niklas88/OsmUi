@@ -4,7 +4,7 @@
 package de.osmui.io.exceptions;
 
 /**
- * @author Niklas Schnelle
+ * @author Peter Vollmer
  *
  */
 public class ExportException extends Exception {
