@@ -23,6 +23,7 @@ import org.junit.Test;
 
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
+import de.osmui.model.osm.TParameter;
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
@@ -55,8 +56,31 @@ public class AbstractPipelineModelTest {
 		assertEquals(test.name, output.name);
 	}
 	
+	@Test public void connectTask() throws TasksNotCompatibleException, TasksNotInModelException{
+		AbstractTask parent = new CommonTask("name");
+		TParameter desc = new TParameter();
+		IntParameter inte = new IntParameter(desc, "10");
+		VariablePipe output = new VariablePipe (parent, inte, "name");
+		output.type = "name";
+		output.source = parent;
+		parent.getOutputPipes().add(output);
+		
+		AbstractTask child = new CommonTask("name");
+		VariablePort input = new VariablePort(child, inte, "name");
+		input.parent = child;
+		child.getInputPorts().add(input);
+		
+		JGPipelineModel model = new JGPipelineModel();
+		model.addTask(parent);
+		model.addTask(child);
+		AbstractPipe test = model.connectTasks(parent, child);
+		assertEquals(true, output.isConnected());
+		test = model.connectTasks(parent, child);
+		assertEquals(test.name, output.name);
+	}
+	
 	/**
-	 * @see AbstractPipelineModel#connectTasks(AbstractTask, AbstractTask)
+	 * @see AbstractPipelineModel#connectTasks(AbstractPipe, AbstractPort)
 	 * 
 	 * @throws TasksNotCompatibleException
 	 * @throws TasksNotInModelException

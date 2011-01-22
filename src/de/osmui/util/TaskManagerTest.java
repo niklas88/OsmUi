@@ -39,6 +39,7 @@ public class TaskManagerTest {
 		TaskManager manager = TaskManager.getInstance();
 		AbstractTask s = manager.createTask("tee");
 		assertEquals("Description==null",task.getName(), s.getName());
+		AbstractTask t = manager.createTask("dataset-bounding-box");
 	}
 	
 	/**
@@ -70,5 +71,7 @@ public class TaskManagerTest {
 		TaskManager manager = TaskManager.getInstance();
 		String s = "tee";
 		assertEquals(24, manager.getCompatibleTasks(s).size());
+		String t = "";
+		assertEquals(19, manager.getCompatibleTasks(t).size());
 	}
 }

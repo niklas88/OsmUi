@@ -55,12 +55,15 @@ public class CommandlineTranslatorTest {
 					"10 --append-change sourceCount=3 inPipe.0=" +
 					"AUTO9to10 inPipe.1=AUTO12to12 inPipe.2=AUTO13to11 ");
 			
-			List<AbstractTask> list = new ArrayList<AbstractTask>();
-			list = model.getSourceTasks();
-			List<AbstractTask> test = new ArrayList<AbstractTask>();
-			AbstractTask task1 = new CommonTask("read-xml");
-			test.add(task1);
-			assertEquals(test.size(), list.size());
+			String testen = trans.exportLine(model, "");
+			assertEquals("--read-xml-change outPipe.0=AUTO9to1 " +
+					"--tee-change outputCount=3 inPipe.0=AUTO9to1 " +
+					"outPipe.0=AUTO12to4 outPipe.1=AUTO11to3 outPipe.2=AUTO10to2 " +
+					"--tee-change outputCount=3 inPipe.0=AUTO10to2 outPipe.2=AUTO15to7 " +
+					"--sort-change inPipe.0=AUTO11to3 outPipe.0=AUTO14to6 --sort-change " +
+					"inPipe.0=AUTO12to4 outPipe.0=AUTO13to5 --append-change sourceCount=3 " +
+					"inPipe.0=AUTO13to5 inPipe.1=AUTO14to6 inPipe.2=AUTO15to7 ", testen);
+			
 		} catch (ImportException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
