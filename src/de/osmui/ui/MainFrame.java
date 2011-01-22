@@ -68,6 +68,8 @@ public class MainFrame extends JFrame {
 
 	protected CopyBox copyBox;
 	
+	protected Boolean saved;
+	
 	/**
 	 * Constructs the mainframe
 	 */
@@ -110,7 +112,9 @@ public class MainFrame extends JFrame {
 		
 		Menu menu = new Menu();
 		this.setJMenuBar(menu);
-
+		
+		saved = true;
+		
 		setLayout(new BorderLayout());
 		add(content, BorderLayout.CENTER);
 		addWindowListener(new WindowAdapter() {
@@ -162,20 +166,43 @@ public class MainFrame extends JFrame {
 		return configurationManager;
 	}
 	
+	/**
+	 * @return the parameterBox
+	 */
 	public ParameterBox getParameterBox() {
 		return parameterBox;
 	}
 
+	/**
+	 * @return the taskPipeBox
+	 */
 	public PipelineBox getPipeBox() {
 		return pipeBox;
 	}
 
+	/**
+	 * @return the copyBox
+	 */
 	public CopyBox getCopyBox() {
 		return copyBox;
 	}
 
+	/**
+	 * @return the pipeModel
+	 */
 	public void setPipeModel(JGPipelineModel pipeModel) {
 		this.pipeModel = pipeModel;
+	}
+	
+	/**
+	 * @return the pipeModel
+	 */
+	public Boolean getSaved() {
+		return saved;
+	}
+
+	public void setSaved(Boolean saved) {
+		this.saved = saved;
 	}
 
 	// A access method on class level, which creates only once a instance a

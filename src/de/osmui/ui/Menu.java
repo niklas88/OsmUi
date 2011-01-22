@@ -76,6 +76,28 @@ public class Menu extends JMenuBar {
 		/*
 		 * Menu items of the menu "File"
 		 */
+
+		/*
+		 * New
+		 */
+		JMenuItem newPipe = new JMenuItem(I18N.getString("Menu.newPipe")); //$NON-NLS-1$
+		newPipe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!MainFrame.getInstance().getSaved()){
+					if (JOptionPane.showConfirmDialog(MainFrame.getInstance(),
+							I18N.getString("Menu.notSavedNew"),
+							I18N.getString("Menu.notSavedNewTitle"),
+							JOptionPane.YES_NO_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE) == JOptionPane.CANCEL_OPTION) {
+						return;
+					} 
+				}
+				
+				System.out.println("newPipe"); //$NON-NLS-1$
+			}
+		});
+		fileMenu.add(newPipe);
+		
 		/*
 		 * Load
 		 */
@@ -166,8 +188,9 @@ public class Menu extends JMenuBar {
 					if (JOptionPane.showConfirmDialog(MainFrame.getInstance(),
 							I18N.getString("Menu.exportWarnQuestion"),
 							I18N.getString("Menu.exportWarnQuestionTitle"),
-							JOptionPane.WARNING_MESSAGE,
-							JOptionPane.YES_NO_OPTION) == JOptionPane.CANCEL_OPTION) {
+							JOptionPane.OK_CANCEL_OPTION,
+							JOptionPane.WARNING_MESSAGE
+							) == JOptionPane.CANCEL_OPTION) {
 						return;
 					}
 				}
@@ -273,7 +296,7 @@ public class Menu extends JMenuBar {
 		/*
 		 * Menu "Layout"
 		 */
-		JMenu layoutMenu = new JMenu(I18N.getString("Menu.Layout"));
+		JMenu layoutMenu = new JMenu(I18N.getString("Menu.layout"));
 		/*
 		 * Menu items of the menu "Layout"
 		 */
