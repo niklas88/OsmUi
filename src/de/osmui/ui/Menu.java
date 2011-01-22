@@ -28,6 +28,7 @@ import java.util.Locale;
 
 import javax.help.HelpSet;
 import javax.help.JHelp;
+import javax.help.MainWindow;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -89,7 +90,8 @@ public class Menu extends JMenuBar {
 		newPipe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (!MainFrame.getInstance().getSaved()) {
+				if (!MainFrame.getInstance().getPipeModel().isEmpty()
+						&& !MainFrame.getInstance().getSaved()) {
 					int selectionOption = JOptionPane.showConfirmDialog(
 							MainFrame.getInstance(),
 							I18N.getString("Menu.notSavedNew"),
@@ -100,8 +102,8 @@ public class Menu extends JMenuBar {
 						return;
 					} else if (selectionOption == JOptionPane.YES_NO_OPTION) {
 						if (save(MainFrame.getInstance().getSavePath())) {
-							MainFrame.getInstance().savePath="";
-						}else{
+							MainFrame.getInstance().savePath = "";
+						} else {
 							return;
 						}
 					}
@@ -117,7 +119,8 @@ public class Menu extends JMenuBar {
 		JMenuItem load = new JMenuItem(I18N.getString("Menu.load")); //$NON-NLS-1$
 		load.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (!MainFrame.getInstance().getSaved()) {
+				if (!MainFrame.getInstance().getPipeModel().isEmpty()
+						&& !MainFrame.getInstance().getSaved()) {
 					int selectionOption = JOptionPane.showConfirmDialog(
 							MainFrame.getInstance(),
 							I18N.getString("Menu.notSavedNew"),
@@ -139,12 +142,14 @@ public class Menu extends JMenuBar {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					try {
 						MainFrame.getInstance().pipeModel.clean();
-						IO.getInstance().load(MainFrame.getInstance().pipeModel, chooser.getSelectedFile().getAbsolutePath());
+						IO.getInstance().load(
+								MainFrame.getInstance().pipeModel,
+								chooser.getSelectedFile().getAbsolutePath());
 					} catch (LoadException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 				}
-				
+
 			}
 		});
 		fileMenu.add(load);
@@ -155,7 +160,7 @@ public class Menu extends JMenuBar {
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				save(MainFrame.getInstance().getSavePath());
-				
+
 			}
 		});
 		fileMenu.add(save);
@@ -180,6 +185,31 @@ public class Menu extends JMenuBar {
 		importFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				if (!MainFrame.getInstance().getPipeModel().isEmpty()) {
+					if (JOptionPane.showConfirmDialog(MainFrame.getInstance(),
+							I18N.getString("Menu.importAddToPipeline"),
+							I18N.getString("Menu.importAddToPipelineTitle"),
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
+						if (!MainFrame.getInstance().saved) {
+							int selectionOption = JOptionPane.showConfirmDialog(
+									MainFrame.getInstance(),
+									I18N.getString("Menu.notSavedNew"),
+									I18N.getString("Menu.notSavedNewTitle"),
+									JOptionPane.YES_NO_CANCEL_OPTION,
+									JOptionPane.QUESTION_MESSAGE);
+							if (selectionOption == JOptionPane.CANCEL_OPTION) {
+								return;
+							} else if (selectionOption == JOptionPane.YES_NO_OPTION) {
+								if (save(MainFrame.getInstance().getSavePath())) {
+									MainFrame.getInstance().savePath = "";
+								} else {
+									return;
+								}
+							}
+						}
+					}
+				}
 				JFileChooser chooser = new JFileChooser();
 				chooser.addChoosableFileFilter(pipeImExBatFilter);
 				chooser.addChoosableFileFilter(pipeImExShFilter);
@@ -198,8 +228,9 @@ public class Menu extends JMenuBar {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					MainFrame.getInstance().pipeModel.layout(null);
+					MainFrame.getInstance().saved = false;
 				}
-				MainFrame.getInstance().saved = false;
+
 
 			}
 		});
@@ -211,6 +242,31 @@ public class Menu extends JMenuBar {
 				I18N.getString("Menu.importClipBoard")); //$NON-NLS-1$
 		importClipBoard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (!MainFrame.getInstance().getPipeModel().isEmpty()) {
+					if (JOptionPane.showConfirmDialog(MainFrame.getInstance(),
+							I18N.getString("Menu.importAddToPipeline"),
+							I18N.getString("Menu.importAddToPipelineTitle"),
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
+						if (!MainFrame.getInstance().saved) {
+							int selectionOption = JOptionPane.showConfirmDialog(
+									MainFrame.getInstance(),
+									I18N.getString("Menu.notSavedNew"),
+									I18N.getString("Menu.notSavedNewTitle"),
+									JOptionPane.YES_NO_CANCEL_OPTION,
+									JOptionPane.QUESTION_MESSAGE);
+							if (selectionOption == JOptionPane.CANCEL_OPTION) {
+								return;
+							} else if (selectionOption == JOptionPane.YES_NO_OPTION) {
+								if (save(MainFrame.getInstance().getSavePath())) {
+									MainFrame.getInstance().savePath = "";
+								} else {
+									return;
+								}
+							}
+						}
+					}
+				}
 				try {
 					PipeImEx.getInstance().importClipBoard(
 							MainFrame.getInstance().pipeModel,
@@ -451,7 +507,7 @@ public class Menu extends JMenuBar {
 							JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
 						return false;
 					}
-					
+
 				}
 			} else {
 				return false;
@@ -464,7 +520,7 @@ public class Menu extends JMenuBar {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}
 		MainFrame.getInstance().savePath = savePath;
-		MainFrame.getInstance().saved=true;
+		MainFrame.getInstance().saved = true;
 		return true;
 	}
 }

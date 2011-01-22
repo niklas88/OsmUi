@@ -220,5 +220,9 @@ public abstract class AbstractPipelineModel extends Observable {
 	 * @return true if executable false otherwise
 	 */
 	public abstract boolean isExecutable();
-
+	
+	/**
+	 * @return Boolean for existing Pipe
+	 */
+	public abstract boolean isEmpty();
 }
