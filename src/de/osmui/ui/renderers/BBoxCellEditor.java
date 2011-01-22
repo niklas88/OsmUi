@@ -33,8 +33,9 @@ import de.unistuttgart.iev.osm.bboxchooser.Bounds;
 import de.unistuttgart.iev.osm.bboxchooser.DialogResponse;
 
 /**
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  *
+ *no tests, only getter and setter
  */
 public class BBoxCellEditor  extends AbstractCellEditor implements
 TableCellEditor, TableCellRenderer,ActionListener {

@@ -44,6 +44,8 @@ import javax.xml.namespace.QName;
  * groups.  Factory methods for each of these are 
  * provided in this class.
  * 
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
+ * 
  * @see ObjectFactoryTest
  */
 @XmlRegistry

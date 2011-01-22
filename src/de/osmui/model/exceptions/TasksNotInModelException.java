@@ -16,14 +16,12 @@
 */
 
 /**
- * 
- */
-package de.osmui.model.exceptions;
-
-/**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
  */
+package de.osmui.model.exceptions;
+
+
 public class TasksNotInModelException extends Exception {
 
 

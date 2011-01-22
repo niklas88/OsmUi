@@ -15,16 +15,17 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package de.osmui.i18n;
-
-import java.text.MessageFormat;
-import java.util.ResourceBundle;
-
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  * @see I18NTest
 */
+
+package de.osmui.i18n;
+
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
+
 public class I18N {
 	
 	

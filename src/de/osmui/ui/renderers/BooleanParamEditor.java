@@ -35,6 +35,8 @@ import de.osmui.model.pipelinemodel.BooleanParameter;
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
+ *
+ *no tests, only getter and setter
  */
 public class BooleanParamEditor extends AbstractCellEditor implements
 		TableCellEditor, ActionListener {

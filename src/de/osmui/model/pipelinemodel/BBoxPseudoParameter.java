@@ -27,7 +27,7 @@ import de.unistuttgart.iev.osm.bboxchooser.Bounds;
  * about the parameters defining a bounding-box so that the GUI can create a renderer/editor
  * for it that can deal with them as a group
  * 
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
  */
 public class BBoxPseudoParameter extends AbstractParameter {
