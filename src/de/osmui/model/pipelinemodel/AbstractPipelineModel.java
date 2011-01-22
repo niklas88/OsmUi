@@ -78,6 +78,11 @@ public abstract class AbstractPipelineModel extends Observable {
 	 * @throws TasksNotInModelException 
 	 */
 	public abstract boolean removeTask(AbstractTask task) throws TasksNotInModelException;
+	
+	/**
+	 * Cleans the model, all tasks will be removed
+	 */
+	public abstract void clean();
 
 	/**
 	 * Connects the given tasks using the first parameter as parent task of the
