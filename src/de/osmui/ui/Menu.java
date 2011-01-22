@@ -13,12 +13,11 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package de.osmui.ui;
 
 import java.awt.BorderLayout;
-
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -48,10 +47,11 @@ import de.osmui.io.exceptions.ExportException;
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
- *
- * Provides Menu to have an easy way to construct the whole Menu of Osmui.
- *
- * will be tested by system-tests
+ * 
+ *         Provides Menu to have an easy way to construct the whole Menu of
+ *         Osmui.
+ * 
+ *         will be tested by system-tests
  * 
  */
 
@@ -64,17 +64,6 @@ public class Menu extends JMenuBar {
 
 	PipeImExShFilter pipeImExShFilter = new PipeImExShFilter();
 	PipeImExBatFilter pipeImExBatFilter = new PipeImExBatFilter();
-
-	public String getExtension(File file) {
-		String ext = null;
-		String s = file.getName();
-		int i = s.lastIndexOf('.');
-
-		if (i > 0 && i < s.length() - 1) {
-			ext = s.substring(i + 1).toLowerCase();
-		}
-		return ext;
-	}
 
 	/**
 	 * Constructs the menu with all its entries of Osmui.
@@ -193,8 +182,18 @@ public class Menu extends JMenuBar {
 				chooser.setAcceptAllFileFilterUsed(false);
 				int returnVal = chooser.showSaveDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					try {
+					if (chooser.getSelectedFile().exists()) {
+						if (JOptionPane.showConfirmDialog(MainFrame
+								.getInstance(), I18N
+								.getString("Menu.overwriteWarnQuestion"), I18N
+								.getString("Menu.overwriteWarnQuestionTitle"),
+								JOptionPane.YES_NO_OPTION,
+								JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
+							return;
+						}
 
+					}
+					try {
 						PipeImEx.getInstance().export(
 								MainFrame.getInstance().pipeModel,
 								chooser.getSelectedFile().getAbsolutePath(),
@@ -202,7 +201,6 @@ public class Menu extends JMenuBar {
 					} catch (ExportException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
-					MainFrame.getInstance().pipeModel.layout(null);
 				}
 			}
 		});
@@ -273,6 +271,26 @@ public class Menu extends JMenuBar {
 
 		this.add(editMenu);
 		/*
+		 * Menu "Layout"
+		 */
+		JMenu layoutMenu = new JMenu(I18N.getString("Menu.Layout"));
+		/*
+		 * Menu items of the menu "Layout"
+		 */
+		
+		/*
+		 * automatic Layout
+		 */
+		JMenuItem layoutAutomatic = new JMenuItem(I18N.getString("Menu.layoutAutomatic")); //$NON-NLS-1$
+		layoutAutomatic.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainFrame.getInstance().pipeModel.layout(null);
+			}
+		});
+		layoutMenu.add(layoutAutomatic);
+		
+		this.add(layoutMenu);
+		/*
 		 * Menu "Help"
 		 */
 		JMenu helpMenu = new JMenu(I18N.getString("Menu.help")); //$NON-NLS-1$
@@ -300,7 +318,7 @@ public class Menu extends JMenuBar {
 						helpViewer.setCurrentID("Simple.Introduction");
 					}
 				} catch (Exception f) {
-					//System.err.println("API Help Set not found");
+					// System.err.println("API Help Set not found");
 				}
 				JFrame frame = new JFrame();
 				frame.setTitle(I18N.getString("Menu.help"));
@@ -324,11 +342,12 @@ public class Menu extends JMenuBar {
 				JDialog frame = new JDialog();
 				frame.setLayout(new BorderLayout());
 				frame.setTitle(I18N.getString("Menu.about"));
-				
-				Icon icon = new ImageIcon(getClass().getResource("Logo_Osmui1.png"));
+
+				Icon icon = new ImageIcon(getClass().getResource(
+						"Logo_Osmui.png"));
 				JLabel bild = new JLabel(icon);
 				frame.add(bild, BorderLayout.NORTH);
-				
+
 				JLabel test = new JLabel(I18N.getString("Menu.about_text"));
 				frame.add(test, BorderLayout.CENTER);
 				frame.setVisible(true);

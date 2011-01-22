@@ -153,13 +153,19 @@ public class PipeImEx {
 	 * @param extension
 	 * @throws ExportException
 	 */
-	public void export(AbstractPipelineModel pipelineModel, String fileName,
+	public void export(AbstractPipelineModel pipelineModel, String filename,
 			String extension) throws ExportException {
-		System.out.println(extension);
+				
+		if (filename.endsWith(extension)) {
+			filename= filename.substring(0, filename.lastIndexOf('.'));			
+		}else{
+			filename = filename +extension;
+		}
+		
 		BufferedWriter writer = null;
 		try {
 			writer = new BufferedWriter(new OutputStreamWriter(
-					new FileOutputStream(fileName+extension), Charset.forName("UTF-8")));
+					new FileOutputStream(filename), Charset.forName("UTF-8")));
 			StringBuilder commandToExport = new StringBuilder();
 			CommandlineTranslator trans = CommandlineTranslator.getInstance();
 			if (extension == ".bat") {

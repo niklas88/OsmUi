@@ -22,6 +22,7 @@ package de.osmui.model.pipelinemodel;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -155,9 +156,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		return this.graph;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see de.osmui.model.pipelinemodel.AbstractModel#getSourceTasks()
 	 */
 	@Override
@@ -180,9 +179,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		return sourceTasks;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see de.osmui.model.pipelinemodel.AbstractModel#addTask(de.osmui.model.
 	 * pipelinemodel.AbstractTask)
 	 */
@@ -214,9 +211,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		notifyObservers(task);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see de.osmui.model.pipelinemodel.AbstractModel#addTask(de.osmui.model.
 	 * pipelinemodel.AbstractTask, de.osmui.model.pipelinemodel.AbstractTask)
 	 */
@@ -225,7 +220,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 			throws TasksNotCompatibleException, TasksNotInModelException {
 
 		if (parent.getModel() != this) {
-			throw new TasksNotInModelException(I18N.getString("JGPiplineModel.parentNotInModel"));
+			throw new TasksNotInModelException(I18N.getString("JGPipelineModel.parentNotInModel"));
 		}
 
 		// First add the child and then use our internal connect method to wire
@@ -239,9 +234,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**	 * 
 	 * @see
 	 * de.osmui.model.pipelinemodel.AbstractModel#removeTask(de.osmui.model.
 	 * pipelinemodel.AbstractTask)
@@ -258,6 +251,16 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		boolean result = graph.removeCells(cellArray).length != 0;
 
 		return result;
+	}
+	
+	/**
+	 * @see de.osmui.model.pipelinemodel.AbstractPipelineModel#clean()
+	 */
+	public void clean(){
+		Collection<mxCell> cells = taskMap.values();
+		Object[] cellArray = cells.toArray();
+		// Our subclass of mxGraph handles disconnecting via rawRemoveTask
+		graph.removeCells(cellArray);
 	}
 
 	/**
@@ -393,8 +396,26 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 	 */
 	@Override
 	public boolean isExecutable() {
-		// TODO Auto-generated method stub
-		return false;
+		// Check whether all pipes are connected
+		for(AbstractTask task : tasks){
+			// Check inputs
+			for(AbstractPort port : task.getInputPorts()){
+				if(!port.isConnected()){
+					return false;
+				}
+			}
+			
+			// Check pipes
+			for(AbstractPipe pipe : task.getOutputPipes()){
+				if(!pipe.isConnected()){
+					return false;
+				}
+			}
+			
+			
+		}
+		
+		return true;
 	}
 
 	public void layout(AbstractTask parent) {
