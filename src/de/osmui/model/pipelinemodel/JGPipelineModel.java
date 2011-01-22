@@ -393,8 +393,26 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 	 */
 	@Override
 	public boolean isExecutable() {
-		// TODO Auto-generated method stub
-		return false;
+		// Check whether all pipes are connected
+		for(AbstractTask task : tasks){
+			// Check inputs
+			for(AbstractPort port : task.getInputPorts()){
+				if(!port.isConnected()){
+					return false;
+				}
+			}
+			
+			// Check pipes
+			for(AbstractPipe pipe : task.getOutputPipes()){
+				if(!pipe.isConnected()){
+					return false;
+				}
+			}
+			
+			
+		}
+		
+		return true;
 	}
 
 	public void layout(AbstractTask parent) {
