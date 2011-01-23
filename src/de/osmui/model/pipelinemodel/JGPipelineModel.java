@@ -425,7 +425,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 	 */
 	@Override
 	public boolean isEmpty() {
-		return tasks.isEmpty()&&taskMap.isEmpty();
+		return tasks.isEmpty();
 	}
 
 	public void layout(AbstractTask parent) {
