@@ -418,6 +418,15 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		return true;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.osmui.model.pipelinemodel.AbstractModel#isEmpty()
+	 */
+	@Override
+	public boolean isEmpty() {
+		return tasks.isEmpty();
+	}
 
 	public void layout(AbstractTask parent) {
 		Object graphparent = (parent != null) ? pipeMap.get(Long.valueOf(parent
