@@ -57,27 +57,24 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 
 	private AbstractTask selectedTask = null;
 
-	private class DoubleClickAdapter extends MouseAdapter {
-		public void mousePressed(MouseEvent event) {
-			if (event.getClickCount() == 2) {
-				if (getSelectedRow() == -1) {
-
-				}else{
-					addSelectedToModel();
-					MainFrame.getInstance().saved=false;
-				}
-			}
-		}
-	}
-
 	public TaskBox(TaskBoxTableModel taskBoxTableModel) {
 		this.setModel(taskBoxTableModel);
 
 		this.setDefaultRenderer(TTask.class, new TaskBoxCellRenderer());
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		DoubleClickAdapter doubleClickAdapter = new DoubleClickAdapter();
-		this.addMouseListener(doubleClickAdapter);
+		this.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e){
+			      if (e.getClickCount() == 2){
+			    	  if (getSelectedRow() == -1) {
+
+						}else{
+							addSelectedToModel();
+							MainFrame.getInstance().saved=false;
+						}
+			         }
+			      }
+		});
 		
 		model = taskBoxTableModel;
 		stringConverter = new TableStringConverter() {
