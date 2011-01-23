@@ -17,6 +17,9 @@
 
 package de.osmui.ui;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.TableModelEvent;
@@ -58,6 +61,9 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 	
 	private CopyBox copyBox;
 
+
+
+	
 	public ParameterBox(ParameterBoxTableModel parameterBoxTableModel, CopyBox cb) {
 		copyBox = cb;
 		model = parameterBoxTableModel;

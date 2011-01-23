@@ -20,6 +20,8 @@ package de.osmui.ui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -44,12 +46,14 @@ public class TabBox extends JTabbedPane {
 	private final TaskBox taskBox;
 	private final ParameterBox paramBox;
 
+
+	
 	public TabBox(TaskBox tb, ParameterBox pb) {
 		this.taskBox = tb;
 		this.paramBox = pb;
 		this.setTabPlacement(JTabbedPane.TOP);
 		this.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-
+		
 		JPanel taskTab = new JPanel();
 		taskTab.setLayout(new BorderLayout());
 

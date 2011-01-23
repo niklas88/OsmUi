@@ -145,7 +145,7 @@ public abstract class AbstractPipelineModel extends Observable {
 							if(out.connect(in)){
 								return out;
 							} else {
-								throw new TasksNotCompatibleException(I18N.getString("AbstractPipelineModel.connectFaild"));
+								throw new TasksNotCompatibleException(I18N.getString("AbstractPipelineModel.connectFailed"));
 							}
 						}
 					}				
