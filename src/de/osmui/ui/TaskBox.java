@@ -13,9 +13,12 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package de.osmui.ui;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -54,26 +57,44 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 
 	private AbstractTask selectedTask = null;
 
+	private class DoubleClickAdapter extends MouseAdapter {
+		public void mousePressed(MouseEvent event) {
+			if (event.getClickCount() == 2) {
+				if (getSelectedRow() == -1) {
+
+				}else{
+					addSelectedToModel();
+					MainFrame.getInstance().saved=false;
+				}
+			}
+		}
+	}
+
 	public TaskBox(TaskBoxTableModel taskBoxTableModel) {
 		this.setModel(taskBoxTableModel);
-		
+
 		this.setDefaultRenderer(TTask.class, new TaskBoxCellRenderer());
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		DoubleClickAdapter doubleClickAdapter = new DoubleClickAdapter();
+		this.addMouseListener(doubleClickAdapter);
+		
 		model = taskBoxTableModel;
-		stringConverter = new TableStringConverter(){
+		stringConverter = new TableStringConverter() {
 			@Override
 			public String toString(TableModel arg0, int arg1, int arg2) {
 				TTask task = (TTask) arg0.getValueAt(arg1, arg2);
 				return task.getName();
-			}};
-			TableRowSorter<TaskBoxTableModel> sorter = new TableRowSorter<TaskBoxTableModel>(model);
-			sorter.setStringConverter(stringConverter);
-			this.setRowSorter(sorter);
+			}
+		};
+		TableRowSorter<TaskBoxTableModel> sorter = new TableRowSorter<TaskBoxTableModel>(
+				model);
+		sorter.setStringConverter(stringConverter);
+		this.setRowSorter(sorter);
 		showCompatibleTasks(null);
 
 	}
 
-	
 	public void showCompatibleTasks(AbstractTask task) {
 		if (task != null && task.isConnectable()) {
 			model.setTasks(TaskManager.getInstance().getCompatibleTasks(
@@ -82,7 +103,7 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 			model.setTasks(TaskManager.getInstance().getCompatibleTasks(""));
 		}
 		this.getRowSorter().toggleSortOrder(0);
-		
+
 	}
 
 	@Override
