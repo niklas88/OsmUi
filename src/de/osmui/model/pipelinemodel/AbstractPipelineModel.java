@@ -224,5 +224,7 @@ public abstract class AbstractPipelineModel extends Observable {
 	/**
 	 * @return Boolean for existing Pipe
 	 */
-	public abstract boolean isEmpty();
+	public boolean isEmpty(){
+		return this.isEmpty();
+	}
 }
