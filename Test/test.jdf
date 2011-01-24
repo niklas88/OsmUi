@@ -577,18 +577,6 @@
 <post>Die Parameter wurden geändert</post>
 <tags/>
 </testcase>
-<testcase created="27.12.2010" creator="VerenaKfer" effort="00:03" number="93" priority="A" title="falsche Parameter">
-<description>Die Parameter isnes Tasks werden eingestellt</description>
-<pre>es ist mind ein Task vorhanden</pre>
-<actions>- Doppelklick auf den Task
-(Die Parameterbox geht auf)
-- Felder leer lassen
-- bestätigen
-(Warnung)
-- Felder füllen</actions>
-<post>Die Parameter wurden geändert</post>
-<tags/>
-</testcase>
 </sequence>
 <sequence created="27.12.2010" creator="VerenaKfer" name="Pipeline Importieren aus Zwischenablage" number="94">
 <description>Benutzer möchte Pipeline aus Osmosis-Aufruf angezeigt haben
@@ -2207,6 +2195,34 @@ gestartet. In der alten Instanz ist die alte Pipeline zu sehen</post>
 <post>Die Parameter wurden geändert</post>
 <tags/>
 </testcase>
+<actions/>
+<post/>
+<comment/>
+</result>
+</executedsequence>
+</testrun>
+<testrun enddate="24.01.2011 20:52" priority="E" startdate="24.01.2011 20:52" tester="VerenaKfer">
+<description/>
+<sut/>
+<executedsequence>
+<sequence created="27.12.2010" creator="VerenaKfer" name="Task-Parameter einstellen" number="90">
+<description>Die Parameter isnes Tasks werden eingestellt</description>
+<pre>es ist mind ein Task vorhanden</pre>
+</sequence>
+<pre/>
+<result actionok="Y" endtime="20:52" outcome="Ok" postok="Y" preok="Y" starttime="20:52">
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:03" number="91" priority="A" title="standard">
+<description>Die Parameter isnes Tasks werden eingestellt</description>
+<pre>es ist mind ein Task vorhanden</pre>
+<actions>- Task selektieren
+- Parameterbox öffnen
+- korrekte Parameter eingeben
+- bestätigen
+</actions>
+<post>Die Parameter wurden geändert</post>
+<tags/>
+</testcase>
+<pre/>
 <actions/>
 <post/>
 <comment/>
