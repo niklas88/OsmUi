@@ -1070,7 +1070,7 @@
         Writes a set of data files suitable for loading a PostGIS database with a "simple" schema using COPY statements. A schema creation script is available in the osmosis script directory. A load script is also available which will invoke the COPY statements and update all indexes and special index support columns appropriately. This option should be used on large import data (like the planet file), since it is much faster than --write-pgsql.
       </description>
       <inputPipe count="single"  index="0" type="entity" />
-      <parameter name="directory" type="string" required="true" defaultValue="pgimport" defaultParameter="false">
+      <parameter name="directory" type="directory" required="true" defaultValue="pgimport" defaultParameter="false">
         <description>
           The name of the directory to write the data files into.
         </description>
