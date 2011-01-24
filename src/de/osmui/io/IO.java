@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import de.osmui.i18n.I18N;
 import de.osmui.io.exceptions.ExportException;
 import de.osmui.io.exceptions.LoadException;
 import de.osmui.io.exceptions.SaveException;
@@ -50,12 +51,10 @@ public class IO {
 			JGPipelineModel model = (JGPipelineModel) in.readObject();
 			return model;
 		} catch (IOException e){
-			e.printStackTrace();
+			throw new LoadException(I18N.getString("IO.loadFormat"));
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new LoadException(I18N.getString("IO.loadLoad"));
 		}
-		return null;
 	}
 	
 	public void save (AbstractPipelineModel pipelineModel, String filename,String extension ) throws SaveException{
@@ -68,10 +67,10 @@ public class IO {
 			out.writeObject(pipelineModel);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			throw new SaveException("Speichern FileNotFound");
+			throw new SaveException(I18N.getString("IO.saveFormat"));
 		} catch (IOException e) {
 			e.printStackTrace();
-			throw new SaveException("Speichern IOExcept");
+			throw new SaveException(I18N.getString("IO.saveSave"));
 		}
 		
 	}
