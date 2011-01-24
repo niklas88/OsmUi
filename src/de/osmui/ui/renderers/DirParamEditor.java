@@ -49,7 +49,8 @@ public class DirParamEditor extends AbstractCellEditor implements
 			chooser.addChoosableFileFilter(new DirFileFilter());
 			chooser.setFileFilter(new DirFileFilter());
 			chooser.setAcceptAllFileFilterUsed(false);
-			int returnVal = chooser.showSaveDialog(null);
+			chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			int returnVal = chooser.showOpenDialog(null);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				textFieldButton.getTextField().setText(
 						chooser.getSelectedFile().getAbsolutePath());
