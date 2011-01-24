@@ -49,7 +49,7 @@ public class FileParamEditor extends AbstractCellEditor implements
 		if (arg0.getSource() == textFieldButton.getButton()) {
 			JFileChooser chooser = new JFileChooser();
 			chooser.setAcceptAllFileFilterUsed(false);
-			int returnVal = chooser.showSaveDialog(null);
+			int returnVal = chooser.showOpenDialog(null);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				textFieldButton.getTextField().setText(
 						chooser.getSelectedFile().getAbsolutePath());

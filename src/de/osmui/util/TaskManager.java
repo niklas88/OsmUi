@@ -44,6 +44,7 @@ import de.osmui.model.pipelinemodel.CommonPipe;
 import de.osmui.model.pipelinemodel.CommonPort;
 import de.osmui.model.pipelinemodel.CommonTask;
 import de.osmui.model.pipelinemodel.EnumParameter;
+import de.osmui.model.pipelinemodel.FileParameter;
 import de.osmui.model.pipelinemodel.IntParameter;
 import de.osmui.model.pipelinemodel.OtherParameter;
 import de.osmui.model.pipelinemodel.VariablePipe;
