@@ -112,6 +112,7 @@ public class Menu extends JMenuBar {
 					}
 				}
 				MainFrame.getInstance().pipeModel.clean();
+				MainFrame.getInstance().setSaved(true);
 			}
 		});
 		fileMenu.add(newPipe);
@@ -212,6 +213,7 @@ public class Menu extends JMenuBar {
 									return;
 								}
 							}
+							MainFrame.getInstance().getPipeModel().clean();
 						}
 					}
 				}
@@ -270,6 +272,7 @@ public class Menu extends JMenuBar {
 								}
 							}
 						}
+						MainFrame.getInstance().getPipeModel().clean();
 					}
 				}
 				try {
@@ -348,9 +351,6 @@ public class Menu extends JMenuBar {
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainFrame.getInstance().shutdown();
-				MainFrame.getInstance().configurationManager
-						.saveConfiguration();
-				System.exit(0);
 			}
 		});
 		fileMenu.add(close);

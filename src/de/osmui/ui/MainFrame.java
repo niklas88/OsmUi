@@ -13,7 +13,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package de.osmui.ui;
 
@@ -40,14 +40,14 @@ import de.osmui.util.ConfigurationManager;
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
- * Provides MainFrame to have a easy way to construct a MainFrame with
- * all UI Content
+ *         Provides MainFrame to have a easy way to construct a MainFrame with
+ *         all UI Content
  * 
- * will be tested by system-tests
+ *         will be tested by system-tests
  * 
  */
 
-public class MainFrame extends JFrame implements Observer{
+public class MainFrame extends JFrame implements Observer {
 
 	/**
 	 * 
@@ -57,7 +57,7 @@ public class MainFrame extends JFrame implements Observer{
 	private static MainFrame instance;
 
 	protected IOFilter ioFilter;
-	
+
 	protected ConfigurationManager configurationManager;
 
 	protected TaskBoxTableModel taskBoxTableModel;
@@ -77,12 +77,106 @@ public class MainFrame extends JFrame implements Observer{
 	protected JGPipelineModel pipeModel;
 
 	protected CopyBox copyBox;
-	
+
 	protected boolean saved;
-	
+
 	protected String savePath;
+
 	
-	protected Boolean save(String systemSavePath) {
+
+	/**
+	 * Constructs the mainframe
+	 */
+	private MainFrame() {
+
+		this.setTitle("OsmUi");
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		configurationManager = ConfigurationManager.getInstance();
+		configurationManager.loadConfiguration();
+		this.setSize(configurationManager.getEntry("MainFrameWidth", 800),
+				configurationManager.getEntry("MainFrameHeight", 600));
+		this.setLocation(
+				configurationManager.getEntry("MainFrameXLocation", 100),
+				configurationManager.getEntry("MainFrameYLocation", 100));
+		pipeModel = new JGPipelineModel();
+		pipeModel.addObserver(this);
+		pipeBox = new PipelineBox(pipeModel.getGraph());
+		pipeModel.addObserver(pipeBox);
+
+		taskBoxTableModel = new TaskBoxTableModel();
+		taskBox = new TaskBox(taskBoxTableModel);
+
+		copyBox = new CopyBox(pipeModel);
+		pipeModel.addObserver(copyBox);
+
+		parameterBoxTableModel = new ParameterBoxTableModel();
+		parameterBox = new ParameterBox(parameterBoxTableModel, copyBox);
+
+		pipeBox.registerTaskSelectedListener(taskBox);
+		pipeBox.registerTaskSelectedListener(parameterBox);
+
+		rightContent = new ContentSplitPane(JSplitPane.VERTICAL_SPLIT, pipeBox,
+				copyBox);
+		rightContent.setDividerLocation(configurationManager.getEntry(
+				"RightContentDividerLocation", 620));
+
+		content = new ContentSplitPane(JSplitPane.HORIZONTAL_SPLIT, new TabBox(
+				taskBox, parameterBox), rightContent);
+		content.setDividerLocation(configurationManager.getEntry(
+				"ContentDividerLocation", 220));
+
+		Menu menu = new Menu();
+		this.setJMenuBar(menu);
+
+		ioFilter = new IOFilter();
+		saved = true;
+		savePath = "";
+
+		setLayout(new BorderLayout());
+		add(content, BorderLayout.CENTER);
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+
+				shutdown();
+
+			}
+
+		});
+
+	}
+
+	public void shutdown() {
+		if (!pipeModel.isEmpty() && !saved) {
+			int selectionOption = JOptionPane.showConfirmDialog(this,
+					I18N.getString("Menu.notSavedNew"),
+					I18N.getString("Menu.notSavedNewTitle"),
+					JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE);
+			if (selectionOption == JOptionPane.CANCEL_OPTION) {
+				return;
+			} else if (selectionOption == JOptionPane.YES_NO_OPTION) {
+				if (save(savePath)) {
+					savePath = "";
+				} else {
+					return;
+				}
+			}
+		}
+		configurationManager.setEntry("MainFrameWidth", this.getSize().width);
+		configurationManager.setEntry("MainFrameHeight", this.getSize().height);
+		configurationManager.setEntry("MainFrameXLocation",
+				this.getLocation().x);
+		configurationManager.setEntry("MainFrameYLocation",
+				this.getLocation().y);
+		configurationManager.setEntry("ContentDividerLocation",
+				content.getDividerLocation());
+		configurationManager.setEntry("RightContentDividerLocation",
+				rightContent.getDividerLocation());
+		configurationManager.saveConfiguration();
+		System.exit(0);
+	}
+
+	protected boolean save(String systemSavePath) {
 		String savePath = systemSavePath;
 		String extension = "";
 		if (savePath == "") {
@@ -113,81 +207,10 @@ public class MainFrame extends JFrame implements Observer{
 			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}
 		MainFrame.getInstance().savePath = savePath;
-		MainFrame.getInstance().saved = true;
+		MainFrame.getInstance().setSaved(true);
 		return true;
 	}
 	
-	/**
-	 * Constructs the mainframe
-	 */
-	private MainFrame() {	
-
-		this.setTitle("OsmUi");
-		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		configurationManager = ConfigurationManager.getInstance();
-		configurationManager.loadConfiguration();
-		this.setSize(configurationManager.getEntry("MainFrameWidth", 800),
-				configurationManager.getEntry("MainFrameHeight", 600));
-		this.setLocation(
-				configurationManager.getEntry("MainFrameXLocation", 100),
-				configurationManager.getEntry("MainFrameYLocation", 100));
-		pipeModel = new JGPipelineModel();
-		pipeBox = new PipelineBox(pipeModel.getGraph());
-		pipeModel.addObserver(pipeBox);
-
-		taskBoxTableModel = new TaskBoxTableModel();
-		taskBox = new TaskBox(taskBoxTableModel);
-
-		copyBox = new CopyBox(pipeModel);
-		pipeModel.addObserver(copyBox);
-
-		parameterBoxTableModel = new ParameterBoxTableModel();
-		parameterBox = new ParameterBox(parameterBoxTableModel, copyBox);
-
-		pipeBox.registerTaskSelectedListener(taskBox);
-		pipeBox.registerTaskSelectedListener(parameterBox);
-
-		rightContent = new ContentSplitPane(JSplitPane.VERTICAL_SPLIT, pipeBox,
-				copyBox);
-		rightContent.setDividerLocation(configurationManager.getEntry(
-				"RightContentDividerLocation", 620));
-
-		content = new ContentSplitPane(JSplitPane.HORIZONTAL_SPLIT, new TabBox(
-				taskBox, parameterBox), rightContent);
-		content.setDividerLocation(configurationManager.getEntry(
-				"ContentDividerLocation", 220));
-		
-		Menu menu = new Menu();
-		this.setJMenuBar(menu);
-		
-		ioFilter = new IOFilter();
-		saved = true;
-		savePath = "";
-		
-		setLayout(new BorderLayout());
-		add(content, BorderLayout.CENTER);
-		addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				
-				shutdown();				
-
-			}
-
-		});
-
-	}
-	
-	public void shutdown(){
-		configurationManager.setEntry("MainFrameWidth", this.getSize().width);
-		configurationManager.setEntry("MainFrameHeight", this.getSize().height);
-		configurationManager.setEntry("MainFrameXLocation", this.getLocation().x);
-		configurationManager.setEntry("MainFrameYLocation", this.getLocation().y);
-		configurationManager.setEntry("ContentDividerLocation", content.getDividerLocation());
-		configurationManager.setEntry("RightContentDividerLocation", rightContent.getDividerLocation());
-		configurationManager.saveConfiguration();
-		System.exit(0);
-	}
-
 	/**
 	 * @return the pipeModel.
 	 */
@@ -215,7 +238,7 @@ public class MainFrame extends JFrame implements Observer{
 	public ConfigurationManager getConfigurationManager() {
 		return configurationManager;
 	}
-	
+
 	/**
 	 * @return the parameterBox
 	 */
@@ -238,12 +261,13 @@ public class MainFrame extends JFrame implements Observer{
 	}
 
 	/**
-	 * @param pipeModel to set as pipeModel
+	 * @param pipeModel
+	 *            to set as pipeModel
 	 */
 	public void setPipeModel(JGPipelineModel pipeModel) {
 		this.pipeModel = pipeModel;
 	}
-	
+
 	/**
 	 * @return the pipeModel
 	 */
@@ -252,7 +276,8 @@ public class MainFrame extends JFrame implements Observer{
 	}
 
 	/**
-	 * @param saved to set saved to
+	 * @param saved
+	 *            to set saved to
 	 */
 	public void setSaved(boolean saved) {
 		this.saved = saved;
@@ -266,16 +291,16 @@ public class MainFrame extends JFrame implements Observer{
 	}
 
 	/**
-	 * @param savePath the savePath has to set.
+	 * @param savePath
+	 *            the savePath has to set.
 	 */
 	public void setSavePath(String savePath) {
 		this.savePath = savePath;
 	}
-	
+
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		saved = false;
-		
 	}
 
 	// A access method on class level, which creates only once a instance a
@@ -291,7 +316,5 @@ public class MainFrame extends JFrame implements Observer{
 		}
 		return MainFrame.instance;
 	}
-
-
 
 }

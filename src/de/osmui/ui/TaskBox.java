@@ -70,7 +70,6 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 
 						}else{
 							addSelectedToModel();
-							MainFrame.getInstance().saved=false;
 						}
 			         }
 			      }
