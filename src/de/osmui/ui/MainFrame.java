@@ -13,7 +13,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package de.osmui.ui;
 
@@ -40,14 +40,14 @@ import de.osmui.util.ConfigurationManager;
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
- * Provides MainFrame to have a easy way to construct a MainFrame with
- * all UI Content
+ *         Provides MainFrame to have a easy way to construct a MainFrame with
+ *         all UI Content
  * 
- * will be tested by system-tests
+ *         will be tested by system-tests
  * 
  */
 
-public class MainFrame extends JFrame implements Observer{
+public class MainFrame extends JFrame implements Observer {
 
 	/**
 	 * 
@@ -57,7 +57,7 @@ public class MainFrame extends JFrame implements Observer{
 	private static MainFrame instance;
 
 	protected IOFilter ioFilter;
-	
+
 	protected ConfigurationManager configurationManager;
 
 	protected TaskBoxTableModel taskBoxTableModel;
@@ -77,50 +77,15 @@ public class MainFrame extends JFrame implements Observer{
 	protected JGPipelineModel pipeModel;
 
 	protected CopyBox copyBox;
-	
-	protected boolean saved;
-	
-	protected String savePath;
-	
-	protected Boolean save(String systemSavePath) {
-		String savePath = systemSavePath;
-		String extension = "";
-		if (savePath == "") {
-			JFileChooser chooser = new JFileChooser();
-			chooser.addChoosableFileFilter(ioFilter);
-			chooser.setFileFilter(ioFilter);
-			chooser.setAcceptAllFileFilterUsed(false);
-			int returnVal = chooser.showSaveDialog(null);
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				if (chooser.getSelectedFile().exists()) {
-					if (JOptionPane.showConfirmDialog(MainFrame.getInstance(),
-							I18N.getString("Menu.overwriteWarnQuestion"),
-							I18N.getString("Menu.overwriteWarnQuestionTitle"),
-							JOptionPane.YES_NO_OPTION,
-							JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
-						return false;
-					}
 
-				}
-			} else {
-				return false;
-			}
-		}
-		try {
-			IO.getInstance().save(MainFrame.getInstance().pipeModel, savePath,
-					extension);
-		} catch (SaveException e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
-		}
-		MainFrame.getInstance().savePath = savePath;
-		MainFrame.getInstance().saved = true;
-		return true;
-	}
-	
+	protected boolean saved;
+
+	protected String savePath;
+
 	/**
 	 * Constructs the mainframe
 	 */
-	private MainFrame() {	
+	private MainFrame() {
 
 		this.setTitle("OsmUi");
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -132,6 +97,7 @@ public class MainFrame extends JFrame implements Observer{
 				configurationManager.getEntry("MainFrameXLocation", 100),
 				configurationManager.getEntry("MainFrameYLocation", 100));
 		pipeModel = new JGPipelineModel();
+		pipeModel.addObserver(this);
 		pipeBox = new PipelineBox(pipeModel.getGraph());
 		pipeModel.addObserver(pipeBox);
 
@@ -156,36 +122,92 @@ public class MainFrame extends JFrame implements Observer{
 				taskBox, parameterBox), rightContent);
 		content.setDividerLocation(configurationManager.getEntry(
 				"ContentDividerLocation", 220));
-		
+
 		Menu menu = new Menu();
 		this.setJMenuBar(menu);
-		
+
 		ioFilter = new IOFilter();
 		saved = true;
 		savePath = "";
-		
+
 		setLayout(new BorderLayout());
 		add(content, BorderLayout.CENTER);
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				
-				shutdown();				
+
+				shutdown();
 
 			}
 
 		});
 
 	}
-	
-	public void shutdown(){
+
+	public void shutdown() {
+		if (!pipeModel.isEmpty() && !saved) {
+			int selectionOption = JOptionPane.showConfirmDialog(this,
+					I18N.getString("Menu.notSavedNew"),
+					I18N.getString("Menu.notSavedNewTitle"),
+					JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE);
+			if (selectionOption == JOptionPane.CANCEL_OPTION) {
+				return;
+			} else if (selectionOption == JOptionPane.YES_NO_OPTION) {
+				if (save(savePath)) {
+					savePath = "";
+				} else {
+					return;
+				}
+			}
+		}
 		configurationManager.setEntry("MainFrameWidth", this.getSize().width);
 		configurationManager.setEntry("MainFrameHeight", this.getSize().height);
-		configurationManager.setEntry("MainFrameXLocation", this.getLocation().x);
-		configurationManager.setEntry("MainFrameYLocation", this.getLocation().y);
-		configurationManager.setEntry("ContentDividerLocation", content.getDividerLocation());
-		configurationManager.setEntry("RightContentDividerLocation", rightContent.getDividerLocation());
+		configurationManager.setEntry("MainFrameXLocation",
+				this.getLocation().x);
+		configurationManager.setEntry("MainFrameYLocation",
+				this.getLocation().y);
+		configurationManager.setEntry("ContentDividerLocation",
+				content.getDividerLocation());
+		configurationManager.setEntry("RightContentDividerLocation",
+				rightContent.getDividerLocation());
 		configurationManager.saveConfiguration();
 		System.exit(0);
+	}
+
+	protected boolean save(String systemSavePath) {
+		String savePath = systemSavePath;
+		String extension = "";
+		if (savePath == "") {
+			JFileChooser chooser = new JFileChooser();
+			chooser.addChoosableFileFilter(ioFilter);
+			chooser.setFileFilter(ioFilter);
+			chooser.setAcceptAllFileFilterUsed(false);
+			int returnVal = chooser.showSaveDialog(null);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				if (chooser.getSelectedFile().exists()) {
+					if (JOptionPane.showConfirmDialog(MainFrame.getInstance(),
+							I18N.getString("Menu.overwriteWarnQuestion"),
+							I18N.getString("Menu.overwriteWarnQuestionTitle"),
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
+						return false;
+					}
+				}
+				savePath = chooser.getSelectedFile().getAbsolutePath();
+				extension = chooser.getFileFilter().getDescription();
+			} else {
+				return false;
+			}
+		}
+		try {
+			IO.getInstance().save(MainFrame.getInstance().pipeModel, savePath,
+					extension);
+		} catch (SaveException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+		}
+		MainFrame.getInstance().savePath = savePath;
+		MainFrame.getInstance().setSaved(true);
+		return true;
 	}
 
 	/**
@@ -215,7 +237,7 @@ public class MainFrame extends JFrame implements Observer{
 	public ConfigurationManager getConfigurationManager() {
 		return configurationManager;
 	}
-	
+
 	/**
 	 * @return the parameterBox
 	 */
@@ -238,12 +260,13 @@ public class MainFrame extends JFrame implements Observer{
 	}
 
 	/**
-	 * @param pipeModel to set as pipeModel
+	 * @param pipeModel
+	 *            to set as pipeModel
 	 */
 	public void setPipeModel(JGPipelineModel pipeModel) {
 		this.pipeModel = pipeModel;
 	}
-	
+
 	/**
 	 * @return the pipeModel
 	 */
@@ -252,7 +275,8 @@ public class MainFrame extends JFrame implements Observer{
 	}
 
 	/**
-	 * @param saved to set saved to
+	 * @param saved
+	 *            to set saved to
 	 */
 	public void setSaved(boolean saved) {
 		this.saved = saved;
@@ -266,16 +290,16 @@ public class MainFrame extends JFrame implements Observer{
 	}
 
 	/**
-	 * @param savePath the savePath has to set.
+	 * @param savePath
+	 *            the savePath has to set.
 	 */
 	public void setSavePath(String savePath) {
 		this.savePath = savePath;
 	}
-	
+
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		saved = false;
-		
 	}
 
 	// A access method on class level, which creates only once a instance a
@@ -291,7 +315,5 @@ public class MainFrame extends JFrame implements Observer{
 		}
 		return MainFrame.instance;
 	}
-
-
 
 }

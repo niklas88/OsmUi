@@ -69,7 +69,6 @@ public class TabBox extends JTabbedPane {
 
 				}else{
 					taskBox.addSelectedToModel();
-					MainFrame.getInstance().saved=false;
 				}
 
 			}
