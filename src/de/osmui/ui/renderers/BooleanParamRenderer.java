@@ -32,7 +32,7 @@ import de.osmui.model.pipelinemodel.BooleanParameter;
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
- * no tests, only getter
+ * no tests, only getter and setter
  *
  */
 public class BooleanParamRenderer implements TableCellRenderer {

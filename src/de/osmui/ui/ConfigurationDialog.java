@@ -36,6 +36,7 @@ public class ConfigurationDialog extends JDialog {
 	/**
 	 * @author Niklas Schnelle, Peter Vollmer, Verena käfer
 	 * 
+	 * will be tested in the system-test
 	 */
 	private static final long serialVersionUID = -1901364651992578489L;
 

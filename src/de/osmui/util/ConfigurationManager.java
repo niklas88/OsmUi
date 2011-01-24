@@ -25,6 +25,7 @@ import java.util.prefs.Preferences;
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
+ * @see ConfigurationManagerTest
  */
 
 public class ConfigurationManager {

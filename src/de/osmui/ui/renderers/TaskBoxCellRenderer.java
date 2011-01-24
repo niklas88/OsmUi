@@ -30,7 +30,7 @@ import de.osmui.model.osm.TTask;
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
- * no tests, only getter and setter
+ * @see TaskBoxCellRendererTest
  */
 public class TaskBoxCellRenderer extends DefaultTableCellRenderer {
 

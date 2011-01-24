@@ -29,6 +29,8 @@ import de.unistuttgart.iev.osm.bboxchooser.Bounds;
  * 
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
+ *@see BBoxPseudoParameterTest
+ *
  */
 public class BBoxPseudoParameter extends AbstractParameter {
 
