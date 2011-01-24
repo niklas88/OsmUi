@@ -27,6 +27,7 @@ import de.osmui.model.pipelinemodel.AbstractParameter;
 import de.osmui.model.pipelinemodel.AbstractTask;
 import de.osmui.model.pipelinemodel.BBoxPseudoParameter;
 import de.osmui.model.pipelinemodel.BooleanParameter;
+import de.osmui.model.pipelinemodel.DirParameter;
 import de.osmui.model.pipelinemodel.EnumParameter;
 import de.osmui.model.pipelinemodel.FileParameter;
 import de.osmui.ui.events.TaskSelectedEvent;
@@ -37,6 +38,7 @@ import de.osmui.ui.renderers.BooleanParamEditor;
 import de.osmui.ui.renderers.BooleanParamRenderer;
 import de.osmui.ui.renderers.DefaultParamEditor;
 import de.osmui.ui.renderers.DefaultParamRenderer;
+import de.osmui.ui.renderers.DirParamEditor;
 import de.osmui.ui.renderers.EnumParamEditor;
 import de.osmui.ui.renderers.FileParamEditor;
 
@@ -81,7 +83,9 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 		this.setDefaultRenderer(FileParameter.class,defaultParamRenderer);
 		this.setDefaultEditor(FileParameter.class, new FileParamEditor());
 		
-			
+		this.setDefaultRenderer(DirParameter.class, defaultParamRenderer);
+		this.setDefaultEditor(DirParameter.class, new DirParamEditor());
+		
 		this.setDefaultRenderer(BBoxPseudoParameter.class, new BBoxCellEditor());
 		this.setDefaultEditor(BBoxPseudoParameter.class, new BBoxCellEditor());
 		

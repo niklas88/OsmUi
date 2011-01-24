@@ -43,6 +43,7 @@ import de.osmui.model.pipelinemodel.BooleanParameter;
 import de.osmui.model.pipelinemodel.CommonPipe;
 import de.osmui.model.pipelinemodel.CommonPort;
 import de.osmui.model.pipelinemodel.CommonTask;
+import de.osmui.model.pipelinemodel.DirParameter;
 import de.osmui.model.pipelinemodel.EnumParameter;
 import de.osmui.model.pipelinemodel.FileParameter;
 import de.osmui.model.pipelinemodel.IntParameter;
@@ -173,7 +174,9 @@ public class TaskManager {
 			} else if (paramDesc.getType().equals("filename")) {
 				newParameter = new FileParameter(paramDesc,
 						paramDesc.getDefaultValue());
-				
+			} else if (paramDesc.getType().equals("directory")){
+				newParameter = new DirParameter(paramDesc,
+						paramDesc.getDefaultValue());
 			} else if (paramDesc.getType().equals("bbox")) {
 				if(newTask.getName().equals("dataset-bounding-box")){
 					// Needs a short form BoundingBox
