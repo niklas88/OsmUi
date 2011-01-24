@@ -13,20 +13,14 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-/**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
- * 
- * @see PipeImExBatFilterTest
  */
-
 package de.osmui.io;
 
 import java.io.File;
+
 import javax.swing.filechooser.FileFilter;
 
-public class PipeImExBatFilter extends FileFilter {
+public class IOFilter extends FileFilter {
 
 	@Override
 	public boolean accept(File file) {
@@ -34,7 +28,7 @@ public class PipeImExBatFilter extends FileFilter {
 			return true;
 		}
 
-		if (file.getName().endsWith(".bat")) {
+		if (file.getName().endsWith(".smu")) {
 			return true;
 		} else {
 			return false;
@@ -43,6 +37,6 @@ public class PipeImExBatFilter extends FileFilter {
 
 	// The description of this filter
 	public String getDescription() {
-		return ".bat";
+		return ".smu";
 	}
 }

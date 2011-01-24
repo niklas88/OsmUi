@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tests SYSTEM "project.dtd">
 <tests product="TestDataManager" team="05" version="1.0">
-<sequence created="20.01.2011" creator="VerenaKfer" name="Projekt" number="0">
+<sequence created="24.01.2011" creator="VerenaKfer" name="Projekt" number="0">
 <description>Dies ist der Wurzelknoten des Projekts. Er enthält alle anderen Testsequenzen und Testfälle</description>
 <pre/>
 <sequence created="21.12.2010" creator="VerenaKfer" name="Systemtest" number="3">
@@ -484,7 +484,7 @@ gestartet. In der alten Instanz ist die alte Pipeline zu sehen</post>
 <testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="82" priority="A" title="Task nicht mehr selektieren">
 <description>ein selektierter Task wird nicht mehr selektiert</description>
 <pre>ein Task ist selektiert</pre>
-<actions>- nochmals auf den Task klicken</actions>
+<actions>- auf freie Fläche klicken</actions>
 <post>Der Task ist nicht mehr selektiert</post>
 <tags/>
 </testcase>
@@ -493,7 +493,7 @@ gestartet. In der alten Instanz ist die alte Pipeline zu sehen</post>
 <pre>mind ein Task vorhanden</pre>
 <actions>- Task anklicken
 (in der Taskbox erscheinen die kompatiblen Tasks)
-- Task auswählen (Doppelklick oder "bestätigen")</actions>
+- Task auswählen ("bestätigen")</actions>
 <post>Der gewählte Task wird angefügt</post>
 <tags/>
 </testcase>
@@ -513,9 +513,8 @@ gestartet. In der alten Instanz ist die alte Pipeline zu sehen</post>
 <description>zwei kompatible Tasks werden verbunden</description>
 <pre>es sind mind 2 kompatible Tasks vorhanden</pre>
 <actions>- Task selektieren
-- Rechtsklick auf anderen Task
-(Menü ist nicht ausgegraut)
--"verbinden" wählen</actions>
+- Pfeil auf zweiten Task ziehen
+</actions>
 <post>Die Tasks werden verbunden</post>
 <tags/>
 </testcase>
@@ -523,9 +522,9 @@ gestartet. In der alten Instanz ist die alte Pipeline zu sehen</post>
 <description/>
 <pre>zweinicht kompatible Tasks sind vorhanden</pre>
 <actions>- Task selektieren
--Rechtsklick auf anderen task
+-Pfeil aud zweiten Task ziehen
 </actions>
-<post>Das Menü ist ausgegraut</post>
+<post>es erscheint kein Rahmen</post>
 <tags/>
 </testcase>
 </sequence>

@@ -335,7 +335,7 @@ public class CommandlineTranslator {
 		// When we are done we need the downstream tasks on the stack
 		AbstractTask currTask;
 		AbstractPort downPort;
-		// Push all connected unfinished Downstream tasks and
+		// Push all connected unfinished Downstream tasks
 		for (AbstractPipe pipe : task.getOutputPipes()) {
 			if (pipe.isConnected()) {
 				downPort = pipe.getTarget();
@@ -353,7 +353,7 @@ public class CommandlineTranslator {
 			if (port.isConnected()) {
 				upPipe = port.getIncoming();
 				currTask = upPipe.getSource();
-				if (!fin.contains(currTask)) {
+				if (!fin.contains(currTask) && !unfin.contains(currTask)) {
 					unfin.push(currTask);
 					unmetDependecy = true;
 				}

@@ -156,9 +156,7 @@ public class PipeImEx {
 	public void export(AbstractPipelineModel pipelineModel, String filename,
 			String extension) throws ExportException {
 				
-		if (filename.endsWith(extension)) {
-			filename= filename.substring(0, filename.lastIndexOf('.'));			
-		}else{
+		if (!filename.endsWith(extension)) {
 			filename = filename +extension;
 		}
 		
