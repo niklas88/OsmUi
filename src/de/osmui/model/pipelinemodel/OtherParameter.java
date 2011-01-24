@@ -29,6 +29,8 @@ import de.osmui.model.osm.TParameter;
  * 
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
+ * @see OtherParameterTest
+ * 
  */
 public class OtherParameter extends AbstractParameter implements Serializable {
 	

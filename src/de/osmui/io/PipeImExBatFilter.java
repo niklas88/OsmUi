@@ -18,6 +18,7 @@
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
+ * @see PipeImExBatFilterTest
  */
 
 package de.osmui.io;

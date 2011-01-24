@@ -15,6 +15,13 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * 
+ * @see TParameter
+ * 
+*/
+
 package de.osmui.model.osm;
 
 import static org.junit.Assert.*;
@@ -24,12 +31,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-/**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
- * 
- * @see TParameter
- * 
-*/
 public class TParameterTest {
 	@Test public void getEnumVal(){
 		List<TEnumValue> arr = new ArrayList<TEnumValue>();
