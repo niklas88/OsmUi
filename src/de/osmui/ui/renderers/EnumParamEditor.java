@@ -16,8 +16,10 @@
 */
 
 /**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  */
+
 package de.osmui.ui.renderers;
 
 import java.awt.Component;
@@ -35,10 +37,6 @@ import javax.swing.table.TableCellEditor;
 import de.osmui.model.osm.TEnumValue;
 import de.osmui.model.pipelinemodel.EnumParameter;
 
-/**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
- * 
- */
 public class EnumParamEditor extends AbstractCellEditor implements
 		TableCellEditor, ActionListener {
 

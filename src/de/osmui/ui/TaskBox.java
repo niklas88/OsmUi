@@ -13,10 +13,14 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package de.osmui.ui;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import javax.swing.ListSelectionModel;
@@ -55,24 +59,38 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 
 	public TaskBox(TaskBoxTableModel taskBoxTableModel) {
 		this.setModel(taskBoxTableModel);
-		
+
 		this.setDefaultRenderer(TTask.class, new TaskBoxCellRenderer());
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		this.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e){
+			      if (e.getClickCount() == 2){
+			    	  if (getSelectedRow() == -1) {
+
+						}else{
+							addSelectedToModel();
+						}
+			         }
+			      }
+		});
+		
 		model = taskBoxTableModel;
-		stringConverter = new TableStringConverter(){
+		stringConverter = new TableStringConverter() {
 			@Override
 			public String toString(TableModel arg0, int arg1, int arg2) {
 				TTask task = (TTask) arg0.getValueAt(arg1, arg2);
 				return task.getName();
-			}};
-			TableRowSorter<TaskBoxTableModel> sorter = new TableRowSorter<TaskBoxTableModel>(model);
-			sorter.setStringConverter(stringConverter);
-			this.setRowSorter(sorter);
+			}
+		};
+		TableRowSorter<TaskBoxTableModel> sorter = new TableRowSorter<TaskBoxTableModel>(
+				model);
+		sorter.setStringConverter(stringConverter);
+		this.setRowSorter(sorter);
 		showCompatibleTasks(null);
 
 	}
 
-	
 	public void showCompatibleTasks(AbstractTask task) {
 		if (task != null && task.isConnectable()) {
 			model.setTasks(TaskManager.getInstance().getCompatibleTasks(
@@ -81,7 +99,7 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 			model.setTasks(TaskManager.getInstance().getCompatibleTasks(""));
 		}
 		this.getRowSorter().toggleSortOrder(0);
-		
+
 	}
 
 	@Override
@@ -112,7 +130,7 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 				MainFrame.getInstance().getPipeModel()
 						.addTask(selectedTask, newTask);
 			} catch (TasksNotCompatibleException e) {
-				System.err.println(e);
+				JOptionPane.showMessageDialog(null, e.getMessage());
 			} catch (TasksNotInModelException e) {
 				// Shouldn't happen
 				e.printStackTrace();

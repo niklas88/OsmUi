@@ -88,7 +88,6 @@ public class TaskManager {
 					if (task.getShortName() != null) {
 						shortNameTable.put(task.getShortName(), task.getName());
 					}
-					// System.out.println("---- " + task + " ----");
 					System.out.println(task.getShortName() + " <=> "
 							+ task.getName());
 				}
@@ -114,6 +113,7 @@ public class TaskManager {
 		}
 
 	}
+	
 
 	/**
 	 * Gets the long version of a taskname e.g. 'read-xml' for 'rx', if a long
@@ -157,6 +157,10 @@ public class TaskManager {
 			} else if (paramDesc.getType().equals("enum")) {
 				newParameter = new EnumParameter(paramDesc,
 						paramDesc.getDefaultValue());
+			} else if (paramDesc.getType().equals("filename")) {
+				newParameter = new FileParameter(paramDesc,
+						paramDesc.getDefaultValue());
+				
 			} else if (paramDesc.getType().equals("bbox")) {
 				if(newTask.getName().equals("dataset-bounding-box")){
 					// Needs a short form BoundingBox

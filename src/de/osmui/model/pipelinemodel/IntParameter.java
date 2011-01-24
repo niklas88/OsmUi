@@ -27,7 +27,7 @@ import de.osmui.model.osm.TParameter;
  * 
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
- * no tests, only getter and setter
+ * @see IntParameterTest
  * 
  */
 public class IntParameter extends AbstractParameter {
@@ -35,7 +35,8 @@ public class IntParameter extends AbstractParameter {
 	 * 
 	 */
 	private static final long serialVersionUID = 4423983777968509408L;
-	protected int value;
+	private int value;
+	private boolean referenced; 
 
 	/**
 	 * 
@@ -63,6 +64,21 @@ public class IntParameter extends AbstractParameter {
 	@Override
 	public String getValue() {
 		return Integer.toString(value);
+	}
+	
+	/**
+	 * Tells this parameter that it is being referenced, this can't be unset
+	 */
+	public void reference(){
+		referenced = true;
+	}
+	/**
+	 * Gets whether this parameter is referenced by a variable pipe and
+	 * therefor must not be changed in the ParameterBox
+	 * @return
+	 */
+	public boolean isReferenced(){
+		return referenced;
 	}
 	
 	/**

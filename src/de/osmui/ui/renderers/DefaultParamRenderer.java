@@ -40,7 +40,6 @@ public class DefaultParamRenderer extends DefaultTableCellRenderer {
 		super.getTableCellRendererComponent(table, obj, isSelected, hasFocus, row, column);
 		
 		AbstractParameter param = (AbstractParameter) obj;
-		//this.setText((task.getFriendlyName()!= null)?task.getFriendlyName():task.getName());
 		this.setText(param.getValue());
 		this.setToolTipText(param.getDescription().getDescription());
 		

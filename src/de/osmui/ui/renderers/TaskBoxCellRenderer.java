@@ -30,7 +30,7 @@ import de.osmui.model.osm.TTask;
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
- * no tests, only getter and setter
+ * @see TaskBoxCellRendererTest
  */
 public class TaskBoxCellRenderer extends DefaultTableCellRenderer {
 
@@ -38,15 +38,33 @@ public class TaskBoxCellRenderer extends DefaultTableCellRenderer {
 	 * 
 	 */
 	private static final long serialVersionUID = 4215729606606179888L;
+	
+	private String lineWrapDescription(String description){
+		StringBuilder sb = new StringBuilder();
+		sb.append("<html>");
+		int ch;
+		int sinceWrap = 0;
+		for(int pos = 0; pos < description.length(); ++pos){
+			ch = description.codePointAt(pos);
+			if(sinceWrap >= 80 && Character.isWhitespace(ch)){
+				sb.append("<br>");
+				sinceWrap = 0;
+			} else {
+				sinceWrap++;
+			}
+			sb.appendCodePoint(ch);
+		}
+		sb.append("</html>");
+		return sb.toString();
+	}
 
 	public Component getTableCellRendererComponent(JTable table, Object obj,
 			boolean isSelected, boolean hasFocus, int row, int column) {
 		super.getTableCellRendererComponent(table, obj, isSelected, hasFocus, row, column);
 		
 		TTask task = (TTask) obj;
-		//this.setText((task.getFriendlyName()!= null)?task.getFriendlyName():task.getName());
 		this.setText(task.getName());
-		this.setToolTipText(task.getDescription());
+		this.setToolTipText(lineWrapDescription(task.getDescription()));
 		
 		return this;
 	}

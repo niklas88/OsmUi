@@ -22,12 +22,14 @@ package de.osmui.model.pipelinemodel;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.swing.SwingConstants;
 
+import de.osmui.i18n.I18N;
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
 
@@ -47,6 +49,92 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		Serializable {
 
 	private static final long serialVersionUID = -4609328085880199933L;
+	
+	private class mxPipelineGraph extends mxGraph {
+
+		// Overrides method to disallow editting
+		@Override
+		public boolean isCellEditable(Object cell) {
+			return false;
+		}
+
+		@Override
+		public boolean isCellConnectable(Object cell) {
+			mxCell mxcell = (mxCell) cell;
+			if (mxcell.isVertex()) {
+				AbstractTask task = (AbstractTask) mxcell.getValue();
+				return task.isConnectable();
+			} else {
+				return false;
+			}
+		}
+
+		@Override
+		public Object addCell(Object cell, Object parent, Integer index,
+				Object source, Object target) {
+			Object ret;
+			ret = super.addCell(cell, parent, index, source, target);
+
+			if (source != null && target != null && cell != null) {
+				// Check the cell, which should be an edge to find out
+				// whether the
+				// tasks are already connected, then it has a pipe user
+				// object
+				mxCell mxcell = (mxCell) cell;
+				if (mxcell.getValue() instanceof AbstractPipe) {
+					// It's already set we are done here
+					return ret;
+				}
+				mxCell mxsource = (mxCell) source;
+				mxCell mxtarget = (mxCell) target;
+				if (mxtarget.getValue() instanceof AbstractTask
+						&& mxsource.getValue() instanceof AbstractTask) {
+					AbstractTask sourceTask = (AbstractTask) mxsource
+							.getValue();
+					AbstractTask targetTask = (AbstractTask) mxtarget
+							.getValue();
+
+					try {
+						AbstractPipe pipe = rawConnectTasks(sourceTask,
+								targetTask);
+						mxcell.setValue(pipe);
+						pipeMap.put(Long.valueOf(pipe.getID()), mxcell);
+					} catch (TasksNotInModelException e) {
+						// shouldn't happen
+					} catch (TasksNotCompatibleException e) {
+						// Too bad,tried connection nonsense
+						Object[] cells = { mxcell };
+						removeCells(cells);
+						return null;
+					}
+
+				}
+			}
+			return ret;
+		}
+
+		@Override
+		public Object[] removeCells(Object[] cells, boolean includeEdges) {
+			Object[] cellsRemoved = super.removeCells(cells, includeEdges);
+			Object val;
+			AbstractPipe pipe;
+			for (Object cell : cellsRemoved) {
+				val = ((mxCell) cell).getValue();
+				if (val instanceof AbstractPipe) {
+					pipe = (AbstractPipe) val;
+					pipe.disconnect();
+
+				} else if (val instanceof AbstractTask) {
+					try {
+						rawRemoveTask((AbstractTask) val);
+					} catch (TasksNotInModelException e) {
+						// Do nothing
+					}
+				}
+			}
+			return cellsRemoved;
+		}
+	}
 
 	protected ArrayList<AbstractTask> tasks;
 
@@ -55,108 +143,53 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 
 	protected transient mxGraph graph;
 	protected transient mxHierarchicalLayout lay;
-
+	/**
+	 * Constructs a new JGPipelineModel
+	 */
 	public JGPipelineModel() {
 		tasks = new ArrayList<AbstractTask>();
 		taskMap = new HashMap<Long, mxCell>();
 		pipeMap = new HashMap<Long, mxCell>();
-
-		graph = new mxGraph() {
-			// Overrides method to disallow editting
-
-			@Override
-			public boolean isCellEditable(Object cell) {
-				return false;
-			}
-
-			@Override
-			public boolean isCellConnectable(Object cell) {
-				mxCell mxcell = (mxCell) cell;
-				if (mxcell.isVertex()) {
-					AbstractTask task = (AbstractTask) mxcell.getValue();
-					return task.isConnectable();
-				} else {
-					return false;
-				}
-			}
-
-			@Override
-			public Object addCell(Object cell, Object parent, Integer index,
-					Object source, Object target) {
-				Object ret;
-				ret = super.addCell(cell, parent, index, source, target);
-
-				if (source != null && target != null && cell != null) {
-					// Check the cell, which should be an edge to find out
-					// whether the
-					// tasks are already connected, then it has a pipe user
-					// object
-					mxCell mxcell = (mxCell) cell;
-					if (mxcell.getValue() instanceof AbstractPipe) {
-						// It's already set we are done here
-						return ret;
-					}
-					mxCell mxsource = (mxCell) source;
-					mxCell mxtarget = (mxCell) target;
-					if (mxtarget.getValue() instanceof AbstractTask
-							&& mxsource.getValue() instanceof AbstractTask) {
-						AbstractTask sourceTask = (AbstractTask) mxsource
-								.getValue();
-						AbstractTask targetTask = (AbstractTask) mxtarget
-								.getValue();
-
-						try {
-							AbstractPipe pipe = rawConnectTasks(sourceTask,
-									targetTask);
-							mxcell.setValue(pipe);
-							pipeMap.put(Long.valueOf(pipe.getID()), mxcell);
-						} catch (TasksNotInModelException e) {
-							// shouldn't happen
-						} catch (TasksNotCompatibleException e) {
-							// Too bad,tried connection nonsense
-							Object[] cells = { mxcell };
-							removeCells(cells);
-							return null;
-						}
-
-					}
-				}
-				return ret;
-			}
-
-			@Override
-			public Object[] removeCells(Object[] cells, boolean includeEdges) {
-				Object[] cellsRemoved = super.removeCells(cells, includeEdges);
-				Object val;
-				AbstractPipe pipe;
-				for (Object cell : cellsRemoved) {
-					val = ((mxCell) cell).getValue();
-					if (val instanceof AbstractPipe) {
-						pipe = (AbstractPipe) val;
-						pipe.disconnect();
-
-					} else if (val instanceof AbstractTask) {
-						try {
-							rawRemoveTask((AbstractTask) val);
-						} catch (TasksNotInModelException e) {
-							// Do nothing
-						}
-					}
-				}
-				return cellsRemoved;
-			};
-		};
+		graph = new mxPipelineGraph();
 		lay = new mxHierarchicalLayout(graph, SwingConstants.NORTH);
 		lay.setLayoutFromSinks(false);
 	}
-
+	
+	/** 
+	 * Restores the transient fields after deserialisation
+	 * @return
+	 */
+	private Object readResolve(){
+		graph = new mxPipelineGraph();
+		lay = new mxHierarchicalLayout(graph, SwingConstants.NORTH);
+		// Add the old task cells
+		graph.addCells(taskMap.values().toArray());
+		// Add the old pipe cells
+		graph.addCells(pipeMap.values().toArray());
+		lay.setLayoutFromSinks(false);
+		return this;
+	}
+	
+	public void setAll(JGPipelineModel newModel){
+		clean();
+		tasks = newModel.tasks;
+		taskMap = newModel.taskMap;
+		pipeMap = newModel.pipeMap;
+		graph.addCells(taskMap.values().toArray());
+		graph.addCells(pipeMap.values().toArray());
+		setChanged();
+		notifyObservers(tasks.get(0));
+	}
+	
+	/**
+	 * Gets the associated graph
+	 * @return
+	 */
 	public mxGraph getGraph() {
 		return this.graph;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see de.osmui.model.pipelinemodel.AbstractModel#getSourceTasks()
 	 */
 	@Override
@@ -179,9 +212,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		return sourceTasks;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see de.osmui.model.pipelinemodel.AbstractModel#addTask(de.osmui.model.
 	 * pipelinemodel.AbstractTask)
 	 */
@@ -213,9 +244,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		notifyObservers(task);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see de.osmui.model.pipelinemodel.AbstractModel#addTask(de.osmui.model.
 	 * pipelinemodel.AbstractTask, de.osmui.model.pipelinemodel.AbstractTask)
 	 */
@@ -224,7 +253,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 			throws TasksNotCompatibleException, TasksNotInModelException {
 
 		if (parent.getModel() != this) {
-			throw new TasksNotInModelException("parent not in model");
+			throw new TasksNotInModelException(I18N.getString("JGPipelineModel.parentNotInModel"));
 		}
 
 		// First add the child and then use our internal connect method to wire
@@ -238,9 +267,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**	 * 
 	 * @see
 	 * de.osmui.model.pipelinemodel.AbstractModel#removeTask(de.osmui.model.
 	 * pipelinemodel.AbstractTask)
@@ -249,8 +276,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 	public boolean removeTask(AbstractTask task)
 			throws TasksNotInModelException {
 		if (task.getModel() != this) {
-			throw new TasksNotInModelException(
-					"The task to remove is not in the model");
+			throw new TasksNotInModelException(I18N.getString("JGPipelineModel.taskToRmNotInModel"));
 		}
 
 		Object[] cellArray = { getCellForTask(task) };
@@ -258,6 +284,17 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		boolean result = graph.removeCells(cellArray).length != 0;
 
 		return result;
+	}
+	
+	/**
+	 * @see de.osmui.model.pipelinemodel.AbstractPipelineModel#clean()
+	 */
+	public void clean(){
+		Collection<mxCell> cells = taskMap.values();
+		Object[] cellArray = cells.toArray();
+		// Our subclass of mxGraph handles disconnecting via rawRemoveTask
+		graph.removeCells(cellArray);
+		setChanged();
 	}
 
 	/**
@@ -271,8 +308,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 	private boolean rawRemoveTask(AbstractTask task)
 			throws TasksNotInModelException {
 		if (task.getModel() != this) {
-			throw new TasksNotInModelException(
-					"The task to remove is not in the model");
+			throw new TasksNotInModelException(I18N.getString("JGPipelineModel.taskToRmNotInModel"));
 		}
 		// Disconnect all connected pipes
 		for (AbstractPipe out : task.getOutputPipes()) {
@@ -313,7 +349,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 				getCellForTask(parent),
 				getCellForTask(child));
 		if(edge == null){
-			throw new TasksNotCompatibleException("Tasks not compatible");
+			throw new TasksNotCompatibleException(I18N.getString("JGPipelineModel.TasksNotComp"));
 		}
 		setChanged();
 		notifyObservers(edge.getValue());
@@ -394,8 +430,36 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 	 */
 	@Override
 	public boolean isExecutable() {
-		// TODO Auto-generated method stub
-		return false;
+		// Check whether all pipes are connected
+		for(AbstractTask task : tasks){
+			// Check inputs
+			for(AbstractPort port : task.getInputPorts()){
+				if(!port.isConnected()){
+					return false;
+				}
+			}
+			
+			// Check pipes
+			for(AbstractPipe pipe : task.getOutputPipes()){
+				if(!pipe.isConnected()){
+					return false;
+				}
+			}
+			
+			
+		}
+		
+		return true;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.osmui.model.pipelinemodel.AbstractModel#isEmpty()
+	 */
+	@Override
+	public boolean isEmpty() {
+		return tasks.isEmpty();
 	}
 
 	public void layout(AbstractTask parent) {

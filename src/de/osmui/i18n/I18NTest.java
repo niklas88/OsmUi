@@ -15,23 +15,26 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package de.osmui.i18n;
-import org.junit.Test;
-import static org.junit.Assert.*;
-
-import javax.swing.JMenu;
-
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  * @see I18N
  * 
  */
+
+package de.osmui.i18n;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+import javax.swing.JMenu;
+
 public class I18NTest {
 	@Test public void get (){
-		I18N inter = new I18N();
 		Object values = null;
-		JMenu fileMenu = new JMenu(inter.getString("Menu.file", values));
+		JMenu fileMenu = new JMenu(I18N.getString("Menu.file"));
+		assertEquals("getString: ", fileMenu.getActionCommand(), "Datei");
+		
+		fileMenu = new JMenu(I18N.getString("Menu.file", values));
 		assertEquals("getString: ", fileMenu.getActionCommand(), "Datei");
 		};
 }

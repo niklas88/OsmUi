@@ -17,6 +17,9 @@
 
 package de.osmui.ui;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.TableModelEvent;
@@ -28,6 +31,7 @@ import de.osmui.model.pipelinemodel.AbstractTask;
 import de.osmui.model.pipelinemodel.BBoxPseudoParameter;
 import de.osmui.model.pipelinemodel.BooleanParameter;
 import de.osmui.model.pipelinemodel.EnumParameter;
+import de.osmui.model.pipelinemodel.FileParameter;
 import de.osmui.ui.events.TaskSelectedEvent;
 import de.osmui.ui.events.TaskSelectedEventListener;
 import de.osmui.ui.models.ParameterBoxTableModel;
@@ -37,6 +41,7 @@ import de.osmui.ui.renderers.BooleanParamRenderer;
 import de.osmui.ui.renderers.DefaultParamEditor;
 import de.osmui.ui.renderers.DefaultParamRenderer;
 import de.osmui.ui.renderers.EnumParamEditor;
+import de.osmui.ui.renderers.FileParamEditor;
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
@@ -58,6 +63,9 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 	
 	private CopyBox copyBox;
 
+
+
+	
 	public ParameterBox(ParameterBoxTableModel parameterBoxTableModel, CopyBox cb) {
 		copyBox = cb;
 		model = parameterBoxTableModel;
@@ -73,6 +81,10 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 		this.setDefaultRenderer(EnumParameter.class,defaultParamRenderer);
 		this.setDefaultEditor(EnumParameter.class, new EnumParamEditor());
 		
+		this.setDefaultRenderer(FileParameter.class,defaultParamRenderer);
+		this.setDefaultEditor(FileParameter.class, new FileParamEditor());
+		
+			
 		this.setDefaultRenderer(BBoxPseudoParameter.class, new BBoxCellEditor());
 		this.setDefaultEditor(BBoxPseudoParameter.class, new BBoxCellEditor());
 		

@@ -22,6 +22,66 @@
  */
 package de.osmui.io;
 
-public class IO {
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
+import de.osmui.i18n.I18N;
+import de.osmui.io.exceptions.ExportException;
+import de.osmui.io.exceptions.LoadException;
+import de.osmui.io.exceptions.SaveException;
+import de.osmui.model.pipelinemodel.AbstractPipelineModel;
+import de.osmui.model.pipelinemodel.JGPipelineModel;
+
+public class IO {
+	
+	private static IO instance;
+
+	// Prevents the creation of the object with other methods
+	private IO() {
+	}
+	
+	public JGPipelineModel load (String filename) throws LoadException{
+		try {
+			System.out.println("Load: "+filename);
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename));
+			JGPipelineModel model = (JGPipelineModel) in.readObject();
+			return model;
+		} catch (IOException e){
+			throw new LoadException(I18N.getString("IO.loadFormat"));
+		} catch (ClassNotFoundException e) {
+			throw new LoadException(I18N.getString("IO.loadLoad"));
+		}
+	}
+	
+	public void save (AbstractPipelineModel pipelineModel, String filename,String extension ) throws SaveException{
+		if (!filename.endsWith(extension)) {
+			filename += extension;
+		}
+		
+		try {
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
+			out.writeObject(pipelineModel);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			throw new SaveException(I18N.getString("IO.saveFormat"));
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new SaveException(I18N.getString("IO.saveSave"));
+		}
+		
+	}
+	
+	// A access method on class level, which creates only once a instance a
+	// concrete object
+	// in a session of OsmUi and returns it.
+	public static IO getInstance() {
+		if (IO.instance == null) {
+			IO.instance = new IO();
+		}
+		return IO.instance;
+	}
 }

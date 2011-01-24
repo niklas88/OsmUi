@@ -39,6 +39,7 @@ public class VariablePipe extends CommonPipe {
 	public VariablePipe(AbstractTask owner, IntParameter param, String type) {
 		super(owner, type);
 		referencedParam = param;
+		referencedParam.reference();
 	}
 	
 	/**

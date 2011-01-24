@@ -1,5 +1,4 @@
-/*OsmUi is a u
- * ser interface for Osmosis
+/*OsmUi is a user interface for Osmosis
     Copyright (C) 2011  Verena Käfer, Peter Vollmer, Niklas Schnelle
 
     This program is free software: you can redistribute it and/or modify
@@ -15,15 +14,13 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-/**
- * 
- */
-package de.osmui.util.exceptions;
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
  */
+package de.osmui.util.exceptions;
+
 
 public class TaskNameUnknownException extends Exception {
 

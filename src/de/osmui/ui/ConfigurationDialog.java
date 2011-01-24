@@ -1,3 +1,19 @@
+/*OsmUi is a user interface for Osmosis
+    Copyright (C) 2011  Verena Käfer, Peter Vollmer, Niklas Schnelle
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or 
+    any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 package de.osmui.ui;
 
 import java.awt.BorderLayout;
@@ -18,7 +34,9 @@ import de.osmui.i18n.I18N;
 
 public class ConfigurationDialog extends JDialog {
 	/**
+	 * @author Niklas Schnelle, Peter Vollmer, Verena käfer
 	 * 
+	 * will be tested in the system-test
 	 */
 	private static final long serialVersionUID = -1901364651992578489L;
 
@@ -60,7 +78,7 @@ public class ConfigurationDialog extends JDialog {
 		add(center, BorderLayout.CENTER);
 
 		JPanel bottom = new JPanel();
-		JButton ok = new JButton("OK");
+		JButton ok = new JButton(I18N.getString("ConfigurationDialog.ok"));
 		ok.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -69,7 +87,7 @@ public class ConfigurationDialog extends JDialog {
 				dialog.dispose();
 			}
 		});
-		JButton cancel = new JButton("Cancel");
+		JButton cancel = new JButton(I18N.getString("ConfigurationDialog.cancel"));
 		cancel.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {

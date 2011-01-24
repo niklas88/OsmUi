@@ -32,9 +32,8 @@ import de.osmui.model.osm.TTask;
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
- * 
- * no tests, only getter and setter
  *
+ *no tests, only getter and setter
  */
 public class TaskBoxTableModel extends AbstractTableModel {
 
