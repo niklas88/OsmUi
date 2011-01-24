@@ -29,13 +29,13 @@ import java.util.Map;
 
 import javax.swing.SwingConstants;
 
-import de.osmui.i18n.I18N;
-import de.osmui.model.exceptions.TasksNotCompatibleException;
-import de.osmui.model.exceptions.TasksNotInModelException;
-
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.view.mxGraph;
+
+import de.osmui.i18n.I18N;
+import de.osmui.model.exceptions.TasksNotCompatibleException;
+import de.osmui.model.exceptions.TasksNotInModelException;
 
 /**
  * This class implements a pipeline model using an mxGraph as a backing store

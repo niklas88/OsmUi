@@ -4,6 +4,12 @@
  */
 package com.mxgraph.io;
 
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import com.mxgraph.io.gd.mxGdDocument;
 import com.mxgraph.io.gd.mxGdEdge;
 import com.mxgraph.io.gd.mxGdNode;
@@ -12,11 +18,6 @@ import com.mxgraph.model.mxGeometry;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxPoint;
 import com.mxgraph.view.mxGraph;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Parses a GD .txt file and imports it in the given graph.<br/>

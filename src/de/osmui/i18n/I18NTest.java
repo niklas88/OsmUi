@@ -16,10 +16,11 @@
 */
 
 package de.osmui.i18n;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import javax.swing.JMenu;
+
+import org.junit.Test;
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer

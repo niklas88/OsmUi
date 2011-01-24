@@ -60,6 +60,7 @@ TableCellEditor, TableCellRenderer,ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		BBoxChooserDialog dialog = new BBoxChooserDialog();
+		dialog.setBoundingBox(param.getBoundingBox());
 		dialog.setVisible(true);
 		if (dialog.getResponse() == DialogResponse.OK) {
 			Bounds boundingBox = dialog.getBoundingBox();

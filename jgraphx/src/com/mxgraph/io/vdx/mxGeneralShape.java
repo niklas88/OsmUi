@@ -1,11 +1,13 @@
 package com.mxgraph.io.vdx;
 
-import com.mxgraph.util.mxPoint;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import com.mxgraph.util.mxPoint;
 
 /**
  * This class is a general wrapper for one Shape Element.<br/>

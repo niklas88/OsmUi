@@ -7,6 +7,7 @@ package com.mxgraph.io.gml;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 

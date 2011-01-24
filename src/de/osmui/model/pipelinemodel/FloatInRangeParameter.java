@@ -59,6 +59,14 @@ public class FloatInRangeParameter extends AbstractParameter {
 	public String getValue() {
 		return Double.toString(value);
 	}
+	
+	/**
+	 * Returns it's value as native double
+	 * @return
+	 */
+	public double getValueDouble(){
+		return value;
+	}
 
 	/* (non-Javadoc)
 	 * @see de.osmui.model.pipelinemodel.AbstractParameter#setValue(java.lang.String)

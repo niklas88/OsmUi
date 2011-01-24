@@ -1,5 +1,15 @@
 package com.mxgraph.io;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import com.mxgraph.io.vdx.PageShapeIDKey;
 import com.mxgraph.io.vdx.mxMastersManager;
 import com.mxgraph.io.vdx.mxPropertiesManager;
@@ -7,22 +17,12 @@ import com.mxgraph.io.vdx.mxStyleSheetManager;
 import com.mxgraph.io.vdx.mxVdxConstants;
 import com.mxgraph.io.vdx.mxVdxShape;
 import com.mxgraph.io.vdx.mxVdxUtils;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
 import com.mxgraph.util.mxPoint;
 import com.mxgraph.view.mxCellState;
 import com.mxgraph.view.mxConnectionConstraint;
 import com.mxgraph.view.mxGraph;
-import java.util.ArrayList;
-import org.w3c.dom.Node;
 
 /**
  * Parses a .vdx XML diagram file and imports it in the given graph.<br/>

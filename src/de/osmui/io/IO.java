@@ -30,7 +30,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import de.osmui.i18n.I18N;
-import de.osmui.io.exceptions.ExportException;
+
 import de.osmui.io.exceptions.LoadException;
 import de.osmui.io.exceptions.SaveException;
 import de.osmui.model.pipelinemodel.AbstractPipelineModel;

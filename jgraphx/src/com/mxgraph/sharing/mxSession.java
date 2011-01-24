@@ -2,7 +2,6 @@ package com.mxgraph.sharing;
 
 import org.w3c.dom.Node;
 
-import com.mxgraph.io.mxCodec;
 import com.mxgraph.sharing.mxSharedState.mxDiagramChangeListener;
 import com.mxgraph.util.mxUtils;
 
