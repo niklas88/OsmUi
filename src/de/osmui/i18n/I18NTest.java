@@ -29,12 +29,6 @@ import org.junit.Test;
  * 
  */
 
-package de.osmui.i18n;
-import org.junit.Test;
-import static org.junit.Assert.*;
-
-import javax.swing.JMenu;
-
 public class I18NTest {
 	@Test public void get (){
 		Object values = null;
