@@ -599,7 +599,7 @@
 <description/>
 <pre>gültiger Osmosis-Aufruf befindet sich in Zwischenablage</pre>
 <actions>- aus Zwischenablage importieren wählen
-</actions>
+(warnung)</actions>
 <post>Die Datei wird geladen in eine neue Instanz geladen und angezeigt. In der alten Instanz ist die alte Pipeline zu sehen</post>
 <tags/>
 </testcase>
@@ -1130,6 +1130,285 @@
 <pre/>
 <actions/>
 <post>passt</post>
+<comment/>
+</result>
+</executedsequence>
+</executedsequence>
+</testrun>
+<testrun enddate="24.01.2011 17:58" priority="E" startdate="24.01.2011 17:57" tester="VerenaKfer">
+<description/>
+<sut/>
+<executedsequence>
+<sequence created="22.12.2010" creator="VerenaKfer" name="Pipeline aus Aufrufscript importieren" number="42">
+<description/>
+<pre>OsmUi ist geöffnet</pre>
+</sequence>
+<pre/>
+<executedsequence>
+<sequence created="22.12.2010" creator="VerenaKfer" name="Datei importieren mit leerem Fenster" number="43">
+<description/>
+<pre>Es ist keine aktuelle Pipeline vorhanden</pre>
+</sequence>
+<pre/>
+<result actionok="Y" endtime="17:57" outcome="Ok" postok="Y" preok="Y" starttime="17:57">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="44" priority="B" title="Prüfen des Fensters">
+<description>Es wird getestet, ob sich das "Importieren aus Datei"-Menü öffnet</description>
+<pre>Es ist keine aktuelle Pipeline vorhanden</pre>
+<actions>- "Importieren aus Datei" wählen</actions>
+<post>Es wird das "Importieren aus Datei" Fenster angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="17:57" outcome="Ok" postok="Y" preok="Y" starttime="17:57">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="45" priority="B" title="Standardfall">
+<description>Eine korrekte Datei wird importiert</description>
+<pre>Es ist keine aktuelle Pipeline vorhanden und es gibt eine korrekt exportierte Datei test.smu</pre>
+<actions>- "Importieren aus Datei" auswählen
+- Den Pfad zu test.smu angeben
+- Bestätigen</actions>
+<post>In der Pipelinebox wird die importierte Pipeline korrekt angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="17:57" outcome="Ok" postok="Y" preok="Y" starttime="17:57">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="46" priority="B" title="Abbrechen statt importieren">
+<description>Anstatt das Importieren zu bestätigen wird abgebrochen</description>
+<pre>Es ist keine aktuelle Pipeline vorhanden</pre>
+<actions>- "Importieren aus Datei" wählen
+- Den Pfad zu test.smu angeben
+- "Abbrechen" wählen</actions>
+<post>Es wird wieder die leere Pipelinebox angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="17:57" outcome="Ok" postok="Y" preok="Y" starttime="17:57">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="47" priority="B" title="Sofort nach Öffnen des Fensters abbrechen">
+<description>anstatt einen Pfad anzugeben wird der Vorgang abgebrochen</description>
+<pre>Es ist keine aktuelle Pipeline vorhanden</pre>
+<actions>- "Importieren aus Datei" wählen
+- "Abbrechen" wählen</actions>
+<post>Es wird wieder die leere Pipelinebox angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="17:57" outcome="Ok" postok="Y" preok="Y" starttime="17:57">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="48" priority="B" title="Datei ist zwischenzeitlich nicht mehr vorhanden">
+<description>Die zu importierenden Datei wird zwischenzeitlich gelöscht</description>
+<pre>Es ist keine aktuelle Pipeline vorhanden und es gibt eine korrekt exportierte Datei test.smu</pre>
+<actions>- "Importieren aus Datei" wählen
+- Pfad zu test.smu wählen
+- test.smu außerhalb von OsmUi löschen
+- importieren bestätigen</actions>
+<post>Fehlermeldung, das die Datei nicht mehr vorhanden ist. Nach Bestätigen wird wieder das leer Fenster angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="17:57" outcome="Ok" postok="Y" preok="Y" starttime="17:57">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="49" priority="B" title="nicht unterstützter Dateityp">
+<description>Der Dateityp der zu importierenden Datei wird nicht unterstützt</description>
+<pre>Es ist keine aktuelle Pipeline vorhanden und es gibt eine Datei falsch.org</pre>
+<actions>- "Importieren aus Datei" wählen
+- Pfad zu falsch.org wählen
+- bestätigen</actions>
+<post>Fehlermeldung, dass der gewählte Dateityp nicht unterstützt wird. Nach Bestätigen wird wieder das leer Fenster angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="17:57" outcome="Ok" postok="Y" preok="Y" starttime="17:57">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="50" priority="B" title="keine Leserechte">
+<description>Der Tester hat keine leserecht an der Datei</description>
+<pre>Es ist keine aktuelle Pipeline vorhanden und es gibt eine Datei falsch.smu an der der Tester keine Leserecht hat</pre>
+<actions>- "Importieren aus Datei" wählen
+- Pfad zu falsch.smu wählen
+- bestätigen</actions>
+<post>Fehlermeldung, dass keine Leserechte vorhanden sind. Nach Bestätigen wird wieder das leer Fenster angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="17:57" outcome="Ok" postok="Y" preok="Y" starttime="17:57">
+<testcase created="23.12.2010" creator="VerenaKfer" effort="00:01" number="58" priority="B" title="mehrere Pipelines in der Datei">
+<description/>
+<pre>Es ist keine Pipeline vorhanden und es gibt eine exportierte Datei, in der mehrere Pipelines stehen</pre>
+<actions>- "Importieren aus Datei" wählen
+- Pfad angeben
+- bestätigen</actions>
+<post>Fehlermeldung, dass nur Dateien mit einer Pipeline gelesen werden können. Nach Bestätigen wird wieder das leer Fenster angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="17:57" outcome="Ok" postok="Y" preok="Y" starttime="17:57">
+<testcase created="23.12.2010" creator="VerenaKfer" effort="00:01" number="60" priority="B" title="Datei ist nicht lesbar">
+<description/>
+<pre>-es ist keine Pipeline vorhanden und es gibt eine nicht leesbare Datei</pre>
+<actions>- "Importieren aus Datei" wählen
+- Pfad angeben
+- bestätigen</actions>
+<post>Fehlermeldung, dass Datei nicht lesbar ist. Nach Bestätigen wird wieder das leer Fenster angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+</executedsequence>
+<executedsequence>
+<sequence created="22.12.2010" creator="VerenaKfer" name="Datei importieren mit vorhandener Pipeline" number="51">
+<description/>
+<pre>Es ist eine aktuelle Pipeline vorhanden</pre>
+</sequence>
+<pre/>
+<result actionok="Y" endtime="17:58" outcome="Ok" postok="Y" preok="Y" starttime="17:57">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="52" priority="B" title="Standardfall">
+<description>Eine korrekte Datei wird importiert und in einer neuen Instanz von OsmUi geöffnet</description>
+<pre>Es ist eine aktuelle Pipeline vorhanden und es gibt eine korrekt exportierte Datei test.smu</pre>
+<actions>- "Importieren aus Datei" auswählen
+- Den Pfad zu test.smu angeben
+(warnung)
+- Bestätigen</actions>
+<post>die pipeline wird geladen</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="17:58" outcome="Ok" postok="Y" preok="Y" starttime="17:58">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="53" priority="B" title="Abbrechen statt importieren">
+<description>Anstatt das Importieren zu bestätigen wird abgebrochen</description>
+<pre>Es ist eine aktuelle Pipeline vorhanden</pre>
+<actions>- "Importieren aus Datei" wählen
+- Den Pfad zu test.smu angeben
+- "Abbrechen" wählen</actions>
+<post>Es wird wieder die Pipelinebox angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="17:58" outcome="Ok" postok="Y" preok="Y" starttime="17:58">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="54" priority="B" title="Sofort nach Öffnen des Fensters abbrechen">
+<description>anstatt einen Pfad anzugeben wird der Vorgang abgebrochen</description>
+<pre>Es ist eine aktuelle Pipeline vorhanden</pre>
+<actions>- "Importieren aus Datei" wählen
+- "Abbrechen" wählen</actions>
+<post>Es wird wieder die Pipeline angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="17:58" outcome="Ok" postok="Y" preok="Y" starttime="17:58">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="55" priority="B" title="Datei ist zwischenzeitlich nicht mehr vorhanden">
+<description>Die zu importierende Datei wird zwischenzeitlich gelöscht</description>
+<pre>Es ist eine aktuelle Pipeline vorhanden und es gibt eine korrekt gespeicherte Datei test.smu</pre>
+<actions>- "Importieren aus Datei"" wählen
+- Pfad zu test.smu wählen
+- test.smu außerhalb von OsmUi löschen
+-importieren bestätigen</actions>
+<post>Fehlermeldung, das die Datei nicht mehr vorhanden ist. Nach Bestätigen wird wieder die Pipeline angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="17:58" outcome="Ok" postok="Y" preok="Y" starttime="17:58">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="56" priority="B" title="nicht unterstützter Dateityp">
+<description>Der Dateityp der zu importierenden Datei wird nicht unterstützt</description>
+<pre>Es ist eine aktuelle Pipeline vorhanden und es gibt eine Datei falsch.org</pre>
+<actions>- "Importieren aus Datei" wählen
+- Pfad zu falsch.org wählen
+- bestätigen</actions>
+<post>Fehlermeldung, dass der gewählte Dateityp nicht unterstützt wird. Nach Bestätigen wird wieder die Pipeline angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="17:58" outcome="Ok" postok="Y" preok="Y" starttime="17:58">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="57" priority="B" title="keine Leserechte">
+<description>Der Tester hat keine Leserechte an der Datei</description>
+<pre>Es ist eine aktuelle Pipeline vorhanden und es gibt eine Datei falsch.smu an der der Tester keine Leserecht hat</pre>
+<actions>- "Importieren aus Datei" wählen
+- Pfad zu falsch.smu wählen
+- bestätigen</actions>
+<post>Fehlermeldung, dass keine Leserechte vorhanden sind. Nach Bestätigen wird wieder die Pipeline angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="17:58" outcome="Ok" postok="Y" preok="Y" starttime="17:58">
+<testcase created="23.12.2010" creator="VerenaKfer" effort="00:01" number="59" priority="B" title="mehrere Pipelines in der Datei">
+<description/>
+<pre>Es ist eeine Pipeline vorhanden und es gibt eine exportierte Datei, in der mehrere Pipelines stehen</pre>
+<actions>- "Importieren aus Datei" wählen
+- Pfad angeben
+- bestätigen</actions>
+<post>Fehlermeldung, dass nur Dateien mit einer Pipeline gelesen werden können. Nach Bestätigen wird wieder die Pipeline angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="17:58" outcome="Ok" postok="Y" preok="Y" starttime="17:58">
+<testcase created="23.12.2010" creator="VerenaKfer" effort="00:01" number="61" priority="B" title="Datei ist nicht leesbar">
+<description/>
+<pre>-es ist eine Pipeline vorhanden und es gibt eine nicht leesbare Datei</pre>
+<actions>- "Importieren aus Datei" wählen
+- Pfad angeben
+- bestätigen</actions>
+<post>Fehlermeldung, dass Datei nicht lesbar ist. Nach Bestätigen wird wieder die Pipeline angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
 <comment/>
 </result>
 </executedsequence>
@@ -1884,6 +2163,47 @@ gestartet. In der alten Instanz ist die alte Pipeline zu sehen</post>
 </result>
 </executedsequence>
 </testrun>
+<testrun enddate="24.01.2011 18:03" priority="E" startdate="24.01.2011 18:03" tester="VerenaKfer">
+<description/>
+<sut/>
+<executedsequence>
+<sequence created="27.12.2010" creator="VerenaKfer" name="Pipeline Importieren aus Zwischenablage" number="94">
+<description>Benutzer möchte Pipeline aus Osmosis-Aufruf angezeigt haben
+</description>
+<pre>Osmosis-Aufruf befindet sich in Zwischenablage
+</pre>
+</sequence>
+<pre/>
+<result actionok="Y" endtime="18:03" outcome="NA" postok="Y" preok="Y" starttime="18:03">
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="96" priority="B" title="standard">
+<description/>
+<pre>gültiger Osmosis-Aufruf befindet sich in Zwischenablage</pre>
+<actions>- aus Zwischenablage importieren wählen
+</actions>
+<post>Die Datei wird geladen in eine neue Instanz geladen und angezeigt. In der alten Instanz ist die alte Pipeline zu sehen</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="" outcome="NA" postok="Y" preok="N" starttime="">
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="97" priority="B" title="kein gültiger Osmosis-Aufruf">
+<description/>
+<pre>ungültiger Osmosis-Aufruf in Zwischenablage</pre>
+<actions>- aus Zwischenablage kopieren wählen
+(Fehlermeldung)
+- bestätigen</actions>
+<post>Zustand vor dem Lade-Versuch wird angezeigt</post>
+<tags/>
+</testcase>
+<actions/>
+<post/>
+<comment/>
+</result>
+</executedsequence>
+</testrun>
 </tsa>
 <tsa name="Pipeline exportieren" number="98" revId="1">
 <relatedsequence>98</relatedsequence>
@@ -2058,6 +2378,60 @@ gestartet. In der alten Instanz ist die alte Pipeline zu sehen</post>
 </tsa>
 <tsa name="Programm schließen" number="108" revId="1">
 <relatedsequence>108</relatedsequence>
+<testrun enddate="24.01.2011 17:53" priority="E" startdate="24.01.2011 17:51" tester="VerenaKfer">
+<description/>
+<sut/>
+<executedsequence>
+<sequence created="27.12.2010" creator="VerenaKfer" name="Programm schließen" number="108">
+<description/>
+<pre>Programm ist geröffnet</pre>
+</sequence>
+<pre/>
+<result actionok="Y" endtime="17:52" outcome="Ok" postok="Y" preok="Y" starttime="17:51">
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="110" priority="B" title="gespeichert">
+<description/>
+<pre>die aktuelle Pipeline ist gespeichert</pre>
+<actions>- schließen wählen</actions>
+<post>das Programm wird geschlossen</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="17:53" outcome="Ok" postok="Y" preok="Y" starttime="17:52">
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="111" priority="A" title="nicht gespeichert, speichern bestätigen">
+<description/>
+<pre>die aktuelle Pipeline ist nicht gespeichert</pre>
+<actions>- schließen wählen
+(Warnung)
+- speichern bestätigen</actions>
+<post>das Programm wird gespeichert und geschlossen</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="17:53" outcome="Ok" postok="Y" preok="Y" starttime="17:53">
+<testcase created="27.12.2010" creator="VerenaKfer" effort="00:01" number="112" priority="A" title="nicht gespeichert, abbrechen">
+<description/>
+<pre>die aktuelle Pipeline ist gespeichert</pre>
+<actions>- schließen wählen
+(Warnung)
+- abbrechen wählen</actions>
+<post>die Pipeline wird wieder angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+</executedsequence>
+</testrun>
 </tsa>
 <tsa name="Datei laden" number="26" revId="1">
 <relatedsequence>26</relatedsequence>
