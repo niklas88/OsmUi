@@ -368,30 +368,30 @@ public class Menu extends JMenuBar {
 		 * Menu items of the menu "Edit"
 		 */
 
-		/*
-		 * Redo
-		 */
-		JMenuItem redo = new JMenuItem(I18N.getString("Menu.redo")); //$NON-NLS-1$
-		redo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("redo"); //$NON-NLS-1$
-			}
-		});
-		editMenu.add(redo);
-		/*
-		 * Undo
-		 */
-		JMenuItem undo = new JMenuItem(I18N.getString("Menu.undo")); //$NON-NLS-1$
-		undo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("undo"); //$NON-NLS-1$
-			}
-		});
-		editMenu.add(undo);
-		/*
-		 * Separator
-		 */
-		editMenu.addSeparator();
+//		/*
+//		 * Redo
+//		 */
+//		JMenuItem redo = new JMenuItem(I18N.getString("Menu.redo")); //$NON-NLS-1$
+//		redo.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				System.out.println("redo"); //$NON-NLS-1$
+//			}
+//		});
+//		editMenu.add(redo);
+//		/*
+//		 * Undo
+//		 */
+//		JMenuItem undo = new JMenuItem(I18N.getString("Menu.undo")); //$NON-NLS-1$
+//		undo.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				System.out.println("undo"); //$NON-NLS-1$
+//			}
+//		});
+//		editMenu.add(undo);
+//		/*
+//		 * Separator
+//		 */
+//		editMenu.addSeparator();
 		/*
 		 * Options
 		 */
