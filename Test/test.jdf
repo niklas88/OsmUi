@@ -3055,6 +3055,225 @@ gestartet. In der alten Instanz ist die alte Pipeline zu sehen</post>
 </executedsequence>
 </executedsequence>
 </testrun>
+<testrun enddate="24.01.2011 19:25" priority="E" startdate="24.01.2011 19:24" tester="VerenaKfer">
+<description/>
+<sut/>
+<executedsequence>
+<sequence created="22.12.2010" creator="VerenaKfer" name="Datei laden" number="26">
+<description>Eine gespeicherte Datei soll geladen werden</description>
+<pre>OsmUi ist geöffnet</pre>
+</sequence>
+<pre/>
+<executedsequence>
+<sequence created="22.12.2010" creator="VerenaKfer" name="Datei laden mit vorhandener Pipeline" number="18">
+<description/>
+<pre>Es ist eine aktuelle Pipeline vorhanden</pre>
+</sequence>
+<pre/>
+<result actionok="Y" endtime="19:24" outcome="Ok" postok="Y" preok="Y" starttime="19:24">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="19" priority="B" title="Standardfall">
+<description>Eine korrekte Datei wird geladen und in einer neuen Instanz von OsmUi geöffnet</description>
+<pre>Es ist eine aktuelle Pipeline vorhanden und es gibt eine korrekt gespeicherte Datei test.smu</pre>
+<actions>- "Datei laden" auswählen
+- Den Pfad zu test.smu angeben
+(Meldung)die pipeline wird geladen
+- Bestätigen</actions>
+<post>die pipeline wird geladen</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="19:24" outcome="Ok" postok="Y" preok="Y" starttime="19:24">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="20" priority="B" title="Abbrechen statt laden">
+<description>Anstatt das Laden zu bestätigen wird abgebrochen</description>
+<pre>Es ist eine aktuelle Pipeline vorhanden</pre>
+<actions>- "Datei laden" wählen
+- Den Pfad zu test.smu angeben
+- "Abbrechen" wählen</actions>
+<post>Es wird wieder die Pipelinebox angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="19:24" outcome="Ok" postok="Y" preok="Y" starttime="19:24">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="21" priority="B" title="Sofort nach Öffnen des Fensters abbrechen">
+<description>anstatt einen Pfad anzugeben wird der Vorgang abgebrochen</description>
+<pre>Es ist eine aktuelle Pipeline vorhanden</pre>
+<actions>- "Datei laden" wählen
+- "Abbrechen" wählen</actions>
+<post>Es wird wieder die Pipelinebox angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="19:24" outcome="Ok" postok="Y" preok="Y" starttime="19:24">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="23" priority="B" title="Datei ist zwischenzeitlich nicht mehr vorhanden">
+<description>Die zu landende Datei wird zwischenzeitlich gelöscht</description>
+<pre>Es ist eeine aktuelle Pipeline vorhanden und es gibt eine korrekt gespeicherte Datei test.smu</pre>
+<actions>- "Datei laden" wählen
+- Pfad zu test.smu wählen
+- test.smu außerhalb von OsmUi löschen
+- laden bestätigen</actions>
+<post>Fehlermeldung, das die Datei nicht mehr vorhanden ist. Nach Bestätigung wird wieder die Pipelinebox angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="19:25" outcome="Ok" postok="Y" preok="Y" starttime="19:24">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="24" priority="B" title="nicht unterstützter Dateityp">
+<description>Der Dateityp der zu landenden Datei wird nicht unterstützt</description>
+<pre>Es ist eeine aktuelle Pipeline vorhanden und es gibt eine Datei falsch.org</pre>
+<actions>- "Datei laden" wählen
+- Pfad zu falsch.org wählen
+- bestätigen</actions>
+<post>Fehlermeldung, dass der gewählte Dateityp nicht unterstützt wird. Nach Bestätigung wird wieder die Pipelinebox angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="19:25" outcome="Ok" postok="Y" preok="Y" starttime="19:25">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="25" priority="B" title="keine Leserechte">
+<description>Der Tester hat keine Leserechte an der Datei</description>
+<pre>Es ist eeine aktuelle Pipeline vorhanden und es gibt eine Datei falsch.smu an der der Tester keine Leserecht hat</pre>
+<actions>- "Datei laden" wählen
+- Pfad zu falsch.smu wählen
+- bestätigen</actions>
+<post>Fehlermeldung, dass keine Leserechte vorhanden sind. Nach Bestätigung wird wieder die Pipelinebox angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+</executedsequence>
+<executedsequence>
+<sequence created="22.12.2010" creator="VerenaKfer" name="Datei laden mit leerem Fenster" number="8">
+<description/>
+<pre>Es ist keine aktuelle Pipeline vorhanden</pre>
+</sequence>
+<pre/>
+<result actionok="Y" endtime="19:25" outcome="Ok" postok="Y" preok="Y" starttime="19:25">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="14" priority="B" title="Prüfen des Fensters">
+<description>Es wird getestet, ob sich das Lade-Menü öffnet</description>
+<pre>Es ist keine aktuelle Pipeline vorhanden</pre>
+<actions>- "laden" wählen</actions>
+<post>Es wird das "Datei laden" Fenster angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="19:25" outcome="Ok" postok="Y" preok="Y" starttime="19:25">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="10" priority="B" title="Standard">
+<description>Eine korrekte Datei wird geladen.</description>
+<pre>Es ist keine aktuelle Pipeline vorhanden und es gibt eine korrekt gespeicherte Datei test.smu</pre>
+<actions>- "Datei laden" auswählen
+- Den Pfad zu test.smu angeben
+- Bestätigen</actions>
+<post>In der Pipelinebox wird die geladene Pipeline korrekt angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="19:25" outcome="Ok" postok="Y" preok="Y" starttime="19:25">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="12" priority="B" title="Abbrechen statt laden">
+<description>Anstatt das Laden zu bestätigen wird abgebrochen</description>
+<pre>Es ist keine aktuelle Pipeline vorhanden</pre>
+<actions>- "Datei laden" wählen
+- Den Pfad zu test.smu angeben
+- "Abbrechen" wählen</actions>
+<post>Es wird wieder die leere Pipelinebox angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="19:25" outcome="Ok" postok="Y" preok="Y" starttime="19:25">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="13" priority="B" title="Sofort nach Öffnen des Fensters abbrechen">
+<description>anstatt einen Pfad anzugeben wird der Vorgang abgebrochen</description>
+<pre>Es ist keine aktuelle Pipeline vorhanden</pre>
+<actions>- "Datei laden" wählen
+- "Abbrechen" wählen</actions>
+<post>Es wird wieder die leere Pipelinebox angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="19:25" outcome="Ok" postok="Y" preok="Y" starttime="19:25">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="15" priority="B" title="Datei ist zwischenzeitlich nicht mehr vorhanden">
+<description>Die zu landende Datei wird zwischenzeitlich gelöscht</description>
+<pre>Es ist keine aktuelle Pipeline vorhanden und es gibt eine korrekt gespeicherte Datei test.smu</pre>
+<actions>- "Datei laden" wählen
+- Pfad zu test.smu wählen
+- test.smu außerhalb von OsmUi löschen
+- laden bestätigen</actions>
+<post>Fehlermeldung, das die Datei nicht mehr vorhanden ist, nach bestätigen wird wieder die leere Pipelinebox angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="19:25" outcome="Ok" postok="Y" preok="Y" starttime="19:25">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="16" priority="B" title="nicht unterstützter Dateityp">
+<description>Der Dateityp der zu landenden Datei wird nicht unterstützt</description>
+<pre>Es ist keine aktuelle Pipeline vorhanden und es gibt eine Datei falsch.org</pre>
+<actions>- "Datei laden" wählen
+- Pfad zu falsch.org wählen
+- bestätigen</actions>
+<post>Fehlermeldung, dass der gewählte Dateityp nicht unterstützt wird. nach bestätigung wird wieder die leere Pipelinebox angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+<result actionok="Y" endtime="19:25" outcome="Ok" postok="Y" preok="Y" starttime="19:25">
+<testcase created="22.12.2010" creator="VerenaKfer" effort="00:01" number="17" priority="B" title="keine Leserechte">
+<description>Der Tester hat keine leserecht an der Datei</description>
+<pre>Es ist keine aktuelle Pipeline vorhanden und es gibt eine Datei falsch.smu an der der Tester keine Leserecht hat</pre>
+<actions>- "Datei laden" wählen
+- Pfad zu falsch.smu wählen
+- bestätigen</actions>
+<post>Fehlermeldung, dass keine Leserechte vorhanden sind. nach Bestätigung wird wieder die leere Pipelinebox angezeigt</post>
+<tags/>
+</testcase>
+<pre/>
+<actions/>
+<post/>
+<comment/>
+</result>
+</executedsequence>
+</executedsequence>
+</testrun>
 </tsa>
 </tsa>
 <tsa name="Black-Box-Test" number="5" revId="1">
