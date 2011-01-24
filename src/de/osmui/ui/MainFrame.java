@@ -192,9 +192,9 @@ public class MainFrame extends JFrame implements Observer {
 							JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
 						return false;
 					}
-					savePath = chooser.getSelectedFile().getAbsolutePath();
-					extension = chooser.getFileFilter().getDescription();
 				}
+				savePath = chooser.getSelectedFile().getAbsolutePath();
+				extension = chooser.getFileFilter().getDescription();
 			} else {
 				return false;
 			}

@@ -23,6 +23,7 @@ import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.Locale;
 
@@ -39,6 +40,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 
 import de.osmui.util.CommandlineTranslator;
 import de.osmui.util.exceptions.ImportException;
@@ -142,11 +144,12 @@ public class Menu extends JMenuBar {
 				}
 				JFileChooser chooser = new JFileChooser();
 				chooser.addChoosableFileFilter(MainFrame.getInstance().ioFilter);
+				chooser.setFileFilter(MainFrame.getInstance().ioFilter);
 				chooser.setAcceptAllFileFilterUsed(false);
 				int returnVal = chooser.showOpenDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					try {
-						JGPipelineModel loaded =  IO.getInstance().load(
+						JGPipelineModel loaded = IO.getInstance().load(
 								chooser.getSelectedFile().getAbsolutePath());
 						MainFrame.getInstance().pipeModel.setAll(loaded);
 					} catch (LoadException e1) {
@@ -168,6 +171,8 @@ public class Menu extends JMenuBar {
 
 			}
 		});
+		save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+				ActionEvent.CTRL_MASK));
 		fileMenu.add(save);
 		/*
 		 * SaveAs
@@ -353,6 +358,8 @@ public class Menu extends JMenuBar {
 				MainFrame.getInstance().shutdown();
 			}
 		});
+		close.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4,
+				ActionEvent.ALT_MASK));
 		fileMenu.add(close);
 
 		this.add(fileMenu);
@@ -461,6 +468,7 @@ public class Menu extends JMenuBar {
 				frame.setVisible(true);
 			}
 		});
+		help.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 		helpMenu.add(help);
 		/*
 		 * Separator
