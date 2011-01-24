@@ -12,7 +12,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 
-import de.osmui.model.pipelinemodel.FileParameter;
+import de.osmui.model.pipelinemodel.parameters.FileParameter;
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena Käfer

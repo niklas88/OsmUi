@@ -26,6 +26,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.osmui.model.pipelinemodel.parameters.AbstractParameter;
+
 /**
  * This is a general implementation of an AbstractTask
  * 

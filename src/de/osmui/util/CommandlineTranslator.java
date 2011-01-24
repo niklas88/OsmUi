@@ -31,14 +31,14 @@ import java.util.Stack;
 import de.osmui.i18n.I18N;
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
-import de.osmui.model.pipelinemodel.AbstractParameter;
 import de.osmui.model.pipelinemodel.AbstractPipe;
 import de.osmui.model.pipelinemodel.AbstractPipelineModel;
 import de.osmui.model.pipelinemodel.AbstractPort;
 import de.osmui.model.pipelinemodel.AbstractTask;
-import de.osmui.model.pipelinemodel.IntParameter;
 import de.osmui.model.pipelinemodel.VariablePipe;
 import de.osmui.model.pipelinemodel.VariablePort;
+import de.osmui.model.pipelinemodel.parameters.AbstractParameter;
+import de.osmui.model.pipelinemodel.parameters.IntParameter;
 import de.osmui.util.exceptions.ImportException;
 import de.osmui.util.exceptions.TaskNameUnknownException;
 

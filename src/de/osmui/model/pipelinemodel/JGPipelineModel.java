@@ -170,11 +170,16 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		return this;
 	}
 	
-	public void setAll(JGPipelineModel newModel){
+	/**
+	 * Puts all tasks from the given model into this model
+	 * the sourceModel will get invalid
+	 * @param sourceModel
+	 */
+	public void setAll(JGPipelineModel sourceModel){
 		clean();
-		tasks = newModel.tasks;
-		taskMap = newModel.taskMap;
-		pipeMap = newModel.pipeMap;
+		tasks = sourceModel.tasks;
+		taskMap = sourceModel.taskMap;
+		pipeMap = sourceModel.pipeMap;
 		// We need to set this model as the associated model 
 		// for all tasks
 		for(AbstractTask task : tasks){

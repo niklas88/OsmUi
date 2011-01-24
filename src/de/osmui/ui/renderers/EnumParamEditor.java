@@ -35,7 +35,7 @@ import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.table.TableCellEditor;
 
 import de.osmui.model.osm.TEnumValue;
-import de.osmui.model.pipelinemodel.EnumParameter;
+import de.osmui.model.pipelinemodel.parameters.EnumParameter;
 
 public class EnumParamEditor extends AbstractCellEditor implements
 		TableCellEditor, ActionListener {

@@ -14,11 +14,12 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.osmui.model.pipelinemodel;
+package de.osmui.model.pipelinemodel.parameters;
 
 import java.util.Map;
 
 import de.osmui.model.osm.TParameter;
+import de.osmui.model.pipelinemodel.AbstractTask;
 import de.unistuttgart.iev.osm.bboxchooser.Bounds;
 
 /**

@@ -9,7 +9,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 
-import de.osmui.model.pipelinemodel.DirParameter;
+import de.osmui.model.pipelinemodel.parameters.DirParameter;
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena Käfer

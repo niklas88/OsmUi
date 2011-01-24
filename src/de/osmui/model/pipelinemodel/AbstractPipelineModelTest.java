@@ -24,6 +24,7 @@ import org.junit.Test;
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
 import de.osmui.model.osm.TParameter;
+import de.osmui.model.pipelinemodel.parameters.IntParameter;
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
