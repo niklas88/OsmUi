@@ -15,8 +15,8 @@ import javax.swing.table.TableCellEditor;
 import de.osmui.model.pipelinemodel.FileParameter;
 
 /**
- * @author Niklas Schnelle
- * 
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
+ *
  */
 public class FileParamEditor extends AbstractCellEditor implements
 		TableCellEditor, ActionListener {
@@ -48,7 +48,6 @@ public class FileParamEditor extends AbstractCellEditor implements
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == textFieldButton.getButton()) {
 			JFileChooser chooser = new JFileChooser();
-			chooser.setAcceptAllFileFilterUsed(false);
 			int returnVal = chooser.showSaveDialog(null);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				textFieldButton.getTextField().setText(
