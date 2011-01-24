@@ -4,15 +4,17 @@
  */
 package com.mxgraph.io.gml;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import com.mxgraph.model.mxCell;
 import com.mxgraph.util.mxPoint;
 import com.mxgraph.view.mxConnectionConstraint;
 import com.mxgraph.view.mxGraph;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 /**
  * Represents a Graph element in the GML Structure.

@@ -1,8 +1,9 @@
 package com.mxgraph.io.vdx;
 
-import com.mxgraph.util.mxPoint;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
+import com.mxgraph.util.mxPoint;
 
 /**
  * This class is a wrapper for a shape element contained in a Master element.<br/>

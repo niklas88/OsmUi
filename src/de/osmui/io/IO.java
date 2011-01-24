@@ -29,7 +29,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import de.osmui.io.exceptions.ExportException;
 import de.osmui.io.exceptions.LoadException;
 import de.osmui.io.exceptions.SaveException;
 import de.osmui.model.pipelinemodel.AbstractPipelineModel;

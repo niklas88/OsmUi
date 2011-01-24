@@ -31,7 +31,6 @@ import javax.swing.JTextField;
 import javax.swing.table.TableCellEditor;
 
 import de.osmui.i18n.I18N;
-
 import de.osmui.model.pipelinemodel.AbstractParameter;
 import de.osmui.model.pipelinemodel.IntParameter;
 

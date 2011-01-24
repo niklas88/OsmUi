@@ -17,6 +17,7 @@
 package de.osmui.io;
 
 import java.io.File;
+
 import javax.swing.filechooser.FileFilter;
 
 public class PipeImExBatFilter extends FileFilter {

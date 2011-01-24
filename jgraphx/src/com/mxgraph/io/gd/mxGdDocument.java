@@ -4,11 +4,12 @@
  */
 package com.mxgraph.io.gd;
 
-import com.mxgraph.util.mxPoint;
 import java.io.BufferedReader;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.mxgraph.util.mxPoint;
 
 /**
  * This class is a representation of a GD file.<br/>

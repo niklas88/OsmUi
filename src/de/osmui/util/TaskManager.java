@@ -31,11 +31,23 @@ import javax.xml.bind.Unmarshaller;
 
 import de.osmui.model.osm.OsmosisTaskDescription;
 import de.osmui.model.osm.TParameter;
+import de.osmui.model.osm.TPipe;
 import de.osmui.model.osm.TTask;
 import de.osmui.model.osm.TTaskGroup;
-import de.osmui.model.osm.TPipe;
-
-import de.osmui.model.pipelinemodel.*;
+import de.osmui.model.pipelinemodel.AbstractParameter;
+import de.osmui.model.pipelinemodel.AbstractPipe;
+import de.osmui.model.pipelinemodel.AbstractPort;
+import de.osmui.model.pipelinemodel.AbstractTask;
+import de.osmui.model.pipelinemodel.BBoxPseudoParameter;
+import de.osmui.model.pipelinemodel.BooleanParameter;
+import de.osmui.model.pipelinemodel.CommonPipe;
+import de.osmui.model.pipelinemodel.CommonPort;
+import de.osmui.model.pipelinemodel.CommonTask;
+import de.osmui.model.pipelinemodel.EnumParameter;
+import de.osmui.model.pipelinemodel.IntParameter;
+import de.osmui.model.pipelinemodel.OtherParameter;
+import de.osmui.model.pipelinemodel.VariablePipe;
+import de.osmui.model.pipelinemodel.VariablePort;
 import de.osmui.util.exceptions.TaskNameUnknownException;
 
 /**

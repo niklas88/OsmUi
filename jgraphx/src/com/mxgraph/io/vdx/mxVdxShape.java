@@ -1,15 +1,16 @@
 package com.mxgraph.io.vdx;
 
-import com.mxgraph.io.mxVdxCodec;
+import java.util.HashMap;
+import java.util.Hashtable;
 
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import com.mxgraph.io.mxVdxCodec;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxPoint;
 import com.mxgraph.view.mxGraph;
-import java.util.HashMap;
-import java.util.Hashtable;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 /**
  * This class is a wrapper for one Shape Element.<br/>
