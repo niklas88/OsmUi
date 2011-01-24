@@ -39,6 +39,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+
+import de.osmui.util.CommandlineTranslator;
 import de.osmui.util.exceptions.ImportException;
 import de.osmui.i18n.I18N;
 import de.osmui.io.IO;
@@ -49,6 +51,7 @@ import de.osmui.io.PipeImExShFilter;
 import de.osmui.io.exceptions.ExportException;
 import de.osmui.io.exceptions.LoadException;
 import de.osmui.io.exceptions.SaveException;
+import de.osmui.model.pipelinemodel.JGPipelineModel;
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
@@ -69,7 +72,6 @@ public class Menu extends JMenuBar {
 
 	PipeImExShFilter pipeImExShFilter = new PipeImExShFilter();
 	PipeImExBatFilter pipeImExBatFilter = new PipeImExBatFilter();
-	IOFilter ioFilter = new IOFilter();
 
 	/**
 	 * Constructs the menu with all its entries of Osmui.
@@ -101,7 +103,8 @@ public class Menu extends JMenuBar {
 					if (selectionOption == JOptionPane.CANCEL_OPTION) {
 						return;
 					} else if (selectionOption == JOptionPane.YES_NO_OPTION) {
-						if (save(MainFrame.getInstance().getSavePath())) {
+						if (MainFrame.getInstance().save(
+								MainFrame.getInstance().getSavePath())) {
 							MainFrame.getInstance().savePath = "";
 						} else {
 							return;
@@ -109,6 +112,7 @@ public class Menu extends JMenuBar {
 					}
 				}
 				MainFrame.getInstance().pipeModel.clean();
+				MainFrame.getInstance().setSaved(true);
 			}
 		});
 		fileMenu.add(newPipe);
@@ -130,21 +134,21 @@ public class Menu extends JMenuBar {
 					if (selectionOption == JOptionPane.CANCEL_OPTION) {
 						return;
 					} else if (selectionOption == JOptionPane.YES_NO_OPTION) {
-						if (!save(MainFrame.getInstance().getSavePath())) {
+						if (!MainFrame.getInstance().save(
+								MainFrame.getInstance().getSavePath())) {
 							return;
 						}
 					}
 				}
 				JFileChooser chooser = new JFileChooser();
-				chooser.addChoosableFileFilter(ioFilter);
+				chooser.addChoosableFileFilter(MainFrame.getInstance().ioFilter);
 				chooser.setAcceptAllFileFilterUsed(false);
 				int returnVal = chooser.showOpenDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					try {
-						MainFrame.getInstance().pipeModel.clean();
-						IO.getInstance().load(
-								MainFrame.getInstance().pipeModel,
+						JGPipelineModel loaded =  IO.getInstance().load(
 								chooser.getSelectedFile().getAbsolutePath());
+						MainFrame.getInstance().pipeModel.setAll(loaded);
 					} catch (LoadException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
@@ -159,7 +163,8 @@ public class Menu extends JMenuBar {
 		JMenuItem save = new JMenuItem(I18N.getString("Menu.save")); //$NON-NLS-1$
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				save(MainFrame.getInstance().getSavePath());
+				MainFrame.getInstance().save(
+						MainFrame.getInstance().getSavePath());
 
 			}
 		});
@@ -170,7 +175,7 @@ public class Menu extends JMenuBar {
 		JMenuItem saveAs = new JMenuItem(I18N.getString("Menu.saveAs")); //$NON-NLS-1$
 		saveAs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				save("");
+				MainFrame.getInstance().save("");
 			}
 		});
 		fileMenu.add(saveAs);
@@ -191,7 +196,7 @@ public class Menu extends JMenuBar {
 							I18N.getString("Menu.importAddToPipelineTitle"),
 							JOptionPane.YES_NO_OPTION,
 							JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
-						if (!MainFrame.getInstance().saved) {
+						if (!MainFrame.getInstance().getSaved()) {
 							int selectionOption = JOptionPane.showConfirmDialog(
 									MainFrame.getInstance(),
 									I18N.getString("Menu.notSavedNew"),
@@ -200,13 +205,15 @@ public class Menu extends JMenuBar {
 									JOptionPane.QUESTION_MESSAGE);
 							if (selectionOption == JOptionPane.CANCEL_OPTION) {
 								return;
-							} else if (selectionOption == JOptionPane.YES_NO_OPTION) {
-								if (save(MainFrame.getInstance().getSavePath())) {
+							} else if (selectionOption == JOptionPane.YES_OPTION) {
+								if (MainFrame.getInstance().save(
+										MainFrame.getInstance().getSavePath())) {
 									MainFrame.getInstance().savePath = "";
 								} else {
 									return;
 								}
 							}
+							MainFrame.getInstance().getPipeModel().clean();
 						}
 					}
 				}
@@ -231,7 +238,6 @@ public class Menu extends JMenuBar {
 					MainFrame.getInstance().saved = false;
 				}
 
-
 			}
 		});
 		fileMenu.add(importFile);
@@ -248,7 +254,7 @@ public class Menu extends JMenuBar {
 							I18N.getString("Menu.importAddToPipelineTitle"),
 							JOptionPane.YES_NO_OPTION,
 							JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
-						if (!MainFrame.getInstance().saved) {
+						if (MainFrame.getInstance().getSaved()) {
 							int selectionOption = JOptionPane.showConfirmDialog(
 									MainFrame.getInstance(),
 									I18N.getString("Menu.notSavedNew"),
@@ -258,13 +264,15 @@ public class Menu extends JMenuBar {
 							if (selectionOption == JOptionPane.CANCEL_OPTION) {
 								return;
 							} else if (selectionOption == JOptionPane.YES_NO_OPTION) {
-								if (save(MainFrame.getInstance().getSavePath())) {
+								if (MainFrame.getInstance().save(
+										MainFrame.getInstance().getSavePath())) {
 									MainFrame.getInstance().savePath = "";
 								} else {
 									return;
 								}
 							}
 						}
+						MainFrame.getInstance().getPipeModel().clean();
 					}
 				}
 				try {
@@ -272,7 +280,6 @@ public class Menu extends JMenuBar {
 							MainFrame.getInstance().pipeModel,
 							Toolkit.getDefaultToolkit().getSystemClipboard());
 				} catch (HeadlessException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (ImportException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
@@ -343,10 +350,7 @@ public class Menu extends JMenuBar {
 		JMenuItem close = new JMenuItem(I18N.getString("Menu.exit")); //$NON-NLS-1$
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getInstance().writePrefs();
-				MainFrame.getInstance().configurationManager
-						.saveConfiguration();
-				System.exit(0);
+				MainFrame.getInstance().shutdown();
 			}
 		});
 		fileMenu.add(close);
@@ -489,38 +493,4 @@ public class Menu extends JMenuBar {
 		this.add(helpMenu);
 	}
 
-	private Boolean save(String systemSavePath) {
-		String savePath = systemSavePath;
-		String extension = "";
-		if (savePath == "") {
-			JFileChooser chooser = new JFileChooser();
-			chooser.addChoosableFileFilter(ioFilter);
-			chooser.setFileFilter(ioFilter);
-			chooser.setAcceptAllFileFilterUsed(false);
-			int returnVal = chooser.showSaveDialog(null);
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				if (chooser.getSelectedFile().exists()) {
-					if (JOptionPane.showConfirmDialog(MainFrame.getInstance(),
-							I18N.getString("Menu.overwriteWarnQuestion"),
-							I18N.getString("Menu.overwriteWarnQuestionTitle"),
-							JOptionPane.YES_NO_OPTION,
-							JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
-						return false;
-					}
-
-				}
-			} else {
-				return false;
-			}
-		}
-		try {
-			IO.getInstance().save(MainFrame.getInstance().pipeModel, savePath,
-					extension);
-		} catch (SaveException e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
-		}
-		MainFrame.getInstance().savePath = savePath;
-		MainFrame.getInstance().saved = true;
-		return true;
-	}
 }

@@ -49,6 +49,92 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		Serializable {
 
 	private static final long serialVersionUID = -4609328085880199933L;
+	
+	private class mxPipelineGraph extends mxGraph {
+
+		// Overrides method to disallow editting
+		@Override
+		public boolean isCellEditable(Object cell) {
+			return false;
+		}
+
+		@Override
+		public boolean isCellConnectable(Object cell) {
+			mxCell mxcell = (mxCell) cell;
+			if (mxcell.isVertex()) {
+				AbstractTask task = (AbstractTask) mxcell.getValue();
+				return task.isConnectable();
+			} else {
+				return false;
+			}
+		}
+
+		@Override
+		public Object addCell(Object cell, Object parent, Integer index,
+				Object source, Object target) {
+			Object ret;
+			ret = super.addCell(cell, parent, index, source, target);
+
+			if (source != null && target != null && cell != null) {
+				// Check the cell, which should be an edge to find out
+				// whether the
+				// tasks are already connected, then it has a pipe user
+				// object
+				mxCell mxcell = (mxCell) cell;
+				if (mxcell.getValue() instanceof AbstractPipe) {
+					// It's already set we are done here
+					return ret;
+				}
+				mxCell mxsource = (mxCell) source;
+				mxCell mxtarget = (mxCell) target;
+				if (mxtarget.getValue() instanceof AbstractTask
+						&& mxsource.getValue() instanceof AbstractTask) {
+					AbstractTask sourceTask = (AbstractTask) mxsource
+							.getValue();
+					AbstractTask targetTask = (AbstractTask) mxtarget
+							.getValue();
+
+					try {
+						AbstractPipe pipe = rawConnectTasks(sourceTask,
+								targetTask);
+						mxcell.setValue(pipe);
+						pipeMap.put(Long.valueOf(pipe.getID()), mxcell);
+					} catch (TasksNotInModelException e) {
+						// shouldn't happen
+					} catch (TasksNotCompatibleException e) {
+						// Too bad,tried connection nonsense
+						Object[] cells = { mxcell };
+						removeCells(cells);
+						return null;
+					}
+
+				}
+			}
+			return ret;
+		}
+
+		@Override
+		public Object[] removeCells(Object[] cells, boolean includeEdges) {
+			Object[] cellsRemoved = super.removeCells(cells, includeEdges);
+			Object val;
+			AbstractPipe pipe;
+			for (Object cell : cellsRemoved) {
+				val = ((mxCell) cell).getValue();
+				if (val instanceof AbstractPipe) {
+					pipe = (AbstractPipe) val;
+					pipe.disconnect();
+
+				} else if (val instanceof AbstractTask) {
+					try {
+						rawRemoveTask((AbstractTask) val);
+					} catch (TasksNotInModelException e) {
+						// Do nothing
+					}
+				}
+			}
+			return cellsRemoved;
+		}
+	}
 
 	protected ArrayList<AbstractTask> tasks;
 
@@ -57,101 +143,48 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 
 	protected transient mxGraph graph;
 	protected transient mxHierarchicalLayout lay;
-
+	/**
+	 * Constructs a new JGPipelineModel
+	 */
 	public JGPipelineModel() {
 		tasks = new ArrayList<AbstractTask>();
 		taskMap = new HashMap<Long, mxCell>();
 		pipeMap = new HashMap<Long, mxCell>();
-
-		graph = new mxGraph() {
-			// Overrides method to disallow editting
-
-			@Override
-			public boolean isCellEditable(Object cell) {
-				return false;
-			}
-
-			@Override
-			public boolean isCellConnectable(Object cell) {
-				mxCell mxcell = (mxCell) cell;
-				if (mxcell.isVertex()) {
-					AbstractTask task = (AbstractTask) mxcell.getValue();
-					return task.isConnectable();
-				} else {
-					return false;
-				}
-			}
-
-			@Override
-			public Object addCell(Object cell, Object parent, Integer index,
-					Object source, Object target) {
-				Object ret;
-				ret = super.addCell(cell, parent, index, source, target);
-
-				if (source != null && target != null && cell != null) {
-					// Check the cell, which should be an edge to find out
-					// whether the
-					// tasks are already connected, then it has a pipe user
-					// object
-					mxCell mxcell = (mxCell) cell;
-					if (mxcell.getValue() instanceof AbstractPipe) {
-						// It's already set we are done here
-						return ret;
-					}
-					mxCell mxsource = (mxCell) source;
-					mxCell mxtarget = (mxCell) target;
-					if (mxtarget.getValue() instanceof AbstractTask
-							&& mxsource.getValue() instanceof AbstractTask) {
-						AbstractTask sourceTask = (AbstractTask) mxsource
-								.getValue();
-						AbstractTask targetTask = (AbstractTask) mxtarget
-								.getValue();
-
-						try {
-							AbstractPipe pipe = rawConnectTasks(sourceTask,
-									targetTask);
-							mxcell.setValue(pipe);
-							pipeMap.put(Long.valueOf(pipe.getID()), mxcell);
-						} catch (TasksNotInModelException e) {
-							// shouldn't happen
-						} catch (TasksNotCompatibleException e) {
-							// Too bad,tried connection nonsense
-							Object[] cells = { mxcell };
-							removeCells(cells);
-							return null;
-						}
-
-					}
-				}
-				return ret;
-			}
-
-			@Override
-			public Object[] removeCells(Object[] cells, boolean includeEdges) {
-				Object[] cellsRemoved = super.removeCells(cells, includeEdges);
-				Object val;
-				AbstractPipe pipe;
-				for (Object cell : cellsRemoved) {
-					val = ((mxCell) cell).getValue();
-					if (val instanceof AbstractPipe) {
-						pipe = (AbstractPipe) val;
-						pipe.disconnect();
-
-					} else if (val instanceof AbstractTask) {
-						try {
-							rawRemoveTask((AbstractTask) val);
-						} catch (TasksNotInModelException e) {
-							// Do nothing
-						}
-					}
-				}
-				return cellsRemoved;
-			};
-		};
+		graph = new mxPipelineGraph();
 		lay = new mxHierarchicalLayout(graph, SwingConstants.NORTH);
 		lay.setLayoutFromSinks(false);
 	}
-
+	
+	/** 
+	 * Restores the transient fields after deserialisation
+	 * @return
+	 */
+	private Object readResolve(){
+		graph = new mxPipelineGraph();
+		lay = new mxHierarchicalLayout(graph, SwingConstants.NORTH);
+		// Add the old task cells
+		graph.addCells(taskMap.values().toArray());
+		// Add the old pipe cells
+		graph.addCells(pipeMap.values().toArray());
+		lay.setLayoutFromSinks(false);
+		return this;
+	}
+	
+	public void setAll(JGPipelineModel newModel){
+		clean();
+		tasks = newModel.tasks;
+		taskMap = newModel.taskMap;
+		pipeMap = newModel.pipeMap;
+		graph.addCells(taskMap.values().toArray());
+		graph.addCells(pipeMap.values().toArray());
+		setChanged();
+		notifyObservers(tasks.get(0));
+	}
+	
+	/**
+	 * Gets the associated graph
+	 * @return
+	 */
 	public mxGraph getGraph() {
 		return this.graph;
 	}
@@ -261,6 +294,7 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		Object[] cellArray = cells.toArray();
 		// Our subclass of mxGraph handles disconnecting via rawRemoveTask
 		graph.removeCells(cellArray);
+		setChanged();
 	}
 
 	/**

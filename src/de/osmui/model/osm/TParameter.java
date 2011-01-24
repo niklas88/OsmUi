@@ -7,6 +7,7 @@
 
 package de.osmui.model.osm;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -68,10 +69,15 @@ import javax.xml.bind.annotation.XmlType;
     "enumValue"
 })
 public class TParameter
-    extends THasDescription
+    extends THasDescription implements Serializable
 {
 
-    protected List<TEnumValue> enumValue;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6274016364143329348L;
+	
+	protected List<TEnumValue> enumValue;
     @XmlAttribute(required = true)
     protected String name;
     @XmlAttribute

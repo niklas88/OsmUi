@@ -22,10 +22,18 @@
  */
 package de.osmui.io;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import de.osmui.io.exceptions.ExportException;
 import de.osmui.io.exceptions.LoadException;
 import de.osmui.io.exceptions.SaveException;
 import de.osmui.model.pipelinemodel.AbstractPipelineModel;
+import de.osmui.model.pipelinemodel.JGPipelineModel;
 
 public class IO {
 	
@@ -35,17 +43,37 @@ public class IO {
 	private IO() {
 	}
 	
-	public void load (AbstractPipelineModel pipelineModel, String filename) throws LoadException{
-		throw new LoadException("Laden");
+	public JGPipelineModel load (String filename) throws LoadException{
+		try {
+			System.out.println("Load: "+filename);
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename));
+			JGPipelineModel model = (JGPipelineModel) in.readObject();
+			return model;
+		} catch (IOException e){
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public void save (AbstractPipelineModel pipelineModel, String filename,String extension ) throws SaveException{
 		if (!filename.endsWith(extension)) {
-			filename = filename +extension;
+			filename += extension;
 		}
 		
-		//hier muss der gesammte export noch hin
-		throw new SaveException("Speichern");
+		try {
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
+			out.writeObject(pipelineModel);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			throw new SaveException("Speichern FileNotFound");
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new SaveException("Speichern IOExcept");
+		}
+		
 	}
 	
 	// A access method on class level, which creates only once a instance a
