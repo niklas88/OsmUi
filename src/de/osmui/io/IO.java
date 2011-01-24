@@ -29,8 +29,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import com.sun.imageio.plugins.common.I18N;
-
+import de.osmui.i18n.I18N;
 import de.osmui.io.exceptions.ExportException;
 import de.osmui.io.exceptions.LoadException;
 import de.osmui.io.exceptions.SaveException;
@@ -67,11 +66,11 @@ public class IO {
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
 			out.writeObject(pipelineModel);
 		} catch (FileNotFoundException e) {
-			System.out.println("IO.saveFormat");
-			throw new SaveException("IO.saveFormat");
+			e.printStackTrace();
+			throw new SaveException(I18N.getString("IO.saveFormat"));
 		} catch (IOException e) {
-			System.out.println("IO.saveFormat");
-			throw new SaveException("IO.saveSave");
+			e.printStackTrace();
+			throw new SaveException(I18N.getString("IO.saveSave"));
 		}
 		
 	}
