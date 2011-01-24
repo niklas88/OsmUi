@@ -12,7 +12,7 @@
 \usepackage{graphicx}
 \usepackage[pdftex]{hyperref}
 \author{Verena Käfer (2551188), Niklas Schnelle (2573250), Peter Vollmer (2553704)}
-\date{erstellt am 03.01.11\\
+\date{erstellt am 24.01.11\\
 Version: 1.0}
 \title{\includegraphics[width=15cm]{../projektplan/Logo_Osmui.png} \\ 
 Handbuch von OsmUi}
@@ -28,15 +28,18 @@ Handbuch von OsmUi}
 \subsection{Leserkreis}
 Dieses Handbuch richtet sich an alle Benutzer von OsmUi und die, die es werden wollen.
 \subsection{Unterstützte Plattformen}
-OsmUi bestet nur aus Java-Code. Daher läuft es auf allen Java SE kompatiblen Systemen, z.B. Linux oder Windows.
+OsmUi besteht nur aus Java-Code. Daher läuft es auf allen Java SE kompatiblen Systemen, z.B. Linux oder Windows.
 
 
 \section{Download und Installation}
-\subsection{Download des Programms}
 \subsection{Installation und Programmstart}
-OsmUi wird als ausführbares JAR Archiv ausgeliefert, welches direkt ausgeführt werden kann. 
+\subsubsection{Windows}
+Öffnen Sie die OsmUi.exe-Datei per Doppelklick.
+\subsubsection{Linux, etc}
+Begeben Sie sich via Konsole in das Verzeichnis, in dem die OsmUi.jar-Datei liegt. Geben Sie java -jar OsmUi.jar ein. 
 
 \section{Beschreibung des Programms}
+OsmUi ist eine Benutzeroberfläche für das Kommandozeilenwerkzeug Osmosis. Zu diesem Zweck uberträgt OsmUi das abstrakte Pipelinekonzept von Osmosis auf eine grafische Darstellung, welche die gesamte Funktionalität von Osmosis zugänglich macht, dabei aber deutlich benutzerfreundlicher ist. Während bei Osmosis ein langer Kommandozeilenaufruf eine Pipeline zur Verarbeitung von OpenStreetMap Daten beschreibt, soll es mit OsmUi möglich sein, eine Verarbeitungspipeline “zusammen zu klicken”. Hierbei kann die Funktionsweise der einzelnen Tasks sowie deren Interaktion der Benutzeroberfläche von OsmUi entnommen werden.
 
 \section{Anfangsbildschirm}
 Nach dem Start von OsmUi ist immer eine leere Datei zu sehen. Es besteht nun die Möglichkeit entweder eine Datei zu laden/exportieren oder eine neue Pipeline zu erstellen.
@@ -67,7 +70,7 @@ OsmUi kann Pipelines als Aufrufskript im .sh Format für alle Posix Konformen Sy
 
 \section{Pipelinebearbeitung}
 \subsection{neue Pipeline erstellen}
-Um eine neue Pipeline zu erstellen, wählt man \textbf{Datei} $\rightarrow$ \textbf{Neu}. War zuvor eine Pipeline vorhanden, so wird eine neue leere Instanz von OsmUi geöffnet.
+Um eine neue Pipeline zu erstellen, wählt man \textbf{Datei} $\rightarrow$ \textbf{Neu}. War zuvor eine ungespeicherte Pipeline vorhanden, so wird man gefragt, ob sie gespeichert werden soll. 
 \subsection{Task hinzufügen}
 \subsubsection{Input-Tasks}
 Um einen Task ohne Eingäng hinzuzufügen wählt man in der Taskbox den gewünschten Input-Task aus und bestätigt mit dem Button ''Hinzufügen''
@@ -96,7 +99,7 @@ Um OsmUi zu beenden wählt man \textbf{Datei} $\rightarrow$ \textbf{Beenden}.
 
 \section{Versionsgeschichte}
 \begin{itemize}
-\item Version 1.0 - Erstellung des Handbuchs (04.01.11)
+\item Version 1.0 - Erstellung des Handbuchs (24.01.11)
 \end{itemize}
 
 \end{document}

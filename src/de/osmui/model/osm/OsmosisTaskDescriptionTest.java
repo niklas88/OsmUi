@@ -15,6 +15,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * 
+ * @see OsmosisTaskDescription
+ * 
+ */
 package de.osmui.model.osm;
 
 import static org.junit.Assert.assertEquals;
@@ -23,12 +29,6 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-/**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
- * 
- * @see OsmosisTaskDescription
- * 
- */
 public class OsmosisTaskDescriptionTest {
 	
 	@Test public void getTaskGroup(){

@@ -14,6 +14,12 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ *@author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * 
+ * will be tested in the systemtest
+*/
 package de.osmui.io;
 
 import java.awt.datatransfer.Clipboard;
@@ -37,11 +43,6 @@ import de.osmui.ui.MainFrame;
 import de.osmui.util.CommandlineTranslator;
 import de.osmui.util.exceptions.ImportException;
 
-/**
- *@author Niklas Schnelle, Peter Vollmer, Verena käfer
- * 
- * will be tested in the systemtest
-*/
 public class PipeImEx {
 
 	private static PipeImEx instance;

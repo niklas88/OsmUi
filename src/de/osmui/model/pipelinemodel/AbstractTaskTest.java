@@ -21,6 +21,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import de.osmui.model.osm.TParameter;
+
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
@@ -40,8 +42,25 @@ public class AbstractTaskTest {
 		CommonPort port2 = new CommonPort(task, "name");	
 		task.inputPorts.add(port1);
 		task.inputPorts.add(port2);
-		assertEquals("isConnectable", true, task.isConnectable());
+		assertEquals("isConnectable", true, task.isConnectable());		
+	}
+	
+	@Test public void getset(){
+		CommonTask task = new CommonTask("name");	
+		TParameter desc = new TParameter();
+		AbstractParameter p = new IntParameter(desc, "10");
+		task.setDefaultParameter(p);
+		AbstractPipelineModel model = new JGPipelineModel();
+		model.addTask(task);
+		task.setModel(model);
+		task.setName("name");
 		
+		String name = task.getName();
+		AbstractPipelineModel mo = task.getModel();
+		AbstractParameter param = task.getDefaultParameter();
 		
+		assertEquals("name", name);
+		assertEquals(1, mo.getSourceTasks().size());
+		assertEquals("null=10", param.getCommandlineForm());
 	}
 }

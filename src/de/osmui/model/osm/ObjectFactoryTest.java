@@ -14,6 +14,12 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * 
+ * @see ObjectFactory
+ * 
+*/
 
 package de.osmui.model.osm;
 
@@ -23,13 +29,7 @@ import javax.xml.bind.JAXBElement;
 
 import org.junit.Test;
 
-/**
- * 
- * @author verena
- * 
- * @see ObjectFactory
- * 
-*/
+
 public class ObjectFactoryTest {
 	@Test public void createParameter(){
 		TParameter value = null;

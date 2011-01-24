@@ -16,7 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 /**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
+ * no tests, only getter and setter
  */
 package de.osmui.ui.renderers;
 
@@ -34,16 +36,14 @@ import de.osmui.i18n.I18N;
 import de.osmui.model.pipelinemodel.AbstractParameter;
 import de.osmui.model.pipelinemodel.IntParameter;
 
-/**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
- * 
- * no tests, only getter and setter
- */
+
 public class DefaultParamEditor  extends AbstractCellEditor
 			implements TableCellEditor, ActionListener{
 
 	/**
+	 * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
 	 * 
+	 * no tests only getter and setter
 	 */
 	private static final long serialVersionUID = -7189134812752397954L;
 

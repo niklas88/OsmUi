@@ -28,10 +28,20 @@ import org.junit.Test;
  * @see I18N
  * 
  */
+
+package de.osmui.i18n;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+import javax.swing.JMenu;
+
 public class I18NTest {
 	@Test public void get (){
 		Object values = null;
-		JMenu fileMenu = new JMenu(I18N.getString("Menu.file", values));
+		JMenu fileMenu = new JMenu(I18N.getString("Menu.file"));
+		assertEquals("getString: ", fileMenu.getActionCommand(), "Datei");
+		
+		fileMenu = new JMenu(I18N.getString("Menu.file", values));
 		assertEquals("getString: ", fileMenu.getActionCommand(), "Datei");
 		};
 }

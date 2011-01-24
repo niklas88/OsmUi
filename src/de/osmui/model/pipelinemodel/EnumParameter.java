@@ -30,6 +30,7 @@ import de.osmui.model.osm.TParameter;
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
+ *@see EnumParameterTest
  */
 public class EnumParameter extends AbstractParameter {
 
@@ -61,7 +62,7 @@ public class EnumParameter extends AbstractParameter {
 	}
 
 	/**
-	 * Returns a list of all possible values for this parameter
+	 * Returns a list of all possible valuevalues for this parameter
 	 * @param tryFriendly
 	 * @return
 	 */

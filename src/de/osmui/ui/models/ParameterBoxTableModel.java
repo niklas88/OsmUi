@@ -30,7 +30,7 @@ public class ParameterBoxTableModel extends AbstractTableModel {
 	/**
 	 * @author Niklas Schnelle, Peter Vollmer, Verena käfer
 	 * 
-	 *  will be tested by system-tests
+	 * no tests, only getter and setter
 	 */
 	private static final long serialVersionUID = 6247700341831278770L;
 

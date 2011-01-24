@@ -27,7 +27,7 @@ import de.osmui.model.osm.TParameter;
  * 
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *
- * no tests, only getter and setter
+ * @see IntParameterTest
  * 
  */
 public class IntParameter extends AbstractParameter {
