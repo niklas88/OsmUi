@@ -20,10 +20,18 @@ package de.osmui.ui;
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Observable;
+import java.util.Observer;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 
+import de.osmui.i18n.I18N;
+import de.osmui.io.IO;
+import de.osmui.io.IOFilter;
+import de.osmui.io.exceptions.SaveException;
 import de.osmui.model.pipelinemodel.JGPipelineModel;
 import de.osmui.ui.models.ParameterBoxTableModel;
 import de.osmui.ui.models.TaskBoxTableModel;
@@ -39,7 +47,7 @@ import de.osmui.util.ConfigurationManager;
  * 
  */
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements Observer{
 
 	/**
 	 * 
@@ -48,6 +56,8 @@ public class MainFrame extends JFrame {
 
 	private static MainFrame instance;
 
+	protected IOFilter ioFilter;
+	
 	protected ConfigurationManager configurationManager;
 
 	protected TaskBoxTableModel taskBoxTableModel;
@@ -71,6 +81,41 @@ public class MainFrame extends JFrame {
 	protected boolean saved;
 	
 	protected String savePath;
+	
+	protected Boolean save(String systemSavePath) {
+		String savePath = systemSavePath;
+		String extension = "";
+		if (savePath == "") {
+			JFileChooser chooser = new JFileChooser();
+			chooser.addChoosableFileFilter(ioFilter);
+			chooser.setFileFilter(ioFilter);
+			chooser.setAcceptAllFileFilterUsed(false);
+			int returnVal = chooser.showSaveDialog(null);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				if (chooser.getSelectedFile().exists()) {
+					if (JOptionPane.showConfirmDialog(MainFrame.getInstance(),
+							I18N.getString("Menu.overwriteWarnQuestion"),
+							I18N.getString("Menu.overwriteWarnQuestionTitle"),
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
+						return false;
+					}
+
+				}
+			} else {
+				return false;
+			}
+		}
+		try {
+			IO.getInstance().save(MainFrame.getInstance().pipeModel, savePath,
+					extension);
+		} catch (SaveException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+		}
+		MainFrame.getInstance().savePath = savePath;
+		MainFrame.getInstance().saved = true;
+		return true;
+	}
 	
 	/**
 	 * Constructs the mainframe
@@ -115,6 +160,7 @@ public class MainFrame extends JFrame {
 		Menu menu = new Menu();
 		this.setJMenuBar(menu);
 		
+		ioFilter = new IOFilter();
 		saved = true;
 		savePath = "";
 		
@@ -123,22 +169,23 @@ public class MainFrame extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				
-				writePrefs();				
-				configurationManager.saveConfiguration();
-				System.exit(0);
+				shutdown();				
+
 			}
 
 		});
 
 	}
 	
-	public void writePrefs(){
+	public void shutdown(){
 		configurationManager.setEntry("MainFrameWidth", this.getSize().width);
 		configurationManager.setEntry("MainFrameHeight", this.getSize().height);
 		configurationManager.setEntry("MainFrameXLocation", this.getLocation().x);
 		configurationManager.setEntry("MainFrameYLocation", this.getLocation().y);
 		configurationManager.setEntry("ContentDividerLocation", content.getDividerLocation());
 		configurationManager.setEntry("RightContentDividerLocation", rightContent.getDividerLocation());
+		configurationManager.saveConfiguration();
+		System.exit(0);
 	}
 
 	/**
@@ -224,6 +271,12 @@ public class MainFrame extends JFrame {
 	public void setSavePath(String savePath) {
 		this.savePath = savePath;
 	}
+	
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		saved = false;
+		
+	}
 
 	// A access method on class level, which creates only once a instance a
 	// concrete object
@@ -238,5 +291,7 @@ public class MainFrame extends JFrame {
 		}
 		return MainFrame.instance;
 	}
+
+
 
 }
