@@ -157,6 +157,10 @@ public class TaskManager {
 			} else if (paramDesc.getType().equals("enum")) {
 				newParameter = new EnumParameter(paramDesc,
 						paramDesc.getDefaultValue());
+			} else if (paramDesc.getType().equals("filename")) {
+				newParameter = new FileParameter(paramDesc,
+						paramDesc.getDefaultValue());
+				
 			} else if (paramDesc.getType().equals("bbox")) {
 				if(newTask.getName().equals("dataset-bounding-box")){
 					// Needs a short form BoundingBox
