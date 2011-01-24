@@ -68,7 +68,7 @@ public class MainFrame extends JFrame {
 
 	protected CopyBox copyBox;
 	
-	protected Boolean saved;
+	protected boolean saved;
 	
 	protected String savePath;
 	
@@ -200,14 +200,14 @@ public class MainFrame extends JFrame {
 	/**
 	 * @return the pipeModel
 	 */
-	public Boolean getSaved() {
+	public boolean getSaved() {
 		return saved;
 	}
 
 	/**
 	 * @param saved to set saved to
 	 */
-	public void setSaved(Boolean saved) {
+	public void setSaved(boolean saved) {
 		this.saved = saved;
 	}
 

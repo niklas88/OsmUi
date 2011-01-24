@@ -38,7 +38,7 @@ public abstract class AbstractParameter implements Serializable{
 	private static final long serialVersionUID = 7146601864666521078L;
 
 	protected String name;
-	protected transient TParameter description;
+	protected TParameter description;
 	
 	
 	public AbstractParameter(TParameter desc, String value){

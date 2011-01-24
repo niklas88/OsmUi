@@ -39,6 +39,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+
+import de.osmui.util.CommandlineTranslator;
 import de.osmui.util.exceptions.ImportException;
 import de.osmui.i18n.I18N;
 import de.osmui.io.IO;
@@ -49,6 +51,7 @@ import de.osmui.io.PipeImExShFilter;
 import de.osmui.io.exceptions.ExportException;
 import de.osmui.io.exceptions.LoadException;
 import de.osmui.io.exceptions.SaveException;
+import de.osmui.model.pipelinemodel.JGPipelineModel;
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
@@ -141,10 +144,9 @@ public class Menu extends JMenuBar {
 				int returnVal = chooser.showOpenDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					try {
-						MainFrame.getInstance().pipeModel.clean();
-						IO.getInstance().load(
-								MainFrame.getInstance().pipeModel,
+						JGPipelineModel loaded =  IO.getInstance().load(
 								chooser.getSelectedFile().getAbsolutePath());
+						MainFrame.getInstance().pipeModel.setAll(loaded);
 					} catch (LoadException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
@@ -272,7 +274,6 @@ public class Menu extends JMenuBar {
 							MainFrame.getInstance().pipeModel,
 							Toolkit.getDefaultToolkit().getSystemClipboard());
 				} catch (HeadlessException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (ImportException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
@@ -489,7 +490,7 @@ public class Menu extends JMenuBar {
 		this.add(helpMenu);
 	}
 
-	private Boolean save(String systemSavePath) {
+	private boolean save(String systemSavePath) {
 		String savePath = systemSavePath;
 		String extension = "";
 		if (savePath == "") {
@@ -512,15 +513,18 @@ public class Menu extends JMenuBar {
 			} else {
 				return false;
 			}
+			savePath = chooser.getSelectedFile().getAbsolutePath();
+			extension = chooser.getFileFilter().getDescription();
 		}
 		try {
 			IO.getInstance().save(MainFrame.getInstance().pipeModel, savePath,
 					extension);
+			MainFrame.getInstance().savePath = savePath;
+			MainFrame.getInstance().saved = true;
 		} catch (SaveException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}
-		MainFrame.getInstance().savePath = savePath;
-		MainFrame.getInstance().saved = true;
+		
 		return true;
 	}
 }
