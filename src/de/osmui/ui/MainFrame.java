@@ -82,8 +82,6 @@ public class MainFrame extends JFrame implements Observer {
 
 	protected String savePath;
 
-	
-
 	/**
 	 * Constructs the mainframe
 	 */
@@ -194,7 +192,8 @@ public class MainFrame extends JFrame implements Observer {
 							JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
 						return false;
 					}
-
+					savePath = chooser.getSelectedFile().getAbsolutePath();
+					extension = chooser.getFileFilter().getDescription();
 				}
 			} else {
 				return false;
@@ -210,7 +209,7 @@ public class MainFrame extends JFrame implements Observer {
 		MainFrame.getInstance().setSaved(true);
 		return true;
 	}
-	
+
 	/**
 	 * @return the pipeModel.
 	 */
