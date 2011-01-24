@@ -175,6 +175,11 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		tasks = newModel.tasks;
 		taskMap = newModel.taskMap;
 		pipeMap = newModel.pipeMap;
+		// We need to set this model as the associated model 
+		// for all tasks
+		for(AbstractTask task : tasks){
+			task.setModel(this);
+		}
 		graph.addCells(taskMap.values().toArray());
 		graph.addCells(pipeMap.values().toArray());
 		setChanged();
