@@ -233,6 +233,7 @@ public class Menu extends JMenuBar {
 								MainFrame.getInstance().pipeModel,
 								chooser.getSelectedFile().getAbsolutePath());
 					} catch (ImportException e1) {
+						System.out.println(e1.getMessage());
 						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					MainFrame.getInstance().pipeModel.layout(null);
