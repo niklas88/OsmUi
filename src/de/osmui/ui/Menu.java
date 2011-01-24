@@ -142,6 +142,7 @@ public class Menu extends JMenuBar {
 				}
 				JFileChooser chooser = new JFileChooser();
 				chooser.addChoosableFileFilter(MainFrame.getInstance().ioFilter);
+				chooser.setFileFilter(MainFrame.getInstance().ioFilter);
 				chooser.setAcceptAllFileFilterUsed(false);
 				int returnVal = chooser.showOpenDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
