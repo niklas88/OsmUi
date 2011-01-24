@@ -374,7 +374,7 @@ public class Menu extends JMenuBar {
 //		JMenuItem redo = new JMenuItem(I18N.getString("Menu.redo")); //$NON-NLS-1$
 //		redo.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
-//				System.out.println("redo"); //$NON-NLS-1$
+//				System.out.println("redo"); //$NON-NLS-1$s
 //			}
 //		});
 //		editMenu.add(redo);
