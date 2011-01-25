@@ -55,9 +55,7 @@ public class CommandlineTranslatorTest {
 			assertEquals(1, model.getSourceTasks().size());
 			
 		} catch (ImportException e) {
-			e.printStackTrace();
 		} catch (ParseException e) {
-			e.printStackTrace();
 		}
 	}
 	
@@ -81,9 +79,7 @@ public class CommandlineTranslatorTest {
 					"AUTO9to10 inPipe.1=AUTO12to12 inPipe.2=AUTO13to11 ", '\\');
 			
 		} catch (ImportException e) {
-			e.printStackTrace();
 		} catch (ParseException e) {
-			e.printStackTrace();
 		}
 	}
 }
