@@ -60,6 +60,8 @@ public class PipeImEx {
 			String fileName) throws ImportException {
 
 		BufferedReader reader = null;
+		char escapeChar = (fileName.endsWith(".bat"))? '^' : '\\';
+		
 		try {
 			reader = new BufferedReader(new InputStreamReader(
 					new FileInputStream(fileName), Charset.forName("UTF-8")));
@@ -71,16 +73,22 @@ public class PipeImEx {
 				if (toParse == null) {
 					if ((indexOfBegin = row.indexOf("--")) != -1) {
 						toParse = new StringBuilder(row.substring(indexOfBegin));
+						// Add the newline back, removed by readLine
+						// This helps the translator deal with escapes
+						toParse.append('\n');
 					}
 				} else {
 					toParse.append(row);
+					// Add the newline back, removed by readLine
+					// This helps the translator deal with escapes
+					toParse.append('\n');
 				}
 			}
 
 			if (toParse != null) {
 				CommandlineTranslator trans = CommandlineTranslator
 						.getInstance();
-				trans.importLine(pipelineModel, toParse.toString());
+				trans.importLine(pipelineModel, toParse.toString(), escapeChar);
 			} else {
 				throw new ImportException(
 						I18N.getString("PipeImEx.noImportablePipeFoundFile"));
@@ -134,7 +142,7 @@ public class PipeImEx {
 			if (toParse != null) {
 				CommandlineTranslator trans = CommandlineTranslator
 						.getInstance();
-				trans.importLine(pipelineModel, toParse.toString());
+				trans.importLine(pipelineModel, toParse.toString(), '\\');
 			} else {
 				throw new ImportException(
 						I18N.getString("PipeImEx.noImportablePipeFoundClipboard"));

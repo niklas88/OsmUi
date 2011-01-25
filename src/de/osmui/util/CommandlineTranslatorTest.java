@@ -54,7 +54,7 @@ public class CommandlineTranslatorTest {
 					".0=AUTO10to7 outPipe.0=AUTO12to12 --sort-" +
 					"change inPipe.0=AUTO8to6 outPipe.0=AUTO9to" +
 					"10 --append-change sourceCount=3 inPipe.0=" +
-					"AUTO9to10 inPipe.1=AUTO12to12 inPipe.2=AUTO13to11 ");
+					"AUTO9to10 inPipe.1=AUTO12to12 inPipe.2=AUTO13to11 ", '\\');
 			
 			String testen = trans.exportLine(model, "");
 			assertEquals(1, model.getSourceTasks().size());
@@ -82,7 +82,7 @@ public class CommandlineTranslatorTest {
 					".0=AUTO10to7 outPipe.0=AUTO12to12 --sort-" +
 					"change inPipe.0=AUTO8to6 outPipe.0=AUTO9to" +
 					"10 --append-change sourceCount=3 inPipe.0=" +
-					"AUTO9to10 inPipe.1=AUTO12to12 inPipe.2=AUTO13to11 ");
+					"AUTO9to10 inPipe.1=AUTO12to12 inPipe.2=AUTO13to11 ", '\\');
 			
 		} catch (ImportException e) {
 			// TODO Auto-generated catch block

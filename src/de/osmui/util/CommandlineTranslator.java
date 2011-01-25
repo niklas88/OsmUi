@@ -277,11 +277,13 @@ public class CommandlineTranslator {
 	 * @param line
 	 * @throws ImportException
 	 */
-	public void importLine(AbstractPipelineModel model, String line)
+	public void importLine(AbstractPipelineModel model, String line, char escapeChar)
 
 	throws ImportException {
-		Scanner st = new Scanner(line);
-		st.useDelimiter("[ \\t\\r\\n\\f\\\\]+");
+		//Scanner st = new Scanner(line);
+		//st.useDelimiter("[ \\t\\r\\n\\f\\\\]+");
+		char[] quoteChars = {'\'', '"'};
+		CommandlineSplitter st = new CommandlineSplitter(line, quoteChars , escapeChar);
 
 		// Stack for unnamed pipes
 		Stack<AbstractPipe> pipeStack = new Stack<AbstractPipe>();
@@ -294,7 +296,6 @@ public class CommandlineTranslator {
 
 		while (st.hasNext()) {
 			currToken = st.next();
-			// System.out.println(currToken);
 			if (currToken.startsWith("--")) {
 				// Ok we got a new task:
 				// If currTask != null this wasn't the first task and the last
