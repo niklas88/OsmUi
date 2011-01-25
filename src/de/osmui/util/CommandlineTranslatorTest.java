@@ -19,6 +19,7 @@ package de.osmui.util;
 
 import static org.junit.Assert.assertEquals;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +63,8 @@ public class CommandlineTranslatorTest {
 		} catch (ImportException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -86,6 +89,8 @@ public class CommandlineTranslatorTest {
 			
 		} catch (ImportException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 	}

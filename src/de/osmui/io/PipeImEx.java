@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
+import java.text.ParseException;
 
 import de.osmui.i18n.I18N;
 import de.osmui.io.exceptions.ExportException;
@@ -57,7 +58,7 @@ public class PipeImEx {
 	 * @throws ImportException
 	 */
 	public void importOutOfFile(AbstractPipelineModel pipelineModel,
-			String fileName) throws ImportException {
+			String fileName) throws ImportException, ParseException {
 
 		BufferedReader reader = null;
 		char escapeChar = (fileName.endsWith(".bat"))? '^' : '\\';
@@ -116,7 +117,7 @@ public class PipeImEx {
 	 * @throws ImportException
 	 */
 	public void importClipBoard(AbstractPipelineModel pipelineModel,
-			Clipboard clipBoardToParse) throws ImportException {
+			Clipboard clipBoardToParse) throws ImportException, ParseException {
 		try {
 			StringBuilder toParse = null;
 			Transferable transferData = clipBoardToParse.getContents(null);
@@ -140,6 +141,14 @@ public class PipeImEx {
 
 			}
 			if (toParse != null) {
+				// Remove \r from DOS line endings
+				char currChar;
+				for(int pos=0; pos < toParse.length(); ++pos){
+					currChar = toParse.charAt(pos);
+					if(currChar == '\r'){
+						toParse.deleteCharAt(pos);
+					}
+				}
 				CommandlineTranslator trans = CommandlineTranslator
 						.getInstance();
 				trans.importLine(pipelineModel, toParse.toString(), '\\');

@@ -20,6 +20,7 @@
  */
 package de.osmui.util;
 
+import java.text.ParseException;
 import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -276,10 +277,11 @@ public class CommandlineTranslator {
 	 * @param model
 	 * @param line
 	 * @throws ImportException
+	 * @throws ParseException 
 	 */
 	public void importLine(AbstractPipelineModel model, String line, char escapeChar)
 
-	throws ImportException {
+	throws ImportException, ParseException {
 		//Scanner st = new Scanner(line);
 		//st.useDelimiter("[ \\t\\r\\n\\f\\\\]+");
 		char[] quoteChars = {'\'', '"'};

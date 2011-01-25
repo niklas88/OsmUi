@@ -5,6 +5,8 @@ package de.osmui.util;
 
 import java.text.ParseException;
 
+import de.osmui.i18n.I18N;
+
 /**
  * This class is used to split an osmosis command line into tokens, while
  * dealing with shell escapes
@@ -63,8 +65,10 @@ public class CommandlineSplitter {
 			switch (state) {
 			case normal: {
 				if (Character.isWhitespace(currChar)) {
-					pos++;
-					return true;
+					if(sb.length() > 0){
+						pos++;
+						return true;
+					}
 				} else if (currChar == escapeChar) {
 					state = State.afterEscape;
 				} else if (isQuoteChar(currChar)) {
@@ -85,12 +89,14 @@ public class CommandlineSplitter {
 			}
 				break;
 			case afterEscape: {
-				// Somehow DOS can escape two at once for line endings,
-				// this isn't nice but should work
-				if(currChar == '\r' || currChar == '\n'){
+				// At line breaks args are split even when
+				// escaped
+				if(currChar == '\n'){
 					state = State.normal;
-					pos++;
-					return true;
+					if(sb.length() > 0){
+						pos++;
+						return true;
+					}
 				} else {
 					sb.append(currChar);
 					state = State.normal;
@@ -107,14 +113,12 @@ public class CommandlineSplitter {
 		return true;
 	}
 
-	public String next() {//throws ParseException {
+	public String next() throws ParseException {
 		String ret;
-		do{
-			ret = sb.toString();
-			if(!readOn()){
-				//throw new ParseException("Error", pos);
-			}
-		} while (ret.length() == 0);
+		ret = sb.toString();
+		if(!readOn()){
+			throw new ParseException(I18N.getString("CommandlineSplitter.Error",currChar), pos);
+		}
 		return ret;
 	}
 
