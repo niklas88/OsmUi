@@ -65,7 +65,7 @@ public class CommandlineSplitter {
 			switch (state) {
 			case normal: {
 				if (Character.isWhitespace(currChar)) {
-					if(sb.length() > 0){
+					if (sb.length() > 0) {
 						pos++;
 						return true;
 					}
@@ -91,9 +91,9 @@ public class CommandlineSplitter {
 			case afterEscape: {
 				// At line breaks args are split even when
 				// escaped
-				if(currChar == '\n'){
+				if (currChar == '\n') {
 					state = State.normal;
-					if(sb.length() > 0){
+					if (sb.length() > 0) {
 						pos++;
 						return true;
 					}
@@ -107,17 +107,18 @@ public class CommandlineSplitter {
 			case dead:
 				return false;
 			}
-			
+
 			pos++;
 		}
-		return true;
+		return (state != State.normal)? false: true;
 	}
 
 	public String next() throws ParseException {
 		String ret;
 		ret = sb.toString();
-		if(!readOn()){
-			throw new ParseException(I18N.getString("CommandlineSplitter.Error",currChar), pos);
+		if (!readOn()) {
+			throw new ParseException(I18N.getString(
+					"CommandlineSplitter.Error", lastQuoteChar), pos);
 		}
 		return ret;
 	}
