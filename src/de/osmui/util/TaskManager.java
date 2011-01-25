@@ -31,11 +31,25 @@ import javax.xml.bind.Unmarshaller;
 
 import de.osmui.model.osm.OsmosisTaskDescription;
 import de.osmui.model.osm.TParameter;
+import de.osmui.model.osm.TPipe;
 import de.osmui.model.osm.TTask;
 import de.osmui.model.osm.TTaskGroup;
-import de.osmui.model.osm.TPipe;
-
-import de.osmui.model.pipelinemodel.*;
+import de.osmui.model.pipelinemodel.AbstractPipe;
+import de.osmui.model.pipelinemodel.AbstractPort;
+import de.osmui.model.pipelinemodel.AbstractTask;
+import de.osmui.model.pipelinemodel.CommonPipe;
+import de.osmui.model.pipelinemodel.CommonPort;
+import de.osmui.model.pipelinemodel.CommonTask;
+import de.osmui.model.pipelinemodel.VariablePipe;
+import de.osmui.model.pipelinemodel.VariablePort;
+import de.osmui.model.pipelinemodel.parameters.AbstractParameter;
+import de.osmui.model.pipelinemodel.parameters.BBoxPseudoParameter;
+import de.osmui.model.pipelinemodel.parameters.BooleanParameter;
+import de.osmui.model.pipelinemodel.parameters.DirParameter;
+import de.osmui.model.pipelinemodel.parameters.EnumParameter;
+import de.osmui.model.pipelinemodel.parameters.FileParameter;
+import de.osmui.model.pipelinemodel.parameters.IntParameter;
+import de.osmui.model.pipelinemodel.parameters.OtherParameter;
 import de.osmui.util.exceptions.TaskNameUnknownException;
 
 /**
@@ -160,7 +174,9 @@ public class TaskManager {
 			} else if (paramDesc.getType().equals("filename")) {
 				newParameter = new FileParameter(paramDesc,
 						paramDesc.getDefaultValue());
-				
+			} else if (paramDesc.getType().equals("directory")){
+				newParameter = new DirParameter(paramDesc,
+						paramDesc.getDefaultValue());
 			} else if (paramDesc.getType().equals("bbox")) {
 				if(newTask.getName().equals("dataset-bounding-box")){
 					// Needs a short form BoundingBox

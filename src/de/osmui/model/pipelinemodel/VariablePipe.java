@@ -20,6 +20,8 @@
  */
 package de.osmui.model.pipelinemodel;
 
+import de.osmui.model.pipelinemodel.parameters.IntParameter;
+
 /**
  * This class implements a variable pipe, that is a pipe that when already connected clones itself
  * and sets up the connection with the clone, it also needs to adjust the task parameter indicating

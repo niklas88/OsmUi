@@ -19,6 +19,7 @@ package de.osmui.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -43,7 +44,7 @@ import de.osmui.ui.events.TaskSelectedEventListener;
  * 
  */
 
-public class PipelineBox extends mxGraphComponent implements Observer {
+public class PipelineBox extends mxGraphComponent implements Observer, MouseListener {
 
 	/**
 	 * 
@@ -65,6 +66,8 @@ public class PipelineBox extends mxGraphComponent implements Observer {
 		this.graph.setCellsResizable(false);
 		this.graph.setEdgeLabelsMovable(false);
 		this.graph.setDropEnabled(false);
+		
+		this.getGraphControl().addMouseListener(this);
 
 		this.setAutoExtend(true);
 		this.setAntiAlias(true);
@@ -102,7 +105,8 @@ public class PipelineBox extends mxGraphComponent implements Observer {
 		});
 
 	}
-
+	
+		
 	@Override
 	public void selectCellForEvent(Object cell, MouseEvent e) {
 		super.selectCellForEvent(cell, e);
@@ -153,5 +157,31 @@ public class PipelineBox extends mxGraphComponent implements Observer {
 		}
 
 	}
+
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		if(getCellAt(arg0.getX(), arg0.getY()) == null){
+			fireTaskSelected(null);
+		}		
+	}
+	
+	// Need to specify the following methods but don't care 
+	// for the events so do nothing
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {}
+
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {}
+
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {}
+
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {}
 
 }

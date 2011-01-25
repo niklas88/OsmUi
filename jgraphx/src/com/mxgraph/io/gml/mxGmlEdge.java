@@ -4,12 +4,14 @@
  */
 package com.mxgraph.io.gml;
 
-import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import com.mxgraph.util.mxConstants;
 
 /**
  * Represents a Data element in the GML Structure.

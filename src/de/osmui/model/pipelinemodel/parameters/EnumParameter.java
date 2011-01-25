@@ -18,14 +18,14 @@
 /**
  * 
  */
-package de.osmui.model.pipelinemodel;
+package de.osmui.model.pipelinemodel.parameters;
 
 
 import java.util.List;
 
+import de.osmui.i18n.I18N;
 import de.osmui.model.osm.TEnumValue;
 import de.osmui.model.osm.TParameter;
-import de.osmui.i18n.*;
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer

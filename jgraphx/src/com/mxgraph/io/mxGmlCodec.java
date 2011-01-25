@@ -4,6 +4,13 @@
  */
 package com.mxgraph.io;
 
+import java.util.HashMap;
+import java.util.List;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
 import com.mxgraph.io.gml.mxGmlConstants;
 import com.mxgraph.io.gml.mxGmlData;
 import com.mxgraph.io.gml.mxGmlEdge;
@@ -20,14 +27,8 @@ import com.mxgraph.util.mxPoint;
 import com.mxgraph.util.mxUtils;
 import com.mxgraph.view.mxCellState;
 import com.mxgraph.view.mxConnectionConstraint;
-
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxGraphView;
-import java.util.HashMap;
-import java.util.List;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 /**
  * Parses a GraphML .graphml file and imports it in the given graph.<br/>

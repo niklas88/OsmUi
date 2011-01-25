@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.osmui.ui.renderers;
 
 import java.awt.Component;
@@ -12,24 +9,25 @@ import javax.swing.JFileChooser;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 
-import de.osmui.model.pipelinemodel.parameters.FileParameter;
+import de.osmui.model.pipelinemodel.parameters.DirParameter;
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
- *
+ * 
  */
-public class FileParamEditor extends AbstractCellEditor implements
+
+public class DirParamEditor extends AbstractCellEditor implements
 		TableCellEditor, ActionListener {
 
 	/**
-	 * 
-	 */
+ * 
+ */
 	private static final long serialVersionUID = -7892064790758688299L;
 
 	private TextFieldAndButton textFieldButton;
-	private FileParameter param;
-
-	public FileParamEditor() {
+	private DirParameter param;
+	
+	public DirParamEditor() {
 		textFieldButton = new TextFieldAndButton();
 		textFieldButton.getButton().setText("...");
 		textFieldButton.getButton().addActionListener(this);
@@ -48,7 +46,11 @@ public class FileParamEditor extends AbstractCellEditor implements
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == textFieldButton.getButton()) {
 			JFileChooser chooser = new JFileChooser();
-			int returnVal = chooser.showSaveDialog(null);
+			chooser.addChoosableFileFilter(new DirFileFilter());
+			chooser.setFileFilter(new DirFileFilter());
+			chooser.setAcceptAllFileFilterUsed(false);
+			chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			int returnVal = chooser.showOpenDialog(null);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				textFieldButton.getTextField().setText(
 						chooser.getSelectedFile().getAbsolutePath());
@@ -60,7 +62,7 @@ public class FileParamEditor extends AbstractCellEditor implements
 	@Override
 	public Component getTableCellEditorComponent(JTable table, Object value,
 			boolean isSelected, int row, int column) {
-		param = (FileParameter) value;
+		param = (DirParameter) value;
 		textFieldButton.getTextField().setText(param.getValue());
 		return textFieldButton;
 	}

@@ -13,7 +13,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 /**
  * 
@@ -24,21 +24,21 @@ import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
-import java.util.Scanner;
 
 import de.osmui.i18n.I18N;
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
-import de.osmui.model.pipelinemodel.AbstractParameter;
-import de.osmui.model.pipelinemodel.AbstractPipelineModel;
 import de.osmui.model.pipelinemodel.AbstractPipe;
+import de.osmui.model.pipelinemodel.AbstractPipelineModel;
 import de.osmui.model.pipelinemodel.AbstractPort;
 import de.osmui.model.pipelinemodel.AbstractTask;
-import de.osmui.model.pipelinemodel.IntParameter;
 import de.osmui.model.pipelinemodel.VariablePipe;
 import de.osmui.model.pipelinemodel.VariablePort;
+import de.osmui.model.pipelinemodel.parameters.AbstractParameter;
+import de.osmui.model.pipelinemodel.parameters.IntParameter;
 import de.osmui.util.exceptions.ImportException;
 import de.osmui.util.exceptions.TaskNameUnknownException;
 
@@ -97,7 +97,7 @@ public class CommandlineTranslator {
 				pipeStack.push(pipe);
 			} else {
 				pipeMap.put(pipe.getName(), pipe);
-				// If the pipe name starts with "AUTO" we don't need this auto 
+				// If the pipe name starts with "AUTO" we don't need this auto
 				// generated name anymore
 				pipe.setName(null);
 			}
@@ -222,17 +222,21 @@ public class CommandlineTranslator {
 			pipeNum = Integer.parseInt(paramName.substring(7));
 			// Check if the pipeNum exists
 			if (pipeNum >= currTask.getInputPorts().size()) {
-				throw new ImportException(
-						I18N.getString("CommandlineTranslatorPipe.indexInPipeNotExist",currToken));
+				throw new ImportException(I18N.getString(
+						"CommandlineTranslatorPipe.indexInPipeNotExist",
+						currToken));
 			}
 			pipe = pipeMap.remove(paramValue);
 			if (pipe == null) {
-				throw new ImportException(I18N.getString("CommandlineTranslator.unknownPipe",paramValue));
+				throw new ImportException(I18N.getString(
+						"CommandlineTranslator.unknownPipe", paramValue));
 			}
 			try {
 				model.connectTasks(pipe, currTask.getInputPorts().get(pipeNum));
 			} catch (TasksNotCompatibleException e) {
-				throw new ImportException(I18N.getString("CommandlineTranslatorTried.incompatibleTask",currTask.getCommandlineForm()));
+				throw new ImportException(I18N.getString(
+						"CommandlineTranslatorTried.incompatibleTask",
+						currTask.getCommandlineForm()));
 			} catch (TasksNotInModelException e) {
 				// Failure in program logic task should be added
 				e.printStackTrace();
@@ -244,14 +248,19 @@ public class CommandlineTranslator {
 			pipeNum = Integer.parseInt(paramName.substring(8));
 			// Check if the pipeNum exists
 			if (pipeNum >= currTask.getOutputPipes().size()) {
-				throw new ImportException(I18N.getString("CommandlineTranslator.indexOutPipeNotExist",currToken));
+				throw new ImportException(
+						I18N.getString(
+								"CommandlineTranslator.indexOutPipeNotExist",
+								currToken));
 			}
 			currTask.getOutputPipes().get(pipeNum).setName(paramValue);
 		} else {
 			// This is a named parameter
 			param = currTask.getParameters().get(paramName);
 			if (param == null) {
-				throw new ImportException(I18N.getString("CommandlineTranslator.unknownParameter",paramName,currTask.getName()));
+				throw new ImportException(I18N.getString(
+						"CommandlineTranslator.unknownParameter", paramName,
+						currTask.getName()));
 			}
 			handleParam(currTask, param, paramValue);
 		}
@@ -268,12 +277,13 @@ public class CommandlineTranslator {
 	 * @param line
 	 * @throws ImportException
 	 */
-	public void importLine(AbstractPipelineModel model, String line)
+	public void importLine(AbstractPipelineModel model, String line, char escapeChar)
 
 	throws ImportException {
-		// StringTokenizer st = new StringTokenizer(line, " \n\r\f\t");
-		Scanner st = new Scanner(line);
-		st.useDelimiter("[ \\t\\r\\n\\f\\\\]+");
+		//Scanner st = new Scanner(line);
+		//st.useDelimiter("[ \\t\\r\\n\\f\\\\]+");
+		char[] quoteChars = {'\'', '"'};
+		CommandlineSplitter st = new CommandlineSplitter(line, quoteChars , escapeChar);
 
 		// Stack for unnamed pipes
 		Stack<AbstractPipe> pipeStack = new Stack<AbstractPipe>();
@@ -286,7 +296,6 @@ public class CommandlineTranslator {
 
 		while (st.hasNext()) {
 			currToken = st.next();
-			// System.out.println(currToken);
 			if (currToken.startsWith("--")) {
 				// Ok we got a new task:
 				// If currTask != null this wasn't the first task and the last
@@ -301,7 +310,8 @@ public class CommandlineTranslator {
 				// Not a task must be parameter or pipe, the currTask must be
 				// non null or else something's wrong
 				if (currTask == null) {
-					throw new ImportException(I18N.getString("CommandlineTranslator.noParamBeforeFirstTask"));
+					throw new ImportException(
+							I18N.getString("CommandlineTranslator.noParamBeforeFirstTask"));
 				}
 				handleParamOrPipe(model, currTask, pipeMap, currToken);
 			}
@@ -328,7 +338,8 @@ public class CommandlineTranslator {
 	 * @param fin
 	 * @param sb
 	 * @param task
-	 * @param lineSep the line separator e.g. "\\\n" for .sh use "" for single line
+	 * @param lineSep
+	 *            the line separator e.g. "\\\n" for .sh use "" for single line
 	 */
 	private void exportTask(Stack<AbstractTask> unfin, Set<AbstractTask> fin,
 			StringBuilder sb, AbstractTask task, String lineSep) {

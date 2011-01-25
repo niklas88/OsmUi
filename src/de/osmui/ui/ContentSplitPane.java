@@ -19,7 +19,6 @@ package de.osmui.ui;
 
 
 import javax.swing.JComponent;
-
 import javax.swing.JSplitPane;
 
 /**

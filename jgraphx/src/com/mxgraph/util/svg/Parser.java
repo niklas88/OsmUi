@@ -18,7 +18,6 @@
  */
 package com.mxgraph.util.svg;
 
-import java.io.Reader;
 
 /**
  * This interface represents a parser.

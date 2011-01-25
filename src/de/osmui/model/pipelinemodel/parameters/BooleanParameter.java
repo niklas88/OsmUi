@@ -18,7 +18,7 @@
 /**
  * 
  */
-package de.osmui.model.pipelinemodel;
+package de.osmui.model.pipelinemodel.parameters;
 
 import de.osmui.model.osm.TParameter;
 

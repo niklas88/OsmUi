@@ -27,7 +27,7 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
 import de.osmui.i18n.I18N;
-import de.osmui.model.pipelinemodel.BBoxPseudoParameter;
+import de.osmui.model.pipelinemodel.parameters.BBoxPseudoParameter;
 import de.unistuttgart.iev.osm.bboxchooser.BBoxChooserDialog;
 import de.unistuttgart.iev.osm.bboxchooser.Bounds;
 import de.unistuttgart.iev.osm.bboxchooser.DialogResponse;
@@ -61,6 +61,7 @@ TableCellEditor, TableCellRenderer,ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		BBoxChooserDialog dialog = new BBoxChooserDialog();
+		dialog.setBoundingBox(param.getBoundingBox());
 		dialog.setVisible(true);
 		if (dialog.getResponse() == DialogResponse.OK) {
 			Bounds boundingBox = dialog.getBoundingBox();

@@ -29,7 +29,6 @@ import java.util.Locale;
 
 import javax.help.HelpSet;
 import javax.help.JHelp;
-import javax.help.MainWindow;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -42,18 +41,15 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
-import de.osmui.util.CommandlineTranslator;
-import de.osmui.util.exceptions.ImportException;
 import de.osmui.i18n.I18N;
 import de.osmui.io.IO;
-import de.osmui.io.IOFilter;
 import de.osmui.io.PipeImEx;
 import de.osmui.io.PipeImExBatFilter;
 import de.osmui.io.PipeImExShFilter;
 import de.osmui.io.exceptions.ExportException;
 import de.osmui.io.exceptions.LoadException;
-import de.osmui.io.exceptions.SaveException;
 import de.osmui.model.pipelinemodel.JGPipelineModel;
+import de.osmui.util.exceptions.ImportException;
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
@@ -372,30 +368,30 @@ public class Menu extends JMenuBar {
 		 * Menu items of the menu "Edit"
 		 */
 
-		/*
-		 * Redo
-		 */
-		JMenuItem redo = new JMenuItem(I18N.getString("Menu.redo")); //$NON-NLS-1$
-		redo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("redo"); //$NON-NLS-1$
-			}
-		});
-		editMenu.add(redo);
-		/*
-		 * Undo
-		 */
-		JMenuItem undo = new JMenuItem(I18N.getString("Menu.undo")); //$NON-NLS-1$
-		undo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("undo"); //$NON-NLS-1$
-			}
-		});
-		editMenu.add(undo);
-		/*
-		 * Separator
-		 */
-		editMenu.addSeparator();
+//		/*
+//		 * Redo
+//		 */
+//		JMenuItem redo = new JMenuItem(I18N.getString("Menu.redo")); //$NON-NLS-1$
+//		redo.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				System.out.println("redo"); //$NON-NLS-1$s
+//			}
+//		});
+//		editMenu.add(redo);
+//		/*
+//		 * Undo
+//		 */
+//		JMenuItem undo = new JMenuItem(I18N.getString("Menu.undo")); //$NON-NLS-1$
+//		undo.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				System.out.println("undo"); //$NON-NLS-1$
+//			}
+//		});
+//		editMenu.add(undo);
+//		/*
+//		 * Separator
+//		 */
+//		editMenu.addSeparator();
 		/*
 		 * Options
 		 */

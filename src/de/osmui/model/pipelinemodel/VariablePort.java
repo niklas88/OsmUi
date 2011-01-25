@@ -20,6 +20,8 @@
  */
 package de.osmui.model.pipelinemodel;
 
+import de.osmui.model.pipelinemodel.parameters.IntParameter;
+
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  *

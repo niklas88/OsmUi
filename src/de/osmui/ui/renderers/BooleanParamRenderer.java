@@ -27,7 +27,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.TableCellRenderer;
 
-import de.osmui.model.pipelinemodel.BooleanParameter;
+import de.osmui.model.pipelinemodel.parameters.BooleanParameter;
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena Käfer

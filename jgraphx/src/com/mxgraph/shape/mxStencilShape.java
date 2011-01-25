@@ -4,16 +4,6 @@
  */
 package com.mxgraph.shape;
 
-import org.w3c.dom.Node;
-
-import com.mxgraph.canvas.mxGraphics2DCanvas;
-import com.mxgraph.util.mxUtils;
-import com.mxgraph.util.svg.AWTPathProducer;
-import com.mxgraph.util.svg.AWTPolygonProducer;
-import com.mxgraph.util.svg.AWTPolylineProducer;
-import com.mxgraph.util.svg.CSSConstants;
-import com.mxgraph.util.svg.ExtendedGeneralPath;
-import com.mxgraph.view.mxCellState;
 import java.awt.Color;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
@@ -29,6 +19,16 @@ import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
+import com.mxgraph.canvas.mxGraphics2DCanvas;
+import com.mxgraph.util.mxUtils;
+import com.mxgraph.util.svg.AWTPathProducer;
+import com.mxgraph.util.svg.AWTPolygonProducer;
+import com.mxgraph.util.svg.AWTPolylineProducer;
+import com.mxgraph.util.svg.CSSConstants;
+import com.mxgraph.util.svg.ExtendedGeneralPath;
+import com.mxgraph.view.mxCellState;
 
 /**
  * Stencil shape drawing that takes an XML definition of the shape 

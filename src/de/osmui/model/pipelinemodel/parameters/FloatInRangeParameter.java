@@ -17,7 +17,7 @@
 /**
  * 
  */
-package de.osmui.model.pipelinemodel;
+package de.osmui.model.pipelinemodel.parameters;
 
 import de.osmui.i18n.I18N;
 import de.osmui.model.osm.TParameter;
@@ -76,6 +76,14 @@ public class FloatInRangeParameter extends AbstractParameter {
 	@Override
 	public String getValue() {
 		return Double.toString(value);
+	}
+	
+	/**
+	 * Returns it's value as native double
+	 * @return
+	 */
+	public double getValueDouble(){
+		return value;
 	}
 
 	/* (non-Javadoc)

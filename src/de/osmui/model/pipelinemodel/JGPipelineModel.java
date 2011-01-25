@@ -29,13 +29,13 @@ import java.util.Map;
 
 import javax.swing.SwingConstants;
 
-import de.osmui.i18n.I18N;
-import de.osmui.model.exceptions.TasksNotCompatibleException;
-import de.osmui.model.exceptions.TasksNotInModelException;
-
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.view.mxGraph;
+
+import de.osmui.i18n.I18N;
+import de.osmui.model.exceptions.TasksNotCompatibleException;
+import de.osmui.model.exceptions.TasksNotInModelException;
 
 /**
  * This class implements a pipeline model using an mxGraph as a backing store
@@ -170,11 +170,21 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		return this;
 	}
 	
-	public void setAll(JGPipelineModel newModel){
+	/**
+	 * Puts all tasks from the given model into this model
+	 * the sourceModel will get invalid
+	 * @param sourceModel
+	 */
+	public void setAll(JGPipelineModel sourceModel){
 		clean();
-		tasks = newModel.tasks;
-		taskMap = newModel.taskMap;
-		pipeMap = newModel.pipeMap;
+		tasks = sourceModel.tasks;
+		taskMap = sourceModel.taskMap;
+		pipeMap = sourceModel.pipeMap;
+		// We need to set this model as the associated model 
+		// for all tasks
+		for(AbstractTask task : tasks){
+			task.setModel(this);
+		}
 		graph.addCells(taskMap.values().toArray());
 		graph.addCells(pipeMap.values().toArray());
 		setChanged();

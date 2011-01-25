@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 import de.osmui.i18n.I18N;
-import de.osmui.model.pipelinemodel.AbstractParameter;
 import de.osmui.model.pipelinemodel.AbstractTask;
+import de.osmui.model.pipelinemodel.parameters.AbstractParameter;
 
 public class ParameterBoxTableModel extends AbstractTableModel {
 

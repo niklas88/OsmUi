@@ -24,6 +24,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import de.osmui.model.pipelinemodel.parameters.AbstractParameter;
+
 /**
  * This is the Task class, it's object represent a single task in a pipeline with it's associated parameters
  * and pipes. It also allows navigating the pipeline graph, normally beginning at the source tasks;

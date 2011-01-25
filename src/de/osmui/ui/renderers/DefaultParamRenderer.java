@@ -22,7 +22,7 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import de.osmui.model.pipelinemodel.AbstractParameter;
+import de.osmui.model.pipelinemodel.parameters.AbstractParameter;
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
