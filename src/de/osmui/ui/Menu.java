@@ -25,6 +25,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.Locale;
 
 import javax.help.HelpSet;
@@ -230,8 +231,9 @@ public class Menu extends JMenuBar {
 								MainFrame.getInstance().pipeModel,
 								chooser.getSelectedFile().getAbsolutePath());
 					} catch (ImportException e1) {
-						System.out.println(e1.getMessage());
 						JOptionPane.showMessageDialog(null, e1.getMessage());
+					} catch (ParseException e2) {
+						JOptionPane.showMessageDialog(null, e2.getMessage());
 					}
 					MainFrame.getInstance().pipeModel.layout(null);
 					MainFrame.getInstance().saved = false;
@@ -282,6 +284,8 @@ public class Menu extends JMenuBar {
 					e1.printStackTrace();
 				} catch (ImportException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
+				} catch (ParseException e2) {
+					JOptionPane.showMessageDialog(null, e2.getMessage());
 				}
 				MainFrame.getInstance().pipeModel.layout(null);
 				MainFrame.getInstance().saved = false;
