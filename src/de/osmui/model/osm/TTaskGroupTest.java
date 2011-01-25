@@ -14,12 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-/**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
- * 
- * @see TTaskGroup
- * 
-*/
+
 
 package de.osmui.model.osm;
 
@@ -30,8 +25,11 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
- */
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
+ * 
+ * @see TTaskGroup
+ * 
+*/
 public class TTaskGroupTest {
 	@Test public void setget(){
 		TTaskGroup group = new TTaskGroup();

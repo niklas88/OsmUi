@@ -23,7 +23,7 @@ import javax.swing.JMenu;
 import org.junit.Test;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * @see I18N
  * 

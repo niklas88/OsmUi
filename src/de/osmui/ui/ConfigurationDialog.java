@@ -32,7 +32,7 @@ import javax.swing.border.EmptyBorder;
 
 import de.osmui.i18n.I18N;
 	/**
-	 * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+	 * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
 	 * 
 	 * will be tested in the system-test
 	 */

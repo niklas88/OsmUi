@@ -15,11 +15,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/**
- *@author Niklas Schnelle, Peter Vollmer, Verena käfer
- * 
- * will be tested in the systemtest
-*/
 package de.osmui.io;
 
 import java.awt.datatransfer.Clipboard;
@@ -45,7 +40,9 @@ import de.osmui.util.CommandlineTranslator;
 import de.osmui.util.exceptions.ImportException;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
+ * 
+ * will be tested in the systemtest
  * 
  * Provides the practicality to export to a file and import
  * Osmosis commands to given pipeline Model 

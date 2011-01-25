@@ -18,13 +18,10 @@
 package de.osmui.io.exceptions;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  */
 public class SaveException extends Exception {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7833842244596013239L;
 
 	public SaveException(String string) {

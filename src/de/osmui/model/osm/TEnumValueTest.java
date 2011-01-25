@@ -14,12 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-/**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
- * 
- * @see TEnumValue
- * 
-*/
+
 
 package de.osmui.model.osm;
 
@@ -28,8 +23,11 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
- */
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
+ * 
+ * @see TEnumValue
+ * 
+*/
 public class TEnumValueTest {
 	@Test public void set(){
 		TEnumValue val = new TEnumValue();

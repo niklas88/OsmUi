@@ -15,15 +15,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
- *
- */
 package de.osmui.model.exceptions;
 
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  */
 public class TasksNotCompatibleException extends Exception {
 

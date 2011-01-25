@@ -25,7 +25,7 @@ import java.util.EventObject;
 /**
  * Event class fired by PipelineBox
  * 
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  *
  */
 public class TaskSelectedEvent extends EventObject {

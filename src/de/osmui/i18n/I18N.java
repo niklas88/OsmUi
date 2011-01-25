@@ -21,7 +21,7 @@ import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * @see I18NTest
 */

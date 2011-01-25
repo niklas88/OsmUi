@@ -15,22 +15,16 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
- * 
- * @see PipeImExBatFilterTest
- */
-
 package de.osmui.io;
 
 import java.io.File;
 
 import javax.swing.filechooser.FileFilter;
-
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
- **/
+ * @see PipeImExBatFilterTest
+ */
 
 public class PipeImExBatFilter extends FileFilter {
 

@@ -38,7 +38,7 @@ import de.osmui.ui.models.TaskBoxTableModel;
 import de.osmui.util.ConfigurationManager;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  *         Provides MainFrame to have a easy way to construct a MainFrame with
  *         all UI Content

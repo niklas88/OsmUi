@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import de.osmui.model.osm.TTask;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * @see TaskBoxCellRendererTest
  */

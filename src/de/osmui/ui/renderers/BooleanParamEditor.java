@@ -33,7 +33,7 @@ import javax.swing.table.TableCellEditor;
 import de.osmui.model.pipelinemodel.parameters.BooleanParameter;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  *
  *
  *no tests, only getter and setter

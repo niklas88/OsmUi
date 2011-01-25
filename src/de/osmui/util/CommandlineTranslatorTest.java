@@ -20,19 +20,13 @@ package de.osmui.util;
 import static org.junit.Assert.assertEquals;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 
-import de.osmui.model.exceptions.TasksNotCompatibleException;
-import de.osmui.model.pipelinemodel.AbstractTask;
-import de.osmui.model.pipelinemodel.CommonTask;
 import de.osmui.model.pipelinemodel.JGPipelineModel;
 import de.osmui.util.exceptions.ImportException;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * @see CommandLineTranslator
  * 
@@ -61,7 +55,6 @@ public class CommandlineTranslatorTest {
 			assertEquals(1, model.getSourceTasks().size());
 			
 		} catch (ImportException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -88,7 +81,6 @@ public class CommandlineTranslatorTest {
 					"AUTO9to10 inPipe.1=AUTO12to12 inPipe.2=AUTO13to11 ", '\\');
 			
 		} catch (ImportException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ParseException e) {
 			e.printStackTrace();

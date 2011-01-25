@@ -18,13 +18,10 @@
 package de.osmui.io.exceptions;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  */
 public class LoadException extends Exception {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5687570462172792439L;
 
 	public LoadException(String string) {

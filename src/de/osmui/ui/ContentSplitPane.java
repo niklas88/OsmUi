@@ -22,7 +22,7 @@ import javax.swing.JComponent;
 import javax.swing.JSplitPane;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * will be tested by system-tests
  * 

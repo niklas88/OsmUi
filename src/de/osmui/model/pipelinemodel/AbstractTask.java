@@ -30,7 +30,7 @@ import de.osmui.model.pipelinemodel.parameters.AbstractParameter;
  * This is the Task class, it's object represent a single task in a pipeline with it's associated parameters
  * and pipes. It also allows navigating the pipeline graph, normally beginning at the source tasks;
  * 
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  *
  * @see AbstractTaskTest
  * 

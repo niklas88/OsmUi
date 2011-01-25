@@ -26,7 +26,7 @@ import de.osmui.model.pipelinemodel.parameters.AbstractParameter;
 import de.osmui.model.pipelinemodel.parameters.IntParameter;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * @see AbstractPort
  * 

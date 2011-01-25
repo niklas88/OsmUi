@@ -26,7 +26,7 @@ import de.osmui.i18n.I18N;
 import de.osmui.model.osm.TTask;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  *
  *no tests, only getter and setter
  */

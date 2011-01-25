@@ -14,12 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-/**
- * @author verenaNiklas Schnelle, Peter Vollmer, Verena käfer
- * 
- * @see TPipe
- * 
-*/
+
 
 package de.osmui.model.osm;
 
@@ -30,8 +25,11 @@ import java.math.BigInteger;
 import org.junit.Test;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
- */
+ * @author verenaNiklas Schnelle, Peter Vollmer, Verena Käfer
+ * 
+ * @see TPipe
+ * 
+*/
 public class TPipeTest {
 	@Test public void setget(){
 		TPipe pipe = new TPipe();
