@@ -49,6 +49,11 @@ public class CommandlineSplitter {
 		return pos < line.length() || sb.length() > 0;
 	}
 
+	/**
+	 * Checks whether the given char is in the quote array
+	 * @param c
+	 * @return
+	 */
 	private boolean isQuoteChar(char c) {
 		for (char ci : quoteChars) {
 			if (ci == c) {
@@ -57,7 +62,11 @@ public class CommandlineSplitter {
 		}
 		return false;
 	}
-
+	/**
+	 * Reads the next token 
+	 * @return true if all was ok, false if there was a parse error e.g
+	 * 			no matching quote
+	 */
 	private boolean readOn() {
 		sb.delete(0, sb.length());
 		while (pos < line.length()) {
@@ -112,7 +121,11 @@ public class CommandlineSplitter {
 		}
 		return (state != State.normal)? false: true;
 	}
-
+	/**
+	 * Gets the next token
+	 * @return
+	 * @throws ParseException
+	 */
 	public String next() throws ParseException {
 		String ret;
 		ret = sb.toString();
