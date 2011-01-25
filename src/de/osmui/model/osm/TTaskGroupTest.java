@@ -29,6 +29,9 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+/**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ */
 public class TTaskGroupTest {
 	@Test public void setget(){
 		TTaskGroup group = new TTaskGroup();

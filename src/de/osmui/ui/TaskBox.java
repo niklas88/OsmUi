@@ -46,9 +46,6 @@ import de.osmui.util.exceptions.TaskNameUnknownException;
 
 public class TaskBox extends JTable implements TaskSelectedEventListener {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4259689270781114248L;
 
 	private final TaskBoxTableModel model;

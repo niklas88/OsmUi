@@ -41,9 +41,6 @@ import de.osmui.util.CommandlineTranslator;
 
 public class CopyBox extends JScrollPane implements Observer {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2196616949819474887L;
 
 	private final CommandlineTranslator trans;

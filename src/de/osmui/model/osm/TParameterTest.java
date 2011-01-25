@@ -31,6 +31,9 @@ import java.util.List;
 
 import org.junit.Test;
 
+/**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ */
 public class TParameterTest {
 	@Test public void getEnumVal(){
 		List<TEnumValue> arr = new ArrayList<TEnumValue>();

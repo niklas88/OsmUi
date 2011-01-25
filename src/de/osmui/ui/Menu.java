@@ -63,9 +63,6 @@ import de.osmui.util.exceptions.ImportException;
 
 public class Menu extends JMenuBar {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6521196530844239528L;
 
 	PipeImExShFilter pipeImExShFilter = new PipeImExShFilter();

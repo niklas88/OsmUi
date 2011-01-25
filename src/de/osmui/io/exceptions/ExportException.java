@@ -25,8 +25,11 @@ package de.osmui.io.exceptions;
 public class ExportException extends Exception {
 
 	
-	private static final long serialVersionUID = -7162813660344557052L;
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6260309323863186484L;
+
 	public ExportException(String string) {
 		super(string);
 	}

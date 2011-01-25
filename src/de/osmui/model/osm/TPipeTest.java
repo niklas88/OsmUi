@@ -29,6 +29,9 @@ import java.math.BigInteger;
 
 import org.junit.Test;
 
+/**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ */
 public class TPipeTest {
 	@Test public void setget(){
 		TPipe pipe = new TPipe();

@@ -21,12 +21,23 @@
  */
 package de.osmui.model.exceptions;
 
+
+/**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ */
 public class TasksNotCompatibleException extends Exception {
 
-	private static final long serialVersionUID = 1L;
-	
-	public TasksNotCompatibleException(String msg){
-		super(msg);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7206178384704120904L;
+
+	/**
+	 * 
+	 * @param msg
+	 */
+	public TasksNotCompatibleException(String message){
+		super(message);
 	}
 
 }

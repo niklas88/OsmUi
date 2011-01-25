@@ -26,7 +26,7 @@ import de.osmui.model.osm.TParameter;
  * This parameter defines a range of floating point numbers, primarily for boundig-box
  * e.g. for left -180.0 to 180.0
  * 
- * @author Niklas Schnelle
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
  * @see FloatInRangeParameterTest
  *

@@ -43,6 +43,12 @@ import de.osmui.ui.MainFrame;
 import de.osmui.util.CommandlineTranslator;
 import de.osmui.util.exceptions.ImportException;
 
+/**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * 
+ * Provides the practicality to export to a file and import
+ * Osmosis commands to given pipeline Model 
+ **/
 public class PipeImEx {
 
 	private static PipeImEx instance;

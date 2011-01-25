@@ -29,6 +29,9 @@ import java.util.List;
 
 import org.junit.Test;
 
+/**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ */
 public class TTaskTest {
 	@Test public void getInputPip(){
 		TTask task = new TTask();

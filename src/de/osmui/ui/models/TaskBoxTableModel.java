@@ -32,9 +32,6 @@ import de.osmui.model.osm.TTask;
  */
 public class TaskBoxTableModel extends AbstractTableModel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2453623808903546286L;
 
 	List<TTask> data;

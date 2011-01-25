@@ -36,9 +36,6 @@ import de.osmui.i18n.I18N;
 
 public class TabBox extends JTabbedPane {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2984123985661193020L;
 
 	private final TaskBox taskBox;

@@ -27,6 +27,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+/**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ */
 public class TEnumValueTest {
 	@Test public void set(){
 		TEnumValue val = new TEnumValue();

@@ -39,9 +39,7 @@ import de.unistuttgart.iev.osm.bboxchooser.DialogResponse;
  */
 public class BBoxCellEditor  extends AbstractCellEditor implements
 TableCellEditor, TableCellRenderer,ActionListener {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -3647091148956495004L;
 	
 	protected JButton button;

@@ -49,9 +49,6 @@ import de.osmui.util.ConfigurationManager;
 
 public class MainFrame extends JFrame implements Observer {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4767348652713972190L;
 
 	private static MainFrame instance;

@@ -27,6 +27,11 @@ import java.io.File;
 
 import javax.swing.filechooser.FileFilter;
 
+/**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * 
+ **/
+
 public class PipeImExBatFilter extends FileFilter {
 
 	@Override

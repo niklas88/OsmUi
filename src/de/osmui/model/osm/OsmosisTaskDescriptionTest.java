@@ -29,6 +29,9 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+/**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ */
 public class OsmosisTaskDescriptionTest {
 	
 	@Test public void getTaskGroup(){

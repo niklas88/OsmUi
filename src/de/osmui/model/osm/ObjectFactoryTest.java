@@ -23,13 +23,16 @@
 
 package de.osmui.model.osm;
 
+
 import static org.junit.Assert.assertEquals;
 
 import javax.xml.bind.JAXBElement;
 
 import org.junit.Test;
 
-
+/**
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ */
 public class ObjectFactoryTest {
 	@Test public void createParameter(){
 		TParameter value = null;

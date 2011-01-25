@@ -34,9 +34,6 @@ import de.osmui.model.osm.TTask;
  */
 public class TaskBoxCellRenderer extends DefaultTableCellRenderer {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4215729606606179888L;
 	
 	private String lineWrapDescription(String description){

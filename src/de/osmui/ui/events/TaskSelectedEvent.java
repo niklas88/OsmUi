@@ -30,13 +30,11 @@ import java.util.EventObject;
  */
 public class TaskSelectedEvent extends EventObject {
 
+	private static final long serialVersionUID = -9168614434923375970L;
+
 	public TaskSelectedEvent(Object source) {
 		super(source);
 	}
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2621201073240220152L;
 
 }
