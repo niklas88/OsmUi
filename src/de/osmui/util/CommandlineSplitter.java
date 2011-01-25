@@ -46,7 +46,7 @@ public class CommandlineSplitter {
 	 * @return
 	 */
 	public boolean hasNext() {
-		return pos < line.length();
+		return pos < line.length() || sb.length() > 0;
 	}
 
 	private boolean isQuoteChar(char c) {
