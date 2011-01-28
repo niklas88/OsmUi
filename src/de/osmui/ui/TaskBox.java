@@ -75,7 +75,7 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 		});
 		
 		model = taskBoxTableModel;
-		stringConverter = new TableStringConverter() {
+		/*stringConverter = new TableStringConverter() {
 			@Override
 			public String toString(TableModel arg0, int arg1, int arg2) {
 				TTask task = (TTask) arg0.getValueAt(arg1, arg2);
@@ -85,7 +85,7 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 		TableRowSorter<TaskBoxTableModel> sorter = new TableRowSorter<TaskBoxTableModel>(
 				model);
 		sorter.setStringConverter(stringConverter);
-		this.setRowSorter(sorter);
+		this.setRowSorter(sorter);*/
 		showCompatibleTasks(null);
 
 	}
@@ -97,7 +97,7 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 		} else {
 			model.setTasks(TaskManager.getInstance().getCompatibleTasks(""));
 		}
-		this.getRowSorter().toggleSortOrder(0);
+		//this.getRowSorter().toggleSortOrder(0);
 
 	}
 
