@@ -19,7 +19,7 @@ package de.osmui.ui;
 import javax.swing.SwingUtilities;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * Application main class that is used to initialize OsmUi and to start
  * up the UI.

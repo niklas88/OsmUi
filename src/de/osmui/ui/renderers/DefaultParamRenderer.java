@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import de.osmui.model.pipelinemodel.parameters.AbstractParameter;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * no tests, only getter and setter
  *

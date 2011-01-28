@@ -30,7 +30,7 @@ import de.osmui.util.CommandlineTranslator;
 
 /**
  * 
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * Provides CopyBox to have an easy way to construct a opportunity to
  * show a Osmosis-command.
@@ -41,9 +41,6 @@ import de.osmui.util.CommandlineTranslator;
 
 public class CopyBox extends JScrollPane implements Observer {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2196616949819474887L;
 
 	private final CommandlineTranslator trans;

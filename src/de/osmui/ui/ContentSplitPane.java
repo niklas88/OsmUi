@@ -22,7 +22,7 @@ import javax.swing.JComponent;
 import javax.swing.JSplitPane;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * will be tested by system-tests
  * 
@@ -30,9 +30,6 @@ import javax.swing.JSplitPane;
 
 public class ContentSplitPane extends JSplitPane {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5856610254528356675L;
 
 

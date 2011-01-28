@@ -20,19 +20,13 @@ package de.osmui.util;
 import static org.junit.Assert.assertEquals;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 
-import de.osmui.model.exceptions.TasksNotCompatibleException;
-import de.osmui.model.pipelinemodel.AbstractTask;
-import de.osmui.model.pipelinemodel.CommonTask;
 import de.osmui.model.pipelinemodel.JGPipelineModel;
 import de.osmui.util.exceptions.ImportException;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * @see CommandLineTranslator
  * 

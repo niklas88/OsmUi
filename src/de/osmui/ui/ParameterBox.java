@@ -43,7 +43,7 @@ import de.osmui.ui.renderers.EnumParamEditor;
 import de.osmui.ui.renderers.FileParamEditor;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  *
  * Provides ParameterBox to have an easy way to construct the parameter
  * box of OsmUi

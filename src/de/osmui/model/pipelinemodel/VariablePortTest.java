@@ -25,7 +25,7 @@ import de.osmui.model.osm.TParameter;
 import de.osmui.model.pipelinemodel.parameters.IntParameter;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * @see VariablePort
  * 

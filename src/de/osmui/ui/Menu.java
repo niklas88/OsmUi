@@ -53,7 +53,7 @@ import de.osmui.model.pipelinemodel.JGPipelineModel;
 import de.osmui.util.exceptions.ImportException;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  *         Provides Menu to have an easy way to construct the whole Menu of
  *         Osmui.
@@ -64,9 +64,6 @@ import de.osmui.util.exceptions.ImportException;
 
 public class Menu extends JMenuBar {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6521196530844239528L;
 
 	PipeImExShFilter pipeImExShFilter = new PipeImExShFilter();
