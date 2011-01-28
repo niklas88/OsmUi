@@ -184,6 +184,7 @@ public class PipeImEx {
 			StringBuilder commandToExport = new StringBuilder();
 			CommandlineTranslator trans = CommandlineTranslator.getInstance();
 			if (extension == ".bat") {
+				writer.write("{0}Hier kommen noch schöne internationale Kommentare hin{1}");
 				commandToExport
 						.append(MainFrame
 								.getInstance()
@@ -192,13 +193,12 @@ public class PipeImEx {
 										"OsmosisPath",
 										I18N.getString("ConfigurationDialog.osmosisStandardPath")));
 				commandToExport.append(" ");
-				commandToExport.append(trans.exportLine(pipelineModel,"^\n"));
+				commandToExport.append(trans.exportLine(pipelineModel,"^\r\n"));
 				writer.write(commandToExport.toString());
 
 			} else {
 				writer.write("#!/bin/sh\n");
-				writer.write("# "+
-						"Hier kommen noch schöne internationale Kommentare hin\n");
+				writer.write("{0}Hier kommen noch schöne internationale Kommentare hin{1}");
 				commandToExport
 						.append(MainFrame
 								.getInstance()
