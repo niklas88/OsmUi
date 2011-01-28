@@ -30,6 +30,8 @@ import javax.swing.SwingUtilities;
 
 public class Application {
 
+	public static String version = "Version 1.0";
+	
 	/**
 	 * Starts OsmUi
 	 * 
