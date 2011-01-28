@@ -13,18 +13,23 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package de.osmui.ui;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.AbstractAction;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
@@ -32,19 +37,23 @@ import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
 
+import de.osmui.model.osm.TTask;
 import de.osmui.model.pipelinemodel.AbstractTask;
 import de.osmui.model.pipelinemodel.JGPipelineModel;
 import de.osmui.ui.events.TaskSelectedEvent;
 import de.osmui.ui.events.TaskSelectedEventListener;
+import de.osmui.util.TaskManager;
+import de.osmui.util.exceptions.TaskNameUnknownException;
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
- * will be tested by system-tests
+ *         will be tested by system-tests
  * 
  */
 
-public class PipelineBox extends mxGraphComponent implements Observer, MouseListener {
+public class PipelineBox extends mxGraphComponent implements Observer,
+		MouseListener, TaskSelectedEventListener {
 
 	/**
 	 * 
@@ -53,11 +62,13 @@ public class PipelineBox extends mxGraphComponent implements Observer, MouseList
 
 	private final ArrayList<TaskSelectedEventListener> selectedListeners;
 	private AbstractTask selectedTask;
-
+	private JPopupMenu popupMenu;
+	private ActionListener popupActionListener;
+	
 	public PipelineBox(mxGraph graph) {
 		super(graph);
 		this.selectedListeners = new ArrayList<TaskSelectedEventListener>();
-
+		
 		this.graph.setAllowDanglingEdges(false);
 		this.graph.setAllowLoops(false);
 		this.graph.setAutoSizeCells(true);
@@ -66,7 +77,7 @@ public class PipelineBox extends mxGraphComponent implements Observer, MouseList
 		this.graph.setCellsResizable(false);
 		this.graph.setEdgeLabelsMovable(false);
 		this.graph.setDropEnabled(false);
-		
+
 		this.getGraphControl().addMouseListener(this);
 
 		this.setAutoExtend(true);
@@ -77,6 +88,30 @@ public class PipelineBox extends mxGraphComponent implements Observer, MouseList
 		this.setDoubleBuffered(true);
 		this.setImportEnabled(false);
 		this.setExportEnabled(false);
+		// Register ourselves as listener
+		registerTaskSelectedListener(this);
+		
+		this.popupMenu = new JPopupMenu();
+		popupActionListener = new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				JMenuItem item;
+				if(event.getSource() instanceof JMenuItem){
+					item = (JMenuItem) event.getSource();
+					AbstractTask newTask;
+					try {
+						newTask = TaskManager.getInstance().createTask(item.getText());
+						MainFrame.getInstance().getTaskBox().addTaskToModel(newTask);
+					} catch (TaskNameUnknownException e) {
+						//Do nothing
+					}
+					
+				}
+			}
+			
+		};
+		
 
 		// Register Keyboard Actions
 		this.getInputMap(WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
@@ -90,32 +125,22 @@ public class PipelineBox extends mxGraphComponent implements Observer, MouseList
 			public void actionPerformed(ActionEvent e) {
 				final mxGraph graph = getGraph();
 				// Removes the selected Cells
-				// Had a concurrent modification exception here doesn't
-				// seem to run in the Event thread by default so make it run there
-				SwingUtilities.invokeLater(new Runnable(){
-
-					@Override
-					public void run() {
-						graph.removeCells();						
-					}
-					
-				});
+				graph.removeCells();			
 
 			}
 		});
 
 	}
-	
-		
+
 	@Override
 	public void selectCellForEvent(Object cell, MouseEvent e) {
 		super.selectCellForEvent(cell, e);
 		mxCell mxcell = (mxCell) cell;
 
 		if (mxcell != null && mxcell.isVertex()) {
-			fireTaskSelected(new TaskSelectedEvent(mxcell.getValue()));
+			fireTaskSelected(new TaskSelectedEvent(this, (AbstractTask) mxcell.getValue()));
 		} else {
-			fireTaskSelected(null);
+			fireTaskSelected(new TaskSelectedEvent(this, (AbstractTask) null));
 		}
 	}
 
@@ -147,41 +172,61 @@ public class PipelineBox extends mxGraphComponent implements Observer, MouseList
 			if (task.getModel() != null && !task.equals(selectedTask)) {
 				this.graph.setSelectionCell(((JGPipelineModel) arg0)
 						.getCellForTask(task));
-				fireTaskSelected(new TaskSelectedEvent(task));
+				fireTaskSelected(new TaskSelectedEvent(this, (AbstractTask) task));
 				selectedTask = task;
-			} else if (task.getModel() == null){
+			} else if (task.getModel() == null) {
 				selectedTask = null;
-				// Sadly sources for event's can't be null let the event be null
-				fireTaskSelected(null);
+				fireTaskSelected(new TaskSelectedEvent(this, (AbstractTask) null));
 			}
 		}
 
 	}
 
-
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		if(getCellAt(arg0.getX(), arg0.getY()) == null){
-			fireTaskSelected(null);
-		}		
+		if (getCellAt(arg0.getX(), arg0.getY()) == null) {
+			fireTaskSelected(new TaskSelectedEvent(this, (AbstractTask) null));
+		}
 	}
-	
-	// Need to specify the following methods but don't care 
+
+	// Need to specify the following methods but don't care
 	// for the events so do nothing
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {}
-
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {}
-
+	public void mouseEntered(MouseEvent arg0) {
+	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {}
+	public void mouseExited(MouseEvent arg0) {
+	}
 
+
+	private void checkPopup(MouseEvent event){
+		// According to java swing doku need to do this in mousePressed
+		// and mouseReleased
+		if (event.isPopupTrigger()) {			
+			popupMenu.show(event.getComponent(), event.getX(), event.getY());
+		}
+	}
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		checkPopup(arg0);
+	}
 
 	@Override
-	public void mouseReleased(MouseEvent arg0) {}
+	public void mouseReleased(MouseEvent arg0) {
+		checkPopup(arg0);
+	}
+
+	@Override
+	public void TaskSelected(TaskSelectedEvent e) {		
+		String taskName = (e.getTask() != null)?e.getTask().getName():"";
+		List<TTask> desc = TaskManager.getInstance().getCompatibleTasks(taskName);
+		popupMenu.removeAll();
+		for(TTask currTask : desc){
+			popupMenu.add(currTask.getName()).addActionListener(popupActionListener);
+		}	
+		
+	}
 
 }

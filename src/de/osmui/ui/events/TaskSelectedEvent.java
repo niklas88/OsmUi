@@ -22,6 +22,8 @@ package de.osmui.ui.events;
 
 import java.util.EventObject;
 
+import de.osmui.model.pipelinemodel.AbstractTask;
+
 /**
  * Event class fired by PipelineBox
  * 
@@ -29,9 +31,15 @@ import java.util.EventObject;
  *
  */
 public class TaskSelectedEvent extends EventObject {
+	private AbstractTask eventTask;
 
-	public TaskSelectedEvent(Object source) {
+	public TaskSelectedEvent(Object source, AbstractTask task) {
 		super(source);
+		eventTask = task;
+	}
+	
+	public AbstractTask getTask(){
+		return eventTask;
 	}
 
 	/**

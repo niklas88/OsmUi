@@ -104,8 +104,8 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 	@Override
 	public void TaskSelected(TaskSelectedEvent e) {
 
-		if (e != null) {
-			selectedTask = (AbstractTask) e.getSource();
+		if (e.getTask() != null) {
+			selectedTask = (AbstractTask) e.getTask();
 			showCompatibleTasks(selectedTask);
 		} else {
 			showCompatibleTasks(null);
@@ -113,17 +113,8 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 		}
 
 	}
-
-	public void addSelectedToModel() {
-		TTask taskDesc = (TTask) model.getValueAt(
-				this.convertRowIndexToModel(this.getSelectedRow()), 0);
-		AbstractTask newTask;
-		try {
-			newTask = TaskManager.getInstance().createTask(taskDesc.getName());
-		} catch (TaskNameUnknownException e) {
-			// Do nothing
-			return;
-		}
+	
+	public void addTaskToModel(AbstractTask newTask){
 		if (selectedTask != null && selectedTask.isConnectable()) {
 			try {
 				MainFrame.getInstance().getPipeModel()
@@ -137,6 +128,19 @@ public class TaskBox extends JTable implements TaskSelectedEventListener {
 		} else {
 			MainFrame.getInstance().getPipeModel().addTask(newTask);
 		}
+	}
+
+	public void addSelectedToModel() {
+		TTask taskDesc = (TTask) model.getValueAt(
+				this.convertRowIndexToModel(this.getSelectedRow()), 0);
+		AbstractTask newTask;
+		try {
+			newTask = TaskManager.getInstance().createTask(taskDesc.getName());
+		} catch (TaskNameUnknownException e) {
+			// Do nothing
+			return;
+		}
+		addTaskToModel(newTask);
 
 	}
 

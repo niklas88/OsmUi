@@ -102,8 +102,8 @@ public class ParameterBox extends JTable implements TaskSelectedEventListener {
 
 	@Override
 	public void TaskSelected(TaskSelectedEvent e) {
-		if (e != null) {
-			selectedTask = (AbstractTask) e.getSource();
+		if (e.getTask() != null) {
+			selectedTask = (AbstractTask) e.getTask();
 			showActualParameters(selectedTask);
 			this.getRowSorter().toggleSortOrder(1);
 		}

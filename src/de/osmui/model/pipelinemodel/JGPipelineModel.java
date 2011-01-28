@@ -320,14 +320,21 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		if (task.getModel() != this) {
 			throw new TasksNotInModelException(I18N.getString("JGPipelineModel.taskToRmNotInModel"));
 		}
-		// Disconnect all connected pipes
-		for (AbstractPipe out : task.getOutputPipes()) {
+		// Disconnect all connected pipes (don't use iterator because then
+		// we can't remove elements)
+		int countOutputPipes = task.getOutputPipes().size();
+		AbstractPipe out;
+		for(int iter=0; iter < countOutputPipes; ++iter){
+			out = task.getOutputPipes().get(iter);
 			if (out.isConnected()) {
 				out.disconnect();
 			}
 		}
 		// Disconnect all connected ports
-		for (AbstractPort in : task.getInputPorts()) {
+		int countInputPorts = task.getInputPorts().size();
+		AbstractPort in;
+		for(int iter=0; iter < countInputPorts; ++iter){
+			in = task.getInputPorts().get(iter);
 			if (in.isConnected()) {
 				in.disconnect();
 			}
