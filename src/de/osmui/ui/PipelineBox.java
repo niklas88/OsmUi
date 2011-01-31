@@ -21,6 +21,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -53,7 +55,7 @@ import de.osmui.util.exceptions.TaskNameUnknownException;
  */
 
 public class PipelineBox extends mxGraphComponent implements Observer,
-		MouseListener, TaskSelectedEventListener {
+		MouseListener, MouseWheelListener, TaskSelectedEventListener {
 
 	private static final long serialVersionUID = -2865210986243818496L;
 
@@ -61,10 +63,12 @@ public class PipelineBox extends mxGraphComponent implements Observer,
 	private AbstractTask selectedTask;
 	private JPopupMenu popupMenu;
 	private ActionListener popupActionListener;
+	private double zoomPos;
 	
 	public PipelineBox(mxGraph graph) {
 		super(graph);
 		this.selectedListeners = new ArrayList<TaskSelectedEventListener>();
+		this.zoomPos = 1.0;
 		
 		this.graph.setAllowDanglingEdges(false);
 		this.graph.setAllowLoops(false);
@@ -87,6 +91,7 @@ public class PipelineBox extends mxGraphComponent implements Observer,
 		this.setExportEnabled(false);
 		// Register ourselves as listener
 		registerTaskSelectedListener(this);
+		addMouseWheelListener(this);
 		
 		this.popupMenu = new JPopupMenu();
 		popupActionListener = new ActionListener(){
@@ -224,6 +229,45 @@ public class PipelineBox extends mxGraphComponent implements Observer,
 			popupMenu.add(currTask.getName()).addActionListener(popupActionListener);
 		}	
 		
+	}
+	
+	/**
+	 * Wee need to add saving the zoom position to the super class
+	 */
+	@Override
+	public void zoomIn(){
+		super.zoomIn();
+		zoomPos *= zoomFactor;
+	}
+
+	/**
+	 * Wee need to add saving the zoom position to the super class
+	 */
+	@Override
+	public void zoomOut(){
+		// JGprahx bug fails zooming in after having zoomed out too much, don't allow this
+		if(zoomPos > 0.4){
+			super.zoomOut();
+			zoomPos /= zoomFactor;
+		}
+	}
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent evt) {
+		if(evt.isControlDown() && evt.getScrollType() == MouseWheelEvent.WHEEL_UNIT_SCROLL){
+			int scrolled = evt.getWheelRotation();
+			if(scrolled < 0){
+				for(int s=0; s>scrolled; --s){
+					this.zoomIn();
+					
+				}
+			
+			} else if (zoomPos > 0.3){
+				for(int s=0; s<scrolled; ++s){
+					this.zoomOut();
+				}
+			}
+			
+		}
 	}
 
 }

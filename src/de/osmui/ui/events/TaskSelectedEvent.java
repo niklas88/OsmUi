@@ -35,7 +35,7 @@ public class TaskSelectedEvent extends EventObject {
 
 	private static final long serialVersionUID = -9168614434923375970L;
 
-	public TaskSelectedEvent(Object source) {
+	public TaskSelectedEvent(Object source, AbstractTask task) {
 		super(source);
 		eventTask = task;
 	}
