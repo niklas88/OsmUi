@@ -28,15 +28,12 @@ import javax.swing.table.DefaultTableCellRenderer;
 import de.osmui.model.osm.TTask;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * @see TaskBoxCellRendererTest
  */
 public class TaskBoxCellRenderer extends DefaultTableCellRenderer {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4215729606606179888L;
 	
 	private String lineWrapDescription(String description){

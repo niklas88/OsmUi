@@ -24,7 +24,7 @@ package de.osmui.model.pipelinemodel;
  * This class implements the common osmosis pipe, the class hierarchy would easily allow to create
  * extra classes for EntityPipes but this is easier
  * 
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * no tests, only getter and setter
  * 

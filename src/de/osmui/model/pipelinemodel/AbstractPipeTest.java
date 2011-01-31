@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * @see AbstractPipe
  * 

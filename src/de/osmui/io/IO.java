@@ -16,10 +16,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
- * 
- */
 package de.osmui.io;
 
 import java.io.FileInputStream;
@@ -30,11 +26,17 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import de.osmui.i18n.I18N;
-
 import de.osmui.io.exceptions.LoadException;
 import de.osmui.io.exceptions.SaveException;
 import de.osmui.model.pipelinemodel.AbstractPipelineModel;
 import de.osmui.model.pipelinemodel.JGPipelineModel;
+
+/**
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
+ * 
+ * Provides the practicality of saving to and loading
+ * from an OsmUi file.
+*/
 
 public class IO {
 	
@@ -44,6 +46,12 @@ public class IO {
 	private IO() {
 	}
 	
+	/**
+	 * Loads from a file with given filename in a JGPipelineModel and returns it.
+	 * @param filename given to load from
+	 * @return JGPipline Model
+	 * @throws LoadException
+	 */
 	public JGPipelineModel load (String filename) throws LoadException{
 		try {
 			System.out.println("Load: "+filename);
@@ -56,7 +64,14 @@ public class IO {
 			throw new LoadException(I18N.getString("IO.loadLoad"));
 		}
 	}
-	
+	 
+	/**
+	 * Save to a given pipeline model to file with given filename and extension. 
+	 * @param pipelineModel to save to a file
+	 * @param filename of the file to save to
+	 * @param extension of the file to save to
+	 * @throws SaveException
+	 */
 	public void save (AbstractPipelineModel pipelineModel, String filename,String extension ) throws SaveException{
 		if (!filename.endsWith(extension)) {
 			filename += extension;

@@ -15,18 +15,18 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
- *
- */
 package de.osmui.model.exceptions;
 
-
+/**
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
+ */
 public class TasksNotInModelException extends Exception {
 
 
-
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3561811295009698978L;
 
 	/**
 	 * @param message

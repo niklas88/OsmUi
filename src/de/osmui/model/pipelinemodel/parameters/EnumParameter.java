@@ -33,11 +33,11 @@ import de.osmui.model.osm.TParameter;
  *@see EnumParameterTest
  */
 public class EnumParameter extends AbstractParameter {
-
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4056315894183855778L;
+	private static final long serialVersionUID = 3403811475288004725L;
 	
 	// The currently set value of this parameter
 	protected String value;

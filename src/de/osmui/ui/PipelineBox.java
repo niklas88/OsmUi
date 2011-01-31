@@ -21,6 +21,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -46,29 +48,28 @@ import de.osmui.util.TaskManager;
 import de.osmui.util.exceptions.TaskNameUnknownException;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  *         will be tested by system-tests
  * 
  */
 
 public class PipelineBox extends mxGraphComponent implements Observer,
-		MouseListener, TaskSelectedEventListener {
+		MouseListener, MouseWheelListener, TaskSelectedEventListener {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2865210986243818496L;
 
 	private final ArrayList<TaskSelectedEventListener> selectedListeners;
 	private AbstractTask selectedTask;
 	private JPopupMenu popupMenu;
 	private ActionListener popupActionListener;
-	
+	private double zoomPos;
+
 	public PipelineBox(mxGraph graph) {
 		super(graph);
 		this.selectedListeners = new ArrayList<TaskSelectedEventListener>();
-		
+		this.zoomPos = 1.0;
+
 		this.graph.setAllowDanglingEdges(false);
 		this.graph.setAllowLoops(false);
 		this.graph.setAutoSizeCells(true);
@@ -90,28 +91,30 @@ public class PipelineBox extends mxGraphComponent implements Observer,
 		this.setExportEnabled(false);
 		// Register ourselves as listener
 		registerTaskSelectedListener(this);
-		
+		addMouseWheelListener(this);
+
 		this.popupMenu = new JPopupMenu();
-		popupActionListener = new ActionListener(){
+		popupActionListener = new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				JMenuItem item;
-				if(event.getSource() instanceof JMenuItem){
+				if (event.getSource() instanceof JMenuItem) {
 					item = (JMenuItem) event.getSource();
 					AbstractTask newTask;
 					try {
-						newTask = TaskManager.getInstance().createTask(item.getText());
-						MainFrame.getInstance().getTaskBox().addTaskToModel(newTask);
+						newTask = TaskManager.getInstance().createTask(
+								item.getText());
+						MainFrame.getInstance().getTaskBox()
+								.addTaskToModel(newTask);
 					} catch (TaskNameUnknownException e) {
-						//Do nothing
+						// Do nothing
 					}
-					
+
 				}
 			}
-			
+
 		};
-		
 
 		// Register Keyboard Actions
 		this.getInputMap(WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
@@ -125,7 +128,7 @@ public class PipelineBox extends mxGraphComponent implements Observer,
 			public void actionPerformed(ActionEvent e) {
 				final mxGraph graph = getGraph();
 				// Removes the selected Cells
-				graph.removeCells();			
+				graph.removeCells();
 
 			}
 		});
@@ -138,7 +141,8 @@ public class PipelineBox extends mxGraphComponent implements Observer,
 		mxCell mxcell = (mxCell) cell;
 
 		if (mxcell != null && mxcell.isVertex()) {
-			fireTaskSelected(new TaskSelectedEvent(this, (AbstractTask) mxcell.getValue()));
+			fireTaskSelected(new TaskSelectedEvent(this,
+					(AbstractTask) mxcell.getValue()));
 		} else {
 			fireTaskSelected(new TaskSelectedEvent(this, (AbstractTask) null));
 		}
@@ -172,11 +176,13 @@ public class PipelineBox extends mxGraphComponent implements Observer,
 			if (task.getModel() != null && !task.equals(selectedTask)) {
 				this.graph.setSelectionCell(((JGPipelineModel) arg0)
 						.getCellForTask(task));
-				fireTaskSelected(new TaskSelectedEvent(this, (AbstractTask) task));
+				fireTaskSelected(new TaskSelectedEvent(this,
+						(AbstractTask) task));
 				selectedTask = task;
 			} else if (task.getModel() == null) {
 				selectedTask = null;
-				fireTaskSelected(new TaskSelectedEvent(this, (AbstractTask) null));
+				fireTaskSelected(new TaskSelectedEvent(this,
+						(AbstractTask) null));
 			}
 		}
 
@@ -186,6 +192,9 @@ public class PipelineBox extends mxGraphComponent implements Observer,
 	public void mouseClicked(MouseEvent arg0) {
 		if (getCellAt(arg0.getX(), arg0.getY()) == null) {
 			fireTaskSelected(new TaskSelectedEvent(this, (AbstractTask) null));
+		} else if (arg0.getClickCount() >= 2) {
+			System.out.println("Double click on task: "
+					+ selectedTask.getCommandlineForm());
 		}
 	}
 
@@ -200,14 +209,14 @@ public class PipelineBox extends mxGraphComponent implements Observer,
 	public void mouseExited(MouseEvent arg0) {
 	}
 
-
-	private void checkPopup(MouseEvent event){
+	private void checkPopup(MouseEvent event) {
 		// According to java swing doku need to do this in mousePressed
 		// and mouseReleased
-		if (event.isPopupTrigger()) {			
+		if (event.isPopupTrigger()) {
 			popupMenu.show(event.getComponent(), event.getX(), event.getY());
 		}
 	}
+
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		checkPopup(arg0);
@@ -219,14 +228,59 @@ public class PipelineBox extends mxGraphComponent implements Observer,
 	}
 
 	@Override
-	public void TaskSelected(TaskSelectedEvent e) {		
-		String taskName = (e.getTask() != null)?e.getTask().getName():"";
-		List<TTask> desc = TaskManager.getInstance().getCompatibleTasks(taskName);
+	public void TaskSelected(TaskSelectedEvent e) {
+		String taskName = (e.getTask() != null && e.getTask().isConnectable()) ? e
+				.getTask().getName() : "";
+		List<TTask> desc = TaskManager.getInstance().getCompatibleTasks(
+				taskName);
 		popupMenu.removeAll();
-		for(TTask currTask : desc){
-			popupMenu.add(currTask.getName()).addActionListener(popupActionListener);
-		}	
-		
+		for (TTask currTask : desc) {
+			popupMenu.add(currTask.getName()).addActionListener(
+					popupActionListener);
+		}
+
+	}
+
+	/**
+	 * Wee need to add saving the zoom position to the super class
+	 */
+	@Override
+	public void zoomIn() {
+		super.zoomIn();
+		zoomPos *= zoomFactor;
+	}
+
+	/**
+	 * Wee need to add saving the zoom position to the super class
+	 */
+	@Override
+	public void zoomOut() {
+		// JGprahx bug fails zooming in after having zoomed out too much, don't
+		// allow this
+		if (zoomPos > 0.4) {
+			super.zoomOut();
+			zoomPos /= zoomFactor;
+		}
+	}
+
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent evt) {
+		if (evt.isControlDown()
+				&& evt.getScrollType() == MouseWheelEvent.WHEEL_UNIT_SCROLL) {
+			int scrolled = evt.getWheelRotation();
+			if (scrolled < 0) {
+				for (int s = 0; s > scrolled; --s) {
+					this.zoomIn();
+
+				}
+
+			} else if (zoomPos > 0.3) {
+				for (int s = 0; s < scrolled; ++s) {
+					this.zoomOut();
+				}
+			}
+
+		}
 	}
 
 }

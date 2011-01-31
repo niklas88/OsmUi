@@ -31,15 +31,15 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import de.osmui.i18n.I18N;
-
-public class ConfigurationDialog extends JDialog {
 	/**
-	 * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+	 * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
 	 * 
 	 * will be tested in the system-test
 	 */
-	private static final long serialVersionUID = -1901364651992578489L;
+public class ConfigurationDialog extends JDialog {
 
+	private static final long serialVersionUID = -1901364651992578489L;
+	
 	private JDialog dialog;
 
 	public ConfigurationDialog() {

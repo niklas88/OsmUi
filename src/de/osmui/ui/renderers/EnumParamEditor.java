@@ -15,11 +15,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
- * 
- */
-
 package de.osmui.ui.renderers;
 
 import java.awt.Component;
@@ -37,13 +32,15 @@ import javax.swing.table.TableCellEditor;
 import de.osmui.model.osm.TEnumValue;
 import de.osmui.model.pipelinemodel.parameters.EnumParameter;
 
+/**
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
+ */
+
 public class EnumParamEditor extends AbstractCellEditor implements
 		TableCellEditor, ActionListener {
 
 	private static class EnumComboBoxRenderer extends BasicComboBoxRenderer {
-		/**
-		 * 
-		 */
+
 		private static final long serialVersionUID = 2368155220295494506L;
 
 		/*

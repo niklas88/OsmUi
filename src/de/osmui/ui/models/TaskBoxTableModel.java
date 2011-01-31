@@ -26,15 +26,12 @@ import de.osmui.i18n.I18N;
 import de.osmui.model.osm.TTask;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  *
  *no tests, only getter and setter
  */
 public class TaskBoxTableModel extends AbstractTableModel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2453623808903546286L;
 
 	List<TTask> data;

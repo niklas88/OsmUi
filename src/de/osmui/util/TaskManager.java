@@ -59,7 +59,7 @@ import de.osmui.util.exceptions.TaskNameUnknownException;
  * descriptions. It implements the Singelton pattern, as well as being a Factory
  * for tasks
  * 
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * @see TaskManagerTest
  */

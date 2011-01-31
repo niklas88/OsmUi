@@ -27,7 +27,7 @@ import de.osmui.model.pipelinemodel.parameters.IntParameter;
  * and sets up the connection with the clone, it also needs to adjust the task parameter indicating
  * it's variability number
  * 
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  *
  * @see VariablePipeTest
  * 

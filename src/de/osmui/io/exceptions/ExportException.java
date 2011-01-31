@@ -16,17 +16,16 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+
+package de.osmui.io.exceptions;
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  */
-package de.osmui.io.exceptions;
-
 public class ExportException extends Exception {
 
-	
-	private static final long serialVersionUID = -7162813660344557052L;
-	
+	private static final long serialVersionUID = 6260309323863186484L;
+
 	public ExportException(String string) {
 		super(string);
 	}

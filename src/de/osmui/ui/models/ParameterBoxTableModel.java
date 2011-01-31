@@ -28,7 +28,7 @@ import de.osmui.model.pipelinemodel.parameters.AbstractParameter;
 public class ParameterBoxTableModel extends AbstractTableModel {
 
 	/**
-	 * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+	 * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
 	 * 
 	 * no tests, only getter and setter
 	 */

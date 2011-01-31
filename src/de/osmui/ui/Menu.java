@@ -24,6 +24,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.text.ParseException;
 import java.util.Locale;
@@ -53,7 +54,7 @@ import de.osmui.model.pipelinemodel.JGPipelineModel;
 import de.osmui.util.exceptions.ImportException;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  *         Provides Menu to have an easy way to construct the whole Menu of
  *         Osmui.
@@ -64,14 +65,13 @@ import de.osmui.util.exceptions.ImportException;
 
 public class Menu extends JMenuBar {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6521196530844239528L;
 
 	PipeImExShFilter pipeImExShFilter = new PipeImExShFilter();
 	PipeImExBatFilter pipeImExBatFilter = new PipeImExBatFilter();
 
+	
+	
 	/**
 	 * Constructs the menu with all its entries of Osmui.
 	 */
@@ -372,30 +372,30 @@ public class Menu extends JMenuBar {
 		 * Menu items of the menu "Edit"
 		 */
 
-//		/*
-//		 * Redo
-//		 */
-//		JMenuItem redo = new JMenuItem(I18N.getString("Menu.redo")); //$NON-NLS-1$
-//		redo.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				System.out.println("redo"); //$NON-NLS-1$s
-//			}
-//		});
-//		editMenu.add(redo);
-//		/*
-//		 * Undo
-//		 */
-//		JMenuItem undo = new JMenuItem(I18N.getString("Menu.undo")); //$NON-NLS-1$
-//		undo.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				System.out.println("undo"); //$NON-NLS-1$
-//			}
-//		});
-//		editMenu.add(undo);
-//		/*
-//		 * Separator
-//		 */
-//		editMenu.addSeparator();
+		// /*
+		// * Redo
+		// */
+		//		JMenuItem redo = new JMenuItem(I18N.getString("Menu.redo")); //$NON-NLS-1$
+		// redo.addActionListener(new ActionListener() {
+		// public void actionPerformed(ActionEvent e) {
+		//				System.out.println("redo"); //$NON-NLS-1$s
+		// }
+		// });
+		// editMenu.add(redo);
+		// /*
+		// * Undo
+		// */
+		//		JMenuItem undo = new JMenuItem(I18N.getString("Menu.undo")); //$NON-NLS-1$
+		// undo.addActionListener(new ActionListener() {
+		// public void actionPerformed(ActionEvent e) {
+		//				System.out.println("undo"); //$NON-NLS-1$
+		// }
+		// });
+		// editMenu.add(undo);
+		// /*
+		// * Separator
+		// */
+		// editMenu.addSeparator();
 		/*
 		 * Options
 		 */
@@ -411,18 +411,62 @@ public class Menu extends JMenuBar {
 
 		this.add(editMenu);
 		/*
-		 * Menu "Layout"
+		 * Menu "View"
 		 */
-		JMenu layoutMenu = new JMenu(I18N.getString("Menu.layout"));
+		JMenu layoutMenu = new JMenu(I18N.getString("Menu.view"));
 		/*
-		 * Menu items of the menu "Layout"
+		 * Menu items of the menu "View"
 		 */
 
+		/*
+		 * Zoom in
+		 */
+		JMenuItem viewZoomIn = new JMenuItem(I18N.getString("Menu.viewZoomIn")); //$NON-NLS-1$
+		viewZoomIn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainFrame.getInstance().getPipeBox().zoomIn();
+
+			}
+		});
+		viewZoomIn.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,
+				ActionEvent.CTRL_MASK));
+		layoutMenu.add(viewZoomIn);
+
+		/*
+		 * Zoom out
+		 */
+
+		JMenuItem viewZoomOut = new JMenuItem(
+				I18N.getString("Menu.viewZoomOut")); //$NON-NLS-1$
+		viewZoomOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainFrame.getInstance().getPipeBox().zoomOut();
+			}
+		});
+		viewZoomOut.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_UP,
+				ActionEvent.CTRL_MASK));
+		layoutMenu.add(viewZoomOut);
+
+		/*
+		 * Zoom standard
+		 */
+
+		JMenuItem viewZoomStandard = new JMenuItem(
+				I18N.getString("Menu.viewZoomStandard")); //$NON-NLS-1$
+		viewZoomStandard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainFrame.getInstance().getPipeBox().zoomTo(1.0, false);
+			}
+		});
+		layoutMenu.add(viewZoomStandard);
+
+		layoutMenu.addSeparator();
+		
 		/*
 		 * automatic Layout
 		 */
 		JMenuItem layoutAutomatic = new JMenuItem(
-				I18N.getString("Menu.layoutAutomatic")); //$NON-NLS-1$
+				I18N.getString("Menu.viewLayoutAutomatic")); //$NON-NLS-1$
 		layoutAutomatic.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainFrame.getInstance().pipeModel.layout(null);
