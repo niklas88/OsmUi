@@ -194,7 +194,7 @@ Beim Selektieren des Menüeintrags \textbf{Datei} öffnet sich ein Dialog. Der B
 \end{figure}
 \end{center}
 \item Bearbeiten\\
-Beim Selektieren des Menüeintrags \textbf{Bearbeiten} öffnet sich ein Dialog. Der Benutzer kann zwischen \textbf{Rückgängig} (die letzte Änderung wird wieder rückgängig gemacht), \textbf{wiederherstellen} (eine rückgängig gemachte Änderung wird wieder hergestellt) und \textbf{Einstellungen} (Den Pfad zu Osmosis einstellen) wählen.
+Beim Selektieren des Menüeintrags \textbf{Bearbeiten} öffnet sich ein Dialog. Der Benutzer kann \textbf{Einstellungen} (Den Pfad zu Osmosis einstellen) wählen.
 \\
 \begin{center}
 \begin{figure}[h!]
@@ -227,10 +227,10 @@ Um die Verwendung von OsmUi für den Benutzer so komfortabel wie möglich zu ges
 OsmUi validiert die Eingaben des Benutzers insofern, dass es prüft, ob zwingend notwendige Felder leer gelassen wurden.
 \subsection{Warnung}
 Wenn der Benutzer das Programm schließen möchte, ohne zuvor gespeichert zu haben, gibt das Programm eine Warnung aus.
-\subsection{Undo}
-Um Fehler leicht rückgängig machen zu können, bietet OsmUi die Möglichkeit den letzten gemachten Schritt rückgängig zu machen.
-\subsection{Redo}
-Ein rückgängig gemachter Schritt kann wieder hergestellt werden.
+%\subsection{Undo}
+%Um Fehler leicht rückgängig machen zu können, bietet OsmUi die Möglichkeit den letzten gemachten Schritt rückgängig zu machen.
+%\subsection{Redo}
+%Ein rückgängig gemachter Schritt kann wieder hergestellt werden.
 \subsection{Filter}
 Um dem Benutzer die Erstellung einer korrekten Pipeline zu vereinfachen, werden in der Taskbox nur die kompatiblen Tasks angezeigt. Ebenso können in der Pipelinebox nur kompatible Tasks angehängt werden.
 \subsection{gute Standardwerte}
@@ -379,36 +379,36 @@ Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer inst
 \newline $ \rightarrow$ Schritt 7b.1
 \end{tabular}
 \end{center}
-\subsubsection{Rückgängig machen}
-\begin{center}
-\begin{tabular}{|p {5cm}|p{10cm}|}
-\hline Name & \textbf{Rückgängig machen} \\ 
-\hline Ziel & der letzte Schritt soll Rückgängig gemacht werden\\
-\hline Vorbedingung & Es muss mindestens ein Schritt gemacht worden sein\\
-\hline Nachbedingung & Der Schritt wurde Rückgängig gemacht\\
-\hline Akteur & Benutzer\\
-\hline Normalablauf & 1 Der Benuzer wählt den Menüeintrag Bearbeiten
-\newline 2 OsmUi öffnet das Bearbeiten Menü
-\newline 3 Der Benutzer wählt \glqq Rückgängig''
-\newline 4 Die letzte Veränderung wird rückgängig gemacht\\
-\hline 
-\end{tabular}
-\end{center}
-\subsubsection{Pipeline Wiederherstellen}
-\begin{center}
-\begin{tabular}{|p {5cm}|p{10cm}|}
-\hline Name & \textbf{Wiederherstellen} \\ 
-\hline Ziel & der zuletzt rückgängig gemachte Schritt soll wieder hergestellt werden\\
-\hline Vorbedingung & Es muss mindestens ein Schritt rückgängig gemacht worden sein\\
-\hline Nachbedingung & Der Schritt wurde wiederhergestellt gemacht\\
-\hline Akteur & Benutzer\\
-\hline Normalablauf & 1 Der Benuzer wählt den Menüeintrag Bearbeiten
-\newline 2 OsmUi öffnet das Bearbeiten Menü
-\newline 3 Der Benutzer wählt \glqq wiederherstellen''
-\newline 4 Der zuletzt rückgängig gemachte Schritt wird wiederhergestellt\\
-\hline 
-\end{tabular}
-\end{center}
+%\subsubsection{Rückgängig machen}
+%\begin{center}
+%\begin{tabular}{|p {5cm}|p{10cm}|}
+%\hline Name & \textbf{Rückgängig machen} \\ 
+%\hline Ziel & der letzte Schritt soll Rückgängig gemacht werden\\
+%\hline Vorbedingung & Es muss mindestens ein Schritt gemacht worden sein\\
+%\hline Nachbedingung & Der Schritt wurde Rückgängig gemacht\\
+%\hline Akteur & Benutzer\\
+%\hline Normalablauf & 1 Der Benuzer wählt den Menüeintrag Bearbeiten
+%\newline 2 OsmUi öffnet das Bearbeiten Menü
+%\newline 3 Der Benutzer wählt \glqq Rückgängig''
+%\newline 4 Die letzte Veränderung wird rückgängig gemacht\\
+%\hline 
+%\end{tabular}
+%\end{center}
+%\subsubsection{Pipeline Wiederherstellen}
+%\begin{center}
+%\begin{tabular}{|p {5cm}|p{10cm}|}
+%\hline Name & \textbf{Wiederherstellen} \\ 
+%\hline Ziel & der zuletzt rückgängig gemachte Schritt soll wieder hergestellt werden\\
+%\hline Vorbedingung & Es muss mindestens ein Schritt rückgängig gemacht worden sein\\
+%\hline Nachbedingung & Der Schritt wurde wiederhergestellt gemacht\\
+%\hline Akteur & Benutzer\\
+%\hline Normalablauf & 1 Der Benuzer wählt den Menüeintrag Bearbeiten
+%\newline 2 OsmUi öffnet das Bearbeiten Menü
+%\newline 3 Der Benutzer wählt \glqq wiederherstellen''
+%\newline 4 Der zuletzt rückgängig gemachte Schritt wird wiederhergestellt\\
+%\hline 
+%\end{tabular}
+%\end{center}
 \subsubsection{Hilfe aufrufen}
 \begin{center}
 \begin{tabular}{|p {5cm}|p{10cm}|}
