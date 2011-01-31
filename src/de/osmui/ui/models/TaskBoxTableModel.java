@@ -53,7 +53,7 @@ public class TaskBoxTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int row, int column) {
-		TTask value = data.get(row + 1);
+		TTask value = data.get(row);
 		return value;
 	}
 
