@@ -22,6 +22,8 @@ package de.osmui.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,6 +69,14 @@ public class TaskManager {
 	protected HashMap<String, TTask> taskMap;
 	protected HashMap<String, String> shortNameTable;
 	protected OsmosisTaskDescription taskDescriptions;
+	protected Comparator<TTask> taskComperator = new Comparator<TTask>(){
+
+		@Override
+		public int compare(TTask arg0, TTask arg1) {
+			return arg0.getName().compareTo(arg1.getName());
+		}
+		
+	};
 
 	/**
 	 * The protected constructor for the Singelton pattern
@@ -304,7 +314,8 @@ public class TaskManager {
 				}
 			}
 		}
-
+		// Sort the tasklist
+		Collections.sort(compatibleTasks, taskComperator);
 		return compatibleTasks;
 	}
 
