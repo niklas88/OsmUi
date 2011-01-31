@@ -247,7 +247,7 @@ public class PipelineBox extends mxGraphComponent implements Observer,
 	public void zoomOut() {
 		// JGprahx bug fails zooming in after having zoomed out too much, don't
 		// allow this
-		if (zoomPos > 0.4) {
+		if (zoomPos > 0.3) {
 			super.zoomOut();
 			zoomPos /= zoomFactor;
 		}
@@ -264,7 +264,7 @@ public class PipelineBox extends mxGraphComponent implements Observer,
 
 				}
 
-			} else if (zoomPos > 0.3) {
+			} else {
 				for (int s = 0; s < scrolled; ++s) {
 					this.zoomOut();
 				}
