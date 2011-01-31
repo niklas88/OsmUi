@@ -135,18 +135,6 @@ public class PipelineBox extends mxGraphComponent implements Observer,
 
 	}
 
-	@Override
-	public void selectCellForEvent(Object cell, MouseEvent e) {
-		super.selectCellForEvent(cell, e);
-		mxCell mxcell = (mxCell) cell;
-
-		if (mxcell != null && mxcell.isVertex()) {
-			fireTaskSelected(new TaskSelectedEvent(this,
-					(AbstractTask) mxcell.getValue()));
-		} else {
-			fireTaskSelected(new TaskSelectedEvent(this, (AbstractTask) null));
-		}
-	}
 
 	public void registerTaskSelectedListener(TaskSelectedEventListener l) {
 		selectedListeners.add(l);
@@ -190,12 +178,7 @@ public class PipelineBox extends mxGraphComponent implements Observer,
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		if (getCellAt(arg0.getX(), arg0.getY()) == null) {
-			fireTaskSelected(new TaskSelectedEvent(this, (AbstractTask) null));
-		} else if (arg0.getClickCount() >= 2) {
-			System.out.println("Double click on task: "
-					+ selectedTask.getCommandlineForm());
-		}
+		//checkEvent(arg0);
 	}
 
 	// Need to specify the following methods but don't care
@@ -209,7 +192,7 @@ public class PipelineBox extends mxGraphComponent implements Observer,
 	public void mouseExited(MouseEvent arg0) {
 	}
 
-	private void checkPopup(MouseEvent event) {
+	private void checkEvent(MouseEvent event) {
 		// According to java swing doku need to do this in mousePressed
 		// and mouseReleased
 		if (event.isPopupTrigger()) {
@@ -219,12 +202,19 @@ public class PipelineBox extends mxGraphComponent implements Observer,
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		checkPopup(arg0);
+		
+		mxCell cell = (mxCell) getCellAt(arg0.getX(), arg0.getY());
+		if ( cell == null) {
+			fireTaskSelected(new TaskSelectedEvent(this, (AbstractTask) null));
+		} else if (cell.isVertex()){
+			fireTaskSelected(new TaskSelectedEvent(this, (AbstractTask) cell.getValue()));
+		}
+		checkEvent(arg0);		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		checkPopup(arg0);
+		checkEvent(arg0);
 	}
 
 	@Override

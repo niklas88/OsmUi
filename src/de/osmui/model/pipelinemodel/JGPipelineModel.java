@@ -50,6 +50,8 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		Serializable {
 
 	private static final long serialVersionUID = -4609328085880199933L;
+	private static final int VERTEX_WIDTH = 100;
+	private static final int VERTEX_HEIGHT = 20;
 	
 	private class mxPipelineGraph extends mxGraph {
 
@@ -144,6 +146,8 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 
 	protected transient mxGraph graph;
 	protected transient mxHierarchicalLayout lay;
+	
+	private int sourceTaskNum; 
 	/**
 	 * Constructs a new JGPipelineModel
 	 */
@@ -152,8 +156,9 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		taskMap = new HashMap<Long, mxCell>();
 		pipeMap = new HashMap<Long, mxCell>();
 		graph = new mxPipelineGraph();
+		sourceTaskNum = 0;
 		lay = new mxHierarchicalLayout(graph, SwingConstants.NORTH);
-		lay.setLayoutFromSinks(false);
+		lay.setLayoutFromSinks(false);		
 	}
 	
 	/** 
@@ -205,52 +210,66 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 	 */
 	@Override
 	public List<AbstractTask> getSourceTasks() {
-
-		ArrayList<AbstractTask> sourceTasks = new ArrayList<AbstractTask>();
-		// Remember we always add sourceTasks to the front so we can break after
-		// finding the first non sourceTask
-		for (AbstractTask task : tasks) {
-			if (task.getInputPorts().isEmpty()) {
-				// We return the Task objects without their decorator here so
-				// that
-				// subclass functionality might be accessed
-				sourceTasks.add(task);
-			} else {
-				break;
-			}
-		}
-
-		return sourceTasks;
+		return new ArrayList<AbstractTask>(tasks.subList(0, sourceTaskNum));
 	}
 
+	/**
+	 * Adds the task to the model without wireing up jgraphx
+	 * @param task
+	 */
+	private void rawAddTask(AbstractTask task){
+		// Add to list of tasks, if it's a sourceTasks add to the beginning,
+		// this speeds up getting sourceTasks
+		if (task.getInputPorts().isEmpty()) {
+			tasks.add(0, task);
+			// Got a new source task
+			sourceTaskNum++;
+		} else {
+			tasks.add(task);
+		}
+
+		task.setModel(this);
+	}
+	/**
+	 * Adds a task to jgraphx and positions it
+	 * @param task
+	 */
+	private void addTaskToJG(AbstractTask parentTask, AbstractTask task){
+		double horizontalPos = 0.0;
+		double verticalPos = 20.0;
+		
+		
+		if(parentTask != null) {
+			// For ease of simplicity position relative to first upstream task			
+			mxCell parentCell = getCellForTask(parentTask);
+			horizontalPos = parentCell.getGeometry().getX();
+			verticalPos = parentCell.getGeometry().getY()+VERTEX_HEIGHT+80.0;
+		} else {
+			// minus one to not count ourselves
+			horizontalPos = (sourceTaskNum - 1)* (VERTEX_WIDTH+20.0) + 20.0;
+		}
+		// Add the task to the underling mxGraph model
+		Object parent = graph.getDefaultParent();
+
+		graph.getModel().beginUpdate();
+		try {
+			
+			// Add a mxCell to our taskMap for this task
+			taskMap.put(Long.valueOf(task.getID()), (mxCell) graph
+					.insertVertex(parent, null, task, horizontalPos, verticalPos, VERTEX_WIDTH, VERTEX_HEIGHT));
+
+		} finally {
+			graph.getModel().endUpdate();
+		}
+	}
 	/**
 	 * @see de.osmui.model.pipelinemodel.AbstractModel#addTask(de.osmui.model.
 	 * pipelinemodel.AbstractTask)
 	 */
 	@Override
 	public void addTask(AbstractTask task) {
-
-		// Add to list of tasks, if it's a sourceTasks add to the beginning,
-		// this speeds up getting sourceTasks
-		if (task.getInputPorts().isEmpty()) {
-			tasks.add(0, task);
-		} else {
-			tasks.add(task);
-		}
-
-		task.setModel(this);
-		// Add the task to the underling mxGraph model
-		Object parent = graph.getDefaultParent();
-
-		graph.getModel().beginUpdate();
-		try {
-			// Add a mxCell to our taskMap for this task
-			taskMap.put(Long.valueOf(task.getID()), (mxCell) graph
-					.insertVertex(parent, null, task, 10, 10, 100, 20));
-
-		} finally {
-			graph.getModel().endUpdate();
-		}
+		rawAddTask(task);
+		addTaskToJG(null, task);
 		setChanged();
 		notifyObservers(task);
 	}
@@ -269,9 +288,10 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 
 		// First add the child and then use our internal connect method to wire
 		// things up
-		addTask(child);
-
+		rawAddTask(child);
+		addTaskToJG(parent, child);
 		connectTasks(parent, child);
+		
 		if(Boolean.valueOf(ConfigurationManager.getInstance().getEntry("AutoConfCheckBox", "true"))){
 			layout(null);
 		}
@@ -335,6 +355,11 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		}
 		// Disconnect all connected ports
 		int countInputPorts = task.getInputPorts().size();
+		// Decrease sourceTaskNum if it was a source task
+		if(countInputPorts == 0){
+			sourceTaskNum--;
+		}
+		
 		AbstractPort in;
 		for(int iter=0; iter < countInputPorts; ++iter){
 			in = task.getInputPorts().get(iter);

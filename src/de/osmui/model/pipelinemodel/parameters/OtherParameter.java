@@ -48,7 +48,7 @@ public class OtherParameter extends AbstractParameter implements Serializable {
 	 */
 	@Override
 	public String getCommandlineForm() {
-		return this.getName()+"="+this.getValue();
+		return this.getName()+"=\""+this.getValue()+"\"";
 	}
 
 	/* (non-Javadoc)

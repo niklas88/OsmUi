@@ -534,7 +534,7 @@ public class Menu extends JMenuBar {
 				JLabel bild = new JLabel(icon);
 				frame.add(bild, BorderLayout.NORTH);
 
-				JLabel test = new JLabel(I18N.getString("Menu.about_text"));
+				JLabel test = new JLabel(I18N.getString("Menu.about_text", Application.version));
 				frame.add(test, BorderLayout.CENTER);
 				frame.setVisible(true);
 				frame.pack();
