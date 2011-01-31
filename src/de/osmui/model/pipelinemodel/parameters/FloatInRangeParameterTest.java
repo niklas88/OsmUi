@@ -13,39 +13,35 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-package de.osmui.ui;
-
-import javax.swing.SwingUtilities;
+*/
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
- * Application main class that is used to initialize OsmUi and to start
- * up the UI.
- * 
- * will be tested by system-tests
+ * @see FloatInRangeParameter
  * 
  */
+package de.osmui.model.pipelinemodel.parameters;
 
-public class Application {
+import static org.junit.Assert.*;
 
-	public static String version = "Version 1.0";
-	
-	/**
-	 * Starts OsmUi
-	 * 
-	 * @param args
-	 *            No runtime arguments are evaluated
-	 */
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				MainFrame osmUi = MainFrame.getInstance();
-				osmUi.setVisible(true);
-			}
+import org.junit.Test;
 
-		});
+import de.osmui.model.osm.TParameter;
+
+
+public class FloatInRangeParameterTest {
+	@Test public void setGet(){
+		TParameter desc = new TParameter();
+		FloatInRangeParameter param = new FloatInRangeParameter(desc , "9");
+		FloatInRangeParameter param1 = new FloatInRangeParameter(desc , "9", 0.0, 10.0);
+		param.setValue("9");
+		param.name = "name";
+		assertEquals("9.0", param.getValue());
+		
+		param1.setValue(9.0);
+		assertEquals("9.0", param1.getValue());
+		
+		assertEquals("name=9.0", param.getCommandlineForm());
 	}
-
 }

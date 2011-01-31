@@ -13,39 +13,28 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-package de.osmui.ui;
-
-import javax.swing.SwingUtilities;
-
+*/
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena käfer
  * 
- * Application main class that is used to initialize OsmUi and to start
- * up the UI.
- * 
- * will be tested by system-tests
- * 
+ * @see OtherParameter
  */
+package de.osmui.model.pipelinemodel.parameters;
 
-public class Application {
+import static org.junit.Assert.*;
 
-	public static String version = "Version 1.0";
-	
-	/**
-	 * Starts OsmUi
-	 * 
-	 * @param args
-	 *            No runtime arguments are evaluated
-	 */
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				MainFrame osmUi = MainFrame.getInstance();
-				osmUi.setVisible(true);
-			}
+import org.junit.Test;
 
-		});
+import de.osmui.model.osm.TParameter;
+
+
+public class OtherParameterTest {
+	@Test public void getSet(){
+		TParameter desc = new TParameter();
+		OtherParameter param = new OtherParameter(desc, "value");
+		param.setValue("value");
+		param.name = "name";
+		assertEquals("value", param.getValue());
+		assertEquals("name=value", param.getCommandlineForm());
 	}
-
 }

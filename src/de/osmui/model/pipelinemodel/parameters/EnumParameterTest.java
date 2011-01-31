@@ -13,39 +13,38 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-package de.osmui.ui;
-
-import javax.swing.SwingUtilities;
-
+*/
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
- * Application main class that is used to initialize OsmUi and to start
- * up the UI.
- * 
- * will be tested by system-tests
+ * @see EnumParameter
  * 
  */
+package de.osmui.model.pipelinemodel.parameters;
 
-public class Application {
+import static org.junit.Assert.*;
 
-	public static String version = "Version 1.0";
-	
-	/**
-	 * Starts OsmUi
-	 * 
-	 * @param args
-	 *            No runtime arguments are evaluated
-	 */
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				MainFrame osmUi = MainFrame.getInstance();
-				osmUi.setVisible(true);
-			}
+import org.junit.Test;
 
-		});
+import de.osmui.model.osm.TEnumValue;
+import de.osmui.model.osm.TParameter;
+
+
+public class EnumParameterTest {
+	@Test public void setGet(){
+		TParameter desc = new TParameter();
+		TEnumValue arg0 = new TEnumValue();
+		arg0.setValue("value");
+		desc.getEnumValue().add(arg0);
+		EnumParameter param = new EnumParameter(desc , "value");
+		param.setValue("value");
+		param.getEnumerationValues().add(arg0);
+		param.name = "name";
+		
+		assertEquals("value", param.getValue());
+		
+		assertEquals("", param.getDefaultValue());
+		
+		assertEquals("name=value", param.getCommandlineForm());
 	}
-
 }

@@ -145,7 +145,7 @@ In der Pipelinebox wird die Pipeline grafisch dargestellt und es können Tasks z
 bearbeitet oder ein neuer Task über die Taskpalette - wie oben beschrieben - angefügt werden. Desweiteren kann eine Verbindung zu einem anderen Task, der noch offene
 Inputs hat, hergestellt werden.
 \subsubsection{Parametertab}
-Wählt der Benutzer einen Task aus (Doppelklick), so zeigt OsmUi den Parametertab an, in dem alle - für den jeweiligen Tasktyp vorhandenen - Parameter eingegeben werden können.
+Selektiert der Benutzer einen Task, so zeigt der Parametertab die Parameter des Tasks an.
 Hierbei kann die Eingabe eingeschränkt sein und als Spanne von Zahlen, als Kartenausschnitt oder als freier Text erfolgen. Dabei wird der für den Datentyp beste Eingabemodus gewählt.\\
 \begin{center}
 \begin{figure}[h!]
@@ -194,7 +194,7 @@ Beim Selektieren des Menüeintrags \textbf{Datei} öffnet sich ein Dialog. Der B
 \end{figure}
 \end{center}
 \item Bearbeiten\\
-Beim Selektieren des Menüeintrags \textbf{Bearbeiten} öffnet sich ein Dialog. Der Benutzer kann zwischen \textbf{Rückgängig} (die letzte Änderung wird wieder rückgängig gemacht), \textbf{wiederherstellen} (eine rückgängig gemachte Änderung wird wieder hergestellt) und \textbf{Einstellungen} (Den Pfad zu Osmosis einstellen) wählen.
+Beim Selektieren des Menüeintrags \textbf{Bearbeiten} öffnet sich ein Dialog. Der Benutzer kann \textbf{Einstellungen} (Den Pfad zu Osmosis einstellen) wählen.
 \\
 \begin{center}
 \begin{figure}[h!]
@@ -227,10 +227,10 @@ Um die Verwendung von OsmUi für den Benutzer so komfortabel wie möglich zu ges
 OsmUi validiert die Eingaben des Benutzers insofern, dass es prüft, ob zwingend notwendige Felder leer gelassen wurden.
 \subsection{Warnung}
 Wenn der Benutzer das Programm schließen möchte, ohne zuvor gespeichert zu haben, gibt das Programm eine Warnung aus.
-\subsection{Undo}
-Um Fehler leicht rückgängig machen zu können, bietet OsmUi die Möglichkeit den letzten gemachten Schritt rückgängig zu machen.
-\subsection{Redo}
-Ein rückgängig gemachter Schritt kann wieder hergestellt werden.
+%\subsection{Undo}
+%Um Fehler leicht rückgängig machen zu können, bietet OsmUi die Möglichkeit den letzten gemachten Schritt rückgängig zu machen.
+%\subsection{Redo}
+%Ein rückgängig gemachter Schritt kann wieder hergestellt werden.
 \subsection{Filter}
 Um dem Benutzer die Erstellung einer korrekten Pipeline zu vereinfachen, werden in der Taskbox nur die kompatiblen Tasks angezeigt. Ebenso können in der Pipelinebox nur kompatible Tasks angehängt werden.
 \subsection{gute Standardwerte}
@@ -276,7 +276,8 @@ Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer inst
 \hline Sonderfall 6a) & 6a.1 Der Benutzer wählt \glqq Abrechen''
 \newline 6a.2 Osmui lädt keine Daten und zeigt den vorherigen Zustand.\\
 \hline Sonderfall 7a) & Pipelinebox ist nicht leer.
-\newline 7a.1 Osmui lädt die Datei in die Piplinebox einer neuen Instanz von OsmUi.\\
+\newline 7a.1 Osmui fragt, ob die Pipeline hinzugefügt werden soll.
+\newline 7a.2 Der Benutzer bestätigt\\
 \hline Sonderfall 7b)& Datei ist zwischenzeitlich nicht mehr verfügbar.
 \newline 7b.1 OsmUi versucht Datei zu lesen bricht dann ab und zeigt einen entsprechenden Fehlerdialog an.
 \newline 7b.2 Benutzer wählt \glqq Ok''.
@@ -361,7 +362,8 @@ Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer inst
 \hline Sonderfall 6a) & 6a.1 Der Benutzer wählt \glqq Abrechen''
 \newline 6a.2 OsmUi importiert keine Daten und zeigt den vorherigen Zustand.\\
 \hline Sonderfall 7a) & Pipelinebox ist nicht leer.
-\newline 7a.1 OsmUi importiert die Datei in die Piplinebox einer neu geöffneten Instanz von OsmUi.\\
+\newline 7a.1 OsmUi fragt, ob die Pipeline hinzugefügt werden soll
+\newline 7a.2 Der Benutzer bestätigt\\
 \hline Sonderfall 7b)& Datei ist zwischenzeitlich nicht mehr verfügbar.
 \newline 7b.1 OsmUi versucht Datei zu lesen bricht dann ab und zeigt einen entsprechenden Fehlerdialog an.
 \newline 7b.2 Benutzer wählt \glqq Ok''.
@@ -377,36 +379,36 @@ Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer inst
 \newline $ \rightarrow$ Schritt 7b.1
 \end{tabular}
 \end{center}
-\subsubsection{Rückgängig machen}
-\begin{center}
-\begin{tabular}{|p {5cm}|p{10cm}|}
-\hline Name & \textbf{Rückgängig machen} \\ 
-\hline Ziel & der letzte Schritt soll Rückgängig gemacht werden\\
-\hline Vorbedingung & Es muss mindestens ein Schritt gemacht worden sein\\
-\hline Nachbedingung & Der Schritt wurde Rückgängig gemacht\\
-\hline Akteur & Benutzer\\
-\hline Normalablauf & 1 Der Benuzer wählt den Menüeintrag Bearbeiten
-\newline 2 OsmUi öffnet das Bearbeiten Menü
-\newline 3 Der Benutzer wählt \glqq Rückgängig''
-\newline 4 Die letzte Veränderung wird rückgängig gemacht\\
-\hline 
-\end{tabular}
-\end{center}
-\subsubsection{Pipeline Wiederherstellen}
-\begin{center}
-\begin{tabular}{|p {5cm}|p{10cm}|}
-\hline Name & \textbf{Wiederherstellen} \\ 
-\hline Ziel & der zuletzt rückgängig gemachte Schritt soll wieder hergestellt werden\\
-\hline Vorbedingung & Es muss mindestens ein Schritt rückgängig gemacht worden sein\\
-\hline Nachbedingung & Der Schritt wurde wiederhergestellt gemacht\\
-\hline Akteur & Benutzer\\
-\hline Normalablauf & 1 Der Benuzer wählt den Menüeintrag Bearbeiten
-\newline 2 OsmUi öffnet das Bearbeiten Menü
-\newline 3 Der Benutzer wählt \glqq wiederherstellen''
-\newline 4 Der zuletzt rückgängig gemachte Schritt wird wiederhergestellt\\
-\hline 
-\end{tabular}
-\end{center}
+%\subsubsection{Rückgängig machen}
+%\begin{center}
+%\begin{tabular}{|p {5cm}|p{10cm}|}
+%\hline Name & \textbf{Rückgängig machen} \\ 
+%\hline Ziel & der letzte Schritt soll Rückgängig gemacht werden\\
+%\hline Vorbedingung & Es muss mindestens ein Schritt gemacht worden sein\\
+%\hline Nachbedingung & Der Schritt wurde Rückgängig gemacht\\
+%\hline Akteur & Benutzer\\
+%\hline Normalablauf & 1 Der Benuzer wählt den Menüeintrag Bearbeiten
+%\newline 2 OsmUi öffnet das Bearbeiten Menü
+%\newline 3 Der Benutzer wählt \glqq Rückgängig''
+%\newline 4 Die letzte Veränderung wird rückgängig gemacht\\
+%\hline 
+%\end{tabular}
+%\end{center}
+%\subsubsection{Pipeline Wiederherstellen}
+%\begin{center}
+%\begin{tabular}{|p {5cm}|p{10cm}|}
+%\hline Name & \textbf{Wiederherstellen} \\ 
+%\hline Ziel & der zuletzt rückgängig gemachte Schritt soll wieder hergestellt werden\\
+%\hline Vorbedingung & Es muss mindestens ein Schritt rückgängig gemacht worden sein\\
+%\hline Nachbedingung & Der Schritt wurde wiederhergestellt gemacht\\
+%\hline Akteur & Benutzer\\
+%\hline Normalablauf & 1 Der Benuzer wählt den Menüeintrag Bearbeiten
+%\newline 2 OsmUi öffnet das Bearbeiten Menü
+%\newline 3 Der Benutzer wählt \glqq wiederherstellen''
+%\newline 4 Der zuletzt rückgängig gemachte Schritt wird wiederhergestellt\\
+%\hline 
+%\end{tabular}
+%\end{center}
 \subsubsection{Hilfe aufrufen}
 \begin{center}
 \begin{tabular}{|p {5cm}|p{10cm}|}
@@ -489,14 +491,11 @@ Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer inst
 \hline Sonderfall 1a) & Der Benutzer hat keinen Task selektiert
 \newline 1a.1 Der Benutzer wählt einen neuen Input-Task aus
 \newline 1a.2 Der neue Input-Task wird unverbunden in die Pipeline eingefügt\\
-\hline Sonderfall 1b) & 1b.1 Der Benutzer klickt erneut auf den selektierten Task
+\hline Sonderfall 1b) & 1b.1 Der Benutzer klickt auf eine freie Fläche
 \newline 1b.2 Der Task gilt nicht mehr als selektiert\\
-\hline Sonderfall 2a) & 2a.1 Der Benutzer klickt rechts auf einen Task in der Pipelinebox
-\newline 2a.2 OsmUi zeigt den Punkt \glqq anfügen''
-\newline 2a.3 Der Benutzer wählt \glqq anfügen''
-\newline 2a.4 Der Task wird an den selektierten Task a\\ngefügt\\
-\hline Sonderfall 2a2a) & Der Punkt \glqq anfügen'' ist ausgegraut
-\newline $ \rightarrow$ Schritt 2\\
+\hline Sonderfall 2a) & 2a.1 Der Benutzer fährt mit der Maus über den Task bis er grün umrandet ist
+\newline 2a.2 Der Benutzer zieht den entstandenen Pfeil zu einem zweiten Task
+\newline 2a.3 Der Task wird an den selektierten Task angefügt\\
 \hline
 \end{tabular}
 \end{center}
@@ -511,10 +510,8 @@ Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer inst
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer selektiert den zu löschenden Task
 \newline 2 Der Benutzer drückt die Entfernen-Taste auf seiner Tastatur
-\newline 3 OsmUi gibt eine Warnung aus, falls dadurch eine inkonsistente Pipeline entsteht
-\newline 4 Der Benutzer wählt \glqq OK''
-\newline 5 Der Task wird gelöscht\\ 
-\hline Sonderfall 2a) & 2a.1 Der Benutzer klickt auf den gewählten Task oder selektiert etwas anderes
+\newline 3 Der Task wird gelöscht\\ 
+\hline Sonderfall 2a) & 2a.1 Der Benutzer klickt auf eine freie Fläche oder selektiert etwas anderes
 \newline 2a.2 Der Task gilt nicht mer als selektiert\\
 \hline 
 \end{tabular}  
@@ -530,10 +527,8 @@ Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer inst
 \hline Akteur & Benutzer \\ 
 \hline Normalablauf & 1 Der Benutzer selektiert die Verbindung zwischen zwei Tasks
 \newline 2 Der Benutzer drückt die Entfernen-Taste auf seiner Tastatur
-\newline 3 OsmUi gibt eine Warnung aus, dass dadurch eine inkonsistente Pipeline entsteht
-\newline 4 Der Benutzer wählt \glqq OK''
-\newline 5 Die Verbindung wird gelöscht\\ 
-\hline Sonderfall 2a) & 2a.1 Der Benutzer klickt noch einmal auf die Verbindung oder selektiert etwas anderes
+\newline 3 Die Verbindung wird gelöscht\\ 
+\hline Sonderfall 2a) & 2a.1 Der Benutzer klickt auf eine freie Fläche
 \newline 2a.2 Die Verbindung gilt nicht mehr als selektiert\\
 \hline 
 \end{tabular}  
@@ -548,8 +543,8 @@ Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer inst
 \hline Nachbedingung im Sonderfall 3a) & Die Parameter wurden nicht geändert\\
 \hline Nachbedingung im Sonderfall 5a) & Die Parameter wurden geändert\\
 \hline Akteur & Benutzer \\ 
-\hline Normalablauf & 1 Der Benutzer macht einen Doppelklick auf den zu ändernden Task
-\newline 2 OsmUi zeigt anstatt der Taskpalette die momentanen Paranetereinstellungen an
+\hline Normalablauf & 1 Der Benutzer selektiert den zu ändernden Task
+\newline 2 Die Taskpalette zeigt die momentanen Paranetereinstellungen an
 \newline 3 Der Benutzer ändert die Parameter
 \newline 4 \textbf{Direkte Validierung:} OsmUi prüft die Eingaben auf leer gleassene Felder
 \newline 5 Der Benutzer setzt seine Arbeit beliebig fort\\ 
@@ -578,7 +573,8 @@ Für alle Use Cases gilt: Der Benutzer hat das Programm auf seinem Computer inst
 4 OsmUi lädt die Datei und zeigt sie in der Pipelinebox an.
 \\ 
 \hline Sonderfall 4a) & Es ist eine aktuelle Pipeline vorhanden
-\newline 4a.1 OsmUi lädt die Zwischenablage in die Pipelinebox einer neuen Instanz von OsmUi.\\
+\newline 4a.1 OsmUi fragt, ob die Pipeline hinzugefügt werden soll.
+\newline 4a.2 Der Benutzer bestätigt\\
 \hline Sonderfall 4b)& Zwischenablage enthält kein gültigen Osmosis-Aufruf .
 \newline
  4b.1 OsmUi versucht Zwischenablage zu laden bricht dann ab und zeigt einen entsprechenden Fehlerdialog an.

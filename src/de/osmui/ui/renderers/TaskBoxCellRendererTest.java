@@ -13,39 +13,38 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-package de.osmui.ui;
-
-import javax.swing.SwingUtilities;
-
+*/
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
+ * @author Niklas Schnelle, Peter Vollmer, Veren Käfer
  * 
- * Application main class that is used to initialize OsmUi and to start
- * up the UI.
- * 
- * will be tested by system-tests
+ * @see TaskBoxCellRenderer
  * 
  */
+package de.osmui.ui.renderers;
 
-public class Application {
+import static org.junit.Assert.*;
 
-	public static String version = "Version 1.0";
-	
-	/**
-	 * Starts OsmUi
-	 * 
-	 * @param args
-	 *            No runtime arguments are evaluated
-	 */
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				MainFrame osmUi = MainFrame.getInstance();
-				osmUi.setVisible(true);
-			}
+import java.awt.Component;
 
-		});
+import javax.swing.JTable;
+
+import org.junit.Test;
+
+import de.osmui.model.osm.TTask;
+
+
+public class TaskBoxCellRendererTest {
+	@Test public void get(){
+		TaskBoxCellRenderer renderer = new TaskBoxCellRenderer();
+		int column = 1;
+		JTable table = new JTable();
+		boolean isSelected = true;
+		TTask task = new TTask();
+		task.setDescription("desc");
+		Object obj = task;
+		int row = 1;
+		boolean hasFocus = true;
+		Component comp = renderer.getTableCellRendererComponent(table, obj, isSelected, hasFocus, row, column);
+		assertEquals("Table.cellRenderer", comp.getName());
 	}
-
 }

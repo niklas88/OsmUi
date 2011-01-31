@@ -35,6 +35,7 @@ import java.text.ParseException;
 import de.osmui.i18n.I18N;
 import de.osmui.io.exceptions.ExportException;
 import de.osmui.model.pipelinemodel.AbstractPipelineModel;
+import de.osmui.ui.Application;
 import de.osmui.ui.MainFrame;
 import de.osmui.util.CommandlineTranslator;
 import de.osmui.util.exceptions.ImportException;
@@ -187,6 +188,7 @@ public class PipeImEx {
 			StringBuilder commandToExport = new StringBuilder();
 			CommandlineTranslator trans = CommandlineTranslator.getInstance();
 			if (extension == ".bat") {
+				writer.write(I18N.getString("IO.sh", "rem", "\r\n", Application.version));
 				commandToExport
 						.append(MainFrame
 								.getInstance()
@@ -195,13 +197,12 @@ public class PipeImEx {
 										"OsmosisPath",
 										I18N.getString("ConfigurationDialog.osmosisStandardPath")));
 				commandToExport.append(" ");
-				commandToExport.append(trans.exportLine(pipelineModel,"^\n"));
+				commandToExport.append(trans.exportLine(pipelineModel,"^\r\n"));
 				writer.write(commandToExport.toString());
 
 			} else {
 				writer.write("#!/bin/sh\n");
-				writer.write("# "+
-						"Hier kommen noch schöne internationale Kommentare hin\n");
+				writer.write(I18N.getString("IO.sh", "#", "\n", Application.version));
 				commandToExport
 						.append(MainFrame
 								.getInstance()
