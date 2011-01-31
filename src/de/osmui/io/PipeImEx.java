@@ -38,6 +38,7 @@ import de.osmui.model.pipelinemodel.AbstractPipelineModel;
 import de.osmui.ui.Application;
 import de.osmui.ui.MainFrame;
 import de.osmui.util.CommandlineTranslator;
+import de.osmui.util.ConfigurationManager;
 import de.osmui.util.exceptions.ImportException;
 
 /**
@@ -190,9 +191,8 @@ public class PipeImEx {
 			if (extension == ".bat") {
 				writer.write(I18N.getString("IO.sh", "rem", "\r\n", Application.version));
 				commandToExport
-						.append(MainFrame
+						.append(ConfigurationManager
 								.getInstance()
-								.getConfigurationManager()
 								.getEntry(
 										"OsmosisPath",
 										I18N.getString("ConfigurationDialog.osmosisStandardPath")));
@@ -204,9 +204,7 @@ public class PipeImEx {
 				writer.write("#!/bin/sh\n");
 				writer.write(I18N.getString("IO.sh", "#", "\n", Application.version));
 				commandToExport
-						.append(MainFrame
-								.getInstance()
-								.getConfigurationManager()
+						.append(ConfigurationManager.getInstance()
 								.getEntry(
 										"OsmosisPath",
 										I18N.getString("ConfigurationDialog.osmosisStandardPath")));

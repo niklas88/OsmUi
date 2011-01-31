@@ -32,6 +32,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import de.osmui.i18n.I18N;
+import de.osmui.util.ConfigurationManager;
 
 /**
  * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
@@ -57,7 +58,7 @@ public class ConfigurationDialog extends JDialog {
 		JLabel osmosisPfadLabel = new JLabel(
 				I18N.getString("ConfigurationDialog.pathLabel"));
 		final JTextField osmosisPfadTextField = new JTextField(
-				MainFrame.getInstance().configurationManager.getEntry(
+				ConfigurationManager.getInstance().getEntry(
 						"OsmosisPath",
 						I18N.getString("ConfigurationDialog.osmosisStandardPath")));
 		JButton osmosisPfadButton = new JButton(
@@ -87,7 +88,7 @@ public class ConfigurationDialog extends JDialog {
 		autoConf.setLayout(new FlowLayout());
 		JLabel autoConfLabel = new JLabel(I18N.getString("ConfigurationDialog.autoConf"));
 		final JCheckBox autoConfCheckBox = new JCheckBox();
-		autoConfCheckBox.setSelected(Boolean.valueOf(MainFrame.getInstance().configurationManager.getEntry("AutoConfCheckBox", "true")));
+		autoConfCheckBox.setSelected(Boolean.valueOf(ConfigurationManager.getInstance().getEntry("AutoConfCheckBox", "true")));
 		autoConf.add(autoConfLabel);
 		autoConf.add(autoConfCheckBox);
 		center.add(autoConf);
@@ -96,12 +97,13 @@ public class ConfigurationDialog extends JDialog {
 		JPanel bottom = new JPanel();
 		JButton save = new JButton(I18N.getString("ConfigurationDialog.save"));
 		save.addActionListener(new ActionListener() {
-
+			private ConfigurationManager confManager = ConfigurationManager.getInstance();
+			
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getInstance().configurationManager.setEntry(
+				confManager.setEntry(
 						"OsmosisPath", osmosisPfadTextField.getText());
 				dialog.dispose();
-				MainFrame.getInstance().configurationManager.setEntry("AutoConfCheckBox", String.valueOf(autoConfCheckBox.isSelected()));
+				confManager.setEntry("AutoConfCheckBox", String.valueOf(autoConfCheckBox.isSelected()));
 			}
 		});
 		JButton cancel = new JButton(

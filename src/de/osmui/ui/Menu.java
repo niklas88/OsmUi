@@ -104,13 +104,13 @@ public class Menu extends JMenuBar {
 					} else if (selectionOption == JOptionPane.YES_NO_OPTION) {
 						if (MainFrame.getInstance().save(
 								MainFrame.getInstance().getSavePath())) {
-							MainFrame.getInstance().savePath = "";
+							MainFrame.getInstance().setSavePath("");
 						} else {
 							return;
 						}
 					}
 				}
-				MainFrame.getInstance().pipeModel.clean();
+				MainFrame.getInstance().getPipeModel().clean();
 				MainFrame.getInstance().setSaved(true);
 			}
 		});
@@ -140,15 +140,15 @@ public class Menu extends JMenuBar {
 					}
 				}
 				JFileChooser chooser = new JFileChooser();
-				chooser.addChoosableFileFilter(MainFrame.getInstance().ioFilter);
-				chooser.setFileFilter(MainFrame.getInstance().ioFilter);
+				chooser.addChoosableFileFilter(MainFrame.getInstance().getIoFilter());
+				chooser.setFileFilter(MainFrame.getInstance().getIoFilter());
 				chooser.setAcceptAllFileFilterUsed(false);
 				int returnVal = chooser.showOpenDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					try {
 						JGPipelineModel loaded = IO.getInstance().load(
 								chooser.getSelectedFile().getAbsolutePath());
-						MainFrame.getInstance().pipeModel.setAll(loaded);
+						MainFrame.getInstance().getPipeModel().setAll(loaded);
 					} catch (LoadException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
@@ -210,7 +210,7 @@ public class Menu extends JMenuBar {
 							} else if (selectionOption == JOptionPane.YES_OPTION) {
 								if (MainFrame.getInstance().save(
 										MainFrame.getInstance().getSavePath())) {
-									MainFrame.getInstance().savePath = "";
+									MainFrame.getInstance().setSavePath("");
 								} else {
 									return;
 								}
@@ -231,15 +231,15 @@ public class Menu extends JMenuBar {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					try {
 						PipeImEx.getInstance().importOutOfFile(
-								MainFrame.getInstance().pipeModel,
+								MainFrame.getInstance().getPipeModel(),
 								chooser.getSelectedFile().getAbsolutePath());
 					} catch (ImportException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
 					} catch (ParseException e2) {
 						JOptionPane.showMessageDialog(null, e2.getMessage());
 					}
-					MainFrame.getInstance().pipeModel.layout(null);
-					MainFrame.getInstance().saved = false;
+					MainFrame.getInstance().getPipeModel().layout(null);
+					MainFrame.getInstance().setSaved(false);
 				}
 
 			}
@@ -270,7 +270,7 @@ public class Menu extends JMenuBar {
 							} else if (selectionOption == JOptionPane.YES_NO_OPTION) {
 								if (MainFrame.getInstance().save(
 										MainFrame.getInstance().getSavePath())) {
-									MainFrame.getInstance().savePath = "";
+									MainFrame.getInstance().setSavePath("");
 								} else {
 									return;
 								}
@@ -281,7 +281,7 @@ public class Menu extends JMenuBar {
 				}
 				try {
 					PipeImEx.getInstance().importClipBoard(
-							MainFrame.getInstance().pipeModel,
+							MainFrame.getInstance().getPipeModel(),
 							Toolkit.getDefaultToolkit().getSystemClipboard());
 				} catch (HeadlessException e1) {
 					e1.printStackTrace();
@@ -290,8 +290,8 @@ public class Menu extends JMenuBar {
 				} catch (ParseException e2) {
 					JOptionPane.showMessageDialog(null, e2.getMessage());
 				}
-				MainFrame.getInstance().pipeModel.layout(null);
-				MainFrame.getInstance().saved = false;
+				MainFrame.getInstance().getPipeModel().layout(null);
+				MainFrame.getInstance().setSaved(false);
 			}
 		});
 		fileMenu.add(importClipBoard);
@@ -302,7 +302,7 @@ public class Menu extends JMenuBar {
 		export.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (!MainFrame.getInstance().pipeModel.isExecutable()) {
+				if (!MainFrame.getInstance().getPipeModel().isExecutable()) {
 
 					if (JOptionPane.showConfirmDialog(MainFrame.getInstance(),
 							I18N.getString("Menu.exportWarnQuestion"),
@@ -336,7 +336,7 @@ public class Menu extends JMenuBar {
 					}
 					try {
 						PipeImEx.getInstance().export(
-								MainFrame.getInstance().pipeModel,
+								MainFrame.getInstance().getPipeModel(),
 								chooser.getSelectedFile().getAbsolutePath(),
 								chooser.getFileFilter().getDescription());
 					} catch (ExportException e1) {
@@ -469,7 +469,7 @@ public class Menu extends JMenuBar {
 				I18N.getString("Menu.viewLayoutAutomatic")); //$NON-NLS-1$
 		layoutAutomatic.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getInstance().pipeModel.layout(null);
+				MainFrame.getInstance().getPipeModel().layout(null);
 			}
 		});
 		layoutMenu.add(layoutAutomatic);

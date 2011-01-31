@@ -36,6 +36,7 @@ import com.mxgraph.view.mxGraph;
 import de.osmui.i18n.I18N;
 import de.osmui.model.exceptions.TasksNotCompatibleException;
 import de.osmui.model.exceptions.TasksNotInModelException;
+import de.osmui.util.ConfigurationManager;
 
 /**
  * This class implements a pipeline model using an mxGraph as a backing store
@@ -271,7 +272,9 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		addTask(child);
 
 		connectTasks(parent, child);
-		layout(null);
+		if(Boolean.valueOf(ConfigurationManager.getInstance().getEntry("AutoConfCheckBox", "true"))){
+			layout(null);
+		}
 		setChanged();
 		notifyObservers(child);
 

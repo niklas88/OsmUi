@@ -53,31 +53,29 @@ public class MainFrame extends JFrame implements Observer {
 
 	private static MainFrame instance;
 
-	protected IOFilter ioFilter;
+	private IOFilter ioFilter;
 
-	protected ConfigurationManager configurationManager;
 
-	protected TaskBoxTableModel taskBoxTableModel;
 
-	protected TaskBox taskBox;
+	private ConfigurationManager configurationManager;
 
-	protected ParameterBoxTableModel parameterBoxTableModel;
+	private TaskBox taskBox;
 
-	protected ParameterBox parameterBox;
+	private ParameterBox parameterBox;
 
-	protected ContentSplitPane rightContent;
+	private PipelineBox pipeBox;
 
-	protected ContentSplitPane content;
+	private JGPipelineModel pipeModel;
 
-	protected PipelineBox pipeBox;
+	private CopyBox copyBox;
+	
+	private ContentSplitPane content;
+	
+	private ContentSplitPane rightContent;
 
-	protected JGPipelineModel pipeModel;
+	private boolean saved;
 
-	protected CopyBox copyBox;
-
-	protected boolean saved;
-
-	protected String savePath;
+	private String savePath;
 
 	/**
 	 * Constructs the mainframe
@@ -98,13 +96,13 @@ public class MainFrame extends JFrame implements Observer {
 		pipeBox = new PipelineBox(pipeModel.getGraph());
 		pipeModel.addObserver(pipeBox);
 
-		taskBoxTableModel = new TaskBoxTableModel();
+		TaskBoxTableModel taskBoxTableModel = new TaskBoxTableModel();
 		taskBox = new TaskBox(taskBoxTableModel);
 
 		copyBox = new CopyBox(pipeModel);
 		pipeModel.addObserver(copyBox);
 
-		parameterBoxTableModel = new ParameterBoxTableModel();
+		ParameterBoxTableModel parameterBoxTableModel = new ParameterBoxTableModel();
 		parameterBox = new ParameterBox(parameterBoxTableModel, copyBox);
 
 		pipeBox.registerTaskSelectedListener(taskBox);
@@ -221,19 +219,6 @@ public class MainFrame extends JFrame implements Observer {
 		return taskBox;
 	}
 
-	/**
-	 * @return the taskBoxTableModel
-	 */
-	public TaskBoxTableModel getTaskBoxTableModel() {
-		return taskBoxTableModel;
-	}
-
-	/**
-	 * @return the taskBoxTableModel
-	 */
-	public ConfigurationManager getConfigurationManager() {
-		return configurationManager;
-	}
 
 	/**
 	 * @return the parameterBox
@@ -254,14 +239,6 @@ public class MainFrame extends JFrame implements Observer {
 	 */
 	public CopyBox getCopyBox() {
 		return copyBox;
-	}
-
-	/**
-	 * @param pipeModel
-	 *            to set as pipeModel
-	 */
-	public void setPipeModel(JGPipelineModel pipeModel) {
-		this.pipeModel = pipeModel;
 	}
 
 	/**
@@ -286,6 +263,15 @@ public class MainFrame extends JFrame implements Observer {
 		return savePath;
 	}
 
+	/**
+	 * Gets the ioFilter used by MainFrame
+	 * 
+	 * @return the ioFilter
+	 */
+	public IOFilter getIoFilter() {
+		return ioFilter;
+	}
+	
 	/**
 	 * @param savePath
 	 *            the savePath has to set.
