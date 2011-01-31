@@ -13,7 +13,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package de.osmui.ui;
 
 import java.awt.BorderLayout;
@@ -23,6 +23,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -31,15 +32,16 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import de.osmui.i18n.I18N;
-	/**
-	 * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
-	 * 
-	 * will be tested in the system-test
-	 */
+
+/**
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
+ * 
+ *         will be tested in the system-test
+ */
 public class ConfigurationDialog extends JDialog {
 
 	private static final long serialVersionUID = -1901364651992578489L;
-	
+
 	private JDialog dialog;
 
 	public ConfigurationDialog() {
@@ -47,8 +49,11 @@ public class ConfigurationDialog extends JDialog {
 		setLayout(new BorderLayout());
 
 		JPanel center = new JPanel();
-		center.setBorder(new EmptyBorder(15, 15, 15, 15));
-		center.setLayout(new GridLayout());
+		center.setLayout(new GridLayout(2, 0));
+
+		JPanel osmuiPfad = new JPanel();
+		osmuiPfad.setBorder(new EmptyBorder(15, 15, 15, 15));
+		osmuiPfad.setLayout(new GridLayout());
 		JLabel osmosisPfadLabel = new JLabel(
 				I18N.getString("ConfigurationDialog.pathLabel"));
 		final JTextField osmosisPfadTextField = new JTextField(
@@ -66,28 +71,41 @@ public class ConfigurationDialog extends JDialog {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					osmosisPfadTextField.setText(chooser.getSelectedFile()
 							.getAbsolutePath());
-					
+
 				}
 
 			}
 		});
 
-		center.add(osmosisPfadLabel);
-		center.add(osmosisPfadTextField);
-		center.add(osmosisPfadButton);
-		add(center, BorderLayout.CENTER);
+		osmuiPfad.add(osmosisPfadLabel);
+		osmuiPfad.add(osmosisPfadTextField);
+		osmuiPfad.add(osmosisPfadButton);
+		center.add(osmuiPfad);
 
+
+		JPanel autoConf = new JPanel();
+		autoConf.setLayout(new FlowLayout());
+		JLabel autoConfLabel = new JLabel(I18N.getString("ConfigurationDialog.autoConf"));
+		final JCheckBox autoConfCheckBox = new JCheckBox();
+		autoConfCheckBox.setSelected(Boolean.valueOf(MainFrame.getInstance().configurationManager.getEntry("AutoConfCheckBox", "true")));
+		autoConf.add(autoConfLabel);
+		autoConf.add(autoConfCheckBox);
+		center.add(autoConf);
+		
+		add(center, BorderLayout.CENTER);
 		JPanel bottom = new JPanel();
-		JButton ok = new JButton(I18N.getString("ConfigurationDialog.ok"));
-		ok.addActionListener(new ActionListener() {
+		JButton save = new JButton(I18N.getString("ConfigurationDialog.save"));
+		save.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				MainFrame.getInstance().configurationManager.setEntry(
 						"OsmosisPath", osmosisPfadTextField.getText());
 				dialog.dispose();
+				MainFrame.getInstance().configurationManager.setEntry("AutoConfCheckBox", String.valueOf(autoConfCheckBox.isSelected()));
 			}
 		});
-		JButton cancel = new JButton(I18N.getString("ConfigurationDialog.cancel"));
+		JButton cancel = new JButton(
+				I18N.getString("ConfigurationDialog.cancel"));
 		cancel.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -95,10 +113,9 @@ public class ConfigurationDialog extends JDialog {
 			}
 		});
 		bottom.setLayout(new FlowLayout());
-		bottom.add(ok);
+		bottom.add(save);
 		bottom.add(cancel);
 		add(bottom, BorderLayout.SOUTH);
 		pack();
 	}
-
 }
