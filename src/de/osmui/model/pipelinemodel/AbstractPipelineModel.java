@@ -30,7 +30,7 @@ import de.osmui.model.exceptions.TasksNotInModelException;
 /**
  * This is the abstract base class for all pipeline models
  * 
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * @see AbstractPipelineModelTest
  * 

@@ -25,7 +25,7 @@ import java.io.Serializable;
 /**
  * This class represents a Pipe within the pipelinemodel, that is an edge in the graph
  * 
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  *
  *@see AbstractPipeTest
  *

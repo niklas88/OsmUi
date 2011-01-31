@@ -27,13 +27,15 @@ import de.osmui.model.pipelinemodel.AbstractTask;
 /**
  * Event class fired by PipelineBox
  * 
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  *
  */
 public class TaskSelectedEvent extends EventObject {
 	private AbstractTask eventTask;
 
-	public TaskSelectedEvent(Object source, AbstractTask task) {
+	private static final long serialVersionUID = -9168614434923375970L;
+
+	public TaskSelectedEvent(Object source) {
 		super(source);
 		eventTask = task;
 	}
@@ -42,9 +44,5 @@ public class TaskSelectedEvent extends EventObject {
 		return eventTask;
 	}
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2621201073240220152L;
 
 }

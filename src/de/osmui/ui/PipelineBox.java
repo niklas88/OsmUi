@@ -46,7 +46,7 @@ import de.osmui.util.TaskManager;
 import de.osmui.util.exceptions.TaskNameUnknownException;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  *         will be tested by system-tests
  * 
@@ -55,9 +55,6 @@ import de.osmui.util.exceptions.TaskNameUnknownException;
 public class PipelineBox extends mxGraphComponent implements Observer,
 		MouseListener, TaskSelectedEventListener {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2865210986243818496L;
 
 	private final ArrayList<TaskSelectedEventListener> selectedListeners;

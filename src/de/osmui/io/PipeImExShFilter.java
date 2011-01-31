@@ -15,17 +15,19 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
- * 
- * @see PipeImExShFilterTest
- */
+
 
 package de.osmui.io;
 
 import java.io.File;
 
 import javax.swing.filechooser.FileFilter;
+
+/**
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
+ * 
+ * @see PipeImExShFilterTest
+ */
 
 public class PipeImExShFilter extends FileFilter{
     

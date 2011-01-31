@@ -40,7 +40,7 @@ import de.osmui.model.exceptions.TasksNotInModelException;
 /**
  * This class implements a pipeline model using an mxGraph as a backing store
  * 
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * @see JGPipelineModelTest
  * 

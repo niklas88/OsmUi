@@ -29,16 +29,13 @@ import javax.swing.JTabbedPane;
 import de.osmui.i18n.I18N;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  *         will be tested by system-tests
  */
 
 public class TabBox extends JTabbedPane {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2984123985661193020L;
 
 	private final TaskBox taskBox;

@@ -36,15 +36,14 @@ import de.osmui.i18n.I18N;
 import de.osmui.model.pipelinemodel.parameters.AbstractParameter;
 import de.osmui.model.pipelinemodel.parameters.IntParameter;
 
-
-public class DefaultParamEditor  extends AbstractCellEditor
-			implements TableCellEditor, ActionListener{
-
 	/**
 	 * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
 	 * 
 	 * no tests only getter and setter
 	 */
+public class DefaultParamEditor  extends AbstractCellEditor
+			implements TableCellEditor, ActionListener{
+
 	private static final long serialVersionUID = -7189134812752397954L;
 
 	private JTextField textField;

@@ -23,7 +23,7 @@ import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 /**
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * @see ConfigurationManagerTest
  */
@@ -65,13 +65,19 @@ public class ConfigurationManager {
 		configEntries.put(key, value);
 	}
 
+	/**
+	 * Saves the preferences list to preferences.
+	 */
 	public void saveConfiguration() {
 		userPrefs = Preferences.userRoot().node("OsmUi");
 		for (String currentEntry : configEntries.keySet()){
 			userPrefs.put(currentEntry, configEntries.get(currentEntry));
 		}
 	}
-
+	
+	/**
+	 * Loads configuration out of the preferences to a preferences list
+	 */
 	public void loadConfiguration() {
 		userPrefs = Preferences.userRoot().node("OsmUi");
 		try {
@@ -79,7 +85,6 @@ public class ConfigurationManager {
 				configEntries.put(currentKey, userPrefs.get(currentKey, currentKey));
 			}
 		} catch (BackingStoreException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -31,7 +31,7 @@ import de.osmui.model.pipelinemodel.parameters.AbstractParameter;
 /**
  * This is a general implementation of an AbstractTask
  * 
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  *
  *@see CommonTaskTest
  *

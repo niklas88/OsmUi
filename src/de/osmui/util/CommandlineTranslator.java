@@ -15,9 +15,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * 
- */
 package de.osmui.util;
 
 import java.text.ParseException;
@@ -25,7 +22,6 @@ import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
 
@@ -48,7 +44,7 @@ import de.osmui.util.exceptions.TaskNameUnknownException;
  * AbstractPipelineModel and exporting an Osmosis command line from a given
  * AbstractPipelineModel. It is implemented using the Singelton pattern.
  * 
- * @author Niklas Schnelle, Peter Vollmer, Verena käfer
+ * @author Niklas Schnelle, Peter Vollmer, Verena Käfer
  * 
  * @see CommandLineTraslatorTest
  */
