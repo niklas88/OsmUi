@@ -238,26 +238,37 @@ public class JGPipelineModel extends AbstractPipelineModel implements
 		double horizontalPos = 0.0;
 		double verticalPos = 20.0;
 		
-		
-		if(parentTask != null) {
-			// For ease of simplicity position relative to first upstream task			
-			mxCell parentCell = getCellForTask(parentTask);
-			horizontalPos = parentCell.getGeometry().getX();
-			verticalPos = parentCell.getGeometry().getY()+VERTEX_HEIGHT+80.0;
-		} else {
-			// minus one to not count ourselves
-			horizontalPos = (sourceTaskNum - 1)* (VERTEX_WIDTH+20.0) + 20.0;
-		}
-		// Add the task to the underling mxGraph model
-		Object parent = graph.getDefaultParent();
-
 		graph.getModel().beginUpdate();
 		try {
+			if(parentTask != null) {
+				// NOTE: The child is not yet connected to the parent!		
+				mxCell parentCell = getCellForTask(parentTask);
+				mxCell currCell = null;
+				double currX;
+				horizontalPos = parentCell.getGeometry().getX();
+				for(AbstractPipe outPipe : parentTask.getOutputPipes()){
+					if(outPipe.isConnected()){
+						currCell = (mxCell) getCellForPipe(outPipe).getTarget();
+						currX = currCell.getGeometry().getX();
+						currX -= (((double) VERTEX_WIDTH)+20.0)/2.0;
+						currCell.getGeometry().setX(currX);
+						horizontalPos += (((double) VERTEX_WIDTH)+20.0)/2.0;
+					}
+				}
+				
+				
+				verticalPos += parentCell.getGeometry().getY()+VERTEX_HEIGHT+60.0;
+			} else {
+				// minus one to not count ourselves
+				horizontalPos = (sourceTaskNum - 1)* (VERTEX_WIDTH+20.0) + 20.0;
+			}
+			// Add the task to the underling mxGraph model
+			Object parent = graph.getDefaultParent();
 			
 			// Add a mxCell to our taskMap for this task
 			taskMap.put(Long.valueOf(task.getID()), (mxCell) graph
 					.insertVertex(parent, null, task, horizontalPos, verticalPos, VERTEX_WIDTH, VERTEX_HEIGHT));
-
+			graph.refresh();
 		} finally {
 			graph.getModel().endUpdate();
 		}
