@@ -26,6 +26,7 @@ import java.util.Observer;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import de.osmui.i18n.I18N;
@@ -71,7 +72,7 @@ public class MainFrame extends JFrame implements Observer {
 	
 	private ContentSplitPane content;
 	
-	private ContentSplitPane rightContent;
+	private JPanel rightContent;
 
 	private boolean saved;
 
@@ -108,10 +109,9 @@ public class MainFrame extends JFrame implements Observer {
 		pipeBox.registerTaskSelectedListener(taskBox);
 		pipeBox.registerTaskSelectedListener(parameterBox);
 
-		rightContent = new ContentSplitPane(JSplitPane.VERTICAL_SPLIT, pipeBox,
-				copyBox);
-		rightContent.setDividerLocation(configurationManager.getEntry(
-				"RightContentDividerLocation", 620));
+		rightContent = new JPanel(new BorderLayout());
+		rightContent.add(pipeBox, BorderLayout.CENTER);
+		rightContent.add(copyBox, BorderLayout.SOUTH);
 
 		content = new ContentSplitPane(JSplitPane.HORIZONTAL_SPLIT, new TabBox(
 				taskBox, parameterBox), rightContent);
@@ -163,8 +163,6 @@ public class MainFrame extends JFrame implements Observer {
 				this.getLocation().y);
 		configurationManager.setEntry("ContentDividerLocation",
 				content.getDividerLocation());
-		configurationManager.setEntry("RightContentDividerLocation",
-				rightContent.getDividerLocation());
 		configurationManager.saveConfiguration();
 		System.exit(0);
 	}

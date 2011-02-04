@@ -17,9 +17,11 @@
 
 package de.osmui.ui;
 
+import java.awt.BorderLayout;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
@@ -39,7 +41,7 @@ import de.osmui.util.CommandlineTranslator;
  * 
  */
 
-public class CopyBox extends JScrollPane implements Observer {
+public class CopyBox extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 2196616949819474887L;
 
@@ -57,11 +59,12 @@ public class CopyBox extends JScrollPane implements Observer {
 	 *            to read the dates out.
 	 */
 	public CopyBox(AbstractPipelineModel pipelineModel) {
+		this.setLayout(new BorderLayout());
 		copyBoxTextField = new JTextField();
 		copyBoxTextField.setEditable(false);
 		trans = CommandlineTranslator.getInstance();
 		model = pipelineModel;
-		this.setViewportView(copyBoxTextField);
+		this.add(copyBoxTextField,BorderLayout.CENTER);
 	}
 
 	/**
@@ -73,6 +76,7 @@ public class CopyBox extends JScrollPane implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		if (arg1 instanceof AbstractTask) {
 			copyBoxTextField.setText(trans.exportLine(model, ""));
+			copyBoxTextField.setCaretPosition(0);
 		}
 	}
 	/**
@@ -80,6 +84,7 @@ public class CopyBox extends JScrollPane implements Observer {
 	 */
 	public void update(){
 		copyBoxTextField.setText(trans.exportLine(model, ""));
+		copyBoxTextField.setCaretPosition(0);
 	}
 
 }
