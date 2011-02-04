@@ -35,6 +35,6 @@ public class OtherParameterTest {
 		param.setValue("value");
 		param.name = "name";
 		assertEquals("value", param.getValue());
-		assertEquals("name=value", param.getCommandlineForm());
+		assertEquals("name=\"value\"", param.getCommandlineForm());
 	}
 }
