@@ -742,17 +742,18 @@
       </description>
       <inputPipe type="entity" count="single" index="0" />
       <outputPipe type="entity" count="single" index="0" />
-      <parameter name="filterMode" type="enum" defaultValue="accept-nodes">
-        <description>
+      <parameter name="filterMode" type="filter" defaultParameter="true">
+         <description>
          Specifies accept/reject behavior and the entity type on which this filter operates. 
-        </description>
+         </description>
         <enumValue value="accept-nodes" />
         <enumValue value="accept-ways" />
         <enumValue value="accept-relations" />
         <enumValue value="reject-nodes" />
         <enumValue value="reject-ways" />
         <enumValue value="reject-relations" />
-      </parameter>
+       </parameter>
+   
     </task>
 
     <task name="used-node" shortName="un">

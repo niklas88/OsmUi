@@ -50,8 +50,10 @@ import de.osmui.model.pipelinemodel.parameters.BooleanParameter;
 import de.osmui.model.pipelinemodel.parameters.DirParameter;
 import de.osmui.model.pipelinemodel.parameters.EnumParameter;
 import de.osmui.model.pipelinemodel.parameters.FileParameter;
+import de.osmui.model.pipelinemodel.parameters.FilterModeParameter;
 import de.osmui.model.pipelinemodel.parameters.IntParameter;
 import de.osmui.model.pipelinemodel.parameters.OtherParameter;
+import de.osmui.model.pipelinemodel.parameters.TagFilterParameter;
 import de.osmui.util.exceptions.TaskNameUnknownException;
 
 /**
@@ -181,6 +183,9 @@ public class TaskManager {
 			} else if (paramDesc.getType().equals("enum")) {
 				newParameter = new EnumParameter(paramDesc,
 						paramDesc.getDefaultValue());
+			} else if (paramDesc.getType().equals("filter")) {
+					newParameter = new FilterModeParameter(paramDesc,
+							paramDesc.getDefaultValue(), newTask);
 			} else if (paramDesc.getType().equals("filename")) {
 				newParameter = new FileParameter(paramDesc,
 						paramDesc.getDefaultValue());

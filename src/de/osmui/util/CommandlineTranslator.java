@@ -141,36 +141,38 @@ public class CommandlineTranslator {
 		// accordingly
 		if (param instanceof IntParameter) {
 			IntParameter intParam = (IntParameter) param;
-			int wantedCount = Integer.parseInt(paramValue);
-			int defaultCount = Integer.parseInt(intParam.getDefaultValue());
-
-			for (AbstractPort port : currTask.getInputPorts()) {
-
-				if (port instanceof VariablePort
-						&& ((VariablePort) port).getReferencedParam().equals(
-								intParam)) {
-					AbstractPort newPort;
-					for (int i = defaultCount; i < wantedCount; ++i) {
-						newPort = ((VariablePort) port).createPort();
-						currTask.getInputPorts().add(newPort);
+			if(intParam.isReferenced()){
+				int wantedCount = Integer.parseInt(paramValue);
+				int defaultCount = Integer.parseInt(intParam.getDefaultValue());
+	
+				for (AbstractPort port : currTask.getInputPorts()) {
+	
+					if (port instanceof VariablePort
+							&& ((VariablePort) port).getReferencedParam().equals(
+									intParam)) {
+						AbstractPort newPort;
+						for (int i = defaultCount; i < wantedCount; ++i) {
+							newPort = ((VariablePort) port).createPort();
+							currTask.getInputPorts().add(newPort);
+						}
+						// We are done
+						return;
 					}
-					// We are done
-					return;
 				}
-			}
-
-			for (AbstractPipe pipe : currTask.getOutputPipes()) {
-
-				if (pipe instanceof VariablePipe
-						&& ((VariablePipe) pipe).getReferencedParam().equals(
-								intParam)) {
-					AbstractPipe newPipe;
-					for (int i = defaultCount; i < wantedCount; ++i) {
-						newPipe = ((VariablePipe) pipe).createPipe();
-						currTask.getOutputPipes().add(newPipe);
+	
+				for (AbstractPipe pipe : currTask.getOutputPipes()) {
+	
+					if (pipe instanceof VariablePipe
+							&& ((VariablePipe) pipe).getReferencedParam().equals(
+									intParam)) {
+						AbstractPipe newPipe;
+						for (int i = defaultCount; i < wantedCount; ++i) {
+							newPipe = ((VariablePipe) pipe).createPipe();
+							currTask.getOutputPipes().add(newPipe);
+						}
+						// We are done
+						return;
 					}
-					// We are done
-					return;
 				}
 			}
 		}
@@ -254,7 +256,16 @@ public class CommandlineTranslator {
 		} else {
 			// This is a named parameter
 			param = currTask.getParameters().get(paramName);
+			// Maybe this parameter is a TagFilterParameter where
+			// we can't know the name
+			
 			if (param == null) {
+				// Check if the task has a filter, which can have the form "foo=bar" and therefore is treated
+				// like a parameter where it actually is it's value
+				param = currTask.getParameters().get("tagfilter");
+				paramValue=currToken;
+			}
+			if (param == null){
 				throw new ImportException(I18N.getString(
 						"CommandlineTranslator.unknownParameter", paramName,
 						currTask.getName()));

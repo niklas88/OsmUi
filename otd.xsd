@@ -130,6 +130,14 @@
                   <documentation>The parameter value represents an instant (date and time).</documentation>
                 </annotation>
               </enumeration>
+              <enumeration value="filter">
+                <annotation>
+                  <documentation>
+                  This is a virtual parameter used to implement a tag filter string it represents the first part
+                  e.g. "accept-ways"
+                  </documentation>
+                </annotation>
+              </enumeration>
               <enumeration value="bbox">
                 <annotation>
                   <documentation>
