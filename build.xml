@@ -1,41 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- WARNING: Eclipse auto-generated file.
-              Any modifications will be overwritten.
-              To include a user specific buildfile here, simply create one in the same
-              directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. -->
+
 <project basedir="." default="build" name="OsmUi">
     <property environment="env"/>
-    <property name="junit.output.dir" value="junit"/>
-    <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.6"/>
     <property name="source" value="1.6"/>
-    <path id="JUnit 4.libraryclasspath">
-        <pathelement location="../Desktop/eclipse/plugins/org.junit_4.8.1.v4_8_1_v20100427-1100/junit.jar"/>
-        <pathelement location="../Desktop/eclipse/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
-    </path>
     <path id="OsmUi.classpath">
         <pathelement location="bin"/>
-        <path refid="JUnit 4.libraryclasspath"/>
+        <pathelement location="jgraphx/lib/jgraphx.jar"/>
         <pathelement location="javahelp/Help.jar"/>
         <pathelement location="javahelp/Hilfe.jar"/>
         <pathelement location="javahelp/hsviewer.jar"/>
         <pathelement location="javahelp/jh.jar"/>
+        <pathelement location="bboxchooser-0.2.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
-        <copy includeemptydirs="false" todir="bin">
-            <fileset dir="jgraphx/src">
-                <exclude name="**/*.launch"/>
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
-        <copy includeemptydirs="false" todir="bin">
-            <fileset dir="jgraphx/examples">
-                <exclude name="**/*.launch"/>
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
                 <exclude name="**/*.launch"/>
@@ -47,61 +26,41 @@
         <delete dir="bin"/>
     </target>
     <target depends="clean" name="cleanall"/>
-    <target depends="build-subprojects,build-project" name="build"/>
+    <target depends="build-subprojects,build-project,jar" name="build"/>
     <target name="build-subprojects"/>
     <target depends="init" name="build-project">
         <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
-            <src path="jgraphx/src"/>
-            <classpath refid="OsmUi.classpath"/>
-        </javac>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
-            <src path="jgraphx/examples"/>
-            <classpath refid="OsmUi.classpath"/>
-        </javac>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+        <javac includeantruntime="false" debug="true" destdir="bin" source="${source}" target="${target}">
+        	<exclude name="**/*Test.java"/>
             <src path="src"/>
             <classpath refid="OsmUi.classpath"/>
         </javac>
     </target>
-    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
-    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
-        <copy todir="${ant.library.dir}">
-            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-        </copy>
-        <unzip dest="${ant.library.dir}">
-            <patternset includes="jdtCompilerAdapter.jar"/>
-            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-        </unzip>
+    <target depends="build-project" name="build-tests">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac includeantruntime="true" debug="true" destdir="bin" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="OsmUi.classpath"/>
+        </javac>
     </target>
-    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
-        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
-        <antcall target="build"/>
-    </target>
-    <target name="Application">
+	<target name="Application">
         <java classname="de.osmui.ui.Application" failonerror="true" fork="yes">
             <classpath refid="OsmUi.classpath"/>
         </java>
     </target>
-    <target name="CommandlineTranslator">
-        <java classname="de.osmui.util.CommandlineTranslator" failonerror="true" fork="yes">
-            <classpath refid="OsmUi.classpath"/>
-        </java>
-    </target>
-    <target name="AbstractPipelineModelTest">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="de.osmui.model.pipelinemodel.AbstractPipelineModelTest" todir="${junit.output.dir}"/>
-            <classpath refid="OsmUi.classpath"/>
-        </junit>
-    </target>
-    <target name="junitreport">
-        <junitreport todir="${junit.output.dir}">
-            <fileset dir="${junit.output.dir}">
-                <include name="TEST-*.xml"/>
-            </fileset>
-            <report format="frames" todir="${junit.output.dir}"/>
-        </junitreport>
-    </target>
+	<target name="jar">
+	        <jar destfile="OsmUi.jar" filesetmanifest="mergewithoutmain">
+	            <manifest>
+	                <attribute name="Main-Class" value="de.osmui.ui.Application"/>
+	                <attribute name="Class-Path" value="."/>
+	            </manifest>
+	            <fileset dir="bin"/>
+	            <zipfileset excludes="META-INF/*.SF" src="jgraphx/lib/jgraphx.jar"/>
+	            <zipfileset excludes="META-INF/*.SF" src="javahelp/jh.jar"/>
+	            <zipfileset excludes="META-INF/*.SF" src="javahelp/hsviewer.jar"/>
+	            <zipfileset excludes="META-INF/*.SF" src="javahelp/Help.jar"/>
+	            <zipfileset excludes="META-INF/*.SF" src="javahelp/Hilfe.jar"/>
+	            <zipfileset excludes="META-INF/*.SF" src="bboxchooser-0.2.jar"/>
+	        </jar>
+	    </target>
 </project>

@@ -1,0 +1,10 @@
+---+Build+---
+In this directory run "ant" it builds OsmUi.jar!
+
+Note: You can build the test classes with "ant build-tests" but this
+is not recommended as it needs junit in your ant classpath use
+the provided eclipse project instead or edit the build.xml
+to make it more versatile, patches welcome!
+---+Run+---
+After having built run "java -jar OsmUi.jar" for further help look into
+the online help provided in the application itself.
