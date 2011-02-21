@@ -13,7 +13,10 @@
         <pathelement location="javahelp/jh.jar"/>
         <pathelement location="bboxchooser-0.2.jar"/>
     </path>
-    <target name="init">
+   <target name="jgraphx">
+      <ant antfile="jgraphx/build.xml" useNativeBasedir="true" inheritRefs="false"  />
+   </target>
+    <target depends="jgraphx" name="init">
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
@@ -24,6 +27,7 @@
     </target>
     <target name="clean">
         <delete dir="bin"/>
+        <ant antfile="jgraphx/build.xml" useNativeBasedir="true" target="clean" inheritRefs="false"  />
     </target>
     <target depends="clean" name="cleanall"/>
     <target depends="build-subprojects,build-project,jar" name="build"/>
